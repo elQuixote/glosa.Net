@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Glosa.Net.Core.Interfaces
 {
-    public interface IEquals
+    public interface IEquals<T>
     {
+        bool Equals(T vector);
     }
 }
