@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Glosa.Net.Core.Interfaces
 {
-    class ILength
+    public interface ILength
     {
     }
 }
