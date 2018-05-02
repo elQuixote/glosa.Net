@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Glosa.Net.Core.Interfaces
 {
-    public interface ILength
+    public interface ILength<T>
     {
+        float Length(T vector);
     }
 }
