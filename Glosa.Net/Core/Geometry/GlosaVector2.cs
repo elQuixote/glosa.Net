@@ -129,5 +129,17 @@ namespace Glosa.Net.Core.Geometry
         {
             return dot(this.vector, vector.vector);
         }
+
+        public GlosaVector2 Inverse()
+        {
+            Vector2 vector2 = inverseNew(this.vector);
+            return new GlosaVector2(vector2.x, vector2.y);
+        }
+        public void InverseSelf()
+        {
+            this.vector = inverseSelf(this.vector);
+            this.x = this.vector.x;
+            this.y = this.vector.y;
+        }
     }
 }
