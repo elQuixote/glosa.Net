@@ -130,7 +130,7 @@ namespace Glosa.Net.Core.Geometry
             return dot(this.vector, vector.vector);
         }
 
-        public GlosaVector2 Inverse()
+        public GlosaVector2 InverseNew()
         {
             Vector2 vector2 = inverseNew(this.vector);
             return new GlosaVector2(vector2.x, vector2.y);
@@ -185,6 +185,10 @@ namespace Glosa.Net.Core.Geometry
         public string Stringify()
         {
             return this.vector.ToString();
+        }
+        public float AngleBetween(GlosaVector2 vector)
+        {
+            return angleBetween(this.vector, vector.vector);
         }
     }
 }
