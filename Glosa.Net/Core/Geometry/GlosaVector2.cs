@@ -156,5 +156,16 @@ namespace Glosa.Net.Core.Geometry
             this.x = this.vector.x;
             this.y = this.vector.y;
         }
+        public GlosaVector2 RefractNew(GlosaVector2 vector, float f)
+        {
+            Vector2 vector2 = refractNew(this.vector, vector.vector, f);
+            return new GlosaVector2(vector2.x, vector2.y);
+        }
+        public void RefractSelf(GlosaVector2 vector, float f)
+        {
+            this.vector = refractSelf(this.vector, vector.vector, f);
+            this.x = this.vector.x;
+            this.y = this.vector.y;
+        }
     }
 }
