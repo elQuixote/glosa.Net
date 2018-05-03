@@ -11,6 +11,7 @@ namespace Glosa.Net.Core.Geometry
 {
     public struct GlosaVector2 : IVector<GlosaVector2>, ILength<GlosaVector2>, IEquals<GlosaVector2>
     {
+        #region C Reference Procs
         [DllImport("vector.dll")]
         private static extern Vector2 vector2(double x, double y);
         [DllImport("vector.dll")]
@@ -53,7 +54,7 @@ namespace Glosa.Net.Core.Geometry
         private static extern Vector2 normalizeSelf(Vector2 v, float m = 1.0f);
         [DllImport("vector.dll")]
         private static extern float angleBetween(Vector2 v1, Vector2 v2);
-
+        #endregion
         private Vector2 vector { get; set; }
         private double m_x, m_y;
         public double x { get { return m_x; } set { m_x = value; } }
@@ -133,69 +134,83 @@ namespace Glosa.Net.Core.Geometry
             Vector2 vector2 = inverseNew(this.vector);
             return new GlosaVector2(vector2.x, vector2.y);
         }
+
         public void InverseSelf()
         {
             this.vector = inverseSelf(this.vector);
             this.m_x = this.vector.x;
             this.m_y = this.vector.y;
         }
+
         public float Heading()
         {
             return headingXY(this.vector);
         }
+
         public GlosaVector2 ReflectNew(GlosaVector2 vector)
         {
             Vector2 vector2 = reflectNew(this.vector, vector.vector);
             return new GlosaVector2(vector2.x, vector2.y);
         }
+
         public void ReflectSelf(GlosaVector2 vector)
         {
             this.vector = reflectSelf(this.vector, vector.vector);
             this.m_x = this.vector.x;
             this.m_y = this.vector.y;
         }
+
         public GlosaVector2 RefractNew(GlosaVector2 vector, float f)
         {
             Vector2 vector2 = refractNew(this.vector, vector.vector, f);
             return new GlosaVector2(vector2.x, vector2.y);
         }
+
         public void RefractSelf(GlosaVector2 vector, float f)
         {
             this.vector = refractSelf(this.vector, vector.vector, f);
             this.m_x = this.vector.x;
             this.m_y = this.vector.y;
         }
+
         public GlosaVector2 NormalizeNew()
         {
             Vector2 vector2 = normalizeNew(this.vector);
             return new GlosaVector2(vector2.x, vector2.y);
         }
+
         public void NormalizeSelf()
         {
             this.vector = normalizeSelf(this.vector);
             this.m_x = this.vector.x;
             this.m_y = this.vector.y;
         }
+
         public float Magnitude()
         {
             return (float)Math.Sqrt(this.vector.x * this.vector.x + this.vector.y * this.vector.y);
         }
+
         public string Stringify()
         {
             return this.vector.ToString();
         }
+
         public float AngleBetween(GlosaVector2 vector)
         {
             return angleBetween(this.vector, vector.vector);
         }
+
         public float Length()
         {
             return this.Magnitude();
         }
+
         public bool Equals(GlosaVector2 vector)
         {
             if ((this.x == vector.x) && (this.y == vector.y)) { return true; }
             else { return false; }
         }
+
     }
 }
