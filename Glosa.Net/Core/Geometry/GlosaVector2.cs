@@ -106,5 +106,18 @@ namespace Glosa.Net.Core.Geometry
             this.x = this.vector.x;
             this.y = this.vector.y;
         }
+
+        public GlosaVector2 MultiplyNew(float f)
+        {
+            Vector2 vector2 = multiplyNew(this.vector, f);
+            return new GlosaVector2(vector2.x, vector2.y);
+        }
+
+        public void MultiplySelf(float f)
+        {
+            this.vector = multiplySelf(this.vector, f);
+            this.x = this.vector.x;
+            this.y = this.vector.y;
+        }
     }
 }
