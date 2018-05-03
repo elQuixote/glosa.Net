@@ -8,6 +8,6 @@ namespace Glosa.Net.Core.Interfaces
 {
     public interface ILength<T>
     {
-        float Length(T vector);
+        float Length();
     }
 }
