@@ -212,6 +212,26 @@ namespace Glosa.Net.Core.Geometry
         {
             return (a.m_x > b.m_x) || (a.m_x == b.m_x && a.m_y >= b.m_y);
         }
+        public static GlosaVector2 operator *(GlosaVector2 vector, float f)
+        {
+            return multiplyNew_v2(vector, f);
+        }
+        public static float operator *(GlosaVector2 vector, GlosaVector2 vector2)
+        {
+            return dot_v2(vector, vector2);
+        }
+        public static GlosaVector2 operator /(GlosaVector2 vector, float f)
+        {
+            return divideNew_v2(vector, f);
+        }
+        public static GlosaVector2 operator +(GlosaVector2 vector, GlosaVector2 vector2)
+        {
+            return addNew_v2(vector, vector2);
+        }
+        public static GlosaVector2 operator -(GlosaVector2 vector, GlosaVector2 vector2)
+        {
+            return subtractNew_v2(vector, vector2);
+        }
         #endregion
         public override bool Equals(object obj)
         {
