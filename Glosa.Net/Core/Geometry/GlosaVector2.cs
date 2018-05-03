@@ -32,6 +32,6 @@ namespace Glosa.Net.Core.Geometry
         [DllImport("vector.dll")]
         private static extern Vector2 cross(Vector2 v1, Vector2 v2);
         [DllImport("vector.dll")]
-        private static extern Vector2 dot(Vector2 vector, Vector2 vector2);
+        private static extern Vector2 dot(Vector2 v1, Vector2 v2);
     }
 }
