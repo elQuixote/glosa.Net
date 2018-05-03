@@ -28,7 +28,6 @@ namespace Glosa.Net.Core.Interfaces
         T NormalizeNew();
         void NormalizeSelf();
         float Magnitude();
-        string Stringify();
         float AngleBetween(T vector);
     }
 }
