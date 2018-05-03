@@ -17,6 +17,9 @@ namespace Glosa.Net.Core.Geometry
         private static extern Vector2 AddNew(Vector2 vector);
         [DllImport("vector.dll")]
         private static extern Vector2 AddSelf(Vector2 vector);
-
+        [DllImport("vector.dll")]
+        private static extern Vector2 SubtractNew(Vector2 vector);
+        [DllImport("vector.dll")]
+        private static extern Vector2 SubtractSelf(Vector2 vector);
     }
 }
