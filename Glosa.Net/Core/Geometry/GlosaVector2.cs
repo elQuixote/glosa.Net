@@ -115,15 +115,12 @@ namespace Glosa.Net.Core.Geometry
 
         public GlosaVector2 InverseNew()
         {
-            Vector2 vector2 = inverseNew(this.vector);
-            return new GlosaVector2(vector2.x, vector2.y);
+            return inverseNew(this);
         }
 
         public void InverseSelf()
         {
-            this.vector = inverseSelf(this.vector);
-            this.m_x = this.vector.x;
-            this.m_y = this.vector.y;
+            this = inverseSelf(this);
         }
 
         public float Heading()
