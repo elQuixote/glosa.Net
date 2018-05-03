@@ -241,5 +241,9 @@ namespace Glosa.Net.Core.Geometry
         {
             return (obj is GlosaVector2 && this == (GlosaVector2)obj);
         }
+        public override int GetHashCode()
+        {
+            return m_x.GetHashCode() ^ m_y.GetHashCode();
+        }
     }
 }
