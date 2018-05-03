@@ -208,9 +208,35 @@ namespace Glosa.Net.Core.Geometry
 
         public bool Equals(GlosaVector2 vector)
         {
-            if ((this.x == vector.x) && (this.y == vector.y)) { return true; }
+            if ((this.m_x == vector.x) && (this.m_y == vector.y)) { return true; }
             else { return false; }
         }
 
+        #region Operators
+        public static bool operator ==(GlosaVector2 a, GlosaVector2 b)
+        {
+            return a.m_x == b.m_x && a.m_y == b.m_y;
+        }
+        public static bool operator !=(GlosaVector2 a, GlosaVector2 b)
+        {
+            return a.m_x != b.m_x || a.m_y != b.m_y;
+        }
+        public static bool operator <(GlosaVector2 a, GlosaVector2 b)
+        {
+            return (a.m_x < b.m_x) || (a.m_x == b.m_x && a.m_y < b.m_y);
+        }
+        public static bool operator <=(GlosaVector2 a, GlosaVector2 b)
+        {
+            return (a.m_x < b.m_x) || (a.m_x == b.m_x && a.m_y <= b.m_y);
+        }
+        public static bool operator >(GlosaVector2 a, GlosaVector2 b)
+        {
+            return (a.m_x > b.m_x) || (a.m_x == b.m_x && a.m_y > b.m_y);
+        }
+        public static bool operator >=(GlosaVector2 a, GlosaVector2 b)
+        {
+            return (a.m_x > b.m_x) || (a.m_x == b.m_x && a.m_y >= b.m_y);
+        }
+        #endregion
     }
 }
