@@ -13,45 +13,45 @@ namespace Glosa.Net.Core.Geometry
     {
         #region C Reference Procs
         [DllImport("vector.dll")]
-        private static extern GlosaVector2 addNew(GlosaVector2 v1, GlosaVector2 v2);
+        private static extern GlosaVector2 addNew_v2(GlosaVector2 v1, GlosaVector2 v2);
         [DllImport("vector.dll")]
-        private static extern GlosaVector2 addSelf(GlosaVector2 v1, GlosaVector2 v2);
+        private static extern GlosaVector2 addSelf_v2(GlosaVector2 v1, GlosaVector2 v2);
         [DllImport("vector.dll")]
-        private static extern GlosaVector2 subtractNew(GlosaVector2 v1, GlosaVector2 v2);
+        private static extern GlosaVector2 subtractNew_v2(GlosaVector2 v1, GlosaVector2 v2);
         [DllImport("vector.dll")]
-        private static extern GlosaVector2 subtractSelf(GlosaVector2 v1, GlosaVector2 v2);
+        private static extern GlosaVector2 subtractSelf_v2(GlosaVector2 v1, GlosaVector2 v2);
         [DllImport("vector.dll")]
-        private static extern GlosaVector2 divideNew(GlosaVector2 v, float f);
+        private static extern GlosaVector2 divideNew_v2(GlosaVector2 v, float f);
         [DllImport("vector.dll")]
-        private static extern GlosaVector2 divideSelf(GlosaVector2 v, float f);
+        private static extern GlosaVector2 divideSelf_v2(GlosaVector2 v, float f);
         [DllImport("vector.dll")]
-        private static extern GlosaVector2 multiplyNew(GlosaVector2 v, float f);
+        private static extern GlosaVector2 multiplyNew_v2(GlosaVector2 v, float f);
         [DllImport("vector.dll")]
-        private static extern GlosaVector2 multiplySelf(GlosaVector2 v, float f);
+        private static extern GlosaVector2 multiplySelf_v2(GlosaVector2 v, float f);
         [DllImport("vector.dll")]
-        private static extern float cross(GlosaVector2 v1, GlosaVector2 v2);
+        private static extern float cross_v2(GlosaVector2 v1, GlosaVector2 v2);
         [DllImport("vector.dll")]
-        private static extern float dot(GlosaVector2 v1, GlosaVector2 v2);
+        private static extern float dot_v2(GlosaVector2 v1, GlosaVector2 v2);
         [DllImport("vector.dll")]
-        private static extern GlosaVector2 inverseNew(GlosaVector2 v);
+        private static extern GlosaVector2 inverseNew_v2(GlosaVector2 v);
         [DllImport("vector.dll")]
-        private static extern GlosaVector2 inverseSelf(GlosaVector2 v);
+        private static extern GlosaVector2 inverseSelf_v2(GlosaVector2 v);
         [DllImport("vector.dll")]
-        private static extern float headingXY(GlosaVector2 v);
+        private static extern float heading_v2(GlosaVector2 v);
         [DllImport("vector.dll")]
-        private static extern GlosaVector2 reflectNew(GlosaVector2 v, GlosaVector2 n);
+        private static extern GlosaVector2 reflectNew_v2(GlosaVector2 v, GlosaVector2 n);
         [DllImport("vector.dll")]
-        private static extern GlosaVector2 reflectSelf(GlosaVector2 v, GlosaVector2 n);
+        private static extern GlosaVector2 reflectSelf_v2(GlosaVector2 v, GlosaVector2 n);
         [DllImport("vector.dll")]
-        private static extern GlosaVector2 refractNew(GlosaVector2 v, GlosaVector2 n, float eta);
+        private static extern GlosaVector2 refractNew_v2(GlosaVector2 v, GlosaVector2 n, float eta);
         [DllImport("vector.dll")]
-        private static extern GlosaVector2 refractSelf(GlosaVector2 v, GlosaVector2 n, float eta);
+        private static extern GlosaVector2 refractSelf_v2(GlosaVector2 v, GlosaVector2 n, float eta);
         [DllImport("vector.dll")]
-        private static extern GlosaVector2 normalizeNew(GlosaVector2 v, float m = 1.0f);
+        private static extern GlosaVector2 normalizeNew_v2(GlosaVector2 v, float m = 1.0f);
         [DllImport("vector.dll")]
-        private static extern GlosaVector2 normalizeSelf(GlosaVector2 v, float m = 1.0f);
+        private static extern GlosaVector2 normalizeSelf_v2(GlosaVector2 v, float m = 1.0f);
         [DllImport("vector.dll")]
-        private static extern float angleBetween(GlosaVector2 v1, GlosaVector2 v2);
+        private static extern float angleBetween_v2(GlosaVector2 v1, GlosaVector2 v2);
         #endregion
         private double m_x, m_y;
         public double x { get { return m_x; } set { m_x = value; } }
