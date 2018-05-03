@@ -60,6 +60,7 @@ namespace Glosa.Net.Core.Geometry
         public GlosaVector2()
         {
         }
+
         public GlosaVector2(double x, double y)
         {
             this.x = x;
@@ -76,6 +77,19 @@ namespace Glosa.Net.Core.Geometry
         public void AddSelf(GlosaVector2 vector)
         {
             this.vector = addSelf(this.vector, vector.vector);
+            this.x = this.vector.x;
+            this.y = this.vector.y;
+        }
+
+        public GlosaVector2 SubtractNew(GlosaVector2 vector)
+        {
+            Vector2 vector2 = subtractNew(this.vector, vector.vector);
+            return new GlosaVector2(vector2.x, vector2.y);
+        }
+
+        public void SubtractSelf(GlosaVector2 vector)
+        {
+            this.vector = subtractSelf(this.vector, vector.vector);
             this.x = this.vector.x;
             this.y = this.vector.y;
         }
