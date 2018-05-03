@@ -9,7 +9,8 @@ using Glosa.Net.Structs;
 
 namespace Glosa.Net.Core.Geometry
 {
-    public struct GlosaVector2 : IVector<GlosaVector2>, ILength<GlosaVector2>, IEquals<GlosaVector2>, IString<GlosaVector2>, ICompare<GlosaVector2>
+    public struct GlosaVector2 : IVector<GlosaVector2>, ILength<GlosaVector2>, IEquals<GlosaVector2>, IString<GlosaVector2>, ICompare<GlosaVector2>,
+        IClear<GlosaVector2>
     {
         #region C Reference Procs
         [DllImport("vector.dll")]
@@ -52,6 +53,8 @@ namespace Glosa.Net.Core.Geometry
         private static extern GlosaVector2 normalizeSelf_v2(GlosaVector2 v, float m = 1.0f);
         [DllImport("vector.dll")]
         private static extern float angleBetween_v2(GlosaVector2 v1, GlosaVector2 v2);
+        [DllImport("vectors.dll")]
+        private static extern GlosaVector2 clear_v2(GlosaVector2 v);
         #endregion
         private double m_x, m_y;
         public double x { get { return m_x; } set { m_x = value; } }
@@ -231,6 +234,11 @@ namespace Glosa.Net.Core.Geometry
                 return 1;
 
             return 0;
+        }
+
+        public void Clear()
+        {
+            this = clear_v2(this);
         }
     }
 }
