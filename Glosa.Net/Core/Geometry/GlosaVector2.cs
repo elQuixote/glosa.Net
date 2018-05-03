@@ -125,33 +125,27 @@ namespace Glosa.Net.Core.Geometry
 
         public float Heading()
         {
-            return headingXY(this.vector);
+            return headingXY(this);
         }
 
         public GlosaVector2 ReflectNew(GlosaVector2 vector)
         {
-            Vector2 vector2 = reflectNew(this.vector, vector.vector);
-            return new GlosaVector2(vector2.x, vector2.y);
+            return reflectNew(this, vector);
         }
 
         public void ReflectSelf(GlosaVector2 vector)
         {
-            this.vector = reflectSelf(this.vector, vector.vector);
-            this.m_x = this.vector.x;
-            this.m_y = this.vector.y;
+            this = reflectSelf(this, vector);
         }
 
         public GlosaVector2 RefractNew(GlosaVector2 vector, float f)
         {
-            Vector2 vector2 = refractNew(this.vector, vector.vector, f);
-            return new GlosaVector2(vector2.x, vector2.y);
+            return refractNew(this, vector, f);
         }
 
         public void RefractSelf(GlosaVector2 vector, float f)
         {
-            this.vector = refractSelf(this.vector, vector.vector, f);
-            this.m_x = this.vector.x;
-            this.m_y = this.vector.y;
+            this = refractSelf(this, vector, f);
         }
 
         public GlosaVector2 NormalizeNew()
