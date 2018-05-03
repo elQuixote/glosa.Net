@@ -75,15 +75,12 @@ namespace Glosa.Net.Core.Geometry
 
         public GlosaVector2 SubtractNew(GlosaVector2 vector)
         {
-            Vector2 vector2 = subtractNew(this.vector, vector.vector);
-            return new GlosaVector2(vector2.x, vector2.y);
+            return subtractNew(this, vector);
         }
 
         public void SubtractSelf(GlosaVector2 vector)
         {
-            this.vector = subtractSelf(this.vector, vector.vector);
-            this.m_x = this.vector.x;
-            this.m_y = this.vector.y;
+            this= subtractSelf(this, vector);
         }
 
         public GlosaVector2 DivideNew(float f)
