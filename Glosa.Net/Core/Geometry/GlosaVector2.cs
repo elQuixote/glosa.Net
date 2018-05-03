@@ -13,8 +13,6 @@ namespace Glosa.Net.Core.Geometry
     {
         #region C Reference Procs
         [DllImport("vector.dll")]
-        private static extern Vector2 vector2(double x, double y);
-        [DllImport("vector.dll")]
         private static extern GlosaVector2 addNew(GlosaVector2 v1, GlosaVector2 v2);
         [DllImport("vector.dll")]
         private static extern GlosaVector2 addSelf(GlosaVector2 v1, GlosaVector2 v2);
@@ -55,7 +53,6 @@ namespace Glosa.Net.Core.Geometry
         [DllImport("vector.dll")]
         private static extern float angleBetween(GlosaVector2 v1, GlosaVector2 v2);
         #endregion
-        private Vector2 vector { get; set; }
         private double m_x, m_y;
         public double x { get { return m_x; } set { m_x = value; } }
         public double y { get { return m_y; } set { m_y = value; } }
@@ -64,7 +61,6 @@ namespace Glosa.Net.Core.Geometry
         {
             this.m_x = x;
             this.m_y = y;
-            this.vector = vector2(x, y);
         }
 
         public GlosaVector2 AddNew(GlosaVector2 vector)
