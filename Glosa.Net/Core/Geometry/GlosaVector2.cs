@@ -192,5 +192,10 @@ namespace Glosa.Net.Core.Geometry
         {
             return this.Magnitude();
         }
+        public bool Equals(GlosaVector2 vector)
+        {
+            if ((this.x == vector.x) && (this.y == vector.y)) { return true; }
+            else { return false; }
+        }
     }
 }
