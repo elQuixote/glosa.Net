@@ -9,7 +9,7 @@ using Glosa.Net.Structs;
 
 namespace Glosa.Net.Core.Geometry
 {
-    public class GlosaVector2 : IVector<GlosaVector2>
+    public struct GlosaVector2 : IVector<GlosaVector2>
     {
         [DllImport("vector.dll")]
         private static extern Vector2 vector2(double x, double y);
@@ -56,10 +56,6 @@ namespace Glosa.Net.Core.Geometry
 
         private Vector2 vector { get; set; }
         public double x, y;
-
-        public GlosaVector2()
-        {
-        }
 
         public GlosaVector2(double x, double y)
         {
