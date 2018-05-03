@@ -55,12 +55,14 @@ namespace Glosa.Net.Core.Geometry
         private static extern float angleBetween(Vector2 v1, Vector2 v2);
 
         private Vector2 vector { get; set; }
-        public double x, y;
+        private double m_x, m_y;
+        public double x { get { return m_x; } set { m_x = value; } }
+        public double y { get { return m_y; } set { m_y = value; } }
 
         public GlosaVector2(double x, double y)
         {
-            this.x = x;
-            this.y = y;
+            this.m_x = x;
+            this.m_y = y;
             this.vector = vector2(x, y);
         }
 
@@ -73,8 +75,8 @@ namespace Glosa.Net.Core.Geometry
         public void AddSelf(GlosaVector2 vector)
         {
             this.vector = addSelf(this.vector, vector.vector);
-            this.x = this.vector.x;
-            this.y = this.vector.y;
+            this.m_x = this.vector.x;
+            this.m_y = this.vector.y;
         }
 
         public GlosaVector2 SubtractNew(GlosaVector2 vector)
@@ -86,8 +88,8 @@ namespace Glosa.Net.Core.Geometry
         public void SubtractSelf(GlosaVector2 vector)
         {
             this.vector = subtractSelf(this.vector, vector.vector);
-            this.x = this.vector.x;
-            this.y = this.vector.y;
+            this.m_x = this.vector.x;
+            this.m_y = this.vector.y;
         }
 
         public GlosaVector2 DivideNew(float f)
@@ -99,8 +101,8 @@ namespace Glosa.Net.Core.Geometry
         public void DivideSelf(float f)
         {
             this.vector = divideSelf(this.vector, f);
-            this.x = this.vector.x;
-            this.y = this.vector.y;
+            this.m_x = this.vector.x;
+            this.m_y = this.vector.y;
         }
 
         public GlosaVector2 MultiplyNew(float f)
@@ -112,8 +114,8 @@ namespace Glosa.Net.Core.Geometry
         public void MultiplySelf(float f)
         {
             this.vector = multiplySelf(this.vector, f);
-            this.x = this.vector.x;
-            this.y = this.vector.y;
+            this.m_x = this.vector.x;
+            this.m_y = this.vector.y;
         }
 
         public float Cross(GlosaVector2 vector)
@@ -134,8 +136,8 @@ namespace Glosa.Net.Core.Geometry
         public void InverseSelf()
         {
             this.vector = inverseSelf(this.vector);
-            this.x = this.vector.x;
-            this.y = this.vector.y;
+            this.m_x = this.vector.x;
+            this.m_y = this.vector.y;
         }
         public float Heading()
         {
@@ -149,8 +151,8 @@ namespace Glosa.Net.Core.Geometry
         public void ReflectSelf(GlosaVector2 vector)
         {
             this.vector = reflectSelf(this.vector, vector.vector);
-            this.x = this.vector.x;
-            this.y = this.vector.y;
+            this.m_x = this.vector.x;
+            this.m_y = this.vector.y;
         }
         public GlosaVector2 RefractNew(GlosaVector2 vector, float f)
         {
@@ -160,8 +162,8 @@ namespace Glosa.Net.Core.Geometry
         public void RefractSelf(GlosaVector2 vector, float f)
         {
             this.vector = refractSelf(this.vector, vector.vector, f);
-            this.x = this.vector.x;
-            this.y = this.vector.y;
+            this.m_x = this.vector.x;
+            this.m_y = this.vector.y;
         }
         public GlosaVector2 NormalizeNew()
         {
@@ -171,8 +173,8 @@ namespace Glosa.Net.Core.Geometry
         public void NormalizeSelf()
         {
             this.vector = normalizeSelf(this.vector);
-            this.x = this.vector.x;
-            this.y = this.vector.y;
+            this.m_x = this.vector.x;
+            this.m_y = this.vector.y;
         }
         public float Magnitude()
         {
