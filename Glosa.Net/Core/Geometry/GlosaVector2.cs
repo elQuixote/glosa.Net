@@ -53,5 +53,9 @@ namespace Glosa.Net.Core.Geometry
         private static extern Vector2 normalizeSelf(Vector2 v, float m = 1.0f);
         [DllImport("vector.dll")]
         private static extern float angleBetween(Vector2 v1, Vector2 v2);
+
+        private Vector2 vector { get; set; }
+        public double x, y;
+
     }
 }
