@@ -208,8 +208,7 @@ namespace Glosa.Net.Core.Geometry
 
         public bool Equals(GlosaVector2 vector)
         {
-            if ((this.m_x == vector.x) && (this.m_y == vector.y)) { return true; }
-            else { return false; }
+            return this == vector;
         }
         #region Operators
         public static bool operator ==(GlosaVector2 a, GlosaVector2 b)
