@@ -105,12 +105,12 @@ namespace Glosa.Net.Core.Geometry
 
         public float Cross(GlosaVector2 vector)
         {
-            return cross(this.vector, vector.vector);
+            return cross(this, vector);
         }
 
         public float Dot(GlosaVector2 vector)
         {
-            return dot(this.vector, vector.vector);
+            return dot(this, vector);
         }
 
         public GlosaVector2 InverseNew()
