@@ -145,5 +145,16 @@ namespace Glosa.Net.Core.Geometry
         {
             return headingXY(this.vector);
         }
+        public GlosaVector2 ReflectNew(GlosaVector2 vector)
+        {
+            Vector2 vector2 = reflectNew(this.vector, vector.vector);
+            return new GlosaVector2(vector2.x, vector2.y);
+        }
+        public void ReflectSelf(GlosaVector2 vector)
+        {
+            this.vector = reflectSelf(this.vector, vector.vector);
+            this.x = this.vector.x;
+            this.y = this.vector.y;
+        }
     }
 }
