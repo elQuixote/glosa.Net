@@ -14,7 +14,7 @@ namespace Glosa.Net.Core.Interfaces
         void SubtractSelf(T vector);
         T DivideNew(T vector, float f);
         void DivideSelf(T vector, float f);
-        T MultiplyNew(T vector);
+        T MultiplyNew(T vector, float f);
         void MultiplySelf(T vector, float f);
         float Dot(T vector, T vector2);
         T Inverse(T vector);
