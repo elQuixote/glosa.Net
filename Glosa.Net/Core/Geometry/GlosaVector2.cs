@@ -124,5 +124,10 @@ namespace Glosa.Net.Core.Geometry
         {
             return cross(this.vector, vector.vector);
         }
+
+        public float Dot(GlosaVector2 vector)
+        {
+            return dot(this.vector, vector.vector);
+        }
     }
 }
