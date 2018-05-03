@@ -170,7 +170,7 @@ namespace Glosa.Net.Core.Geometry
 
         public float AngleBetween(GlosaVector2 vector)
         {
-            return angleBetween(this.vector, vector.vector);
+            return angleBetween(this, vector);
         }
 
         public float Length()
