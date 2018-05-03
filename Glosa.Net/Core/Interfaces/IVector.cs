@@ -19,7 +19,7 @@ namespace Glosa.Net.Core.Interfaces
         float Cross(T vector);
         float Dot(T vector);
         T Inverse(T vector);
-        void Inverse();
+        void InverseSelf();
         float Heading(T vector);
         T Reflect(T vector, T vector2);
         T Refract(T vector, T vector2, float f);
