@@ -37,5 +37,7 @@ namespace Glosa.Net.Core.Geometry
         private static extern Vector2 inverseNew(Vector2 v);
         [DllImport("vector.dll")]
         private static extern Vector2 inverseSelf(Vector2 v);
+        [DllImport("vector.dll")]
+        private static extern float headingXY(Vector2 v);
     }
 }
