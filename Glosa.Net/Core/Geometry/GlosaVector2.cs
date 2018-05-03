@@ -9,7 +9,7 @@ using Glosa.Net.Structs;
 
 namespace Glosa.Net.Core.Geometry
 {
-    public struct GlosaVector2 : IVector<GlosaVector2>, ILength<GlosaVector2>, IEquals<GlosaVector2>, IString<GlosaVector2>
+    public struct GlosaVector2 : IVector<GlosaVector2>, ILength<GlosaVector2>, IEquals<GlosaVector2>, IString<GlosaVector2>, ICompare<GlosaVector2>
     {
         #region C Reference Procs
         [DllImport("vector.dll")]
@@ -240,9 +240,25 @@ namespace Glosa.Net.Core.Geometry
         {
             return (obj is GlosaVector2 && this == (GlosaVector2)obj);
         }
+
         public override int GetHashCode()
         {
             return m_x.GetHashCode() ^ m_y.GetHashCode();
+        }
+
+        public int CompareTo(GlosaVector2 other)
+        {
+            if (m_x < other.m_x)
+                return -1;
+            if (m_x > other.m_x)
+                return 1;
+
+            if (m_y < other.m_y)
+                return -1;
+            if (m_y > other.m_y)
+                return 1;
+
+            return 0;
         }
     }
 }
