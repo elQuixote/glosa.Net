@@ -141,5 +141,9 @@ namespace Glosa.Net.Core.Geometry
             this.x = this.vector.x;
             this.y = this.vector.y;
         }
+        public float Heading()
+        {
+            return headingXY(this.vector);
+        }
     }
 }
