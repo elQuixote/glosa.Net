@@ -65,15 +65,12 @@ namespace Glosa.Net.Core.Geometry
 
         public GlosaVector2 AddNew(GlosaVector2 vector)
         {
-            Vector2 vector2 = addNew(this.vector, vector.vector);
-            return new GlosaVector2(vector2.x, vector2.y);
+            return addNew(this, vector);
         }
 
         public void AddSelf(GlosaVector2 vector)
         {
-            this.vector = addSelf(this.vector, vector.vector);
-            this.m_x = this.vector.x;
-            this.m_y = this.vector.y;
+            this = addSelf(this, vector);
         }
 
         public GlosaVector2 SubtractNew(GlosaVector2 vector)
