@@ -178,5 +178,9 @@ namespace Glosa.Net.Core.Geometry
             this.x = this.vector.x;
             this.y = this.vector.y;
         }
+        public float Magnitude()
+        {
+            return (float)Math.Sqrt(this.vector.x * this.vector.x + this.vector.y * this.vector.y);
+        }
     }
 }
