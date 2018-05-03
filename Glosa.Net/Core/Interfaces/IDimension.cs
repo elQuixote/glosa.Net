@@ -8,6 +8,6 @@ namespace Glosa.Net.Core.Interfaces
 {
     public interface IDimension<T>
     {
-        int Dimension(T obj);
+        int Dimension();
     }
 }

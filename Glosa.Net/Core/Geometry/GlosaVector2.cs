@@ -10,51 +10,53 @@ using Glosa.Net.Structs;
 namespace Glosa.Net.Core.Geometry
 {
     public struct GlosaVector2 : IVector<GlosaVector2>, ILength<GlosaVector2>, IEquals<GlosaVector2>, IString<GlosaVector2>, ICompare<GlosaVector2>,
-        IClear<GlosaVector2>
+        IClear<GlosaVector2>, IDimension<GlosaVector2>
     {
         #region C Reference Procs
-        [DllImport("vector.dll")]
+        [DllImport("vectors.dll")]
         private static extern GlosaVector2 addNew_v2(GlosaVector2 v1, GlosaVector2 v2);
-        [DllImport("vector.dll")]
+        [DllImport("vectors.dll")]
         private static extern GlosaVector2 addSelf_v2(GlosaVector2 v1, GlosaVector2 v2);
-        [DllImport("vector.dll")]
+        [DllImport("vectors.dll")]
         private static extern GlosaVector2 subtractNew_v2(GlosaVector2 v1, GlosaVector2 v2);
-        [DllImport("vector.dll")]
+        [DllImport("vectors.dll")]
         private static extern GlosaVector2 subtractSelf_v2(GlosaVector2 v1, GlosaVector2 v2);
-        [DllImport("vector.dll")]
+        [DllImport("vectors.dll")]
         private static extern GlosaVector2 divideNew_v2(GlosaVector2 v, float f);
-        [DllImport("vector.dll")]
+        [DllImport("vectors.dll")]
         private static extern GlosaVector2 divideSelf_v2(GlosaVector2 v, float f);
-        [DllImport("vector.dll")]
+        [DllImport("vectors.dll")]
         private static extern GlosaVector2 multiplyNew_v2(GlosaVector2 v, float f);
-        [DllImport("vector.dll")]
+        [DllImport("vectors.dll")]
         private static extern GlosaVector2 multiplySelf_v2(GlosaVector2 v, float f);
-        [DllImport("vector.dll")]
+        [DllImport("vectors.dll")]
         private static extern float cross_v2(GlosaVector2 v1, GlosaVector2 v2);
-        [DllImport("vector.dll")]
+        [DllImport("vectors.dll")]
         private static extern float dot_v2(GlosaVector2 v1, GlosaVector2 v2);
-        [DllImport("vector.dll")]
+        [DllImport("vectors.dll")]
         private static extern GlosaVector2 inverseNew_v2(GlosaVector2 v);
-        [DllImport("vector.dll")]
+        [DllImport("vectors.dll")]
         private static extern GlosaVector2 inverseSelf_v2(GlosaVector2 v);
-        [DllImport("vector.dll")]
+        [DllImport("vectors.dll")]
         private static extern float heading_v2(GlosaVector2 v);
-        [DllImport("vector.dll")]
+        [DllImport("vectors.dll")]
         private static extern GlosaVector2 reflectNew_v2(GlosaVector2 v, GlosaVector2 n);
-        [DllImport("vector.dll")]
+        [DllImport("vectors.dll")]
         private static extern GlosaVector2 reflectSelf_v2(GlosaVector2 v, GlosaVector2 n);
-        [DllImport("vector.dll")]
+        [DllImport("vectors.dll")]
         private static extern GlosaVector2 refractNew_v2(GlosaVector2 v, GlosaVector2 n, float eta);
-        [DllImport("vector.dll")]
+        [DllImport("vectors.dll")]
         private static extern GlosaVector2 refractSelf_v2(GlosaVector2 v, GlosaVector2 n, float eta);
-        [DllImport("vector.dll")]
+        [DllImport("vectors.dll")]
         private static extern GlosaVector2 normalizeNew_v2(GlosaVector2 v, float m = 1.0f);
-        [DllImport("vector.dll")]
+        [DllImport("vectors.dll")]
         private static extern GlosaVector2 normalizeSelf_v2(GlosaVector2 v, float m = 1.0f);
-        [DllImport("vector.dll")]
+        [DllImport("vectors.dll")]
         private static extern float angleBetween_v2(GlosaVector2 v1, GlosaVector2 v2);
         [DllImport("vectors.dll")]
         private static extern GlosaVector2 clear_v2(GlosaVector2 v);
+        [DllImport("vectors.dll")]
+        private static extern int dimension_v2(GlosaVector2 v);
         #endregion
         private double m_x, m_y;
         public double x { get { return m_x; } set { m_x = value; } }
@@ -239,6 +241,11 @@ namespace Glosa.Net.Core.Geometry
         public void Clear()
         {
             this = clear_v2(this);
+        }
+
+        public int Dimension()
+        {
+            return dimension_v2(this);
         }
     }
 }
