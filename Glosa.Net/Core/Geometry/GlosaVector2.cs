@@ -167,5 +167,16 @@ namespace Glosa.Net.Core.Geometry
             this.x = this.vector.x;
             this.y = this.vector.y;
         }
+        public GlosaVector2 NormalizeNew()
+        {
+            Vector2 vector2 = normalizeNew(this.vector);
+            return new GlosaVector2(vector2.x, vector2.y);
+        }
+        public void NormalizeSelf()
+        {
+            this.vector = normalizeSelf(this.vector);
+            this.x = this.vector.x;
+            this.y = this.vector.y;
+        }
     }
 }
