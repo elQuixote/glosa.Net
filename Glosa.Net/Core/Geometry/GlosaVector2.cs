@@ -57,5 +57,15 @@ namespace Glosa.Net.Core.Geometry
         private Vector2 vector { get; set; }
         public double x, y;
 
+        public GlosaVector2()
+        {
+
+        }
+        public GlosaVector2(double x, double y)
+        {
+            this.x = x;
+            this.y = y;
+            this.vector = vector2(x, y);
+        }
     }
 }
