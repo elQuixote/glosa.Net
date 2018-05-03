@@ -85,15 +85,12 @@ namespace Glosa.Net.Core.Geometry
 
         public GlosaVector2 DivideNew(float f)
         {
-            Vector2 vector2 = divideNew(this.vector, f);
-            return new GlosaVector2(vector2.x, vector2.y);
+            return divideNew(this, f);
         }
 
         public void DivideSelf(float f)
         {
-            this.vector = divideSelf(this.vector, f);
-            this.m_x = this.vector.x;
-            this.m_y = this.vector.y;
+            this = divideSelf(this, f);
         }
 
         public GlosaVector2 MultiplyNew(float f)
