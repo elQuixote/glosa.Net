@@ -150,20 +150,17 @@ namespace Glosa.Net.Core.Geometry
 
         public GlosaVector2 NormalizeNew()
         {
-            Vector2 vector2 = normalizeNew(this.vector);
-            return new GlosaVector2(vector2.x, vector2.y);
+            return normalizeNew(this);
         }
 
         public void NormalizeSelf()
         {
-            this.vector = normalizeSelf(this.vector);
-            this.m_x = this.vector.x;
-            this.m_y = this.vector.y;
+            this = normalizeSelf(this);
         }
 
         public float Magnitude()
         {
-            return (float)Math.Sqrt(this.vector.x * this.vector.x + this.vector.y * this.vector.y);
+            return (float)Math.Sqrt(this.x * this.x + this.y * this.y);
         }
 
         public string Stringify()
