@@ -21,11 +21,14 @@ namespace Glosa.Net.Core.Interfaces
         T Inverse(T vector);
         void InverseSelf();
         float Heading();
-        T Reflect(T vector, T vector2);
-        T Refract(T vector, T vector2, float f);
-        T Normalize(T vector);
-        float Magnitude(T vector);
-        string Stringify(T vector);
-        float AngleBetween(T vector, T vector2);
+        T ReflectNew(T vector);
+        void ReflectSelf(T vector);
+        T RefractNew(T vector, float f);
+        void RefractSelf(T vector, float f);
+        T NormalizeNew();
+        void NormalizeSelf();
+        float Magnitude();
+        string Stringify();
+        float AngleBetween(T vector);
     }
 }
