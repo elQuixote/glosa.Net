@@ -8,6 +8,6 @@ namespace Glosa.Net.Core.Interfaces
 {
     public interface IEquals<T>
     {
-        bool Equals(T vector);
+        bool Equals(T other);
     }
 }
