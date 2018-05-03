@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Glosa.Net.Core.Interfaces
 {
-    public interface IString
+    public interface IString<T>
     {
         string Stringify();
     }

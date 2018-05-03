@@ -9,7 +9,7 @@ using Glosa.Net.Structs;
 
 namespace Glosa.Net.Core.Geometry
 {
-    public struct GlosaVector2 : IVector<GlosaVector2>, ILength<GlosaVector2>, IEquals<GlosaVector2>
+    public struct GlosaVector2 : IVector<GlosaVector2>, ILength<GlosaVector2>, IEquals<GlosaVector2>, IString<GlosaVector2>
     {
         #region C Reference Procs
         [DllImport("vector.dll")]
@@ -193,7 +193,7 @@ namespace Glosa.Net.Core.Geometry
 
         public string Stringify()
         {
-            return this.vector.ToString();
+            return String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0},{1}", m_x, m_y);
         }
 
         public float AngleBetween(GlosaVector2 vector)
