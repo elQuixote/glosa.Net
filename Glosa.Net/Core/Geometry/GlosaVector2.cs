@@ -182,5 +182,9 @@ namespace Glosa.Net.Core.Geometry
         {
             return (float)Math.Sqrt(this.vector.x * this.vector.x + this.vector.y * this.vector.y);
         }
+        public string Stringify()
+        {
+            return this.vector.ToString();
+        }
     }
 }
