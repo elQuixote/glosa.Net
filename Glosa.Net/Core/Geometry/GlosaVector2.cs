@@ -211,7 +211,6 @@ namespace Glosa.Net.Core.Geometry
             if ((this.m_x == vector.x) && (this.m_y == vector.y)) { return true; }
             else { return false; }
         }
-
         #region Operators
         public static bool operator ==(GlosaVector2 a, GlosaVector2 b)
         {
@@ -238,5 +237,9 @@ namespace Glosa.Net.Core.Geometry
             return (a.m_x > b.m_x) || (a.m_x == b.m_x && a.m_y >= b.m_y);
         }
         #endregion
+        public override bool Equals(object obj)
+        {
+            return (obj is GlosaVector2 && this == (GlosaVector2)obj);
+        }
     }
 }
