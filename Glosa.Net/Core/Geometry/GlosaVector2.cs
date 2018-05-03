@@ -95,15 +95,12 @@ namespace Glosa.Net.Core.Geometry
 
         public GlosaVector2 MultiplyNew(float f)
         {
-            Vector2 vector2 = multiplyNew(this.vector, f);
-            return new GlosaVector2(vector2.x, vector2.y);
+            return multiplyNew(this, f);
         }
 
         public void MultiplySelf(float f)
         {
-            this.vector = multiplySelf(this.vector, f);
-            this.m_x = this.vector.x;
-            this.m_y = this.vector.y;
+            this = multiplySelf(this, f);
         }
 
         public float Cross(GlosaVector2 vector)
