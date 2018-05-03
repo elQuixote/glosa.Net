@@ -15,45 +15,45 @@ namespace Glosa.Net.Core.Geometry
         [DllImport("vector.dll")]
         private static extern Vector2 vector2(double x, double y);
         [DllImport("vector.dll")]
-        private static extern Vector2 addNew(Vector2 v1, Vector2 v2);
+        private static extern GlosaVector2 addNew(GlosaVector2 v1, GlosaVector2 v2);
         [DllImport("vector.dll")]
-        private static extern Vector2 addSelf(Vector2 v1, Vector2 v2);
+        private static extern GlosaVector2 addSelf(GlosaVector2 v1, GlosaVector2 v2);
         [DllImport("vector.dll")]
-        private static extern Vector2 subtractNew(Vector2 v1, Vector2 v2);
+        private static extern GlosaVector2 subtractNew(GlosaVector2 v1, GlosaVector2 v2);
         [DllImport("vector.dll")]
-        private static extern Vector2 subtractSelf(Vector2 v1, Vector2 v2);
+        private static extern GlosaVector2 subtractSelf(GlosaVector2 v1, GlosaVector2 v2);
         [DllImport("vector.dll")]
-        private static extern Vector2 divideNew(Vector2 v, float f);
+        private static extern GlosaVector2 divideNew(GlosaVector2 v, float f);
         [DllImport("vector.dll")]
-        private static extern Vector2 divideSelf(Vector2 v, float f);
+        private static extern GlosaVector2 divideSelf(GlosaVector2 v, float f);
         [DllImport("vector.dll")]
-        private static extern Vector2 multiplyNew(Vector2 v, float f);
+        private static extern GlosaVector2 multiplyNew(GlosaVector2 v, float f);
         [DllImport("vector.dll")]
-        private static extern Vector2 multiplySelf(Vector2 v, float f);
+        private static extern GlosaVector2 multiplySelf(GlosaVector2 v, float f);
         [DllImport("vector.dll")]
-        private static extern float cross(Vector2 v1, Vector2 v2);
+        private static extern float cross(GlosaVector2 v1, GlosaVector2 v2);
         [DllImport("vector.dll")]
-        private static extern float dot(Vector2 v1, Vector2 v2);
+        private static extern float dot(GlosaVector2 v1, GlosaVector2 v2);
         [DllImport("vector.dll")]
-        private static extern Vector2 inverseNew(Vector2 v);
+        private static extern GlosaVector2 inverseNew(GlosaVector2 v);
         [DllImport("vector.dll")]
-        private static extern Vector2 inverseSelf(Vector2 v);
+        private static extern GlosaVector2 inverseSelf(GlosaVector2 v);
         [DllImport("vector.dll")]
-        private static extern float headingXY(Vector2 v);
+        private static extern float headingXY(GlosaVector2 v);
         [DllImport("vector.dll")]
-        private static extern Vector2 reflectNew(Vector2 v, Vector2 n);
+        private static extern GlosaVector2 reflectNew(GlosaVector2 v, GlosaVector2 n);
         [DllImport("vector.dll")]
-        private static extern Vector2 reflectSelf(Vector2 v, Vector2 n);
+        private static extern GlosaVector2 reflectSelf(GlosaVector2 v, GlosaVector2 n);
         [DllImport("vector.dll")]
-        private static extern Vector2 refractNew(Vector2 v, Vector2 n, float eta);
+        private static extern GlosaVector2 refractNew(GlosaVector2 v, GlosaVector2 n, float eta);
         [DllImport("vector.dll")]
-        private static extern Vector2 refractSelf(Vector2 v, Vector2 n, float eta);
+        private static extern GlosaVector2 refractSelf(GlosaVector2 v, GlosaVector2 n, float eta);
         [DllImport("vector.dll")]
-        private static extern Vector2 normalizeNew(Vector2 v, float m = 1.0f);
+        private static extern GlosaVector2 normalizeNew(GlosaVector2 v, float m = 1.0f);
         [DllImport("vector.dll")]
-        private static extern Vector2 normalizeSelf(Vector2 v, float m = 1.0f);
+        private static extern GlosaVector2 normalizeSelf(GlosaVector2 v, float m = 1.0f);
         [DllImport("vector.dll")]
-        private static extern float angleBetween(Vector2 v1, Vector2 v2);
+        private static extern float angleBetween(GlosaVector2 v1, GlosaVector2 v2);
         #endregion
         private Vector2 vector { get; set; }
         private double m_x, m_y;
