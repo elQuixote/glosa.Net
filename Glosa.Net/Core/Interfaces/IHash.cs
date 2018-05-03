@@ -8,6 +8,6 @@ namespace Glosa.Net.Core.Interfaces
 {
     public interface IHash<T>
     {
-        int Hash(T obj); 
+        int Hash(); 
     }
 }

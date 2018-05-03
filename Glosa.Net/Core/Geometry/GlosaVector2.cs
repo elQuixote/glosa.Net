@@ -10,7 +10,7 @@ using Glosa.Net.Structs;
 namespace Glosa.Net.Core.Geometry
 {
     public struct GlosaVector2 : IVector<GlosaVector2>, ILength<GlosaVector2>, IEquals<GlosaVector2>, IString<GlosaVector2>, ICompare<GlosaVector2>,
-        IClear<GlosaVector2>, IDimension<GlosaVector2>
+        IClear<GlosaVector2>, IDimension<GlosaVector2>, IHash<GlosaVector2>
     {
         #region C Reference Procs
         [DllImport("vectors.dll")]
@@ -246,6 +246,11 @@ namespace Glosa.Net.Core.Geometry
         public int Dimension()
         {
             return dimension_v2(this);
+        }
+
+        public int Hash()
+        {
+            return m_x.GetHashCode() ^ m_y.GetHashCode();
         }
     }
 }
