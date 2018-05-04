@@ -92,6 +92,16 @@ namespace Glosa.Net.Core.Geometry
             return rv;
         }
 
+        public static GlosaVector2 ToGlosaVector2(Rhino.Geometry.Vector2d rhinoVector)
+        {
+            return new GlosaVector2(rhinoVector);
+        }
+
+        public static GlosaVector2 ToGlosaVector2(Rhino.Geometry.Vector2f rhinoVector)
+        {
+            return new GlosaVector2(rhinoVector);
+        }
+
         public GlosaVector2 AddNew(GlosaVector2 vector)
         {
             return addNew_v2(this, vector);
