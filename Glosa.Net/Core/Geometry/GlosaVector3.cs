@@ -115,5 +115,48 @@ namespace Glosa.Net.Core.Geometry
             this.m_y = rhinoVector.Y;
             this.m_z = rhinoVector.Z;
         }
+        #region Conversions
+        /// <summary>
+        /// Creates a GlosaVector3 from a Rhino Vector3d
+        /// </summary>
+        /// <param name="rhinoVector">The Rhino Vector3d</param>
+        /// <returns>A new GlosaVector3 with the three, X and Y and Z, components from the Rhino Vector3d</returns>
+        public static GlosaVector3 ToGlosaVector3(Rhino.Geometry.Vector3d rhinoVector)
+        {
+            return new GlosaVector3(rhinoVector);
+        }
+
+        /// <summary>
+        /// Creates a GlosaVector3 from a Rhino Vector3f
+        /// </summary>
+        /// <param name="rhinoVector">The Rhino Vector3f</param>
+        /// <returns>A new GlosaVector2 with the three, X and Y and Z, components from the Rhino Vector3f</returns>
+        public static GlosaVector3 ToGlosaVector2(Rhino.Geometry.Vector3f rhinoVector)
+        {
+            return new GlosaVector3(rhinoVector);
+        }
+
+        /// <summary>
+        /// Creates a RhinoVector3d from a GlosaVector3
+        /// </summary>
+        /// <returns>A new Rhino Vector3d with the three, X and Y and Z, components from the GlosaVector3</returns>
+        public Rhino.Geometry.Vector3d ToVector3d()
+        {
+            return new Rhino.Geometry.Vector3d(this.x, this.y, this.z);
+        }
+
+        /// <summary>
+        /// Creates a RhinoVector3f from a GlosaVector3
+        /// </summary>
+        /// <returns>A new Rhino Vector3f with the three, X and Y and Z, components from the GlosaVector3</returns>
+        public Rhino.Geometry.Vector3f ToVector3f()
+        {
+            Rhino.Geometry.Vector3f rv = new Rhino.Geometry.Vector3f();
+            rv.X = this.m_x;
+            rv.Y = this.m_y;
+            rv.Z = this.m_z;
+            return rv;
+        }
+        #endregion
     }
 }
