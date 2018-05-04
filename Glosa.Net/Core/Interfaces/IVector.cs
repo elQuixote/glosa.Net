@@ -25,8 +25,8 @@ namespace Glosa.Net.Core.Interfaces
         void ReflectSelf(T vector);
         T RefractNew(T vector, float f);
         void RefractSelf(T vector, float f);
-        T NormalizeNew();
-        void NormalizeSelf();
+        T NormalizeNew(float v);
+        void NormalizeSelf(float v);
         float Magnitude();
         float AngleBetween(T vector);
     }
