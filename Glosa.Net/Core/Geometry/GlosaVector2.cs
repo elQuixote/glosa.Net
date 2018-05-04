@@ -61,6 +61,8 @@ namespace Glosa.Net.Core.Geometry
         private static extern int dimension_v2(GlosaVector2 v);
         [DllImport("vectors.dll")]
         private static extern GlosaVector2 copy_v2(GlosaVector2 v);
+        [DllImport("vectors.dll")]
+        private static extern GlosaVector2 set_v2(GlosaVector2 v, float n);
         #endregion
         private float m_x, m_y;
 
@@ -695,6 +697,7 @@ namespace Glosa.Net.Core.Geometry
         /// <param name="y">The y value</param>
         public void Set(float x, float y)
         {
+            //Need to update in NIM to include proc for specifying all components on vector
             this.m_x = x;
             this.m_y = y;
         }
@@ -705,8 +708,7 @@ namespace Glosa.Net.Core.Geometry
         /// <param name="n">The value</param>
         public void Set(float n)
         {
-            this.m_x = n;
-            this.m_y = n;
+            this = set_v2(this, n);
         }
     }
 }
