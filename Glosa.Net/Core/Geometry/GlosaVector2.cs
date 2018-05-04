@@ -12,7 +12,7 @@ namespace Glosa.Net.Core.Geometry
     /// Represents the two components of a vector in two-dimensional space
     /// </summary>
     public struct GlosaVector2 : IVector<GlosaVector2>, ILength<GlosaVector2>, IEquals<GlosaVector2>, IString<GlosaVector2>, ICompare<GlosaVector2>,
-        IClear<GlosaVector2>, IDimension<GlosaVector2>, IHash<GlosaVector2>
+        IClear<GlosaVector2>, IDimension<GlosaVector2>, IHash<GlosaVector2>, ICopy<GlosaVector2>
     {
         #region C Reference Procs
         [DllImport("vectors.dll")]
@@ -59,6 +59,8 @@ namespace Glosa.Net.Core.Geometry
         private static extern GlosaVector2 clear_v2(GlosaVector2 v);
         [DllImport("vectors.dll")]
         private static extern int dimension_v2(GlosaVector2 v);
+        [DllImport("vectors.dll")]
+        private static extern GlosaVector2 copy_v2(GlosaVector2 v);
         #endregion
         private float m_x, m_y;
 
@@ -664,6 +666,26 @@ namespace Glosa.Net.Core.Geometry
         public int Hash()
         {
             return m_x.GetHashCode() ^ m_y.GetHashCode();
+        }
+
+        /// <summary>
+        /// Copies a GlosaVector 
+        /// </summary>
+        /// <param name="vector">The GlosaVector2 to copy</param>
+        /// <returns>A new copy of that GlosaVector2</returns>
+        public static GlosaVector2 CopyNew(GlosaVector2 vector)
+        {
+            return copy_v2(vector);
+        }
+
+        /// <summary>
+        /// Copies a GlosaVector 
+        /// </summary>
+        /// <param name="vector">The GlosaVector2 to copy</param>
+        /// <returns>A new copy of that GlosaVector2</returns>
+        public GlosaVector2 Copy(GlosaVector2 vector)
+        {
+            return copy_v2(vector);
         }
     }
 }
