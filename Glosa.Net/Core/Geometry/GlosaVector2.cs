@@ -67,6 +67,18 @@ namespace Glosa.Net.Core.Geometry
             this.m_y = y;
         }
 
+        public GlosaVector2(Rhino.Geometry.Vector2d rhinoVector)
+        {
+            this.m_x = rhinoVector.Y;
+            this.m_y = rhinoVector.Y;
+        }
+
+        public GlosaVector2(Rhino.Geometry.Vector2f rhinoVector)
+        {
+            this.m_x = rhinoVector.Y;
+            this.m_y = rhinoVector.Y;
+        }
+
         public GlosaVector2 AddNew(GlosaVector2 vector)
         {
             return addNew_v2(this, vector);
