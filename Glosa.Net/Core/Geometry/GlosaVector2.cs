@@ -57,11 +57,11 @@ namespace Glosa.Net.Core.Geometry
         [DllImport("vectors.dll")]
         private static extern int dimension_v2(GlosaVector2 v);
         #endregion
-        private double m_x, m_y;
-        public double x { get { return m_x; } set { m_x = value; } }
-        public double y { get { return m_y; } set { m_y = value; } }
+        private float m_x, m_y;
+        public float x { get { return m_x; } set { m_x = value; } }
+        public float y { get { return m_y; } set { m_y = value; } }
 
-        public GlosaVector2(double x, double y)
+        public GlosaVector2(float x, float y)
         {
             this.m_x = x;
             this.m_y = y;
@@ -69,14 +69,27 @@ namespace Glosa.Net.Core.Geometry
 
         public GlosaVector2(Rhino.Geometry.Vector2d rhinoVector)
         {
-            this.m_x = rhinoVector.Y;
-            this.m_y = rhinoVector.Y;
+            this.m_x = (float)rhinoVector.Y;
+            this.m_y = (float)rhinoVector.Y;
         }
 
         public GlosaVector2(Rhino.Geometry.Vector2f rhinoVector)
         {
             this.m_x = rhinoVector.Y;
             this.m_y = rhinoVector.Y;
+        }
+
+        public Rhino.Geometry.Vector2d toVector2d()
+        {
+            return new Rhino.Geometry.Vector2d(this.x, this.y);
+        }
+
+        public Rhino.Geometry.Vector2f toVector2f()
+        {
+            Rhino.Geometry.Vector2f rv = new Rhino.Geometry.Vector2f();
+            rv.X = this.m_x;
+            rv.Y = this.m_y;
+            return rv;
         }
 
         public GlosaVector2 AddNew(GlosaVector2 vector)
