@@ -80,5 +80,40 @@ namespace Glosa.Net.Core.Geometry
         /// Gets or sets the Z (third) component of this vector.
         /// </summary>
         public float z { get { return m_z; } set { m_z = value; } }
+
+        /// <summary>
+        /// Initializes a new instance of the GlosaVector3 based on three, X and Y and Z, components.
+        /// </summary>
+        /// <param name="x">The X (first) component.</param>
+        /// <param name="y">The Y (second) component.</param>
+        /// <param name="z">The Z (third) component.</param>
+        public GlosaVector3(float x, float y, float z)
+        {
+            this.m_x = x;
+            this.m_y = y;
+            this.m_z = z;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the GlosaVector3 from a Rhino Vector3d.
+        /// </summary>
+        /// <param name="rhinoVector">The Rhino Vector3d</param>
+        public GlosaVector3(Rhino.Geometry.Vector3d rhinoVector)
+        {
+            this.m_x = (float)rhinoVector.Y;
+            this.m_y = (float)rhinoVector.Y;
+            this.m_z = (float)rhinoVector.Z;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the GlosaVector3 from a Rhino Vector3f.
+        /// </summary>
+        /// <param name="rhinoVector">The Rhino Vector3f</param>
+        public GlosaVector3(Rhino.Geometry.Vector3f rhinoVector)
+        {
+            this.m_x = rhinoVector.Y;
+            this.m_y = rhinoVector.Y;
+            this.m_z = rhinoVector.Z;
+        }
     }
 }
