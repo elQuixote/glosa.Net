@@ -8,6 +8,9 @@ using System.Runtime.InteropServices;
 
 namespace Glosa.Net.Core.Geometry
 {
+    /// <summary>
+    /// Represents the three components of a vector in three-dimensional space
+    /// </summary>
     public struct GlosaVector3 : IVector<GlosaVector3>, ILength<GlosaVector3>, IEquals<GlosaVector3>, IString<GlosaVector3>, ICompare<GlosaVector3>,
         IClear<GlosaVector3>, IDimension<GlosaVector3>, IHash<GlosaVector3>, ICopy<GlosaVector3>
     {
