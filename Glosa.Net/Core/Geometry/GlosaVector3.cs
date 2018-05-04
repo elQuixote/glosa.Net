@@ -64,5 +64,21 @@ namespace Glosa.Net.Core.Geometry
         [DllImport("vectors.dll")]
         private static extern GlosaVector3 set_v3(GlosaVector3 v, float n);
         #endregion
+        private float m_x, m_y, m_z;
+
+        /// <summary>
+        /// Gets or sets the X (first) component of this vector.
+        /// </summary>
+        public float x { get { return m_x; } set { m_x = value; } }
+
+        /// <summary>
+        /// Gets or sets the Y (second) component of this vector.
+        /// </summary>
+        public float y { get { return m_y; } set { m_y = value; } }
+
+        /// <summary>
+        /// Gets or sets the Z (third) component of this vector.
+        /// </summary>
+        public float z { get { return m_z; } set { m_z = value; } }
     }
 }
