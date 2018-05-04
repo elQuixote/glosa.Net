@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="RhinoCommon">
+      <HintPath>C:\Program Files (x86)\Rhinoceros 5\System\RhinoCommon.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,12 +46,22 @@
   <ItemGroup>
     <Compile Include="Core\Geometry\GlosaVector2.cs" />
     <Compile Include="Core\Geometry\GlosaVector3.cs" />
+    <Compile Include="Core\Interfaces\IClear.cs" />
+    <Compile Include="Core\Interfaces\ICompare.cs" />
+    <Compile Include="Core\Interfaces\ICopy.cs" />
+    <Compile Include="Core\Interfaces\IDimension.cs" />
     <Compile Include="Core\Interfaces\IEquals.cs" />
+    <Compile Include="Core\Interfaces\IHash.cs" />
     <Compile Include="Core\Interfaces\ILength.cs" />
+    <Compile Include="Core\Interfaces\IString.cs" />
     <Compile Include="Core\Interfaces\IVector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="vectors.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
