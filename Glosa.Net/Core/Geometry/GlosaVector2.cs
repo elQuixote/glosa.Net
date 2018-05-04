@@ -687,5 +687,26 @@ namespace Glosa.Net.Core.Geometry
         {
             return copy_v2(vector);
         }
+
+        /// <summary>
+        /// Sets the GlosaVector components, X and Y, to the specified values.
+        /// </summary>
+        /// <param name="x">The x value</param>
+        /// <param name="y">The y value</param>
+        public void Set(float x, float y)
+        {
+            this.m_x = x;
+            this.m_y = y;
+        }
+
+        /// <summary>
+        /// Sets the GlosaVector components, X and Y, to the specified value.
+        /// </summary>
+        /// <param name="n">The value</param>
+        public void Set(float n)
+        {
+            this.m_x = n;
+            this.m_y = n;
+        }
     }
 }
