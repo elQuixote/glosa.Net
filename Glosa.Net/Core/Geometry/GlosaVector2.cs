@@ -148,6 +148,16 @@ namespace Glosa.Net.Core.Geometry
         /// <summary>
         /// Sums up two GlosaVector2.
         /// </summary>
+        /// <param name="vector">The first GlosaVector2</param>
+        /// <param name="vector2">The second GlosaVector2</param>
+        /// <returns>A new GlosaVector2 that results from the componentwise addition of the two vectors.</returns>
+        public static GlosaVector2 AddNew(GlosaVector2 vector, GlosaVector2 vector2)
+        {
+            return addNew_v2(vector, vector2);
+        }
+        /// <summary>
+        /// Sums up two GlosaVector2.
+        /// </summary>
         /// <param name="vector">The GlosaVector2 to add</param>
         /// <returns>A new GlosaVector2 that results from the componentwise addition of the two vectors.</returns>
         public GlosaVector2 AddNew(GlosaVector2 vector)
@@ -162,6 +172,17 @@ namespace Glosa.Net.Core.Geometry
         public void AddSelf(GlosaVector2 vector)
         {
             this = addSelf_v2(this, vector);
+        }
+
+        /// <summary>
+        /// Subtracts the second vector from the first one.
+        /// </summary>
+        /// <param name="vector">The first GlosaVector2</param>
+        /// <param name="vector2">The second GlosaVector2</param>
+        /// <returns>A new GlosaVector2 that results from the componentwise difference of vector1 - vector2.</returns>
+        public static GlosaVector2 SubtractNew(GlosaVector2 vector, GlosaVector2 vector2)
+        {
+            return subtractNew_v2(vector, vector2);
         }
 
         /// <summary>
@@ -186,6 +207,17 @@ namespace Glosa.Net.Core.Geometry
         /// <summary>
         /// Divides a GlosaVector2 by a number, having the effect of shrinking it
         /// </summary>
+        /// <param name="vector">The GlosaVector2 to divide</param>
+        /// <param name="f">The number to divide by</param>
+        /// <returns>A new GlosaVector2 that is componentwise divided by f</returns>
+        public static GlosaVector2 DivideNew(GlosaVector2 vector, float f)
+        {
+            return divideNew_v2(vector, f);
+        }
+
+        /// <summary>
+        /// Divides a GlosaVector2 by a number, having the effect of shrinking it
+        /// </summary>
         /// <param name="f">The number to divide by</param>
         /// <returns>A new GlosaVector2 that is componentwise divided by f</returns>
         public GlosaVector2 DivideNew(float f)
@@ -200,6 +232,17 @@ namespace Glosa.Net.Core.Geometry
         public void DivideSelf(float f)
         {
             this = divideSelf_v2(this, f);
+        }
+
+        /// <summary>
+        /// Multiplies a GlosaVector2 by a number, having the effect of scaling it.
+        /// </summary>
+        /// <param name="vector">The GlosaVector2 to multiply</param>
+        /// <param name="f">The number to multiply by</param>
+        /// <returns>A new GlosaVector2 that is the original vector coordinatewise multiplied by f.</returns>
+        public static GlosaVector2 MultiplyNew(GlosaVector2 vector, float f)
+        {
+            return multiplyNew_v2(vector, f);
         }
 
         /// <summary>
@@ -224,6 +267,20 @@ namespace Glosa.Net.Core.Geometry
         /// <summary>
         /// Computes the cross product (or vector product, or exterior product) of two GlosaVector2s.
         /// </summary>
+        /// <param name="vector">The first GlosaVector2</param>
+        /// <param name="vector2">The second GlosaVector2</param>
+        /// <returns>A new vector that is perpendicular to both this instance and vector,
+        /// <para>has Length == this.Length * vector.Length and</para>
+        /// <para>with a result that is oriented following the right hand rule.</para>
+        /// </returns>
+        public static float Cross(GlosaVector2 vector, GlosaVector2 vector2)
+        {
+            return cross_v2(vector, vector2);
+        }
+
+        /// <summary>
+        /// Computes the cross product (or vector product, or exterior product) of two GlosaVector2s.
+        /// </summary>
         /// <param name="vector">The second GlosaVector2 to compute</param>
         /// <returns>A new vector that is perpendicular to both this instance and vector,
         /// <para>has Length == this.Length * vector.Length and</para>
@@ -232,6 +289,20 @@ namespace Glosa.Net.Core.Geometry
         public float Cross(GlosaVector2 vector)
         {
             return cross_v2(this, vector);
+        }
+
+        /// <summary>
+        /// Multiplies two GlosaVector2 together, returning the dot product (or inner product).
+        /// </summary>
+        /// <param name="vector">The first GlosaVector2</param>
+        /// <param name="vector2">The second GlosaVector2</param>
+        /// <returns>
+        /// A value that results from the evaluation of v1.X*v2.X + v1.Y*v2.Y + v1.Z*v2.Z.
+        /// <para>This value equals v1.Length * v2.Length * cos(alpha), where alpha is the angle between vectors.</para>
+        /// </returns>
+        public static float Dot(GlosaVector2 vector, GlosaVector2 vector2)
+        {
+            return dot_v2(vector, vector2);
         }
 
         /// <summary>
@@ -350,6 +421,17 @@ namespace Glosa.Net.Core.Geometry
         public string Stringify()
         {
             return String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0},{1}", m_x, m_y);
+        }
+
+        /// <summary>
+        /// Compute the angle between two GlosaVector2.
+        /// </summary>
+        /// <param name="vector">The first vector</param>
+        /// <param name="vector2">The second vector</param>
+        /// <returns>The angle (in radians) between this and vector</returns>
+        public static float AngleBetween(GlosaVector2 vector, GlosaVector2 vector2)
+        {
+            return angleBetween_v2(vector, vector2);
         }
 
         /// <summary>
