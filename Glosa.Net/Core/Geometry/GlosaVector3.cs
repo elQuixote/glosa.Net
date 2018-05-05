@@ -650,5 +650,42 @@ namespace Glosa.Net.Core.Geometry
         {
             return (obj is GlosaVector3 && this == (GlosaVector3)obj);
         }
+
+        /// <summary>
+        /// Provides a hashing value for the present GlosaVector3.
+        /// </summary>
+        /// <returns>A non-unique number based on GlosaVector3 components.</returns>
+        public override int GetHashCode()
+        {
+            return m_x.GetHashCode() ^ m_y.GetHashCode() ^ m_z.GetHashCode();
+        }
+
+        /// <summary>
+        /// Compares this GlosaVector3 with another, Component evaluation priority is first X, then Y, then Z.
+        /// </summary>
+        /// <param name="other">The other GlosaVector3</param>
+        /// <returns>
+        /// <para> 0: if this is identical to other</para>
+        /// <para>-1: if this.X &lt; other.X</para>
+        /// <para>-1: if this.X == other.X and this.Y &lt; other.Y</para>
+        /// <para>-1: if this.X == other.X and this.Y == other.Y and this.Z &lt; other.Z</para>
+        /// <para>+1: otherwise.</para>
+        /// </returns>
+        public int CompareTo(GlosaVector3 other)
+        {
+            if (m_x < other.m_x)
+                return -1;
+            if (m_x > other.m_x)
+                return 1;
+            if (m_y < other.m_y)
+                return -1;
+            if (m_y > other.m_y)
+                return 1;
+            if (m_z < other.m_z)
+                return -1;
+            if (m_z > other.m_z)
+                return 1;
+            return 0;
+        }
     }
 }
