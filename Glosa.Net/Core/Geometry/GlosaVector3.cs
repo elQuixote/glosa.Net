@@ -428,5 +428,44 @@ namespace Glosa.Net.Core.Geometry
         {
             return (float)Math.Sqrt(this.m_x * this.m_x + this.m_y * this.m_y + this.m_z * this.m_z);
         }
+
+        /// <summary>
+        /// Returns the string representation of the current GlosaVector3, in the form X,Y,Z.
+        /// </summary>
+        /// <returns>A string with the current location of the GlosaVector3.</returns>
+        public string Stringify()
+        {
+            return String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0},{1},{2]", this.m_x, this.m_y, this.m_z);
+        }
+
+        /// <summary>
+        /// Compute the angle between two GlosaVector3.
+        /// </summary>
+        /// <param name="vector">The first vector</param>
+        /// <param name="vector2">The second vector</param>
+        /// <returns>The angle (in radians) between this and vector</returns>
+        public static float AngleBetween(GlosaVector3 vector, GlosaVector3 vector2)
+        {
+            return angleBetween_v3(vector, vector2);
+        }
+
+        /// <summary>
+        /// Compute the angle between two GlosaVector3.
+        /// </summary>
+        /// <param name="vector">The second vector</param>
+        /// <returns>The angle (in radians) between this and vector</returns>
+        public float AngleBetween(GlosaVector3 vector)
+        {
+            return angleBetween_v3(this, vector);
+        }
+
+        /// <summary>
+        /// Gets the Length of the GlosaVector3
+        /// </summary>
+        /// <returns>The length</returns>
+        public float Length()
+        {
+            return this.Magnitude();
+        }
     }
 }
