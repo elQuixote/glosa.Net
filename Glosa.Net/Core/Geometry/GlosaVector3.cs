@@ -112,10 +112,10 @@ namespace Glosa.Net.Core.Geometry
         /// <summary>
         /// Initializes a new instance of the GlosaVector3 from a Rhino Vector3f.
         /// </summary>
-        /// <param name="rhinoVector">The Rhino Vector3f</param>
+        /// <param name="rhinoVector">The Rhino Vector3f</param>s
         public GlosaVector3(Rhino.Geometry.Vector3f rhinoVector)
         {
-            this.m_x = rhinoVector.Y;
+            this.m_x = rhinoVector.X;
             this.m_y = rhinoVector.Y;
             this.m_z = rhinoVector.Z;
         }
