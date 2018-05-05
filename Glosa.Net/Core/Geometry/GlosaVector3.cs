@@ -40,7 +40,11 @@ namespace Glosa.Net.Core.Geometry
         [DllImport("vectors.dll")]
         private static extern GlosaVector3 inverseSelf_v3(GlosaVector3 v);
         [DllImport("vectors.dll")]
-        private static extern float heading_v3(GlosaVector3 v);
+        private static extern float headingXY_v3(GlosaVector3 v);
+        [DllImport("vectors.dll")]
+        private static extern float headingXZ_v3(GlosaVector3 v);
+        [DllImport("vectors.dll")]
+        private static extern float headingYZ_v3(GlosaVector3 v);
         [DllImport("vectors.dll")]
         private static extern GlosaVector3 reflectNew_v3(GlosaVector3 v, GlosaVector3 n);
         [DllImport("vectors.dll")]
