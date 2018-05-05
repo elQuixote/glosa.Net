@@ -246,5 +246,35 @@ namespace Glosa.Net.Core.Geometry
         {
             this = divideSelf_v3(this, f);
         }
+
+        /// <summary>
+        /// Multiplies a GlosaVector3 by a number, having the effect of scaling it.
+        /// </summary>
+        /// <param name="vector">The GlosaVector3 to multiply</param>
+        /// <param name="f">The number to multiply by</param>
+        /// <returns>A new GlosaVector3 that is the original vector coordinatewise multiplied by f.</returns>
+        public static GlosaVector3 MultiplyNew(GlosaVector3 vector, float f)
+        {
+            return multiplyNew_v3(vector, f);
+        }
+
+        /// <summary>
+        /// Multiplies a GlosaVector3 by a number, having the effect of scaling it.
+        /// </summary>
+        /// <param name="f">The number to multiply by</param>
+        /// <returns>A new GlosaVector3 that is the original vector coordinatewise multiplied by f.</returns>
+        public GlosaVector3 MultiplyNew(float f)
+        {
+            return multiplyNew_v3(this, f);
+        }
+
+        /// <summary>
+        /// Multiplies a GlosaVector3 by a number, having the effect of scaling it, and overrides coordinates with result.
+        /// </summary>
+        /// <param name="f">The number to multiply by</param>
+        public void MultiplySelf(float f)
+        {
+            this = multiplySelf_v3(this, f);
+        }
     }
 }
