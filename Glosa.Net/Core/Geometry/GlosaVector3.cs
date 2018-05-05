@@ -353,7 +353,7 @@ namespace Glosa.Net.Core.Geometry
         /// Computes the GlosaVector3's direction in the XY plane
         /// </summary>
         /// <returns>The rotation angle</returns>
-        public float HeadingXY()
+        public float Heading()
         {
             return heading_v3(this);
         }
