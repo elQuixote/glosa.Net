@@ -455,7 +455,7 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>A string with the current location of the GlosaVector3.</returns>
         public string Stringify()
         {
-            return String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0},{1},{2]", this.m_x, this.m_y, this.m_z);
+            return String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0},{1},{2}", this.m_x, this.m_y, this.m_z);
         }
 
         /// <summary>
