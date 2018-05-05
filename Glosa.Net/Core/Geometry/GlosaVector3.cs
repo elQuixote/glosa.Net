@@ -687,5 +687,74 @@ namespace Glosa.Net.Core.Geometry
                 return 1;
             return 0;
         }
+
+        /// <summary>
+        /// Sets all GlosaVector3 components to 0.
+        /// </summary>
+        public void Clear()
+        {
+            this = clear_v3(this);
+        }
+
+        /// <summary>
+        /// Gets the GlosaVector3 Dimension
+        /// </summary>
+        /// <returns>The dimension, for GlosaVector3 the result should be 3</returns>
+        public int Dimension()
+        {
+            return dimension_v3(this);
+        }
+
+        /// <summary>
+        /// Provides a hashing value for the present GlosaVector3.
+        /// </summary>
+        /// <returns>A non-unique number based on GlosaVector3 components.</returns>
+        public int Hash()
+        {
+            return m_x.GetHashCode() ^ m_y.GetHashCode() ^ m_z.GetHashCode();
+        }
+
+        /// <summary>
+        /// Copies a GlosaVector3 
+        /// </summary>
+        /// <param name="vector">The GlosaVector3 to copy</param>
+        /// <returns>A new copy of that GlosaVector3</returns>
+        public static GlosaVector3 CopyNew(GlosaVector3 vector)
+        {
+            return copy_v3(vector);
+        }
+
+        /// <summary>
+        /// Copies a GlosaVector3 
+        /// </summary>
+        /// <param name="vector">The GlosaVector3 to copy</param>
+        /// <returns>A new copy of that GlosaVector3</returns>
+        public GlosaVector3 Copy(GlosaVector3 vector)
+        {
+            return copy_v3(vector);
+        }
+
+        /// <summary>
+        /// Sets the GlosaVector3 components, X Y and Z, to the specified values.
+        /// </summary>
+        /// <param name="x">The x value</param>
+        /// <param name="y">The y value</param>
+        /// <param name="z">The z value</param>
+        public void Set(float x, float y, float z)
+        {
+            //Need to update in NIM to include proc for specifying all components on vector
+            this.m_x = x;
+            this.m_y = y;
+            this.m_z = z;
+        }
+
+        /// <summary>
+        /// Sets the GlosaVector3 components, X Y and Z, to the specified value.
+        /// </summary>
+        /// <param name="n">The value</param>
+        public void Set(float n)
+        {
+            this = set_v3(this, n);
+        }
     }
 }
