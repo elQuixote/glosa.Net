@@ -330,5 +330,23 @@ namespace Glosa.Net.Core.Geometry
         {
             return dot_v3(this, vector);
         }
+
+        /// <summary>
+        /// Computes the additive inverse of all coordinates in the GlosaVector3, and returns the new GlosaVector3.
+        /// </summary>
+        /// <returns>The new GlosaVector3</returns>
+        public GlosaVector3 InverseNew()
+        {
+            return inverseNew_v3(this);
+        }
+
+        /// <summary>
+        /// Computes the additive inverse of all coordinates in the GlosaVector3, and overrides coordinates with result.
+        /// </summary>
+        /// <returns>Itself</returns>
+        public void InverseSelf()
+        {
+            this = inverseSelf_v3(this);
+        }
     }
 }
