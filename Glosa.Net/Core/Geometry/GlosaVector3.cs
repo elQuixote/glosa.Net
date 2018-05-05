@@ -68,22 +68,22 @@ namespace Glosa.Net.Core.Geometry
         [DllImport("vectors.dll")]
         private static extern GlosaVector3 set_v3(GlosaVector3 v, float n);
         #endregion
-        private float m_x, m_y, m_z;
+        private double m_x, m_y, m_z;
 
         /// <summary>
         /// Gets or sets the X (first) component of this vector.
         /// </summary>
-        public float x { get { return m_x; } set { m_x = value; } }
+        public double x { get { return m_x; } set { m_x = value; } }
 
         /// <summary>
         /// Gets or sets the Y (second) component of this vector.
         /// </summary>
-        public float y { get { return m_y; } set { m_y = value; } }
+        public double y { get { return m_y; } set { m_y = value; } }
 
         /// <summary>
         /// Gets or sets the Z (third) component of this vector.
         /// </summary>
-        public float z { get { return m_z; } set { m_z = value; } }
+        public double z { get { return m_z; } set { m_z = value; } }
 
         /// <summary>
         /// Initializes a new instance of the GlosaVector3 based on three, X and Y and Z, components.
@@ -91,7 +91,7 @@ namespace Glosa.Net.Core.Geometry
         /// <param name="x">The X (first) component.</param>
         /// <param name="y">The Y (second) component.</param>
         /// <param name="z">The Z (third) component.</param>
-        public GlosaVector3(float x, float y, float z)
+        public GlosaVector3(double x, double y, double z)
         {
             this.m_x = x;
             this.m_y = y;
@@ -104,9 +104,9 @@ namespace Glosa.Net.Core.Geometry
         /// <param name="rhinoVector">The Rhino Vector3d</param>
         public GlosaVector3(Rhino.Geometry.Vector3d rhinoVector)
         {
-            this.m_x = (float)rhinoVector.Y;
-            this.m_y = (float)rhinoVector.Y;
-            this.m_z = (float)rhinoVector.Z;
+            this.m_x = rhinoVector.Y;
+            this.m_y = rhinoVector.Y;
+            this.m_z = rhinoVector.Z;
         }
 
         /// <summary>
@@ -156,9 +156,9 @@ namespace Glosa.Net.Core.Geometry
         public Rhino.Geometry.Vector3f ToVector3f()
         {
             Rhino.Geometry.Vector3f rv = new Rhino.Geometry.Vector3f();
-            rv.X = this.m_x;
-            rv.Y = this.m_y;
-            rv.Z = this.m_z;
+            rv.X = (float)this.m_x;
+            rv.Y = (float)this.m_y;
+            rv.Z = (float)this.m_z;
             return rv;
         }
         #endregion
