@@ -186,5 +186,35 @@ namespace Glosa.Net.Core.Geometry
         {
             this = addSelf_v3(this, vector);
         }
+
+        /// <summary>
+        /// Subtracts the second vector from the first one.
+        /// </summary>
+        /// <param name="vector">The first GlosaVector3</param>
+        /// <param name="vector2">The second GlosaVector3</param>
+        /// <returns>A new GlosaVector3 that results from the componentwise difference of vector1 - vector2.</returns>
+        public static GlosaVector3 SubtractNew(GlosaVector3 vector, GlosaVector3 vector2)
+        {
+            return subtractNew_v3(vector, vector2);
+        }
+
+        /// <summary>
+        /// Subtracts the second vector from the first one.
+        /// </summary>
+        /// <param name="vector">The GlosaVector3 to add</param>
+        /// <returns>A new GlosaVector3 that results from the componentwise difference of vector1 - vector2.</returns>
+        public GlosaVector3 SubtractNew(GlosaVector3 vector)
+        {
+            return subtractNew_v3(this, vector);
+        }
+
+        /// <summary>
+        /// Subtracts GlosaVector3 and overrides coordinates with result.
+        /// </summary>
+        /// <param name="vector">The GlosaVector3 to subtract</param>
+        public void SubtractSelf(GlosaVector3 vector)
+        {
+            this = subtractSelf_v3(this, vector);
+        }
     }
 }
