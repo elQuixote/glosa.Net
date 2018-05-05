@@ -24,41 +24,41 @@ namespace Glosa.Net.Core.Geometry
         [DllImport("vectors.dll")]
         private static extern GlosaVector3 subtractSelf_v3(GlosaVector3 v1, GlosaVector3 v2);
         [DllImport("vectors.dll")]
-        private static extern GlosaVector3 divideNew_v3(GlosaVector3 v, float f);
+        private static extern GlosaVector3 divideNew_v3(GlosaVector3 v, double f);
         [DllImport("vectors.dll")]
-        private static extern GlosaVector3 divideSelf_v3(GlosaVector3 v, float f);
+        private static extern GlosaVector3 divideSelf_v3(GlosaVector3 v, double f);
         [DllImport("vectors.dll")]
-        private static extern GlosaVector3 multiplyNew_v3(GlosaVector3 v, float f);
+        private static extern GlosaVector3 multiplyNew_v3(GlosaVector3 v, double f);
         [DllImport("vectors.dll")]
-        private static extern GlosaVector3 multiplySelf_v3(GlosaVector3 v, float f);
+        private static extern GlosaVector3 multiplySelf_v3(GlosaVector3 v, double f);
         [DllImport("vectors.dll")]
         private static extern GlosaVector3 cross_v3(GlosaVector3 v1, GlosaVector3 v2);
         [DllImport("vectors.dll")]
-        private static extern float dot_v3(GlosaVector3 v1, GlosaVector3 v2);
+        private static extern double dot_v3(GlosaVector3 v1, GlosaVector3 v2);
         [DllImport("vectors.dll")]
         private static extern GlosaVector3 inverseNew_v3(GlosaVector3 v);
         [DllImport("vectors.dll")]
         private static extern GlosaVector3 inverseSelf_v3(GlosaVector3 v);
         [DllImport("vectors.dll")]
-        private static extern float headingXY_v3(GlosaVector3 v);
+        private static extern double headingXY_v3(GlosaVector3 v);
         [DllImport("vectors.dll")]
-        private static extern float headingXZ_v3(GlosaVector3 v);
+        private static extern double headingXZ_v3(GlosaVector3 v);
         [DllImport("vectors.dll")]
-        private static extern float headingYZ_v3(GlosaVector3 v);
+        private static extern double headingYZ_v3(GlosaVector3 v);
         [DllImport("vectors.dll")]
         private static extern GlosaVector3 reflectNew_v3(GlosaVector3 v, GlosaVector3 n);
         [DllImport("vectors.dll")]
         private static extern GlosaVector3 reflectSelf_v3(GlosaVector3 v, GlosaVector3 n);
         [DllImport("vectors.dll")]
-        private static extern GlosaVector3 refractNew_v3(GlosaVector3 v, GlosaVector3 n, float eta);
+        private static extern GlosaVector3 refractNew_v3(GlosaVector3 v, GlosaVector3 n, double eta);
         [DllImport("vectors.dll")]
-        private static extern GlosaVector3 refractSelf_v3(GlosaVector3 v, GlosaVector3 n, float eta);
+        private static extern GlosaVector3 refractSelf_v3(GlosaVector3 v, GlosaVector3 n, double eta);
         [DllImport("vectors.dll")]
-        private static extern GlosaVector3 normalizeNew_v3(GlosaVector3 v, float m = 1.0f);
+        private static extern GlosaVector3 normalizeNew_v3(GlosaVector3 v, double m = 1.0);
         [DllImport("vectors.dll")]
-        private static extern GlosaVector3 normalizeSelf_v3(GlosaVector3 v, float m = 1.0f);
+        private static extern GlosaVector3 normalizeSelf_v3(GlosaVector3 v, double m = 1.0);
         [DllImport("vectors.dll")]
-        private static extern float angleBetween_v3(GlosaVector3 v1, GlosaVector3 v2);
+        private static extern double angleBetween_v3(GlosaVector3 v1, GlosaVector3 v2);
         [DllImport("vectors.dll")]
         private static extern GlosaVector3 clear_v3(GlosaVector3 v);
         [DllImport("vectors.dll")]
@@ -66,7 +66,7 @@ namespace Glosa.Net.Core.Geometry
         [DllImport("vectors.dll")]
         private static extern GlosaVector3 copy_v3(GlosaVector3 v);
         [DllImport("vectors.dll")]
-        private static extern GlosaVector3 set_v3(GlosaVector3 v, float n);
+        private static extern GlosaVector3 set_v3(GlosaVector3 v, double n);
         #endregion
         private double m_x, m_y, m_z;
 
@@ -227,7 +227,7 @@ namespace Glosa.Net.Core.Geometry
         /// <param name="vector">The GlosaVector3 to divide</param>
         /// <param name="f">The number to divide by</param>
         /// <returns>A new GlosaVector3 that is componentwise divided by f</returns>
-        public static GlosaVector3 DivideNew(GlosaVector3 vector, float f)
+        public static GlosaVector3 DivideNew(GlosaVector3 vector, double f)
         {
             return divideNew_v3(vector, f);
         }
@@ -237,7 +237,7 @@ namespace Glosa.Net.Core.Geometry
         /// </summary>
         /// <param name="f">The number to divide by</param>
         /// <returns>A new GlosaVector3 that is componentwise divided by f</returns>
-        public GlosaVector3 DivideNew(float f)
+        public GlosaVector3 DivideNew(double f)
         {
             return divideNew_v3(this, f);
         }
@@ -246,13 +246,13 @@ namespace Glosa.Net.Core.Geometry
         /// Divides a GlosaVector3 by a number, having the effect of shrinking it and overrides coordinates with result.
         /// </summary>
         /// <param name="f">The number to divide by</param>
-        public void DivideSelf(float f)
+        public void DivideSelf(double f)
         {
             this = divideSelf_v3(this, f);
         }
         //NOTE - There is def an issue with passing floats from .net to reference c functions. values 
         // are all jacked up. This method below returns a different result than DivideSelf. Check this
-        public void DivideSelfTest(float f)
+        public void DivideSelfTest(double f)
         {
             this.m_x /= f;
             this.m_y /= f;
@@ -265,7 +265,7 @@ namespace Glosa.Net.Core.Geometry
         /// <param name="vector">The GlosaVector3 to multiply</param>
         /// <param name="f">The number to multiply by</param>
         /// <returns>A new GlosaVector3 that is the original vector coordinatewise multiplied by f.</returns>
-        public static GlosaVector3 MultiplyNew(GlosaVector3 vector, float f)
+        public static GlosaVector3 MultiplyNew(GlosaVector3 vector, double f)
         {
             return multiplyNew_v3(vector, f);
         }
@@ -275,7 +275,7 @@ namespace Glosa.Net.Core.Geometry
         /// </summary>
         /// <param name="f">The number to multiply by</param>
         /// <returns>A new GlosaVector3 that is the original vector coordinatewise multiplied by f.</returns>
-        public GlosaVector3 MultiplyNew(float f)
+        public GlosaVector3 MultiplyNew(double f)
         {
             return multiplyNew_v3(this, f);
         }
@@ -284,7 +284,7 @@ namespace Glosa.Net.Core.Geometry
         /// Multiplies a GlosaVector3 by a number, having the effect of scaling it, and overrides coordinates with result.
         /// </summary>
         /// <param name="f">The number to multiply by</param>
-        public void MultiplySelf(float f)
+        public void MultiplySelf(double f)
         {
             this = multiplySelf_v3(this, f);
         }
@@ -325,7 +325,7 @@ namespace Glosa.Net.Core.Geometry
         /// A value that results from the evaluation of v1.X*v2.X + v1.Y*v2.Y + v1.Z*v2.Z.
         /// <para>This value equals v1.Length * v2.Length * cos(alpha), where alpha is the angle between vectors.</para>
         /// </returns>
-        public static float Dot(GlosaVector3 vector, GlosaVector3 vector2)
+        public static double Dot(GlosaVector3 vector, GlosaVector3 vector2)
         {
             return dot_v3(vector, vector2);
         }
@@ -338,7 +338,7 @@ namespace Glosa.Net.Core.Geometry
         /// A value that results from the evaluation of v1.X*v2.X + v1.Y*v2.Y + v1.Z*v2.Z.
         /// <para>This value equals v1.Length * v2.Length * cos(alpha), where alpha is the angle between vectors.</para>
         /// </returns>
-        public float Dot(GlosaVector3 vector)
+        public double Dot(GlosaVector3 vector)
         {
             return dot_v3(this, vector);
         }
@@ -365,7 +365,7 @@ namespace Glosa.Net.Core.Geometry
         /// Computes the GlosaVector3's direction in the XY plane
         /// </summary>
         /// <returns>The rotation angle</returns>
-        public float Heading()
+        public double Heading()
         {
             return headingXY_v3(this);
         }
@@ -374,7 +374,7 @@ namespace Glosa.Net.Core.Geometry
         /// Computes the GlosaVector3's direction in the XZ plane
         /// </summary>
         /// <returns>The rotation angle</returns>
-        public float HeadingXZ()
+        public double HeadingXZ()
         {
             return headingXZ_v3(this);
         }
@@ -383,7 +383,7 @@ namespace Glosa.Net.Core.Geometry
         /// Computes the GlosaVector3's direction in the YZ plane
         /// </summary>
         /// <returns>The rotation angle</returns>
-        public float HeadingYZ()
+        public double HeadingYZ()
         {
             return headingYZ_v3(this);
         }
@@ -413,7 +413,7 @@ namespace Glosa.Net.Core.Geometry
         /// <param name="vector"></param>
         /// <param name="f"></param>
         /// <returns></returns>
-        public GlosaVector3 RefractNew(GlosaVector3 vector, float f)
+        public GlosaVector3 RefractNew(GlosaVector3 vector, double f)
         {
             return refractNew_v3(this, vector, f);
         }
@@ -423,7 +423,7 @@ namespace Glosa.Net.Core.Geometry
         /// </summary>
         /// <param name="vector"></param>
         /// <param name="f"></param>
-        public void RefractSelf(GlosaVector3 vector, float f)
+        public void RefractSelf(GlosaVector3 vector, double f)
         {
             this = refractSelf_v3(this, vector, f);
         }
@@ -433,7 +433,7 @@ namespace Glosa.Net.Core.Geometry
         /// </summary>
         /// <param name="value">The value to normalize to</param>
         /// <returns>A new normalized GlosaVector3</returns>
-        public GlosaVector3 NormalizeNew(float value)
+        public GlosaVector3 NormalizeNew(double value)
         {
             return normalizeNew_v3(this, value);
         }
@@ -443,7 +443,7 @@ namespace Glosa.Net.Core.Geometry
         /// </summary>
         /// <param name="value">The value to normalize to</param>
         /// <returns>Itself</returns>
-        public void NormalizeSelf(float value)
+        public void NormalizeSelf(double value)
         {
             this = normalizeSelf_v3(this, value);
         }
@@ -452,9 +452,9 @@ namespace Glosa.Net.Core.Geometry
         /// Computes the length of the GlosaVector3
         /// </summary>
         /// <returns>The length</returns>
-        public float Magnitude()
+        public double Magnitude()
         {
-            return (float)Math.Sqrt(this.m_x * this.m_x + this.m_y * this.m_y + this.m_z * this.m_z);
+            return Math.Sqrt(this.m_x * this.m_x + this.m_y * this.m_y + this.m_z * this.m_z);
         }
 
         /// <summary>
@@ -472,7 +472,7 @@ namespace Glosa.Net.Core.Geometry
         /// <param name="vector">The first vector</param>
         /// <param name="vector2">The second vector</param>
         /// <returns>The angle (in radians) between this and vector</returns>
-        public static float AngleBetween(GlosaVector3 vector, GlosaVector3 vector2)
+        public static double AngleBetween(GlosaVector3 vector, GlosaVector3 vector2)
         {
             return angleBetween_v3(vector, vector2);
         }
@@ -482,7 +482,7 @@ namespace Glosa.Net.Core.Geometry
         /// </summary>
         /// <param name="vector">The second vector</param>
         /// <returns>The angle (in radians) between this and vector</returns>
-        public float AngleBetween(GlosaVector3 vector)
+        public double AngleBetween(GlosaVector3 vector)
         {
             return angleBetween_v3(this, vector);
         }
@@ -491,7 +491,7 @@ namespace Glosa.Net.Core.Geometry
         /// Gets the Length of the GlosaVector3
         /// </summary>
         /// <returns>The length</returns>
-        public float Length()
+        public double Length()
         {
             return this.Magnitude();
         }
@@ -631,7 +631,7 @@ namespace Glosa.Net.Core.Geometry
         /// A value that results from the evaluation of v1.X*v2.X + v1.Y*v2.Y + v1.Z*v2.Z.
         /// <para>This value equals v1.Length * v2.Length * cos(alpha), where alpha is the angle between vectors.</para>
         /// </returns>
-        public static float operator *(GlosaVector3 vector, GlosaVector3 vector2)
+        public static double operator *(GlosaVector3 vector, GlosaVector3 vector2)
         {
             return dot_v3(vector, vector2);
         }
@@ -642,7 +642,7 @@ namespace Glosa.Net.Core.Geometry
         /// <param name="vector">The GlosaVector3 to divide</param>
         /// <param name="f">The number to divide by</param>
         /// <returns>A new GlosaVector3 that is componentwise divided by f</returns>
-        public static GlosaVector3 operator /(GlosaVector3 vector, float f)
+        public static GlosaVector3 operator /(GlosaVector3 vector, double f)
         {
             return divideNew_v3(vector, f);
         }
@@ -768,7 +768,7 @@ namespace Glosa.Net.Core.Geometry
         /// <param name="x">The x value</param>
         /// <param name="y">The y value</param>
         /// <param name="z">The z value</param>
-        public void Set(float x, float y, float z)
+        public void Set(double x, double y, double z)
         {
             //Need to update in NIM to include proc for specifying all components on vector
             this.m_x = x;
@@ -780,7 +780,7 @@ namespace Glosa.Net.Core.Geometry
         /// Sets the GlosaVector3 components, X Y and Z, to the specified value.
         /// </summary>
         /// <param name="n">The value</param>
-        public void Set(float n)
+        public void Set(double n)
         {
             this = set_v3(this, n);
         }
