@@ -399,5 +399,34 @@ namespace Glosa.Net.Core.Geometry
         {
             this = refractSelf_v3(this, vector, f);
         }
+
+        /// <summary>
+        /// Normalizes the GlosaVector3 so that its magnitude is = value
+        /// </summary>
+        /// <param name="value">The value to normalize to</param>
+        /// <returns>A new normalized GlosaVector3</returns>
+        public GlosaVector3 NormalizeNew(float value)
+        {
+            return normalizeNew_v3(this, value);
+        }
+
+        /// <summary>
+        /// Normalizes the GlosaVector3 so that its magnitude is = value
+        /// </summary>
+        /// <param name="value">The value to normalize to</param>
+        /// <returns>Itself</returns>
+        public void NormalizeSelf(float value)
+        {
+            this = normalizeSelf_v3(this, value);
+        }
+
+        /// <summary>
+        /// Computes the length of the GlosaVector3
+        /// </summary>
+        /// <returns>The length</returns>
+        public float Magnitude()
+        {
+            return (float)Math.Sqrt(this.m_x * this.m_x + this.m_y * this.m_y + this.m_z * this.m_z);
+        }
     }
 }
