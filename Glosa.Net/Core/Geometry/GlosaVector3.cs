@@ -348,5 +348,56 @@ namespace Glosa.Net.Core.Geometry
         {
             this = inverseSelf_v3(this);
         }
+
+        /// <summary>
+        /// Computes the GlosaVector3's direction in the XY plane
+        /// </summary>
+        /// <returns>The rotation angle</returns>
+        public float HeadingXY()
+        {
+            return heading_v3(this);
+        }
+
+        //NOTE - NEED TO ADD HEADING XZ AND HEADING YZ (WRAP NIM METHODS FIRST)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vector"></param>
+        /// <returns></returns>
+        public GlosaVector3 ReflectNew(GlosaVector3 vector)
+        {
+            return reflectNew_v3(this, vector);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vector"></param>
+        public void ReflectSelf(GlosaVector3 vector)
+        {
+            this = reflectSelf_v3(this, vector);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vector"></param>
+        /// <param name="f"></param>
+        /// <returns></returns>
+        public GlosaVector3 RefractNew(GlosaVector3 vector, float f)
+        {
+            return refractNew_v3(this, vector, f);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vector"></param>
+        /// <param name="f"></param>
+        public void RefractSelf(GlosaVector3 vector, float f)
+        {
+            this = refractSelf_v3(this, vector, f);
+        }
     }
 }
