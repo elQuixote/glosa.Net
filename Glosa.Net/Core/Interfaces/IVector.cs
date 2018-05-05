@@ -16,7 +16,7 @@ namespace Glosa.Net.Core.Interfaces
         void DivideSelf(float f);
         T MultiplyNew(float f);
         void MultiplySelf(float f);
-        float Cross(T vector);
+        //float Cross(T vector); //vector2 returns float and 3 returns vector, do we need float?
         float Dot(T vector);
         T InverseNew();
         void InverseSelf();
