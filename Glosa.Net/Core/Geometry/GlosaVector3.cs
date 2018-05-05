@@ -216,5 +216,35 @@ namespace Glosa.Net.Core.Geometry
         {
             this = subtractSelf_v3(this, vector);
         }
+
+        /// <summary>
+        /// Divides a GlosaVector3 by a number, having the effect of shrinking it
+        /// </summary>
+        /// <param name="vector">The GlosaVector3 to divide</param>
+        /// <param name="f">The number to divide by</param>
+        /// <returns>A new GlosaVector3 that is componentwise divided by f</returns>
+        public static GlosaVector3 DivideNew(GlosaVector3 vector, float f)
+        {
+            return divideNew_v3(vector, f);
+        }
+
+        /// <summary>
+        /// Divides a GlosaVector3 by a number, having the effect of shrinking it
+        /// </summary>
+        /// <param name="f">The number to divide by</param>
+        /// <returns>A new GlosaVector3 that is componentwise divided by f</returns>
+        public GlosaVector3 DivideNew(float f)
+        {
+            return divideNew_v3(this, f);
+        }
+
+        /// <summary>
+        /// Divides a GlosaVector3 by a number, having the effect of shrinking it and overrides coordinates with result.
+        /// </summary>
+        /// <param name="f">The number to divide by</param>
+        public void DivideSelf(float f)
+        {
+            this = divideSelf_v3(this, f);
+        }
     }
 }
