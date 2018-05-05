@@ -359,10 +359,26 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>The rotation angle</returns>
         public float Heading()
         {
-            return heading_v3(this);
+            return headingXY_v3(this);
         }
 
-        //NOTE - NEED TO ADD HEADING XZ AND HEADING YZ (WRAP NIM METHODS FIRST)
+        /// <summary>
+        /// Computes the GlosaVector3's direction in the XZ plane
+        /// </summary>
+        /// <returns>The rotation angle</returns>
+        public float HeadingXZ()
+        {
+            return headingXZ_v3(this);
+        }
+
+        /// <summary>
+        /// Computes the GlosaVector3's direction in the YZ plane
+        /// </summary>
+        /// <returns>The rotation angle</returns>
+        public float HeadingYZ()
+        {
+            return headingYZ_v3(this);
+        }
 
         /// <summary>
         /// 
