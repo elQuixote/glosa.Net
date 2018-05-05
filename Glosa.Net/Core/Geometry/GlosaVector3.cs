@@ -467,5 +467,188 @@ namespace Glosa.Net.Core.Geometry
         {
             return this.Magnitude();
         }
+
+        /// <summary>
+        /// Determines whether the specified GlosaVector3 has the same value as the present GlosaVector3.
+        /// </summary>
+        /// <param name="vector">The other GlosaVector3 to compare</param>
+        /// <returns>The result</returns>
+        public bool Equals(GlosaVector3 vector)
+        {
+            return this == vector;
+        }
+        #region Operators
+
+        /// <summary>
+        /// Determines whether two GlosaVector3 have equal values.
+        /// </summary>
+        /// <param name="a">The first GlosaVector3</param>
+        /// <param name="b">The second GlosaVector3</param>
+        /// <returns>True if components of the two GlosaVector3 are pairwise equal; otherwise false.</returns>
+        public static bool operator ==(GlosaVector3 a, GlosaVector3 b)
+        {
+            return a.m_x == b.m_x && a.m_y == b.m_y && a.m_z == b.m_z;
+        }
+
+        /// <summary>
+        /// Determines whether two GlosaVector3 have different values.
+        /// </summary>
+        /// <param name="a">The first GlosaVector3</param>
+        /// <param name="b">The second GlosaVector3</param>
+        /// <returns>True if any component of the two GlosaVector3 is pairwise different; otherwise false.</returns>
+        public static bool operator !=(GlosaVector3 a, GlosaVector3 b)
+        {
+            return a.m_x != b.m_x || a.m_y != b.m_y || a.m_z != b.m_z;
+        }
+
+        /// <summary>
+        /// Determines whether the first specified GlosaVector3 comes before
+        /// (has inferior sorting value than) the second GlosaVector3.
+        /// <para>Components have decreasing evaluation priority: first X, then Y, then Z.</para>
+        /// </summary>
+        /// <param name="a">The first GlosaVector3</param>
+        /// <param name="b">The second GlosaVector3</param>
+        /// <returns>true if a.X is smaller than b.X,
+        /// or a.X == b.X and a.Y is smaller than b.Y,
+        /// or a.X == b.X and a.Y == b.Y and a.Z is smaller than b.Z;
+        /// otherwise, false.</returns>
+        public static bool operator <(GlosaVector3 a, GlosaVector3 b)
+        {
+            if (a.m_x < b.m_x)
+                return true;
+            if (a.m_x == b.m_x)
+            {
+                if (a.m_y < b.m_y)
+                    return true;
+                if (a.m_y == b.m_y && a.m_z < b.m_z)
+                    return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Determines whether the first specified GlosaVector3 comes before
+        /// (has inferior sorting value than) the second GlosaVector3, or it is equal to it.
+        /// <para>Components have decreasing evaluation priority: first X, then Y, then Z.</para>
+        /// </summary>
+        /// <param name="a">The first GlosaVector3</param>
+        /// <param name="b">The second GlosaVector3</param>
+        /// <returns>true if a.X is smaller than b.X,
+        /// or a.X == b.X and a.Y is smaller than b.Y,
+        /// or a.X == b.X and a.Y == b.Y and a.Z &lt;= b.Z;
+        /// otherwise, false.</returns>
+        public static bool operator <=(GlosaVector3 a, GlosaVector3 b)
+        {
+            return a.CompareTo(b) <= 0;
+        }
+
+        /// <summary>
+        /// Determines whether the first specified GlosaVector3 comes after
+        /// (has superior sorting value than) the second GlosaVector3.
+        /// <para>Components have decreasing evaluation priority: first X, then Y.</para>
+        /// </summary>
+        /// <param name="a">The first GlosaVector3</param>
+        /// <param name="b">The second GlosaVector3</param>
+        /// <returns>true if a.X is larger than b.X,
+        /// or a.X == b.X and a.Y is larger than b.Y,
+        /// or a.X == b.X and a.Y == b.Y and a.Z is larger than b.Z;
+        /// otherwise, false.</returns>
+        public static bool operator >(GlosaVector3 a, GlosaVector3 b)
+        {
+            if (a.m_x > b.m_x)
+                return true;
+            if (a.m_x == b.m_x)
+            {
+                if (a.m_y > b.m_y)
+                    return true;
+                if (a.m_y == b.m_y && a.m_z > b.m_z)
+                    return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Determines whether the first specified GlosaVector3 comes after
+        /// (has superior sorting value than) the second GlosaVector3, or it is equal to it.
+        /// <para>Components have decreasing evaluation priority: first X, then Y, then Z.</para>
+        /// </summary>
+        /// <param name="a">The first GlosaVector3</param>
+        /// <param name="b">The second GlosaVector3</param>
+        /// <returns>true if a.X is larger than b.X,
+        /// or a.X == b.X and a.Y is larger than b.Y,
+        /// or a.X == b.X and a.Y == b.Y and a.Z &gt;= b.Z;
+        /// otherwise, false.</returns>
+        public static bool operator >=(GlosaVector3 a, GlosaVector3 b)
+        {
+            return a.CompareTo(b) >= 0;
+        }
+
+        /// <summary>
+        /// Multiplies a GlosaVector3 by a number, having the effect of scaling it.
+        /// </summary>
+        /// <param name="vector">The GlosaVector3 to multiply</param>
+        /// <param name="f">The value to multiply by</param>
+        /// <returns>A new GlosaVector3 that is the original vector coordinatewise multiplied by f.</returns>
+        public static GlosaVector3 operator *(GlosaVector3 vector, float f)
+        {
+            return multiplyNew_v3(vector, f);
+        }
+
+        /// <summary>
+        /// Multiplies two GlosaVector3 together, returning the dot product (or inner product).
+        /// </summary>
+        /// <param name="vector">The GlosaVector3</param>
+        /// <param name="vector2">The second GlosaVector3 to multiply by</param>
+        /// <returns>
+        /// A value that results from the evaluation of v1.X*v2.X + v1.Y*v2.Y + v1.Z*v2.Z.
+        /// <para>This value equals v1.Length * v2.Length * cos(alpha), where alpha is the angle between vectors.</para>
+        /// </returns>
+        public static float operator *(GlosaVector3 vector, GlosaVector3 vector2)
+        {
+            return dot_v3(vector, vector2);
+        }
+
+        /// <summary>
+        /// Divides a GlosaVector3 by a number, having the effect of shrinking it
+        /// </summary>
+        /// <param name="vector">The GlosaVector3 to divide</param>
+        /// <param name="f">The number to divide by</param>
+        /// <returns>A new GlosaVector3 that is componentwise divided by f</returns>
+        public static GlosaVector3 operator /(GlosaVector3 vector, float f)
+        {
+            return divideNew_v3(vector, f);
+        }
+
+        /// <summary>
+        /// Sums up two GlosaVector3.
+        /// </summary>
+        /// <param name="vector">The GlosaVector3</param>
+        /// <param name="vector2">The second GlosaVector3</param>
+        /// <returns>A new GlosaVector3 that results from the componentwise addition of the two vectors.</returns>
+        public static GlosaVector3 operator +(GlosaVector3 vector, GlosaVector3 vector2)
+        {
+            return addNew_v3(vector, vector2);
+        }
+
+        /// <summary>
+        /// Subtracts the second vector from the first one.
+        /// </summary>
+        /// <param name="vector">The GlosaVector3</param>
+        /// <param name="vector2">The second GlosaVector3</param>
+        /// <returns>A new GlosaVector3 that results from the componentwise difference of vector1 - vector2.</returns>
+        public static GlosaVector3 operator -(GlosaVector3 vector, GlosaVector3 vector2)
+        {
+            return subtractNew_v3(vector, vector2);
+        }
+        #endregion
+        /// <summary>
+        /// Determines whether the specified System.Object is a GlosaVector3 and has the same values as the present GlosaVector3.
+        /// </summary>
+        /// <param name="obj">THe specified object</param>
+        /// <returns>true if obj is a GlosaVector3 and has the same coordinates as this; otherwise false.</returns>
+        public override bool Equals(object obj)
+        {
+            return (obj is GlosaVector3 && this == (GlosaVector3)obj);
+        }
     }
 }
