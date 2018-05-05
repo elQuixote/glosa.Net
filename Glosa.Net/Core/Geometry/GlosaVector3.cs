@@ -276,5 +276,59 @@ namespace Glosa.Net.Core.Geometry
         {
             this = multiplySelf_v3(this, f);
         }
+
+        /// <summary>
+        /// Computes the cross product (or vector product, or exterior product) of two GlosaVector3.
+        /// </summary>
+        /// <param name="vector">The first GlosaVector3</param>
+        /// <param name="vector2">The second GlosaVector3</param>
+        /// <returns>A new GlosaVector3 that is perpendicular to both this instance and vector,
+        /// <para>has Length == this.Length * vector.Length and</para>
+        /// <para>with a result that is oriented following the right hand rule.</para>
+        /// </returns>
+        public static GlosaVector3 Cross(GlosaVector3 vector, GlosaVector3 vector2)
+        {
+            return cross_v3(vector, vector2);
+        }
+
+        /// <summary>
+        /// Computes the cross product (or vector product, or exterior product) of two GlosaVector3.
+        /// </summary>
+        /// <param name="vector">The second GlosaVector3 to compute</param>
+        /// <returns>A new vector that is perpendicular to both this instance and vector,
+        /// <para>has Length == this.Length * vector.Length and</para>
+        /// <para>with a result that is oriented following the right hand rule.</para>
+        /// </returns>
+        public GlosaVector3 Cross(GlosaVector3 vector)
+        {
+            return cross_v3(this, vector);
+        }
+
+        /// <summary>
+        /// Multiplies two GlosaVector3 together, returning the dot product (or inner product).
+        /// </summary>
+        /// <param name="vector">The first GlosaVector3</param>
+        /// <param name="vector2">The second GlosaVector3</param>
+        /// <returns>
+        /// A value that results from the evaluation of v1.X*v2.X + v1.Y*v2.Y + v1.Z*v2.Z.
+        /// <para>This value equals v1.Length * v2.Length * cos(alpha), where alpha is the angle between vectors.</para>
+        /// </returns>
+        public static float Dot(GlosaVector3 vector, GlosaVector3 vector2)
+        {
+            return dot_v3(vector, vector2);
+        }
+
+        /// <summary>
+        /// Multiplies two GlosaVector3 together, returning the dot product (or inner product).
+        /// </summary>
+        /// <param name="vector">The GlosaVector3 to multiply by</param>
+        /// <returns>
+        /// A value that results from the evaluation of v1.X*v2.X + v1.Y*v2.Y + v1.Z*v2.Z.
+        /// <para>This value equals v1.Length * v2.Length * cos(alpha), where alpha is the angle between vectors.</para>
+        /// </returns>
+        public float Dot(GlosaVector3 vector)
+        {
+            return dot_v3(this, vector);
+        }
     }
 }
