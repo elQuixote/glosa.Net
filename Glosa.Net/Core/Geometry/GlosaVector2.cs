@@ -134,7 +134,7 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>A new Rhino Vector2d with the two, X and Y, components from the GlosaVector2</returns>
         public Rhino.Geometry.Vector2d ToVector2d()
         {
-            return new Rhino.Geometry.Vector2d(this.x, this.y);
+            return new Rhino.Geometry.Vector2d(this.m_x, this.m_y);
         }
 
         /// <summary>
