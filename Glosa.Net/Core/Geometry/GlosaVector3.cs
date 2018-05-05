@@ -146,7 +146,7 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>A new Rhino Vector3d with the three, X and Y and Z, components from the GlosaVector3</returns>
         public Rhino.Geometry.Vector3d ToVector3d()
         {
-            return new Rhino.Geometry.Vector3d(this.x, this.y, this.z);
+            return new Rhino.Geometry.Vector3d(this.m_x, this.m_y, this.m_z);
         }
 
         /// <summary>
