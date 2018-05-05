@@ -158,5 +158,33 @@ namespace Glosa.Net.Core.Geometry
             return rv;
         }
         #endregion
+        /// <summary>
+        /// Sums up two GlosaVector3.
+        /// </summary>
+        /// <param name="vector">The first GlosaVector3</param>
+        /// <param name="vector2">The second GlosaVector3</param>
+        /// <returns>A new GlosaVector3 that results from the componentwise addition of the two vectors.</returns>
+        public static GlosaVector3 AddNew(GlosaVector3 vector, GlosaVector3 vector2)
+        {
+            return addNew_v3(vector, vector2);
+        }
+        /// <summary>
+        /// Sums up two GlosaVector3.
+        /// </summary>
+        /// <param name="vector">The GlosaVector3 to add</param>
+        /// <returns>A new GlosaVector3 that results from the componentwise addition of the two vectors.</returns>
+        public GlosaVector3 AddNew(GlosaVector3 vector)
+        {
+            return addNew_v3(this, vector);
+        }
+
+        /// <summary>
+        /// Adds GlosaVector3 and overrides coordinates with result.
+        /// </summary>
+        /// <param name="vector">The GlosaVector3 to add</param>
+        public void AddSelf(GlosaVector3 vector)
+        {
+            this = addSelf_v3(this, vector);
+        }
     }
 }
