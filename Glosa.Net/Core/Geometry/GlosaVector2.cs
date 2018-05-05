@@ -64,24 +64,24 @@ namespace Glosa.Net.Core.Geometry
         [DllImport("vectors.dll")]
         private static extern GlosaVector2 set_v2(GlosaVector2 v, float n);
         #endregion
-        private float m_x, m_y;
+        private double m_x, m_y;
 
         /// <summary>
         /// Gets or sets the X (first) component of this vector.
         /// </summary>
-        public float x { get { return m_x; } set { m_x = value; } }
+        public double x { get { return m_x; } set { m_x = value; } }
 
         /// <summary>
         /// Gets or sets the Y (second) component of this vector.
         /// </summary>
-        public float y { get { return m_y; } set { m_y = value; } }
+        public double y { get { return m_y; } set { m_y = value; } }
 
         /// <summary>
         /// Initializes a new instance of the vector based on two, X and Y, components.
         /// </summary>
         /// <param name="x">The X (first) component.</param>
         /// <param name="y">The Y (second) component.</param>
-        public GlosaVector2(float x, float y)
+        public GlosaVector2(double x, double y)
         {
             this.m_x = x;
             this.m_y = y;
@@ -93,8 +93,8 @@ namespace Glosa.Net.Core.Geometry
         /// <param name="rhinoVector">The Rhino Vector2d</param>
         public GlosaVector2(Rhino.Geometry.Vector2d rhinoVector)
         {
-            this.m_x = (float)rhinoVector.Y;
-            this.m_y = (float)rhinoVector.Y;
+            this.m_x = rhinoVector.Y;
+            this.m_y = rhinoVector.Y;
         }
 
         /// <summary>
@@ -144,8 +144,8 @@ namespace Glosa.Net.Core.Geometry
         public Rhino.Geometry.Vector2f ToVector2f()
         {
             Rhino.Geometry.Vector2f rv = new Rhino.Geometry.Vector2f();
-            rv.X = this.m_x;
-            rv.Y = this.m_y;
+            rv.X = (float)this.m_x;
+            rv.Y = (float)this.m_y;
             return rv;
         }
         #endregion
