@@ -81,6 +81,8 @@ namespace Glosa.Net.Core.Geometry
         private static extern bool equals_v3(GlosaVector3 v1, GlosaVector3 v2);
         [DllImport("vectors.dll")]
         private static extern bool notEqual_v3(GlosaVector3 v1, GlosaVector3 v2);
+        [DllImport("vectors.dll")]
+        private static extern int hash_v3(GlosaVector3 v);
         #endregion
         private double m_x, m_y, m_z;
 
@@ -735,7 +737,7 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>A non-unique number based on GlosaVector3 components.</returns>
         public int Hash()
         {
-            return m_x.GetHashCode() ^ m_y.GetHashCode() ^ m_z.GetHashCode();
+            return hash_v3(this);
         }
 
         /// <summary>
