@@ -83,6 +83,10 @@ namespace Glosa.Net.Core.Geometry
         private static extern bool notEqual_v3(GlosaVector3 v1, GlosaVector3 v2);
         [DllImport("vectors.dll")]
         private static extern int hash_v3(GlosaVector3 v);
+        [DllImport("vectors.dll")]
+        //private static extern double[] toArray_v3(GlosaVector3 v);
+        //private static extern IntPtr toArray_v3(GlosaVector3 v);
+        private static unsafe extern double* toArray_v3(GlosaVector3 v);
         #endregion
         private double m_x, m_y, m_z;
 
@@ -781,6 +785,28 @@ namespace Glosa.Net.Core.Geometry
         public void Set(double n)
         {
             this = set_v3(this, n);
+        }
+
+        public unsafe double[] ToArray()
+        {
+            /*
+            IntPtr ptr = toArray_v3(this);
+            int arrayLength = Marshal.ReadByte(ptr);
+            ptr = IntPtr.Add(ptr, 4);
+            double[] result = new double[arrayLength];
+            Marshal.Copy(ptr, result, 0, arrayLength);
+
+            return result;     
+            */
+            //return toArray_v3(this);
+            var incoming = new double[3];
+            fixed (double* inBuf = incoming)
+            {
+                double* outBuf = toArray_v3(this);
+                for (int i = 0; i < 3; i++)
+                    incoming[i] = outBuf[i];
+            }
+            return incoming;
         }
     }
 }
