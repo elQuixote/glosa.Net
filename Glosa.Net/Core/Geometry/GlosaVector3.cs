@@ -529,7 +529,7 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>True if components of the two GlosaVector3 are pairwise equal; otherwise false.</returns>
         public static bool operator ==(GlosaVector3 a, GlosaVector3 b)
         {
-            return a.m_x == b.m_x && a.m_y == b.m_y && a.m_z == b.m_z;
+            return equals_v3(a, b);
         }
 
         /// <summary>
@@ -540,7 +540,7 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>True if any component of the two GlosaVector3 is pairwise different; otherwise false.</returns>
         public static bool operator !=(GlosaVector3 a, GlosaVector3 b)
         {
-            return a.m_x != b.m_x || a.m_y != b.m_y || a.m_z != b.m_z;
+            return notEqual_v3(a, b);
         }
 
         /// <summary>
@@ -556,16 +556,7 @@ namespace Glosa.Net.Core.Geometry
         /// otherwise, false.</returns>
         public static bool operator <(GlosaVector3 a, GlosaVector3 b)
         {
-            if (a.m_x < b.m_x)
-                return true;
-            if (a.m_x == b.m_x)
-            {
-                if (a.m_y < b.m_y)
-                    return true;
-                if (a.m_y == b.m_y && a.m_z < b.m_z)
-                    return true;
-            }
-            return false;
+            return lessThan_v3(a, b);
         }
 
         /// <summary>
@@ -581,7 +572,7 @@ namespace Glosa.Net.Core.Geometry
         /// otherwise, false.</returns>
         public static bool operator <=(GlosaVector3 a, GlosaVector3 b)
         {
-            return a.CompareTo(b) <= 0;
+            return lessThanEqual_v3(a, b);
         }
 
         /// <summary>
@@ -613,7 +604,7 @@ namespace Glosa.Net.Core.Geometry
         /// otherwise, false.</returns>
         public static bool operator >=(GlosaVector3 a, GlosaVector3 b)
         {
-            return a.CompareTo(b) >= 0;
+            return greaterThanEqual_v3(a, b);
         }
 
         /// <summary>
