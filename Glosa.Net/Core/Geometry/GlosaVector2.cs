@@ -431,7 +431,7 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>The length</returns>
         public double Magnitude()
         {
-            return Math.Sqrt(this.x * this.x + this.y * this.y);
+            return magnitude_v2(this);
         }
 
         /// <summary>
@@ -492,7 +492,7 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>True if components of the two GlosaVector2 are pairwise equal; otherwise false.</returns>
         public static bool operator ==(GlosaVector2 a, GlosaVector2 b)
         {
-            return a.m_x == b.m_x && a.m_y == b.m_y;
+            return equals_v2(a, b);
         }
 
         /// <summary>
@@ -503,7 +503,7 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>True if any component of the two vectors is pairwise different; otherwise false.</returns>
         public static bool operator !=(GlosaVector2 a, GlosaVector2 b)
         {
-            return a.m_x != b.m_x || a.m_y != b.m_y;
+            return notEqual_v2(a, b);
         }
 
         /// <summary>
@@ -516,7 +516,7 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>True if a.X is smaller than b.X, or a.X == b.X and a.Y is smaller than b.Y; otherwise, false</returns>
         public static bool operator <(GlosaVector2 a, GlosaVector2 b)
         {
-            return (a.m_x < b.m_x) || (a.m_x == b.m_x && a.m_y < b.m_y);
+            return lessThan_v2(a, b);
         }
 
         /// <summary>
@@ -529,7 +529,7 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>True if a.X is smaller than b.X, or a.X == b.X and a.Y &lt;= b.Y; otherwise, false.</returns>
         public static bool operator <=(GlosaVector2 a, GlosaVector2 b)
         {
-            return (a.m_x < b.m_x) || (a.m_x == b.m_x && a.m_y <= b.m_y);
+            return lessThanEqual_v2(a, b);
         }
 
         /// <summary>
@@ -542,7 +542,7 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>True if a.X is larger than b.X, or a.X == b.X and a.Y is larger than b.Y; otherwise, false.</returns>
         public static bool operator >(GlosaVector2 a, GlosaVector2 b)
         {
-            return (a.m_x > b.m_x) || (a.m_x == b.m_x && a.m_y > b.m_y);
+            return greaterThan_v2(a, b);
         }
 
         /// <summary>
@@ -555,7 +555,7 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>True if a.X is larger than b.X, or a.X == b.X and a.Y &gt;= b.Y; otherwise, false.</returns>
         public static bool operator >=(GlosaVector2 a, GlosaVector2 b)
         {
-            return (a.m_x > b.m_x) || (a.m_x == b.m_x && a.m_y >= b.m_y);
+            return greaterThanEqual_v2(a, b);
         }
 
         /// <summary>
@@ -683,7 +683,7 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>A non-unique number based on GlosaVector2 components.</returns>
         public int Hash()
         {
-            return m_x.GetHashCode() ^ m_y.GetHashCode();
+            return hash_v2(this);
         }
 
         /// <summary>
