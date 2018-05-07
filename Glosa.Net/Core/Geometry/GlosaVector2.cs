@@ -63,6 +63,22 @@ namespace Glosa.Net.Core.Geometry
         private static extern GlosaVector2 copy_v2(GlosaVector2 v);
         [DllImport("vectors.dll")]
         private static extern GlosaVector2 set_v2(GlosaVector2 v, double n);
+        [DllImport("vectors.dll")]
+        private static extern double magnitude_v2(GlosaVector2 v);
+        [DllImport("vectors.dll")]
+        private static extern bool greaterThan_v2(GlosaVector2 v1, GlosaVector2 v2);
+        [DllImport("vectors.dll")]
+        private static extern bool greaterThanEqual_v2(GlosaVector2 v1, GlosaVector2 v2);
+        [DllImport("vectors.dll")]
+        private static extern bool lessThan_v2(GlosaVector2 v1, GlosaVector2 v2);
+        [DllImport("vectors.dll")]
+        private static extern bool lessThanEqual_v2(GlosaVector2 v1, GlosaVector2 v2);
+        [DllImport("vectors.dll")]
+        private static extern bool equals_v2(GlosaVector2 v1, GlosaVector2 v2);
+        [DllImport("vectors.dll")]
+        private static extern bool notEqual_v2(GlosaVector2 v1, GlosaVector2 v2);
+        [DllImport("vectors.dll")]
+        private static extern int hash_v2(GlosaVector2 v);
         #endregion
         private double m_x, m_y;
 
