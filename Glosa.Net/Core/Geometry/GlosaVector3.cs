@@ -67,6 +67,8 @@ namespace Glosa.Net.Core.Geometry
         private static extern GlosaVector3 copy_v3(GlosaVector3 v);
         [DllImport("vectors.dll")]
         private static extern GlosaVector3 set_v3(GlosaVector3 v, double n);
+        [DllImport("vectors.dll")]
+        private static extern double magnitude_v3(GlosaVector3 v);
         #endregion
         private double m_x, m_y, m_z;
 
@@ -454,7 +456,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>The length</returns>
         public double Magnitude()
         {
-            return Math.Sqrt(this.m_x * this.m_x + this.m_y * this.m_y + this.m_z * this.m_z);
+            //return Math.Sqrt(this.m_x * this.m_x + this.m_y * this.m_y + this.m_z * this.m_z);
+            return magnitude_v3(this);
         }
 
         /// <summary>
@@ -463,7 +466,7 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>A string with the current location of the GlosaVector3.</returns>
         public string Stringify()
         {
-            return String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0},{1},{2}", this.m_x, this.m_y, this.m_z);
+            return String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0},{1},{2}", this.m_x, this.m_y, this.m_z);       
         }
 
         /// <summary>
