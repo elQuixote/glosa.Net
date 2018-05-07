@@ -69,6 +69,18 @@ namespace Glosa.Net.Core.Geometry
         private static extern GlosaVector3 set_v3(GlosaVector3 v, double n);
         [DllImport("vectors.dll")]
         private static extern double magnitude_v3(GlosaVector3 v);
+        [DllImport("vectors.dll")]
+        private static extern bool greaterThan_v3(GlosaVector3 v1, GlosaVector3 v2);
+        [DllImport("vectors.dll")]
+        private static extern bool greaterThanEqual_v3(GlosaVector3 v1, GlosaVector3 v2);
+        [DllImport("vectors.dll")]
+        private static extern bool lessThan_v3(GlosaVector3 v1, GlosaVector3 v2);
+        [DllImport("vectors.dll")]
+        private static extern bool lessThanEqual_v3(GlosaVector3 v1, GlosaVector3 v2);
+        [DllImport("vectors.dll")]
+        private static extern bool equals_v3(GlosaVector3 v1, GlosaVector3 v2);
+        [DllImport("vectors.dll")]
+        private static extern bool notEqual_v3(GlosaVector3 v1, GlosaVector3 v2);
         #endregion
         private double m_x, m_y, m_z;
 
@@ -456,7 +468,6 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>The length</returns>
         public double Magnitude()
         {
-            //return Math.Sqrt(this.m_x * this.m_x + this.m_y * this.m_y + this.m_z * this.m_z);
             return magnitude_v3(this);
         }
 
@@ -586,16 +597,7 @@ namespace Glosa.Net.Core.Geometry
         /// otherwise, false.</returns>
         public static bool operator >(GlosaVector3 a, GlosaVector3 b)
         {
-            if (a.m_x > b.m_x)
-                return true;
-            if (a.m_x == b.m_x)
-            {
-                if (a.m_y > b.m_y)
-                    return true;
-                if (a.m_y == b.m_y && a.m_z > b.m_z)
-                    return true;
-            }
-            return false;
+            return greaterThan_v3(a, b);
         }
 
         /// <summary>
