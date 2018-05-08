@@ -788,10 +788,11 @@ namespace Glosa.Net.Core.Geometry
         /// <summary>
         /// Returns an array with the GlosaVector3 components, X Y and Z,
         /// </summary>
-        /// <returns>The array</returns>
-        public double[] ToArray()
+        /// <param name="array">The fixed array to modify</param>
+        /// <returns>The modified array</returns>
+        public double[] ToArray(double[] array)
         {
-            double[] array = new double[3];
+            if(array.Length != 3) { throw new System.ArgumentException("array must be fixed array with length of 3 for GlosaVector3", "array"); }
             toArray_v3(this, array);
             return array;
         }

@@ -732,10 +732,11 @@ namespace Glosa.Net.Core.Geometry
         /// <summary>
         /// Returns an array with the GlosaVector2 components, X Y.
         /// </summary>
-        /// <returns>The array</returns>
-        public double[] ToArray()
+        /// <param name="array">The fixed array to modify</param>
+        /// <returns>The modified array</returns>
+        public double[] ToArray(double[] array)
         {
-            double[] array = new double[2];
+            if (array.Length != 2) { throw new System.ArgumentException("array must be fixed array with length of 2 for GlosaVector2", "array"); }
             toArray_v2(this, array);
             return array;
         }
