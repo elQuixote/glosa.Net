@@ -110,68 +110,6 @@ namespace Glosa.Net.Core.Geometry
         }
 
         /// <summary>
-        /// Initializes a new instance of the vector from a Rhino Vector2d.
-        /// </summary>
-        /// <param name="rhinoVector">The Rhino Vector2d</param>
-        public GlosaVector2(Rhino.Geometry.Vector2d rhinoVector)
-        {
-            this.m_x = rhinoVector.Y;
-            this.m_y = rhinoVector.Y;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the vector from a Rhino Vector2f.
-        /// </summary>
-        /// <param name="rhinoVector">The Rhino Vector2f</param>
-        public GlosaVector2(Rhino.Geometry.Vector2f rhinoVector)
-        {
-            this.m_x = rhinoVector.Y;
-            this.m_y = rhinoVector.Y;
-        }
-
-        #region Conversions
-        /// <summary>
-        /// Creates a GlosaVector2 from a Rhino Vector2d
-        /// </summary>
-        /// <param name="rhinoVector">The Rhino Vector2d</param>
-        /// <returns>A new GlosaVector2 with the two, X and Y, components from the Rhino Vector2d</returns>
-        public static GlosaVector2 ToGlosaVector2(Rhino.Geometry.Vector2d rhinoVector)
-        {
-            return new GlosaVector2(rhinoVector);
-        }
-
-        /// <summary>
-        /// Creates a GlosaVector2 from a Rhino Vector2f
-        /// </summary>
-        /// <param name="rhinoVector">The Rhino Vector2f</param>
-        /// <returns>A new GlosaVector2 with the two, X and Y, components from the Rhino Vector2f</returns>
-        public static GlosaVector2 ToGlosaVector2(Rhino.Geometry.Vector2f rhinoVector)
-        {
-            return new GlosaVector2(rhinoVector);
-        }
-
-        /// <summary>
-        /// Creates a RhinoVector2d from a GlosaVector2
-        /// </summary>
-        /// <returns>A new Rhino Vector2d with the two, X and Y, components from the GlosaVector2</returns>
-        public Rhino.Geometry.Vector2d ToVector2d()
-        {
-            return new Rhino.Geometry.Vector2d(this.m_x, this.m_y);
-        }
-
-        /// <summary>
-        /// Creates a RhinoVector2f from a GlosaVector2
-        /// </summary>
-        /// <returns>A new Rhino Vector2f with the two, X and Y, components from the GlosaVector2</returns>
-        public Rhino.Geometry.Vector2f ToVector2f()
-        {
-            Rhino.Geometry.Vector2f rv = new Rhino.Geometry.Vector2f();
-            rv.X = (float)this.m_x;
-            rv.Y = (float)this.m_y;
-            return rv;
-        }
-        #endregion
-        /// <summary>
         /// Sums up two GlosaVector2.
         /// </summary>
         /// <param name="vector">The first GlosaVector2</param>
