@@ -68,6 +68,8 @@ namespace Glosa.Net.Core.Geometry
         [DllImport("vectors.dll")]
         private static extern GlosaVector3 set_v3(GlosaVector3 v, double n);
         [DllImport("vectors.dll")]
+        private static extern GlosaVector3 set2_v3(GlosaVector3 v, double x, double y, double z);
+        [DllImport("vectors.dll")]
         private static extern double magnitude_v3(GlosaVector3 v);
         [DllImport("vectors.dll")]
         private static extern bool greaterThan_v3(GlosaVector3 v1, GlosaVector3 v2);
@@ -770,10 +772,7 @@ namespace Glosa.Net.Core.Geometry
         /// <param name="z">The z value</param>
         public void Set(double x, double y, double z)
         {
-            //Need to update in NIM to include proc for specifying all components on vector
-            this.m_x = x;
-            this.m_y = y;
-            this.m_z = z;
+            this = set2_v3(this, x, y, z);
         }
 
         /// <summary>
