@@ -84,9 +84,7 @@ namespace Glosa.Net.Core.Geometry
         [DllImport("vectors.dll")]
         private static extern int hash_v3(GlosaVector3 v);
         [DllImport("vectors.dll")]
-        //private static extern double[] toArray_v3(GlosaVector3 v);
-        //private static extern IntPtr toArray_v3(GlosaVector3 v);
-        private static unsafe extern double* toArray_v3(GlosaVector3 v);
+        private static extern void toArray_v3(GlosaVector3 v, double[] array);
         #endregion
         private double m_x, m_y, m_z;
 
@@ -787,26 +785,15 @@ namespace Glosa.Net.Core.Geometry
             this = set_v3(this, n);
         }
 
-        public unsafe double[] ToArray()
+        /// <summary>
+        /// Returns an array with the GlosaVector3 components, X Y and Z,
+        /// </summary>
+        /// <returns>The array</returns>
+        public double[] ToArray()
         {
-            /*
-            IntPtr ptr = toArray_v3(this);
-            int arrayLength = Marshal.ReadByte(ptr);
-            ptr = IntPtr.Add(ptr, 4);
-            double[] result = new double[arrayLength];
-            Marshal.Copy(ptr, result, 0, arrayLength);
-
-            return result;     
-            */
-            //return toArray_v3(this);
-            var incoming = new double[3];
-            fixed (double* inBuf = incoming)
-            {
-                double* outBuf = toArray_v3(this);
-                for (int i = 0; i < 3; i++)
-                    incoming[i] = outBuf[i];
-            }
-            return incoming;
+            double[] array = new double[3];
+            toArray_v3(this, array);
+            return array;
         }
     }
 }
