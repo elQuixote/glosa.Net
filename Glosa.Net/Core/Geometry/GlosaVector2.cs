@@ -83,6 +83,8 @@ namespace Glosa.Net.Core.Geometry
         private static extern int hash_v2(GlosaVector2 v);
         [DllImport("vectors.dll")]
         private static extern void toArray_v2(GlosaVector2 v, double[] array);
+        [DllImport("vectors.dll")]
+        private static extern int compareTo_v2(GlosaVector2 v1, GlosaVector2 v2);
         #endregion
         private double m_x, m_y;
 
@@ -651,17 +653,7 @@ namespace Glosa.Net.Core.Geometry
         /// </returns>
         public int CompareTo(GlosaVector2 other)
         {
-            if (m_x < other.m_x)
-                return -1;
-            if (m_x > other.m_x)
-                return 1;
-
-            if (m_y < other.m_y)
-                return -1;
-            if (m_y > other.m_y)
-                return 1;
-
-            return 0;
+            return compareTo_v2(this, other);
         }
 
         /// <summary>
