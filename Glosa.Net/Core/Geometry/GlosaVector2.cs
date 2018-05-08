@@ -79,6 +79,8 @@ namespace Glosa.Net.Core.Geometry
         private static extern bool notEqual_v2(GlosaVector2 v1, GlosaVector2 v2);
         [DllImport("vectors.dll")]
         private static extern int hash_v2(GlosaVector2 v);
+        [DllImport("vectors.dll")]
+        private static extern void toArray_v2(GlosaVector2 v, double[] array);
         #endregion
         private double m_x, m_y;
 
@@ -725,6 +727,17 @@ namespace Glosa.Net.Core.Geometry
         public void Set(double n)
         {
             this = set_v2(this, n);
+        }
+
+        /// <summary>
+        /// Returns an array with the GlosaVector2 components, X Y.
+        /// </summary>
+        /// <returns>The array</returns>
+        public double[] ToArray()
+        {
+            double[] array = new double[2];
+            toArray_v2(this, array);
+            return array;
         }
     }
 }
