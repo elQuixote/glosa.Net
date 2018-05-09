@@ -85,6 +85,8 @@ namespace Glosa.Net.Core.Geometry
         private static extern void toArray_v2(GlosaVector2 v, double[] array);
         [DllImport("vectors.dll")]
         private static extern int compareTo_v2(GlosaVector2 v1, GlosaVector2 v2);
+        [DllImport("vectors.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern IntPtr stringify_v2(GlosaVector2 v);
         #endregion
         private double m_x, m_y;
 
@@ -384,7 +386,9 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>A string with the current location of the GlosaVector2.</returns>
         public string Stringify()
         {
-            return String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0},{1}", m_x, m_y);
+            IntPtr pStr = stringify_v2(this);
+            string rs = Marshal.PtrToStringAnsi(pStr);
+            return rs ?? String.Empty;
         }
 
         /// <summary>
