@@ -208,14 +208,6 @@ namespace Glosa.Net.Core.Geometry
         {
             this = divideSelf_v3(this, f);
         }
-        //NOTE - There is def an issue with passing floats from .net to reference c functions. values 
-        // are all jacked up. This method below returns a different result than DivideSelf. Check this
-        public void DivideSelfTest(double f)
-        {
-            this.m_x /= f;
-            this.m_y /= f;
-            this.m_z /= f;
-        }
 
         /// <summary>
         /// Multiplies a GlosaVector3 by a number, having the effect of scaling it.
