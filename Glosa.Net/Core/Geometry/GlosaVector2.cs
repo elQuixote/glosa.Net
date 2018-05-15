@@ -15,75 +15,75 @@ namespace Glosa.Net.Core.Geometry
         IClear<GlosaVector2>, IDimension<GlosaVector2>, IHash<GlosaVector2>, ICopy<GlosaVector2>
     {
         #region C Reference Procs
-        [DllImport("vectors.dll")]
+        [DllImport("wrapper_vector.dll")]
         private static extern GlosaVector2 addNew_v2(GlosaVector2 v1, GlosaVector2 v2);
-        [DllImport("vectors.dll")]
+        [DllImport("wrapper_vector.dll")]
         private static extern GlosaVector2 addSelf_v2(GlosaVector2 v1, GlosaVector2 v2);
-        [DllImport("vectors.dll")]
+        [DllImport("wrapper_vector.dll")]
         private static extern GlosaVector2 subtractNew_v2(GlosaVector2 v1, GlosaVector2 v2);
-        [DllImport("vectors.dll")]
+        [DllImport("wrapper_vector.dll")]
         private static extern GlosaVector2 subtractSelf_v2(GlosaVector2 v1, GlosaVector2 v2);
-        [DllImport("vectors.dll")]
+        [DllImport("wrapper_vector.dll")]
         private static extern GlosaVector2 divideNew_v2(GlosaVector2 v, double f);
-        [DllImport("vectors.dll")]
+        [DllImport("wrapper_vector.dll")]
         private static extern GlosaVector2 divideSelf_v2(GlosaVector2 v, double f);
-        [DllImport("vectors.dll")]
+        [DllImport("wrapper_vector.dll")]
         private static extern GlosaVector2 multiplyNew_v2(GlosaVector2 v, double f);
-        [DllImport("vectors.dll")]
+        [DllImport("wrapper_vector.dll")]
         private static extern GlosaVector2 multiplySelf_v2(GlosaVector2 v, double f);
-        [DllImport("vectors.dll")]
+        [DllImport("wrapper_vector.dll")]
         private static extern double cross_v2(GlosaVector2 v1, GlosaVector2 v2);
-        [DllImport("vectors.dll")]
+        [DllImport("wrapper_vector.dll")]
         private static extern double dot_v2(GlosaVector2 v1, GlosaVector2 v2);
-        [DllImport("vectors.dll")]
+        [DllImport("wrapper_vector.dll")]
         private static extern GlosaVector2 inverseNew_v2(GlosaVector2 v);
-        [DllImport("vectors.dll")]
+        [DllImport("wrapper_vector.dll")]
         private static extern GlosaVector2 inverseSelf_v2(GlosaVector2 v);
-        [DllImport("vectors.dll")]
+        [DllImport("wrapper_vector.dll")]
         private static extern double heading_v2(GlosaVector2 v);
-        [DllImport("vectors.dll")]
+        [DllImport("wrapper_vector.dll")]
         private static extern GlosaVector2 reflectNew_v2(GlosaVector2 v, GlosaVector2 n);
-        [DllImport("vectors.dll")]
+        [DllImport("wrapper_vector.dll")]
         private static extern GlosaVector2 reflectSelf_v2(GlosaVector2 v, GlosaVector2 n);
-        [DllImport("vectors.dll")]
+        [DllImport("wrapper_vector.dll")]
         private static extern GlosaVector2 refractNew_v2(GlosaVector2 v, GlosaVector2 n, double eta);
-        [DllImport("vectors.dll")]
+        [DllImport("wrapper_vector.dll")]
         private static extern GlosaVector2 refractSelf_v2(GlosaVector2 v, GlosaVector2 n, double eta);
-        [DllImport("vectors.dll")]
+        [DllImport("wrapper_vector.dll")]
         private static extern GlosaVector2 normalizeNew_v2(GlosaVector2 v, double m = 1.0);
-        [DllImport("vectors.dll")]
+        [DllImport("wrapper_vector.dll")]
         private static extern GlosaVector2 normalizeSelf_v2(GlosaVector2 v, double m = 1.0);
-        [DllImport("vectors.dll")]
+        [DllImport("wrapper_vector.dll")]
         private static extern float angleBetween_v2(GlosaVector2 v1, GlosaVector2 v2);
-        [DllImport("vectors.dll")]
+        [DllImport("wrapper_vector.dll")]
         private static extern GlosaVector2 clear_v2(GlosaVector2 v);
-        [DllImport("vectors.dll")]
+        [DllImport("wrapper_vector.dll")]
         private static extern int dimension_v2(GlosaVector2 v);
-        [DllImport("vectors.dll")]
+        [DllImport("wrapper_vector.dll")]
         private static extern GlosaVector2 copy_v2(GlosaVector2 v);
-        [DllImport("vectors.dll")]
+        [DllImport("wrapper_vector.dll")]
         private static extern GlosaVector2 set_v2(GlosaVector2 v, double n);
-        [DllImport("vectors.dll")]
+        [DllImport("wrapper_vector.dll")]
         private static extern GlosaVector2 set2_v2(GlosaVector2 v, double x, double y);
-        [DllImport("vectors.dll")]
+        [DllImport("wrapper_vector.dll")]
         private static extern double magnitude_v2(GlosaVector2 v);
-        [DllImport("vectors.dll")]
+        [DllImport("wrapper_vector.dll")]
         private static extern bool greaterThan_v2(GlosaVector2 v1, GlosaVector2 v2);
-        [DllImport("vectors.dll")]
+        [DllImport("wrapper_vector.dll")]
         private static extern bool greaterThanEqual_v2(GlosaVector2 v1, GlosaVector2 v2);
-        [DllImport("vectors.dll")]
+        [DllImport("wrapper_vector.dll")]
         private static extern bool lessThan_v2(GlosaVector2 v1, GlosaVector2 v2);
-        [DllImport("vectors.dll")]
+        [DllImport("wrapper_vector.dll")]
         private static extern bool lessThanEqual_v2(GlosaVector2 v1, GlosaVector2 v2);
-        [DllImport("vectors.dll")]
+        [DllImport("wrapper_vector.dll")]
         private static extern bool equals_v2(GlosaVector2 v1, GlosaVector2 v2);
-        [DllImport("vectors.dll")]
+        [DllImport("wrapper_vector.dll")]
         private static extern bool notEqual_v2(GlosaVector2 v1, GlosaVector2 v2);
-        [DllImport("vectors.dll")]
+        [DllImport("wrapper_vector.dll")]
         private static extern int hash_v2(GlosaVector2 v);
-        [DllImport("vectors.dll")]
+        [DllImport("wrapper_vector.dll")]
         private static extern void toArray_v2(GlosaVector2 v, double[] array);
-        [DllImport("vectors.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("wrapper_vector.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr stringify_v2(GlosaVector2 v);
         #endregion
         private double m_x, m_y;
