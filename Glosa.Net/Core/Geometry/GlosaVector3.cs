@@ -72,6 +72,8 @@ namespace Glosa.Net.Core.Geometry
         [DllImport("wrapper_vector.dll")]
         private static extern double magnitude_v3(GlosaVector3 v);
         [DllImport("wrapper_vector.dll")]
+        private static extern double magnitudeSquared_v3(GlosaVector3 v);
+        [DllImport("wrapper_vector.dll")]
         private static extern bool greaterThan_v3(GlosaVector3 v1, GlosaVector3 v2);
         [DllImport("wrapper_vector.dll")]
         private static extern bool greaterThanEqual_v3(GlosaVector3 v1, GlosaVector3 v2);
@@ -415,6 +417,15 @@ namespace Glosa.Net.Core.Geometry
         public double Magnitude()
         {
             return magnitude_v3(this);
+        }
+
+        /// <summary>
+        /// Computes the length of the GlosaVector3 (Computationally less expensive)
+        /// </summary>
+        /// <returns>The length</returns>
+        public double MagnitudeSquared()
+        {
+            return magnitudeSquared_v3(this);
         }
 
         /// <summary>
