@@ -711,7 +711,7 @@ namespace Glosa.Net.Core.Geometry
         /// </summary>
         /// <param name="array">The fixed array to create a GlosaVector from</param>
         /// <returns>The GlosaVector3</returns>
-        public GlosaVector2 FromArray(double[] array)
+        public static GlosaVector2 FromArray(double[] array)
         {
             if (array.Length != 2) { throw new System.ArgumentException("array must be fixed array with length of 2 for GlosaVector2", "array"); }
             return fromArray_v2(array);
