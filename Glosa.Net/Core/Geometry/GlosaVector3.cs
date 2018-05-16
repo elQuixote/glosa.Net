@@ -12,7 +12,7 @@ namespace Glosa.Net.Core.Geometry
     /// Represents the three components of a vector in three-dimensional space
     /// </summary>
     public struct GlosaVector3 : IVector<GlosaVector3>, ILength<GlosaVector3>, IEquals<GlosaVector3>, IString<GlosaVector3>, ICompare<GlosaVector3>,
-        IClear<GlosaVector3>, IDimension<GlosaVector3>, IHash<GlosaVector3>, ICopy<GlosaVector3>
+        IClear<GlosaVector3>, IDimension<GlosaVector3>, IHash<GlosaVector3>, ICopy<GlosaVector3>, ITransform<GlosaVector3>
     {
         #region C Reference Procs
         [DllImport("wrapper_vector.dll")]
@@ -89,6 +89,8 @@ namespace Glosa.Net.Core.Geometry
         private static extern void toArray_v3(GlosaVector3 v, double[] array);
         [DllImport("wrapper_vector.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr stringify_v3(GlosaVector3 v);
+        [DllImport("wrapper_vector.dll")]
+        private static extern GlosaVector3 fromArray_v3(double[] array);
         #endregion
         private double m_x, m_y, m_z;
 
@@ -726,6 +728,17 @@ namespace Glosa.Net.Core.Geometry
             if(array.Length != 3) { throw new System.ArgumentException("array must be fixed array with length of 3 for GlosaVector3", "array"); }
             toArray_v3(this, array);
             return array;
+        }
+
+        /// <summary>
+        /// Returns an GlosaVector3 with the components, X Y and Z from the array
+        /// </summary>
+        /// <param name="array">The fixed array to create a GlosaVector from</param>
+        /// <returns>The GlosaVector3</returns>
+        public GlosaVector3 FromArray(double[] array)
+        {
+            if (array.Length != 3) { throw new System.ArgumentException("array must be fixed array with length of 3 for GlosaVector3", "array"); }       
+            return fromArray_v3(array); 
         }
     }
 }
