@@ -18,6 +18,7 @@ namespace Glosa.Net.Core.Geometry
         IClear<GlosaMatrix33>, IDimension<GlosaMatrix33>, IHash<GlosaMatrix33>, ICopy<GlosaMatrix33>
     {
         private double m_00, m_01, m_02, m_10, m_11, m_12, m_20, m_21, m_22;
+        private double[,] m_matrix;
         /// <summary>
         /// Gets or sets the 0,0 component of this matrix.
         /// </summary>
@@ -55,6 +56,8 @@ namespace Glosa.Net.Core.Geometry
         /// </summary>
         public double m22 { get { return m_22; } set { m_22 = value; } }
 
+        public double[,] matrix { get { return m_matrix; } set { m_matrix = value; } }
+
         /// <summary>
         /// Initializes a new instance of the GlosaMatrix33
         /// </summary>
@@ -78,6 +81,18 @@ namespace Glosa.Net.Core.Geometry
             this.m_20 = m20;
             this.m_21 = m21;
             this.m_22 = m22;
+
+            this.m_matrix = new double[3, 3];
+
+            this.m_matrix[0, 0] = m00;
+            this.m_matrix[0, 1] = m01;
+            this.m_matrix[0, 2] = m02;
+            this.m_matrix[1, 0] = m10;
+            this.m_matrix[1, 1] = m11;
+            this.m_matrix[1, 2] = m12;
+            this.m_matrix[2, 0] = m20;
+            this.m_matrix[2, 1] = m21;
+            this.m_matrix[2, 2] = m22;
         }
     }
 }
