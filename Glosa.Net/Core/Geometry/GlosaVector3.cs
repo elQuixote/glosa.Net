@@ -776,7 +776,7 @@ namespace Glosa.Net.Core.Geometry
         /// </summary>
         /// <param name="vectors">The GlosaVectors to compare</param>
         /// <returns>The min GlosaVector</returns>
-        public GlosaVector3 Min(GlosaVector3[] vectors)
+        public static GlosaVector3 Min(GlosaVector3[] vectors)
         {
             return min_v3(vectors);
         }
@@ -786,7 +786,7 @@ namespace Glosa.Net.Core.Geometry
         /// </summary>
         /// <param name="vectors">The GlosaVectors to compare</param>
         /// <returns>The max GlosaVector</returns>
-        public GlosaVector3 Max(GlosaVector3[] vectors)
+        public static GlosaVector3 Max(GlosaVector3[] vectors)
         {
             return max_v3(vectors);
         }

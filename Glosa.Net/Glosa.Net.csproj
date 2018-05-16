@@ -51,6 +51,7 @@
     <Compile Include="Core\Interfaces\IHash.cs" />
     <Compile Include="Core\Interfaces\ILength.cs" />
     <Compile Include="Core\Interfaces\IString.cs" />
+    <Compile Include="Core\Interfaces\ITransform.cs" />
     <Compile Include="Core\Interfaces\IVector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
