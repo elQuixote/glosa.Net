@@ -14,8 +14,8 @@ namespace Glosa.Net.Core.Geometry
     /// [ m10(1,0) m11(1,1) m12(1,2) ]
     /// [ m20(2,0) m21(2,1) m22(2,2) ]
     /// </summary>
-    public struct Matrix33 : IMatrix<Matrix33>, IEquals<Matrix33>, IString<Matrix33>, ICompare<Matrix33>,
-        IClear<Matrix33>, IDimension<Matrix33>, IHash<Matrix33>, ICopy<Matrix33>
+    public struct GlosaMatrix33 : IMatrix<GlosaMatrix33>, IEquals<GlosaMatrix33>, IString<GlosaMatrix33>, ICompare<GlosaMatrix33>,
+        IClear<GlosaMatrix33>, IDimension<GlosaMatrix33>, IHash<GlosaMatrix33>, ICopy<GlosaMatrix33>
     {
         private double m_00, m_01, m_02, m_10, m_11, m_12, m_20, m_21, m_22;
         /// <summary>
