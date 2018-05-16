@@ -85,6 +85,16 @@ namespace Glosa.Net.Core.Geometry
         private static extern void toArray_v2(GlosaVector2 v, double[] array);
         [DllImport("wrapper_vector.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr stringify_v2(GlosaVector2 v);
+        [DllImport("wrapper_vector.dll")]
+        private static extern GlosaVector2 fromArray_v2(double[] array);
+        [DllImport("wrapper_vector.dll")]
+        private static extern double distanceToSquared_v2(GlosaVector2 v1, GlosaVector2 v2);
+        [DllImport("wrapper_vector.dll")]
+        private static extern GlosaVector2 interpolateTo_v2(GlosaVector2 v1, GlosaVector2 v2, double f);
+        [DllImport("wrapper_vector.dll")]
+        private static extern GlosaVector2 min_v2(GlosaVector2[] array);
+        [DllImport("wrapper_vector.dll")]
+        private static extern GlosaVector2 max_v2(GlosaVector2[] array);
         #endregion
         private double m_x, m_y;
 
@@ -679,6 +689,59 @@ namespace Glosa.Net.Core.Geometry
             if (array.Length != 2) { throw new System.ArgumentException("array must be fixed array with length of 2 for GlosaVector2", "array"); }
             toArray_v2(this, array);
             return array;
+        }
+
+        /// <summary>
+        /// Returns an GlosaVector3 with the components, X Y and Z from the array
+        /// </summary>
+        /// <param name="array">The fixed array to create a GlosaVector from</param>
+        /// <returns>The GlosaVector3</returns>
+        public GlosaVector2 FromArray(double[] array)
+        {
+            if (array.Length != 2) { throw new System.ArgumentException("array must be fixed array with length of 2 for GlosaVector2", "array"); }
+            return fromArray_v2(array);
+        }
+
+        /// <summary>
+        /// Computes the distance between two points.
+        /// </summary>
+        /// <param name="vector">Other GlosaVector for distance measurement</param>
+        /// <returns>The distance between 2 GlosaVectors</returns>
+        public double DistanceTo(GlosaVector2 vector)
+        {
+            return distanceToSquared_v2(this, vector);
+        }
+
+        /// <summary>
+        /// Interpolates between two vectors using an interpolation value (0.5 will return vector between the two vectors)
+        /// </summary>
+        /// <param name="vector">The second GlosaVector</param>
+        /// <param name="f">The Interpolation factor (should be in the range 0..1)</param>
+        /// <returns>The interpolated vector</returns>
+        public GlosaVector2 Interpolate(GlosaVector2 vector, double f)
+        {
+            if (f < 0 || f > 1) { throw new System.ArgumentException("Interpolation value must be between 0 and 1"); }
+            return interpolateTo_v2(this, vector, f);
+        }
+
+        /// <summary>
+        /// Batch compares an array of GlosaVectors
+        /// </summary>
+        /// <param name="vectors">The GlosaVectors to compare</param>
+        /// <returns>The min GlosaVector</returns>
+        public GlosaVector2 Min(GlosaVector2[] vectors)
+        {
+            return min_v2(vectors);
+        }
+
+        /// <summary>
+        /// Batch compares an array of GlosaVectors
+        /// </summary>
+        /// <param name="vectors">The GlosaVectors to compare</param>
+        /// <returns>The max GlosaVector</returns>
+        public GlosaVector2 Max(GlosaVector2[] vectors)
+        {
+            return max_v2(vectors);
         }
     }
 }
