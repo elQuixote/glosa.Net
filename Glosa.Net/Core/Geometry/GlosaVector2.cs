@@ -99,6 +99,8 @@ namespace Glosa.Net.Core.Geometry
         private static extern GlosaVector2 max_v2(GlosaVector2[] array);
         [DllImport("wrapper_vector.dll")]
         private static extern GlosaVector3 toVector3(GlosaVector2 vector);
+        [DllImport("wrapper_vector.dll")]
+        private static extern GlosaVector2 fromPolar_v2(double r, double theta);
         #endregion
         private double m_x, m_y;
 
@@ -786,6 +788,17 @@ namespace Glosa.Net.Core.Geometry
         public GlosaVector3 ToVector3()
         {
             return toVector3(this);
+        }
+
+        /// <summary>
+        /// Creates a GlosaVector2 from Polar Coordinates
+        /// </summary>
+        /// <param name="r"></param>
+        /// <param name="theta"></param>
+        /// <returns></returns>
+        public GlosaVector2 FromPolar(double r, double theta)
+        {
+            return fromPolar_v2(r, theta);
         }
     }
 }

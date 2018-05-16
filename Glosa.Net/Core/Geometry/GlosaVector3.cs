@@ -103,6 +103,8 @@ namespace Glosa.Net.Core.Geometry
         private static extern GlosaVector3 max_v3(GlosaVector3[] array);
         [DllImport("wrapper_vector.dll")]
         private static extern GlosaVector2 toVector2(GlosaVector3 vector);
+        [DllImport("wrapper_vector.dll")]
+        private static extern GlosaVector3 fromSpherical_v3(double r, double theta, double phi);
         #endregion
         private double m_x, m_y, m_z;
 
@@ -833,6 +835,18 @@ namespace Glosa.Net.Core.Geometry
         public GlosaVector2 ToVector2()
         {
             return toVector2(this);
+        }
+
+        /// <summary>
+        /// Creates a GlosaVector3 from N-Spherical Coordinates
+        /// </summary>
+        /// <param name="r"></param>
+        /// <param name="theta"></param>
+        /// <param name="phi"></param>
+        /// <returns></returns>
+        public GlosaVector3 FromSpherical(double r, double theta, double phi)
+        {
+            return fromSpherical_v3(r, theta, phi);
         }
     }
 }
