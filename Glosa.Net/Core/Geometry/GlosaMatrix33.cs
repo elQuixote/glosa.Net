@@ -54,5 +54,30 @@ namespace Glosa.Net.Core.Geometry
         /// Gets or sets the 2,2 component of this matrix.
         /// </summary>
         public double m22 { get { return m_22; } set { m_22 = value; } }
+
+        /// <summary>
+        /// Initializes a new instance of the GlosaMatrix33
+        /// </summary>
+        /// <param name="m00">0,0 component of this matrix</param>
+        /// <param name="m01">0,1 component of this matrix</param>
+        /// <param name="m02">0,2 component of this matrix</param>
+        /// <param name="m10">1,0 component of this matrix</param>
+        /// <param name="m11">1,1 component of this matrix</param>
+        /// <param name="m12">1,2 component of this matrix</param>
+        /// <param name="m20">2,0 component of this matrix</param>
+        /// <param name="m21">2,1 component of this matrix</param>
+        /// <param name="m22">2,2 component of this matrix</param>
+        public GlosaMatrix33(double m00, double m01, double m02, double m10, double m11, double m12, double m20, double m21, double m22)
+        {
+            this.m_00 = m00;
+            this.m_01 = m01;
+            this.m_02 = m02;
+            this.m_10 = m10;
+            this.m_11 = m11;
+            this.m_12 = m12;
+            this.m_20 = m20;
+            this.m_21 = m21;
+            this.m_22 = m22;
+        }
     }
 }
