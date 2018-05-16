@@ -91,6 +91,8 @@ namespace Glosa.Net.Core.Geometry
         public static extern IntPtr stringify_v3(GlosaVector3 v);
         [DllImport("wrapper_vector.dll")]
         private static extern GlosaVector3 fromArray_v3(double[] array);
+        [DllImport("wrapper_vector.dll")]
+        private static extern double distanceToSquared_v3(GlosaVector3 v1, GlosaVector3 v2);
         #endregion
         private double m_x, m_y, m_z;
 
@@ -739,6 +741,16 @@ namespace Glosa.Net.Core.Geometry
         {
             if (array.Length != 3) { throw new System.ArgumentException("array must be fixed array with length of 3 for GlosaVector3", "array"); }       
             return fromArray_v3(array); 
+        }
+
+        /// <summary>
+        /// Computes the distance between two points.
+        /// </summary>
+        /// <param name="vector">Other GlosaVector for distance measurement</param>
+        /// <returns>The distance between 2 GlosaVectors</returns>
+        public double DistanceTo(GlosaVector3 vector)
+        {
+            return distanceToSquared_v3(this, vector);
         }
     }
 }

@@ -30,7 +30,7 @@ namespace Glosa.Net.Core.Interfaces
         double Magnitude();
         double AngleBetween(T vector);
         void Set(double n);
-        float DistanceTo(T vector);
+        double DistanceTo(T vector);
         T Interpolate(T vector);
         T Min(T[] vectors);
         T Max(T[] vectors);
