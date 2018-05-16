@@ -772,6 +772,18 @@ namespace Glosa.Net.Core.Geometry
         }
 
         /// <summary>
+        /// Interpolates between two vectors using an interpolation value (0.5 will return vector between the two vectors)
+        /// </summary>
+        /// <param name="vector">The second GlosaVector</param>
+        /// <param name="f">The Interpolation factor (should be in the range 0..1)</param>
+        /// <returns>The interpolated vector</returns>
+        public static GlosaVector3 InterpolateNew(GlosaVector3 vector, GlosaVector3 vector2, double f)
+        {
+            if (f < 0 || f > 1) { throw new System.ArgumentException("Interpolation value must be between 0 and 1"); }
+            return interpolateTo_v3(vector, vector2, f);
+        }
+
+        /// <summary>
         /// Batch compares an array of GlosaVectors
         /// </summary>
         /// <param name="vectors">The GlosaVectors to compare</param>
