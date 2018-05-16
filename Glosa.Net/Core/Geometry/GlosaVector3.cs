@@ -101,6 +101,8 @@ namespace Glosa.Net.Core.Geometry
         private static extern GlosaVector3 min_v3(GlosaVector3[] array);
         [DllImport("wrapper_vector.dll")]
         private static extern GlosaVector3 max_v3(GlosaVector3[] array);
+        [DllImport("wrapper_vector.dll")]
+        private static extern GlosaVector2 toVector2(GlosaVector3 vector);
         #endregion
         private double m_x, m_y, m_z;
 
@@ -822,6 +824,15 @@ namespace Glosa.Net.Core.Geometry
         public static GlosaVector3 Max(GlosaVector3[] vectors)
         {
             return max_v3(vectors);
+        }
+
+        /// <summary>
+        /// Converts a GlosaVector3 into a GlosaVector2
+        /// </summary>
+        /// <returns>The GlosaVector2</returns>
+        public GlosaVector2 ToVector2()
+        {
+            return toVector2(this);
         }
     }
 }
