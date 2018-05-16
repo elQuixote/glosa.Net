@@ -32,7 +32,8 @@ namespace Glosa.Net.Core.Interfaces
         void Set(double n);
         float DistanceTo(T vector);
         T Interpolate(T vector);
-        T Min(List<T> vectors);
-        T Max(List<T> vectors);
+        T Min(T[] vectors);
+        T Max(T[] vectors);
+        T FromArray(double[] array);
     }
 }
