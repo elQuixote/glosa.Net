@@ -2,4 +2,4 @@ bin/
 obj/
 Debug/
 .vs
-.dll
+*.dll
