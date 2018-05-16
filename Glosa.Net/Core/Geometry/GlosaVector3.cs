@@ -95,6 +95,10 @@ namespace Glosa.Net.Core.Geometry
         private static extern double distanceToSquared_v3(GlosaVector3 v1, GlosaVector3 v2);
         [DllImport("wrapper_vector.dll")]
         private static extern GlosaVector3 interpolateTo_v3(GlosaVector3 v1, GlosaVector3 v2, double f);
+        [DllImport("wrapper_vector.dll")]
+        private static extern GlosaVector3 min_v3(GlosaVector3[] array);
+        [DllImport("wrapper_vector.dll")]
+        private static extern GlosaVector3 max_v3(GlosaVector3[] array);
         #endregion
         private double m_x, m_y, m_z;
 
@@ -765,6 +769,26 @@ namespace Glosa.Net.Core.Geometry
         {
             if (f < 0 || f > 1) { throw new System.ArgumentException("Interpolation value must be between 0 and 1"); }
             return interpolateTo_v3(this, vector, f);
+        }
+
+        /// <summary>
+        /// Batch compares an array of GlosaVectors
+        /// </summary>
+        /// <param name="vectors">The GlosaVectors to compare</param>
+        /// <returns>The min GlosaVector</returns>
+        public GlosaVector3 Min(GlosaVector3[] vectors)
+        {
+            return min_v3(vectors);
+        }
+
+        /// <summary>
+        /// Batch compares an array of GlosaVectors
+        /// </summary>
+        /// <param name="vectors">The GlosaVectors to compare</param>
+        /// <returns>The max GlosaVector</returns>
+        public GlosaVector3 Max(GlosaVector3[] vectors)
+        {
+            return max_v3(vectors);
         }
     }
 }
