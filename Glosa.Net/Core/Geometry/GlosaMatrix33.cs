@@ -14,7 +14,8 @@ namespace Glosa.Net.Core.Geometry
     /// [ m10(1,0) m11(1,1) m12(1,2) ]
     /// [ m20(2,0) m21(2,1) m22(2,2) ]
     /// </summary>
-    public struct GlosaMatrix33 
+    public struct GlosaMatrix33 : IMatrix<GlosaMatrix33>, IEquals<GlosaMatrix33>, IString<GlosaMatrix33>, IClear<GlosaMatrix33>,
+        IDimension<GlosaMatrix33>, IHash<GlosaMatrix33>, ICopy<GlosaMatrix33>
     {
         [DllImport("wrapper_matrix.dll")]
         private static extern GlosaMatrix33 clear_33(GlosaMatrix33 m);
@@ -151,7 +152,31 @@ namespace Glosa.Net.Core.Geometry
             return !equals_33(a, b);
         }
 
+        public bool Equals(GlosaMatrix33 m)
+        {
+            return this == m;
+        }
+
+        /// <summary>
+        /// Determines whether the specified System.Object is a GlosaMatrix33 and has the same values as the present GlosaMatrix33.
+        /// </summary>
+        /// <param name="obj">THe specified object</param>
+        /// <returns>true if obj is a GlosaMatrix33 and has the same components as this; otherwise false.</returns>
+        public override bool Equals(object obj)
+        {
+            return (obj is GlosaMatrix33 && this == (GlosaMatrix33)obj);
+        }
+
         public int Hash()
+        {
+            return hash_33(this);
+        }
+
+        /// <summary>
+        /// Provides a hashing value for the present GlosaMatrix33.
+        /// </summary>
+        /// <returns>A non-unique number based on GlosaMatrix33 components.</returns>
+        public override int GetHashCode()
         {
             return hash_33(this);
         }
@@ -246,6 +271,11 @@ namespace Glosa.Net.Core.Geometry
             matrix[2, 1] = this.m_21;
             matrix[2, 2] = this.m_22;
             return matrix;
+        }
+
+        public int Dimension()
+        {
+            return 2;
         }
     }
 }
