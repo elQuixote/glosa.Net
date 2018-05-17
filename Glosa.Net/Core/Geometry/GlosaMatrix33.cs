@@ -258,7 +258,7 @@ namespace Glosa.Net.Core.Geometry
             return fromVector3(v1, v2, v3);
         }
 
-        public double[,] ToArray(GlosaMatrix33 m)
+        public double[,] ToArray()
         {
             double[,] matrix = new double[3, 3];
             matrix[0, 0] = this.m_00;
