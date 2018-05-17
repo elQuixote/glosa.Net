@@ -136,6 +136,11 @@ namespace Glosa.Net.Core.Geometry
             return copy_33(this);
         }
 
+        public static GlosaMatrix33 CopyNew(GlosaMatrix33 m)
+        {
+            return copy_33(m);
+        }
+
         public static bool operator ==(GlosaMatrix33 a, GlosaMatrix33 b)
         {
             return equals_33(a, b);

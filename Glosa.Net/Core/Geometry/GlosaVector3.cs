@@ -714,11 +714,10 @@ namespace Glosa.Net.Core.Geometry
         /// <summary>
         /// Copies a GlosaVector3 
         /// </summary>
-        /// <param name="vector">The GlosaVector3 to copy</param>
         /// <returns>A new copy of that GlosaVector3</returns>
-        public GlosaVector3 Copy(GlosaVector3 vector)
+        public GlosaVector3 Copy()
         {
-            return copy_v3(vector);
+            return copy_v3(this);
         }
 
         /// <summary>

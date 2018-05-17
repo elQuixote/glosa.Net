@@ -8,6 +8,6 @@ namespace Glosa.Net.Core.Interfaces
 {
     public interface ICopy<T>
     {
-        T Copy(T obj);
+        T Copy();
     }
 }
