@@ -359,7 +359,7 @@ namespace Glosa.Net.Core.Geometry
         /// </summary>
         /// <param name="s">The scale value</param>
         /// <returns>The scale matrix</returns>
-        public static GlosaMatrix33 ScaleUniform(double s)
+        public static GlosaMatrix33 Scale(double s)
         {
             return scaleMatrix_33(s);
         }
