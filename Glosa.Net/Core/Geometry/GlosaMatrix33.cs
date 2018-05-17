@@ -53,6 +53,8 @@ namespace Glosa.Net.Core.Geometry
         private static extern GlosaMatrix33 shearMatrixY_33(double sy);
         [DllImport("wrapper_matrix.dll")]
         private static extern GlosaMatrix33 fromVector3(GlosaVector3 v1, GlosaVector3 v2, GlosaVector3 v3);
+        [DllImport("wrapper_matrix.dll")]
+        private static extern void toArray_33(GlosaMatrix33 m, double[,] array);
 
         private double m_00, m_01, m_02, m_10, m_11, m_12, m_20, m_21, m_22;
         /// <summary>
@@ -258,19 +260,19 @@ namespace Glosa.Net.Core.Geometry
             return fromVector3(v1, v2, v3);
         }
 
-        public double[,] ToArray()
+        /// <summary>
+        /// Returns an array with the GlosaMatrix33 components.
+        /// [ m00(0,0) m01(0,1) m02(0,2) ]
+        /// [ m10(1,0) m11(1,1) m12(1,2) ]
+        /// [ m20(2,0) m21(2,1) m22(2,2) ]
+        /// </summary>
+        /// <param name="array">The fixed two dimensional array to modify</param>
+        /// <returns>The modified two dimensional array</returns>
+        public double[,] ToArray(double[,] array)
         {
-            double[,] matrix = new double[3, 3];
-            matrix[0, 0] = this.m_00;
-            matrix[0, 1] = this.m_01;
-            matrix[0, 2] = this.m_02;
-            matrix[1, 0] = this.m_10;
-            matrix[1, 1] = this.m_11;
-            matrix[1, 2] = this.m_12;
-            matrix[2, 0] = this.m_20;
-            matrix[2, 1] = this.m_21;
-            matrix[2, 2] = this.m_22;
-            return matrix;
+            if (array.GetUpperBound(0) != 2 && array.GetUpperBound(1) != 2) { throw new System.ArgumentException("array must be fixed two dimensional array [3,3] for GlosaMatrix33", "array"); }
+            toArray_33(this, array);
+            return array;
         }
 
         public int Dimension()

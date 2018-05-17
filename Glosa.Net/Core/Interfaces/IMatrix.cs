@@ -14,6 +14,6 @@ namespace Glosa.Net.Core.Interfaces
         T Invert();
         void InvertSelf();
         void Set(double n);
-        double[,] ToArray();
+        double[,] ToArray(double[,] array);
     }
 }
