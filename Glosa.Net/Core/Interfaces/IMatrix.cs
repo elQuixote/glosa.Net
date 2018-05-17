@@ -8,11 +8,12 @@ namespace Glosa.Net.Core.Interfaces
 {
     public interface IMatrix<T>
     {
-        T TransposeNew(T matrix);
-        void TransposeSelf(T matrix);
-        double Determinant(T matrix);
-        T InvertNew(T matrix);
-        void InvertSelf(T matrix);
+        T Transpose();
+        void TransposeSelf();
+        double Determinant();
+        T Invert();
+        void InvertSelf();
         void Set(double n);
+        double[,] ToArray(T matrix);
     }
 }
