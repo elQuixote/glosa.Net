@@ -122,6 +122,24 @@ namespace Glosa.Net.Core.Geometry
         }
 
         /// <summary>
+        /// Initializes a new instance of the GlosaMatrix33 from a two dimensional array
+        /// </summary>
+        /// <param name="array">The two dimensional array</param>
+        public GlosaMatrix33(double[,] array)
+        {
+            if (array.GetUpperBound(0) != 2 && array.GetUpperBound(1) != 2) { throw new System.ArgumentException("array must be fixed two dimensional array [3,3] for GlosaMatrix33", "array"); }
+            this.m_00 = array[0, 0];
+            this.m_01 = array[0, 1];
+            this.m_02 = array[0, 2];
+            this.m_10 = array[1, 0];
+            this.m_11 = array[1, 1];
+            this.m_12 = array[1, 2];
+            this.m_20 = array[2, 0];
+            this.m_21 = array[2, 1];
+            this.m_22 = array[2, 2];
+        }
+
+        /// <summary>
         /// Sets all GlosaMatrix33 components to 0.
         /// </summary>
         public void Clear()
