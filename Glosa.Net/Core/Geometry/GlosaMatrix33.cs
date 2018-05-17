@@ -17,6 +17,7 @@ namespace Glosa.Net.Core.Geometry
     public struct GlosaMatrix33 : IMatrix<GlosaMatrix33>, IEquals<GlosaMatrix33>, IString<GlosaMatrix33>, IClear<GlosaMatrix33>,
         IDimension<GlosaMatrix33>, IHash<GlosaMatrix33>, ICopy<GlosaMatrix33>
     {
+        #region C Reference Procs
         [DllImport("wrapper_matrix.dll")]
         private static extern GlosaMatrix33 clear_33(GlosaMatrix33 m);
         [DllImport("wrapper_matrix.dll")]
@@ -55,8 +56,9 @@ namespace Glosa.Net.Core.Geometry
         private static extern GlosaMatrix33 fromVector3(GlosaVector3 v1, GlosaVector3 v2, GlosaVector3 v3);
         [DllImport("wrapper_matrix.dll")]
         private static extern void toArray_33(GlosaMatrix33 m, double[,] array);
-
+        #endregion
         private double m_00, m_01, m_02, m_10, m_11, m_12, m_20, m_21, m_22;
+
         /// <summary>
         /// Gets or sets the 0,0 component of this matrix.
         /// </summary>
@@ -119,41 +121,84 @@ namespace Glosa.Net.Core.Geometry
             this.m_22 = m22;
         }
 
+        /// <summary>
+        /// Sets all GlosaMatrix33 components to 0.
+        /// </summary>
         public void Clear()
         {
             this = clear_33(this);
         }
 
+        /// <summary>
+        /// Quick access to an identity matrix
+        /// [1 0 0]
+        /// [0 1 0]
+        /// [0 0 1]
+        /// </summary>
+        /// <returns>The identity matrix</returns>
         public static GlosaMatrix33 IDMatrix()
         {
             return idMatrix_33();
         }
 
+        /// <summary>
+        /// Sets the GlosaMatrix33 components to the specified value.
+        /// [n n n]
+        /// [n n n]
+        /// [n n n]
+        /// </summary>
+        /// <param name="n">The value</param>
         public void Set(double n)
         {
             this = set_33(this, n);
         }
 
+        /// <summary>
+        /// Copies a GlosaMatrix33 
+        /// </summary>
+        /// <returns>A new copy of that GlosaMatrix33</returns>
         public GlosaMatrix33 Copy()
         {
             return copy_33(this);
         }
 
+        /// <summary>
+        /// Copies a GlosaMatrix33 
+        /// </summary>
+        /// <param name="vector">The GlosaMatrix33 to copy</param>
+        /// <returns>A new copy of that GlosaMatrix33</returns>
         public static GlosaMatrix33 CopyNew(GlosaMatrix33 m)
         {
             return copy_33(m);
         }
 
+        /// <summary>
+        /// Determines whether two GlosaMatrix33 have equal values.
+        /// </summary>
+        /// <param name="a">The first GlosaMatrix33</param>
+        /// <param name="b">The second GlosaMatrix33</param>
+        /// <returns>True if components of the two GlosaMatrix33 are pairwise equal; otherwise false.</returns>
         public static bool operator ==(GlosaMatrix33 a, GlosaMatrix33 b)
         {
             return equals_33(a, b);
         }
 
+        /// <summary>
+        /// Determines whether two GlosaMatrix33 have different values.
+        /// </summary>
+        /// <param name="a">The first GlosaMatrix33</param>
+        /// <param name="b">The second GlosaMatrix33</param>
+        /// <returns>True if any component of the two GlosaMatrix33 is pairwise different; otherwise false.</returns>
         public static bool operator !=(GlosaMatrix33 a, GlosaMatrix33 b)
         {
             return !equals_33(a, b);
         }
 
+        /// <summary>
+        /// Determines whether the specified GlosaMatrix33 has the same value as the present GlosaMatrix33.
+        /// </summary>
+        /// <param name="vector">The other GlosaMatrix33 to compare</param>
+        /// <returns>The result</returns>
         public bool Equals(GlosaMatrix33 m)
         {
             return this == m;
@@ -169,6 +214,10 @@ namespace Glosa.Net.Core.Geometry
             return (obj is GlosaMatrix33 && this == (GlosaMatrix33)obj);
         }
 
+        /// <summary>
+        /// Provides a hashing value for the present GlosaMatrix33.
+        /// </summary>
+        /// <returns>A non-unique number based on GlosaMatrix33 components.</returns>
         public int Hash()
         {
             return hash_33(this);
@@ -183,6 +232,13 @@ namespace Glosa.Net.Core.Geometry
             return hash_33(this);
         }
 
+        /// <summary>
+        /// Returns the string representation of the current GlosaMatrix33, in the form of
+        /// [ m00(0,0) m01(0,1) m02(0,2) ]
+        /// [ m10(1,0) m11(1,1) m12(1,2) ]
+        /// [ m20(2,0) m21(2,1) m22(2,2) ]
+        /// </summary>
+        /// <returns>A string</returns>
         public string Stringify()
         {
             IntPtr pStr = stringify_33(this);
@@ -190,71 +246,156 @@ namespace Glosa.Net.Core.Geometry
             return rs ?? String.Empty;
         }
 
+        /// <summary>
+        /// Modifies this GlosaMatrix33 to be its transpose. This is like swapping rows with columns.
+        /// </summary>
         public void TransposeSelf()
         {
             this = transposeSelf_33(this);
         }
 
+        /// <summary>
+        /// Creates a new transposed GlosaMatrix33. This is like swapping rows with columns.
+        /// </summary>
+        /// <returns>The new transposed GlosaMatrix33</returns>
         public GlosaMatrix33 Transpose()
         {
             return transposeNew_33(this);
         }
 
+        /// <summary>
+        /// Creates a new transposed GlosaMatrix33. This is like swapping rows with columns.
+        /// </summary>
+        /// <param name="m">The GlosaMatrix33 to transpose</param>
+        /// <returns>The new transposed GlosaMatrix33</returns>
         public static GlosaMatrix33 Transpose(GlosaMatrix33 m)
         {
             return transposeNew_33(m);
         }
 
+        /// <summary>
+        /// Computes the determinant of the GlosaMatrix33.
+        /// </summary>
+        /// <returns>The determinant</returns>
         public double Determinant()
         {
             return determinant_33(this);
         }
 
+        /// <summary>
+        /// Computes the determinant of the GlosaMatrix33.
+        /// </summary>
+        /// <param name="m">The GlosaMatrix33 whose determinant we want to compute</param>
+        /// <returns>The determinant</returns>
         public static double Determinant(GlosaMatrix33 m)
         {
             return determinant_33(m);
         }
 
+        /// <summary>
+        /// Modifies the current GlosaMatrix33 to be its inverse
+        /// If the GlosaMatrix33 is not invertible (determinant = 0) an division by zero exception will be thrown
+        /// </summary>
         public void InvertSelf()
         {
             this = invertSelf_33(this);
         }
 
+        /// <summary>
+        /// Returns a new GlosaMatrix33, which is the inverse of the GlosaMatrix33
+        /// If the GlosaMatrix33 is not invertible (determinant = 0) an division by zero exception will be thrown
+        /// </summary>
         public GlosaMatrix33 Invert()
         {
             return invertNew_33(this);
         }
 
+        /// <summary>
+        /// Returns a new GlosaMatrix33, which is the inverse of the GlosaMatrix33
+        /// </summary>
+        /// <param name="m">The GlosaMatrix33 to invert</param>
+        /// <returns>A new inverted GlosaMatrix33</returns>
         public static GlosaMatrix33 Invert(GlosaMatrix33 m)
         {
             return invertNew_33(m);
         }
 
+        /// <summary>
+        /// Returns a new rotation matrix which represents a rotation by 'rad' radians
+        /// [c(theta) s(theta) -s(theta)]
+        /// [c(theta) 0         0       ]
+        /// [0        0         1       ]
+        /// </summary>
+        /// <param name="theta">The rotation value in radians</param>
+        /// <returns>The rotation matrix</returns>
         public static GlosaMatrix33 Rotate(double theta)
         {
             return rotateMatrix_33(theta);
         }
 
+        /// <summary>
+        /// Returns a new scale matrix
+        /// [s 0 0]
+        /// [0 s 0]
+        /// [0 0 1]
+        /// </summary>
+        /// <param name="s">The scale value</param>
+        /// <returns>The scale matrix</returns>
         public static GlosaMatrix33 ScaleUniform(double s)
         {
             return scaleMatrix_33(s);
         }
 
-        public static GlosaMatrix33 Scale(double sx, double sy)
+        /// <summary>
+        /// Returns new a stretch matrix, which is a scale matrix with non uniform scale in x and y.
+        /// [sx 0 0]
+        /// [0 sy 0]
+        /// [0  0 1]
+        /// </summary>
+        /// <param name="sx">The scale value for x</param>
+        /// <param name="sy">The scale value for y</param>
+        /// <returns>A new stretch matrix</returns>
+        public static GlosaMatrix33 Stretch(double sx, double sy)
         {
             return scaleMatrix2_33(sx, sy);
         }
 
+        /// <summary>
+        /// Returns a new X-Direction Shear Matrix
+        /// [1 0 0]
+        /// [sx 0 0]
+        /// [0 0 1]
+        /// </summary>
+        /// <param name="sx">The shear value</param>
+        /// <returns>A new shear matrix</returns>
         public static GlosaMatrix33 ShearX(double sx)
         {
             return shearMatrixX_33(sx);
         }
 
+        /// <summary>
+        /// Returns a new Y-Direction Shear Matrix
+        /// [1 sy 0]
+        /// [0 0 0]
+        /// [0 0 1]
+        /// </summary>
+        /// <param name="sy">The shear value</param>
+        /// <returns>A new shear matrix</returns>
         public static GlosaMatrix33 ShearY(double sy)
         {
             return shearMatrixY_33(sy);
         }
 
+        /// <summary>
+        /// Returns a new GlosaMatrix33 created from 3 GlosaVector3
+        /// [v1.x v2.x v3.x]
+        /// [v1.y v2.y v3.y]
+        /// [v1.z v2.z v3.z]
+        /// </summary>
+        /// <param name="v1"></param>
+        /// <param name="v2"></param>
+        /// <param name="v3"></param>
+        /// <returns>A new GlosaMatrix33</returns>
         public GlosaMatrix33 FromVector3(GlosaVector3 v1, GlosaVector3 v2, GlosaVector3 v3)
         {
             return fromVector3(v1, v2, v3);
@@ -262,9 +403,9 @@ namespace Glosa.Net.Core.Geometry
 
         /// <summary>
         /// Returns an array with the GlosaMatrix33 components.
-        /// [ m00(0,0) m01(0,1) m02(0,2) ]
-        /// [ m10(1,0) m11(1,1) m12(1,2) ]
-        /// [ m20(2,0) m21(2,1) m22(2,2) ]
+        /// [m00(0,0) m01(0,1) m02(0,2)]
+        /// [m10(1,0) m11(1,1) m12(1,2)]
+        /// [m20(2,0) m21(2,1) m22(2,2)]
         /// </summary>
         /// <param name="array">The fixed two dimensional array to modify</param>
         /// <returns>The modified two dimensional array</returns>
@@ -275,6 +416,10 @@ namespace Glosa.Net.Core.Geometry
             return array;
         }
 
+        /// <summary>
+        /// Gets the GlosaMatrix33 Dimension
+        /// </summary>
+        /// <returns>The dimension, for GlosaMatrix33 the result should be 2</returns>
         public int Dimension()
         {
             return 2;
