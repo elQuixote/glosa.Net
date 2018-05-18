@@ -86,5 +86,26 @@ namespace Glosa.Net.Core.Geometry
         [DllImport("wrapper_quaternion.dll")]
         private static extern GlosaQuaternion fromVector3_quat(double w, GlosaVector3 v);
         #endregion
+        private double m_x, m_y, m_z, m_w;
+
+        /// <summary>
+        /// Gets or sets the X (first) component of this quaternion.
+        /// </summary>
+        public double x { get { return m_x; } set { m_x = value; } }
+
+        /// <summary>
+        /// Gets or sets the Y (second) component of this quaternion.
+        /// </summary>
+        public double y { get { return m_y; } set { m_y = value; } }
+
+        /// <summary>
+        /// Gets or sets the Z (third) component of this quaternion.
+        /// </summary>
+        public double z { get { return m_z; } set { m_z = value; } }
+
+        /// <summary>
+        /// Gets or sets the W (fourth) component of this quaternion.
+        /// </summary>
+        public double w { get { return m_w; } set { m_w = value; } }
     }
 }
