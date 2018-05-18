@@ -107,5 +107,33 @@ namespace Glosa.Net.Core.Geometry
         /// Gets or sets the W (fourth) component of this quaternion.
         /// </summary>
         public double w { get { return m_w; } set { m_w = value; } }
+
+        /// <summary>
+        /// Initializes a new instance of the GlosaQuaternion based on four, X and Y and Z and W, components.
+        /// </summary>
+        /// <param name="x">The X (first) component.</param>
+        /// <param name="y">The Y (second) component.</param>
+        /// <param name="z">The Z (third) component.</param>
+        /// <param name="w">The W (fourth) component.</param>
+        public GlosaQuaternion(double x, double y, double z, double w)
+        {
+            this.m_x = x;
+            this.m_y = y;
+            this.m_z = z;
+            this.m_w = w;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the GlosaQuaternion based on a GlosaVector3 specifying the X,Y,Z components and W from double
+        /// </summary>
+        /// <param name="v">The GlosaVector3</param>
+        /// <param name="w">The W value</param>
+        public GlosaQuaternion(GlosaVector3 v, double w)
+        {
+            this.m_x = v.x;
+            this.m_y = v.y;
+            this.m_z = v.z;
+            this.m_w = w;
+        }
     }
 }
