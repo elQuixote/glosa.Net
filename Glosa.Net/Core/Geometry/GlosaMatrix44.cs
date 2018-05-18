@@ -148,12 +148,19 @@ namespace Glosa.Net.Core.Geometry
         /// <param name="m00">0,0 component of this matrix</param>
         /// <param name="m01">0,1 component of this matrix</param>
         /// <param name="m02">0,2 component of this matrix</param>
+        /// <param name="m03">0,3 component of this matrix</param>
         /// <param name="m10">1,0 component of this matrix</param>
         /// <param name="m11">1,1 component of this matrix</param>
         /// <param name="m12">1,2 component of this matrix</param>
+        /// <param name="m13">1,3 component of this matrix</param>
         /// <param name="m20">2,0 component of this matrix</param>
         /// <param name="m21">2,1 component of this matrix</param>
         /// <param name="m22">2,2 component of this matrix</param>
+        /// <param name="m23">2,3 component of this matrix</param>
+        /// <param name="m30">3,0 component of this matrix</param>
+        /// <param name="m31">3,1 component of this matrix</param>
+        /// <param name="m32">3,2 component of this matrix</param>
+        /// <param name="m33">3,2 component of this matrix</param>
         public GlosaMatrix44(double m00, double m01, double m02, double m03, double m10, double m11, double m12, double m13, double m20, double m21, double m22, double m23, double m30, double m31, double m32, double m33)
         {
             this.m_00 = m00;
@@ -211,9 +218,10 @@ namespace Glosa.Net.Core.Geometry
 
         /// <summary>
         /// Quick access to an identity matrix
-        /// [1 0 0]
-        /// [0 1 0]
-        /// [0 0 1]
+        /// [1 0 0 0]
+        /// [0 1 0 0]
+        /// [0 0 1 0]
+        /// [0 0 0 1]
         /// </summary>
         /// <returns>The identity matrix</returns>
         public static GlosaMatrix44 IDMatrix()
@@ -223,9 +231,10 @@ namespace Glosa.Net.Core.Geometry
 
         /// <summary>
         /// Sets the GlosaMatrix44 components to the specified value.
-        /// [n n n]
-        /// [n n n]
-        /// [n n n]
+        /// [n n n n]
+        /// [n n n n]
+        /// [n n n n]
+        /// [n n n n]
         /// </summary>
         /// <param name="n">The value</param>
         public void Set(double n)
@@ -314,9 +323,10 @@ namespace Glosa.Net.Core.Geometry
 
         /// <summary>
         /// Returns the string representation of the current GlosaMatrix44, in the form of
-        /// [ m00(0,0) m01(0,1) m02(0,2) ]
-        /// [ m10(1,0) m11(1,1) m12(1,2) ]
-        /// [ m20(2,0) m21(2,1) m22(2,2) ]
+        ///[ m00(0,0) m01(0,1) m02(0,2) m03(0,3) ]
+        ///[ m10(1,0) m11(1,1) m12(1,2) m13(1,3) ]
+        ///[ m20(2,0) m21(2,1) m22(2,2) m23(2,3) ]
+        ///[ m30(3,0) m31(3,1) m32(3,2) m33(3,3) ]
         /// </summary>
         /// <returns>A string</returns>
         public string Stringify()
