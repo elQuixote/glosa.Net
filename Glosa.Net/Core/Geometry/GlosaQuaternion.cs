@@ -8,7 +8,7 @@ using Glosa.Net.Core.Interfaces;
 
 namespace Glosa.Net.Core.Geometry
 {
-    public struct GlosaQuaternion
+    public struct GlosaQuaternion : ILength<GlosaQuaternion>, IEquals<GlosaQuaternion>
     {
         #region C Reference Procs
         [DllImport("wrapper_quaternion.dll")]
@@ -26,7 +26,7 @@ namespace Glosa.Net.Core.Geometry
         [DllImport("wrapper_quaternion.dll")]
         private static extern GlosaQuaternion invertSelf_quat(GlosaQuaternion q);
         [DllImport("wrapper_quaternion.dll")]
-        private static extern GlosaQuaternion equals_quat(GlosaQuaternion q1, GlosaQuaternion q2);
+        private static extern bool equals_quat(GlosaQuaternion q1, GlosaQuaternion q2);
         [DllImport("wrapper_quaternion.dll")]
         private static extern int hash_quat(GlosaQuaternion q);
         [DllImport("wrapper_quaternion.dll", CallingConvention = CallingConvention.Cdecl)]
@@ -134,6 +134,57 @@ namespace Glosa.Net.Core.Geometry
             this.m_y = v.y;
             this.m_z = v.z;
             this.m_w = w;
+        }
+
+        /// <summary>
+        /// Computes the length of the GlosaQuaternion
+        /// </summary>
+        /// <returns>The length</returns>
+        public double Length()
+        {
+            return length_quat(this);
+        }
+
+        /// <summary>
+        /// Determines whether the specified GlosaQuaternion has the same value as the present GlosaQuaternion.
+        /// </summary>
+        /// <param name="quaternion">The other GlosaQuaternion to compare</param>
+        /// <returns>The result</returns>
+        public bool Equals(GlosaQuaternion quaternion)
+        {
+            return this == quaternion;
+        }
+
+        /// <summary>
+        /// Determines whether the specified System.Object is a GlosaQuaternion and has the same values as the present GlosaQuaternion.
+        /// </summary>
+        /// <param name="obj">THe specified object</param>
+        /// <returns>true if obj is a GlosaQuaternion and has the same coordinates as this; otherwise false.</returns>
+        public override bool Equals(object obj)
+        {
+            return (obj is GlosaQuaternion && this == (GlosaQuaternion)obj);
+        }
+
+        /// <summary>
+        /// Determines whether two GlosaQuaternion have equal values.
+        /// </summary>
+        /// <param name="a">The first GlosaQuaternion</param>
+        /// <param name="b">The second GlosaQuaternion</param>
+        /// <returns>True if components of the two GlosaQuaternion are pairwise equal; otherwise false.</returns>
+        public static bool operator ==(GlosaQuaternion a, GlosaQuaternion b)
+        {
+            return equals_quat(a, b);
+        }
+
+        /// <summary>
+        /// Determines whether two GlosaQuaternion have different values.
+        /// </summary>
+        /// <param name="a">The first GlosaQuaternion</param>
+        /// <param name="b">The second GlosaQuaternion</param>
+        /// <returns>True if any component of the two GlosaQuaternion is pairwise different; otherwise false.</returns>
+        public static bool operator !=(GlosaQuaternion a, GlosaQuaternion b)
+        {
+            return !equals_quat(a, b);
         }
     }
 }
