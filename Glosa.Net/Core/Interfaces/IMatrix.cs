@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Glosa.Net.Core.Interfaces
 {
-    public interface IMatrix<T>
+    public interface IMatrix<T> : IMatrixes
     {
         T Transpose();
         void TransposeSelf();

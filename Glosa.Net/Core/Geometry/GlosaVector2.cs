@@ -12,7 +12,7 @@ namespace Glosa.Net.Core.Geometry
     /// Represents the two components of a vector in two-dimensional space
     /// </summary>
     public struct GlosaVector2 : IVector<GlosaVector2>, ILength<GlosaVector2>, IEquals<GlosaVector2>, IString<GlosaVector2>, ICompare<GlosaVector2>,
-        IClear<GlosaVector2>, IDimension<GlosaVector2>, IHash<GlosaVector2>, ICopy<GlosaVector2>
+        IClear<GlosaVector2>, IDimension<GlosaVector2>, IHash<GlosaVector2>, ICopy<GlosaVector2>, ITransform<GlosaVector2>
     {
         #region C Reference Procs
         [DllImport("wrapper_vector.dll")]
@@ -101,6 +101,24 @@ namespace Glosa.Net.Core.Geometry
         private static extern GlosaVector3 toVector3(GlosaVector2 vector);
         [DllImport("wrapper_vector.dll")]
         private static extern GlosaVector2 fromPolar_v2(double r, double theta);
+        [DllImport("wrapper_vector.dll")]
+        private static extern GlosaVector2 transformNew_v2(GlosaVector2 vector, GlosaMatrix33 matrix);
+        [DllImport("wrapper_vector.dll")]
+        private static extern GlosaVector2 transformSelf_v2(GlosaVector2 vector, GlosaMatrix33 matrix);
+        [DllImport("wrapper_vector.dll")]
+        private static extern GlosaVector2 translate_v2(GlosaVector2 vector, GlosaVector2 translation);
+        [DllImport("wrapper_vector.dll")]
+        private static extern GlosaVector2 rotateSelf_v2(GlosaVector2 vector, double theta);
+        [DllImport("wrapper_vector.dll")]
+        private static extern GlosaVector2 rotateNew_v2(GlosaVector2 vector, double theta);
+        [DllImport("wrapper_vector.dll")]
+        private static extern GlosaVector2 scaleSelf_v2(GlosaVector2 vector, double s);
+        [DllImport("wrapper_vector.dll")]
+        private static extern GlosaVector2 scaleNew_v2(GlosaVector2 vector, double s);
+        [DllImport("wrapper_vector.dll")]
+        private static extern GlosaVector2 scaleSelfComponent_v2(GlosaVector2 vector, double sx, double sy);
+        [DllImport("wrapper_vector.dll")]
+        private static extern GlosaVector2 scaleNewComponent_v2(GlosaVector2 vector, double sx, double sy);
         #endregion
         private double m_x, m_y;
 
@@ -798,6 +816,51 @@ namespace Glosa.Net.Core.Geometry
         public GlosaVector2 FromPolar(double r, double theta)
         {
             return fromPolar_v2(r, theta);
+        }
+
+        public GlosaVector2 ScaleNew(double s)
+        {
+            return scaleNew_v2(this, s);
+        }
+
+        public void ScaleSelf(double s)
+        {
+            this = scaleSelf_v2(this, s);
+        }
+
+        public GlosaVector2 ScaleNew(double sx, double sy, double sz = 0, double sw = 0)
+        {
+            return scaleNewComponent_v2(this, sx, sy);
+        }
+
+        public void ScaleSelf(double sx, double sy, double sz = 0, double sw = 0)
+        {
+            this = scaleSelfComponent_v2(this, sx, sy);
+        }
+
+        public GlosaVector2 RotateNew(float theta, int component = 0)
+        {
+            return rotateNew_v2(this, theta);
+        }
+
+        public void RotateSelf(float theta, int component = 0)
+        {
+            this = rotateSelf_v2(this, theta); 
+        }
+
+        public void Translate(GlosaVector2 vector)
+        {
+            this = translate_v2(this, vector);
+        }
+
+        public GlosaVector2 TransformNew(IMatrixes matrix)
+        {
+            return transformNew_v2(this, (GlosaMatrix33)matrix);
+        }
+
+        public void TransformSelf(IMatrixes matrix)
+        {
+            this = transformSelf_v2(this, (GlosaMatrix33)matrix);
         }
     }
 }

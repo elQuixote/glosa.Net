@@ -12,7 +12,7 @@ namespace Glosa.Net.Core.Geometry
     /// Represents the three components of a vector in three-dimensional space
     /// </summary>
     public struct GlosaVector3 : IVector<GlosaVector3>, ILength<GlosaVector3>, IEquals<GlosaVector3>, IString<GlosaVector3>, ICompare<GlosaVector3>,
-        IClear<GlosaVector3>, IDimension<GlosaVector3>, IHash<GlosaVector3>, ICopy<GlosaVector3>
+        IClear<GlosaVector3>, IDimension<GlosaVector3>, IHash<GlosaVector3>, ICopy<GlosaVector3>, ITransform<GlosaVector3>
     {
         #region C Reference Procs
         [DllImport("wrapper_vector.dll")]
@@ -105,6 +105,34 @@ namespace Glosa.Net.Core.Geometry
         private static extern GlosaVector2 toVector2(GlosaVector3 vector);
         [DllImport("wrapper_vector.dll")]
         private static extern GlosaVector3 fromSpherical_v3(double r, double theta, double phi);
+        [DllImport("wrapper_vector.dll")]
+        private static extern GlosaVector3 transformNew_v3(GlosaVector3 vector, GlosaMatrix44 matrix);
+        [DllImport("wrapper_vector.dll")]
+        private static extern GlosaVector3 transformSelf_v3(GlosaVector3 vector, GlosaMatrix44 matrix);
+        [DllImport("wrapper_vector.dll")]
+        private static extern GlosaVector3 translate_v3(GlosaVector3 vector, GlosaVector3 translation);
+        [DllImport("wrapper_vector.dll")]
+        private static extern GlosaVector3 rotateAxis_v3(GlosaVector3 vector, GlosaVector3 axis, double theta);
+        [DllImport("wrapper_vector.dll")]
+        private static extern GlosaVector3 rotateXSelf_v3(GlosaVector3 vector, double theta);
+        [DllImport("wrapper_vector.dll")]
+        private static extern GlosaVector3 rotateYSelf_v3(GlosaVector3 vector, double theta);
+        [DllImport("wrapper_vector.dll")]
+        private static extern GlosaVector3 rotateZSelf_v3(GlosaVector3 vector, double theta);
+        [DllImport("wrapper_vector.dll")]
+        private static extern GlosaVector3 rotateXNew_v3(GlosaVector3 vector, double theta);
+        [DllImport("wrapper_vector.dll")]
+        private static extern GlosaVector3 rotateYNew_v3(GlosaVector3 vector, double theta);
+        [DllImport("wrapper_vector.dll")]
+        private static extern GlosaVector3 rotateZNew_v3(GlosaVector3 vector, double theta);
+        [DllImport("wrapper_vector.dll")]
+        private static extern GlosaVector3 scaleSelf_v3(GlosaVector3 vector, double s);
+        [DllImport("wrapper_vector.dll")]
+        private static extern GlosaVector3 scaleNew_v3(GlosaVector3 vector, double s);
+        [DllImport("wrapper_vector.dll")]
+        private static extern GlosaVector3 scaleSelfComponent_v3(GlosaVector3 vector, double sx, double sy, double sz);
+        [DllImport("wrapper_vector.dll")]
+        private static extern GlosaVector3 scaleNewComponent_v3(GlosaVector3 vector, double sx, double sy, double sz);
         #endregion
         private double m_x, m_y, m_z;
 
@@ -846,6 +874,62 @@ namespace Glosa.Net.Core.Geometry
         public GlosaVector3 FromSpherical(double r, double theta, double phi)
         {
             return fromSpherical_v3(r, theta, phi);
+        }
+
+        public GlosaVector3 ScaleNew(double s)
+        {
+            return scaleNew_v3(this, s);
+        }
+
+        public void ScaleSelf(double s)
+        {
+            this = scaleSelf_v3(this, s);
+        }
+
+        public GlosaVector3 ScaleNew(double sx, double sy, double sz, double sw = 0)
+        {
+            return scaleNewComponent_v3(this, sx, sy, sz);
+        }
+
+        public void ScaleSelf(double sx, double sy, double sz, double sw = 0)
+        {
+            this = scaleSelfComponent_v3(this, sx, sy, sz);
+        }
+
+        public GlosaVector3 RotateNew(float theta, int component = 0)
+        {
+            if (component == 0) { return rotateXNew_v3(this, theta); }
+            else if (component == 1) { return rotateYNew_v3(this, theta); }
+            else if (component == 2) { return rotateZNew_v3(this, theta); }
+            else { throw new System.ArgumentException("Component value must be between 0 and 2 representing x, y, z"); }
+        }
+
+        public void RotateSelf(float theta, int component = 0)
+        {
+            if (component == 0){ this = rotateXSelf_v3(this, theta);}
+            else if(component == 1) { this = rotateYSelf_v3(this, theta);}
+            else if (component == 2) { this = rotateZSelf_v3(this, theta); }
+            else { throw new System.ArgumentException("Component value must be between 0 and 2 representing x, y, z"); }
+        }
+
+        public void Translate(GlosaVector3 vector)
+        {
+            this = translate_v3(this, vector);
+        }
+
+        public GlosaVector3 TransformNew(IMatrixes matrix)
+        {
+            return transformNew_v3(this, (GlosaMatrix44)matrix);
+        }
+
+        public void TransformSelf(IMatrixes matrix)
+        {
+            this = transformSelf_v3(this, (GlosaMatrix44)matrix);
+        }
+
+        public void RotateAxis(GlosaVector3 axis, double theta)
+        {
+            this = rotateAxis_v3(this, axis, theta);
         }
     }
 }

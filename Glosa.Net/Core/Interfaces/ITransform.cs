@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Glosa.Net.Core.Geometry;
+using Glosa.Net.Core.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +14,10 @@ namespace Glosa.Net.Core.Interfaces
         void ScaleSelf(double s);
         T ScaleNew(double sx, double sy, double sz, double sw);
         void ScaleSelf(double sx, double sy, double sz, double sw);
-        T RotateNew(T vector, float theta);
-        void RotateSelf(float theta);
-        T Translate(T vector1, T vector2);
-        //Need to add Matrix33 and Matrix44 structs before adding transformNew & Self
+        T RotateNew(float theta, int component);
+        void RotateSelf(float theta, int component);
+        void Translate(T vector);
+        T TransformNew(IMatrixes matrix);
+        void TransformSelf(IMatrixes matrix);
     }
 }
