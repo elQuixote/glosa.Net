@@ -90,7 +90,7 @@ namespace Glosa.Net.Core.Geometry
         [DllImport("wrapper_vector.dll")]
         private static extern void toArray_v3(GlosaVector3 v, double[] array);
         [DllImport("wrapper_vector.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr stringify_v3(GlosaVector3 v);
+        private static extern IntPtr stringify_v3(GlosaVector3 v);
         [DllImport("wrapper_vector.dll")]
         private static extern GlosaVector3 fromArray_v3(double[] array);
         [DllImport("wrapper_vector.dll")]
