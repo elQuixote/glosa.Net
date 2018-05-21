@@ -43,8 +43,8 @@ namespace Glosa.Net.Core.Geometry
         private static extern GlosaMatrix44 invertSelf_44(GlosaMatrix44 m);
         [DllImport("wrapper_matrix.dll")]
         private static extern GlosaMatrix44 invertNew_44(GlosaMatrix44 m);
-        //[DllImport("wrapper_matrix.dll")]
-        //private static extern GlosaMatrix44 fromQuaternion_44(GlosaQuaternion q);
+        [DllImport("wrapper_matrix.dll")]
+        private static extern GlosaMatrix44 fromQuaternion_44(GlosaQuaternion q);
         [DllImport("wrapper_matrix.dll")]
         private static extern GlosaMatrix44 rotateMatrixX_44(double theta);
         [DllImport("wrapper_matrix.dll")]
@@ -605,6 +605,16 @@ namespace Glosa.Net.Core.Geometry
         public int Dimension()
         {
             return 3;
+        }
+
+        /// <summary>
+        /// Creates a new GlosaMatrix44 from a GlosaQuaternion
+        /// </summary>
+        /// <param name="q">The GlosaQuaternion</param>
+        /// <returns>A new GlosaMatrix44</returns>
+        public static GlosaMatrix44 FromQuaternion(GlosaQuaternion q)
+        {
+            return fromQuaternion_44(q);
         }
         #endregion
     }
