@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Geometry\GlosaLineSegment.cs" />
     <Compile Include="Core\Geometry\GlosaMatrix44.cs" />
     <Compile Include="Core\Geometry\GlosaQuaternion.cs" />
     <Compile Include="Core\Geometry\GlosaVector2.cs" />
@@ -58,10 +59,14 @@
     <Compile Include="Core\Interfaces\IString.cs" />
     <Compile Include="Core\Interfaces\ITransform.cs" />
     <Compile Include="Core\Interfaces\IVector.cs" />
+    <Compile Include="Core\Interfaces\IVectors.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="wrapper_matrix.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wrapper_path.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="wrapper_quaternion.dll">

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Glosa.Net.Core.Interfaces
 {
-    public interface IVector<T>
+    public interface IVector<T> : IVector
     {
         T AddNew(T vector);
         void AddSelf(T vector);
