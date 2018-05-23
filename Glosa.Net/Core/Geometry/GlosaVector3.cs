@@ -133,6 +133,10 @@ namespace Glosa.Net.Core.Geometry
         private static extern GlosaVector3 scaleSelfComponent_v3(GlosaVector3 vector, double sx, double sy, double sz);
         [DllImport("wrapper_vector.dll")]
         private static extern GlosaVector3 scaleNewComponent_v3(GlosaVector3 vector, double sx, double sy, double sz);
+        [DllImport("wrapper_vector.dll")]
+        private static extern bool areCollinear_v(GlosaVector3 v1, GlosaVector3 v2, GlosaVector3 v3);
+        [DllImport("wrapper_vector.dll")]
+        private static extern bool arePlanar_v(GlosaVector3[] array);
         #endregion
         private double m_x, m_y, m_z;
 
@@ -930,6 +934,16 @@ namespace Glosa.Net.Core.Geometry
         public void RotateAxis(GlosaVector3 axis, double theta)
         {
             this = rotateAxis_v3(this, axis, theta);
+        }
+
+        public static bool AreCollinear(GlosaVector3 v1, GlosaVector3 v2, GlosaVector3 v3)
+        {
+            return areCollinear_v(v1, v2, v3);
+        }
+
+        public static bool ArePlanar(GlosaVector3[] array)
+        {
+            return arePlanar_v(array);
         }
     }
 }
