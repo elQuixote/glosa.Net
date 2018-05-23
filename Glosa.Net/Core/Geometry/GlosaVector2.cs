@@ -98,7 +98,9 @@ namespace Glosa.Net.Core.Geometry
         [DllImport("wrapper_vector.dll")]
         private static extern GlosaVector2 max_v2(GlosaVector2[] array);
         [DllImport("wrapper_vector.dll")]
-        private static extern GlosaVector3 toVector3_v2(GlosaVector2 vector);
+        private static extern GlosaVector3 toVector3_v2(GlosaVector2 vector, double z);
+        [DllImport("wrapper_vector.dll")]
+        private static extern GlosaVector3 toVector4_v2(GlosaVector2 vector, double z, double w);
         [DllImport("wrapper_vector.dll")]
         private static extern GlosaVector2 fromPolar_v2(double r, double theta);
         [DllImport("wrapper_vector.dll")]
@@ -801,10 +803,22 @@ namespace Glosa.Net.Core.Geometry
         /// <summary>
         /// Converts a GlosaVector2 into a GlosaVector3
         /// </summary>
+        /// <param name="z">The z value</param>
         /// <returns>The GlosaVector3</returns>
-        public GlosaVector3 ToVector3()
+        public GlosaVector3 ToVector3(double z = 0)
         {
-            return toVector3_v2(this);
+            return toVector3_v2(this, z);
+        }
+
+        /// <summary>
+        /// Converts a GlosaVector2 into a GlosaVector4
+        /// </summary>
+        /// <param name="z">The z value</param>
+        /// <param name="w">The w value</param>
+        /// <returns>The GlosaVector4</returns>
+        public GlosaVector3 ToVector4(double z = 0, double w = 0)
+        {
+            return toVector4_v2(this, z, w);
         }
 
         /// <summary>
