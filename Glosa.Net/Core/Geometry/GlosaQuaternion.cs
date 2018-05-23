@@ -137,6 +137,10 @@ namespace Glosa.Net.Core.Geometry
             this.m_w = w;
         }
 
+        /// <summary>
+        /// Creates a GlosaQuaternion from a GlosaMatrix44
+        /// </summary>
+        /// <param name="m">The new GlosaQuaternion</param>
         public GlosaQuaternion(GlosaMatrix44 m)
         {
             this = fromMatrix_quat(m);
@@ -151,6 +155,10 @@ namespace Glosa.Net.Core.Geometry
             return length_quat(this);
         }
 
+        /// <summary>
+        /// Computes the length of the GlosaQuaternion (Computationally less expensive)
+        /// </summary>
+        /// <returns>The length</returns>
         public double MagnitudeSquared()
         {
             return magnitudeSquared_quat(this);
@@ -272,154 +280,308 @@ namespace Glosa.Net.Core.Geometry
             this = new GlosaQuaternion(x, y, z, w);
         }
 
+        /// <summary>
+        /// Modifies this quaternion to become
+        /// <para>(x = -x, y = -y, z = -z, w = -w),</para>
+        /// </summary>
         public void InverseSelf()
         {
             this = inverseSelf_quat(this);
         }
 
+        /// <summary>
+        /// Creates a new inversed GlosaQuaternion 
+        /// <para>(x = -x, y = -y, z = -z, w = -w),</para>
+        /// </summary>
+        /// <returns>A new inversed Quaternion</returns>
         public GlosaQuaternion InverseNew()
         {
             return inverseNew_quat(this);
         }
 
+        /// <summary>
+        /// Creates a new inversed GlosaQuaternion 
+        /// <para>(x = -x, y = -y, z = -z, w = -w),</para>
+        /// </summary>
+        /// <returns>A new inversed Quaternion</returns>
         public static GlosaQuaternion InverseNew(GlosaQuaternion q)
         {
             return inverseNew_quat(q);
         }
 
+        /// <summary>
+        /// Modifies this quaternion to become
+        /// <para>(x = 1/x, y = 1/y, z = 1/z, w = 1/w),</para>
+        /// </summary>
         public void InvertSelf()
         {
             this = invertSelf_quat(this);
         }
 
+        /// <summary>
+        /// Creates a new inverted GlosaQuaternion 
+        /// <para>(x = 1/x, y = 1/y, z = 1/z, w = 1/w),</para>
+        /// </summary>
+        /// <returns>A new inverted Quaternion</returns>
         public GlosaQuaternion InvertNew()
         {
             return invertNew_quat(this);
         }
 
+        /// <summary>
+        /// Creates a new inverted GlosaQuaternion 
+        /// <para>(x = 1/x, y = 1/y, z = 1/z, w = 1/w),</para>
+        /// </summary>
+        /// <returns>A new inverted Quaternion</returns>
         public static GlosaQuaternion InvertNew(GlosaQuaternion q)
         {
             return invertNew_quat(q);
         }
 
+        /// <summary>
+        /// Adds GlosaQuaternion and overrides coordinates with result.
+        /// </summary>
+        /// <param name="q">The GlosaQuaternion to add</param>
         public void AddSelf(GlosaQuaternion q)
         {
             this = addSelf_quat(this, q);
         }
 
+        /// <summary>
+        /// Adds GlosaQuaternion and overrides coordinates with result.
+        /// </summary>
+        /// <param name="f">The value to add</param>
         public void AddSelf(double f)
         {
             this = addSelf2_quat(this, f);
         }
 
+        /// <summary>
+        /// Sums up two GlosaQuaternion.
+        /// </summary>
+        /// <param name="q">The GlosaQuaternion</param>
+        /// <returns>A new GlosaQuaternion that results from the componentwise addition of the two GlosaQuaternion.</returns>
         public GlosaQuaternion AddNew(GlosaQuaternion q)
         {
             return addNew_quat(this, q);
         }
 
+        /// <summary>
+        /// Adds f to each component of the GlosaQuaternion
+        /// </summary>
+        /// <param name="f">The value to add</param>
+        /// <returns>A new GlosaQuaternion that results from the componentwise addition of the GlosaQuaternion and f</returns>
         public GlosaQuaternion AddNew(double f)
         {
             return addNew2_quat(this, f);
         }
 
+        /// <summary>
+        /// Sums up two GlosaQuaternion.
+        /// </summary>
+        /// <param name="q1">The GlosaQuaternion</param>
+        /// <param name="q2">The second GlosaQuaternion</param>
+        /// <returns>A new GlosaQuaternion that results from the componentwise addition of the two GlosaQuaternion.</returns>
         public static GlosaQuaternion Add(GlosaQuaternion q1, GlosaQuaternion q2)
         {
             return addNew_quat(q1, q2);
         }
 
+        /// <summary>
+        /// Adds f to each component of the GlosaQuaternion
+        /// </summary>
+        /// <param name="q1">The GlosaQuaternion</param>
+        /// <param name="f">The value to add</param>
+        /// <returns>A new GlosaQuaternion that results from the componentwise addition of the GlosaQuaternion and f</returns>
         public static GlosaQuaternion Add(GlosaQuaternion q1, double f)
         {
             return addNew2_quat(q1, f);
         }
 
+        /// <summary>
+        /// Subtracts GlosaQuaternion and overrides coordinates with result.
+        /// </summary>
+        /// <param name="q">The GlosaQuaternion to subtract</param>
         public void SubtractSelf(GlosaQuaternion q)
         {
             this = subtractSelf_quat(this, q);
         }
 
+        /// <summary>
+        /// Subtracts GlosaQuaternion and overrides coordinates with result.
+        /// </summary>
+        /// <param name="f">The value to subtract</param>
         public void SubtractSelf(double f)
         {
             this = subtractSelf2_quat(this, f);
         }
 
+        /// <summary>
+        /// Subtracts a GlosaQuaternion from another one.
+        /// <para>This computes the difference of each GlosaQuaternion coefficient with its
+        /// correspondant and returns a new result GlosaQuaternion.</para>
+        /// </summary>
+        /// <param name="q">A quaternion.</param>
+        /// <returns>A new GlosaQuaternion.</returns>
         public GlosaQuaternion SubtractNew(GlosaQuaternion q)
         {
             return subtractNew_quat(this, q);
         }
 
+        /// <summary>
+        /// Subtracts all GlosaQuaternion coefficients by a factor and returns a new GlosaQuaternion with the result.
+        /// </summary>
+        /// <param name="f">The value to subtract</param>
+        /// <returns>A new GlosaQuaternion that results from the componentwise subtraction of the GlosaQuaternion and f</returns>
         public GlosaQuaternion SubtractNew(double f)
         {
             return subtractNew2_quat(this, f);
         }
 
+        /// <summary>
+        /// Subtracts a GlosaQuaternion from another one.
+        /// <para>This computes the difference of each GlosaQuaternion coefficient with its
+        /// correspondant and returns a new result GlosaQuaternion.</para>
+        /// </summary>
+        /// <param name="q1">A quaternion.</param>
+        /// <param name="q2">Another GlosaQuaternion.</param>
+        /// <returns>A new GlosaQuaternion.</returns>
         public static GlosaQuaternion Subtract(GlosaQuaternion q1, GlosaQuaternion q2)
         {
             return subtractNew_quat(q1, q2);
         }
 
+        /// <summary>
+        /// Subtracts all GlosaQuaternion coefficients by a factor and returns a new GlosaQuaternion with the result.
+        /// </summary>
+        /// <param name="q1">The GlosaQuaternion</param>
+        /// <param name="f">The value to subtract</param>
+        /// <returns>A new GlosaQuaternion that results from the componentwise subtraction of the GlosaQuaternion and f</returns>
         public static GlosaQuaternion Subtract(GlosaQuaternion q1, double f)
         {
             return subtractNew2_quat(q1, f);
         }
 
+        /// <summary>
+        /// Multiplies GlosaQuaternion and overrides coordinates with result.
+        /// </summary>
+        /// <param name="q">The GlosaQuaternion to multiply</param>
         public void MultiplySelf(GlosaQuaternion q)
         {
             this = multiplySelf_quat(this, q);
         }
 
+        /// <summary>
+        /// Multiplies GlosaQuaternion and overrides coordinates with result.
+        /// </summary>
+        /// <param name="f">The value to multiply</param>
         public void MultiplySelf(double f)
         {
             this = multiplySelf2_quat(this, f);
         }
 
+        /// <summary>
+        /// Multiplies a GlosaQuaternion with another one.
+        /// <para>Quaternion multiplication (Hamilton product) is not commutative.</para>
+        /// </summary>
+        /// <param name="q">The first term.</param>
+        /// <returns>A new GlosaQuaternion.</returns>
         public GlosaQuaternion MultiplyNew(GlosaQuaternion q)
         {
             return multiplyNew_quat(this, q);
         }
 
+        /// <summary>
+        /// Multiplies a GlosaQuaternion by a number, having the effect of scaling it.
+        /// </summary>
+        /// <param name="f">The value to multiply by</param>
+        /// <returns>A new GlosaQuaternion that is the original vector coordinatewise multiplied by f.</returns>
         public GlosaQuaternion MultiplyNew(double f)
         {
             return multiplyNew2_quat(this, f);
         }
 
+        /// <summary>
+        /// Multiplies a GlosaQuaternion with another one.
+        /// <para>Quaternion multiplication (Hamilton product) is not commutative.</para>
+        /// </summary>
+        /// <param name="q1">The first term.</param>
+        /// <param name="q2">The second term.</param>
+        /// <returns>A new GlosaQuaternion.</returns>
         public static GlosaQuaternion Multiply(GlosaQuaternion q1, GlosaQuaternion q2)
         {
             return multiplyNew_quat(q1, q2);
         }
 
-        public static GlosaQuaternion Multiply(GlosaQuaternion q1, double f)
+        /// <summary>
+        /// Multiplies a GlosaQuaternion by a number, having the effect of scaling it.
+        /// </summary>
+        /// <param name="q">The GlosaQuaternion to multiply</param>
+        /// <param name="f">The value to multiply by</param>
+        /// <returns>A new GlosaQuaternion that is the original vector coordinatewise multiplied by f.</returns>
+        public static GlosaQuaternion Multiply(GlosaQuaternion q, double f)
         {
-            return multiplyNew2_quat(q1, f);
+            return multiplyNew2_quat(q, f);
         }
 
+        /// <summary>
+        /// Divides GlosaQuaternion and overrides coordinates with result.
+        /// </summary>
+        /// <param name="q">The GlosaQuaternion to divide</param>
         public void DivideSelf(GlosaQuaternion q)
         {
             this = divideSelf_quat(this, q);
         }
 
+        /// <summary>
+        /// Divides GlosaQuaternion and overrides coordinates with result.
+        /// </summary>
+        /// <param name="f">The value to divide</param>
         public void DivideSelf(double f)
         {
             this = divideSelf2_quat(this, f);
         }
 
+        /// <summary>
+        /// Divides a GlosaQuaternion with another one.
+        /// </summary>
+        /// <param name="q">A GlosaQuaternion.</param>
+        /// <returns>A new GlosaQuaternion.</returns>
         public GlosaQuaternion DivideNew(GlosaQuaternion q)
         {
             return divideNew_quat(this, q);
         }
 
+        /// <summary>
+        /// Divides all GlosaQuaternion coefficients by a factor and returns a new GlosaQuaternion with the result.
+        /// </summary>
+        /// <param name="f">A number.</param>
+        /// <returns>A new GlosaQuaternion.</returns>
         public GlosaQuaternion DivideNew(double f)
         {
             return divideNew2_quat(this, f);
         }
 
+        /// <summary>
+        /// Divides a GlosaQuaternion with another one.
+        /// </summary>
+        /// <param name="q1">The first GlosaQuaternion.</param>
+        /// <param name="q2">The second GlosaQuaternion.</param>
+        /// <returns>A new GlosaQuaternion.</returns>
         public static GlosaQuaternion Divide(GlosaQuaternion q1, GlosaQuaternion q2)
         {
             return divideNew_quat(q1, q2);
         }
 
-        public static GlosaQuaternion Divide(GlosaQuaternion q1, double f)
+        /// <summary>
+        /// Divides a GlosaQuaternion with another one.
+        /// </summary>
+        /// <param name="q">A GlosaQuaternion.</param>
+        /// <param name="y">A number.</param>
+        /// <returns>A new GlosaQuaternion.</returns>
+        public static GlosaQuaternion Divide(GlosaQuaternion q, double f)
         {
-            return divideNew2_quat(q1, f);
+            return divideNew2_quat(q, f);
         }
 
         /// <summary>
@@ -471,7 +633,7 @@ namespace Glosa.Net.Core.Geometry
         /// <summary>
         /// Multiplies a GlosaQuaternion by a number, having the effect of scaling it.
         /// </summary>
-        /// <param name="vector">The GlosaQuaternion to multiply</param>
+        /// <param name="q">The GlosaQuaternion to multiply</param>
         /// <param name="f">The value to multiply by</param>
         /// <returns>A new GlosaQuaternion that is the original vector coordinatewise multiplied by f.</returns>
         public static GlosaQuaternion operator *(GlosaQuaternion q, float f)
@@ -483,8 +645,8 @@ namespace Glosa.Net.Core.Geometry
         /// Multiplies a GlosaQuaternion with another one.
         /// <para>Quaternion multiplication (Hamilton product) is not commutative.</para>
         /// </summary>
-        /// <param name="q1">The first term.</param>
-        /// <param name="q2">The second term.</param>
+        /// <param name="q1">The first GlosaQuaternion.</param>
+        /// <param name="q2">The second GlosaQuaternion.</param>
         /// <returns>A new GlosaQuaternion.</returns>
         public static GlosaQuaternion operator *(GlosaQuaternion q1, GlosaQuaternion q2)
         {
@@ -495,7 +657,7 @@ namespace Glosa.Net.Core.Geometry
         /// Divides all GlosaQuaternion coefficients by a factor and returns a new GlosaQuaternion with the result.
         /// </summary>
         /// <param name="q">A GlosaQuaternion.</param>
-        /// <param name="y">A number.</param>
+        /// <param name="f">A number.</param>
         /// <returns>A new GlosaQuaternion.</returns>
         public static GlosaQuaternion operator /(GlosaQuaternion q, double f)
         {
@@ -505,8 +667,8 @@ namespace Glosa.Net.Core.Geometry
         /// <summary>
         /// Divides a GlosaQuaternion with another one.
         /// </summary>
-        /// <param name="q">A GlosaQuaternion.</param>
-        /// <param name="y">A number.</param>
+        /// <param name="q1">The first GlosaQuaternion.</param>
+        /// <param name="q2">The second GlosaQuaternion.</param>
         /// <returns>A new GlosaQuaternion.</returns>
         public static GlosaQuaternion operator /(GlosaQuaternion q1, GlosaQuaternion q2)
         {
@@ -583,11 +745,22 @@ namespace Glosa.Net.Core.Geometry
             return conjugateNew_quat(q);
         }
 
+        /// <summary>
+        /// Creates a new GlosaQuaternion from a Matrix44
+        /// </summary>
+        /// <param name="m">The GlosaMatrix to create the quaternion from</param>
+        /// <returns>The GlosaQuaternion</returns>
         public GlosaQuaternion FromMatrix(GlosaMatrix44 m)
         {
             return fromMatrix_quat(m);
         }
 
+        /// <summary>
+        /// Creates a GlosaQuaternion from a axis and a angle.
+        /// </summary>
+        /// <param name="axis">Axis vector (will be normalized)</param>
+        /// <param name="angle">Angle in radians.</param>
+        /// <returns>The new GlosaQuaternion</returns>
         public static GlosaQuaternion FromAxisAngle(GlosaVector3 axis, double angle)
         {
             return fromAxisAngle_quat(axis, angle);
