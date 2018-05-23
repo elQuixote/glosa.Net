@@ -45,9 +45,11 @@
     <Compile Include="Core\Geometry\GlosaMatrix44.cs" />
     <Compile Include="Core\Geometry\GlosaPolyline.cs" />
     <Compile Include="Core\Geometry\GlosaQuaternion.cs" />
+    <Compile Include="Core\Geometry\GlosaVector.cs" />
     <Compile Include="Core\Geometry\GlosaVector2.cs" />
     <Compile Include="Core\Geometry\GlosaVector3.cs" />
     <Compile Include="Core\Geometry\GlosaMatrix33.cs" />
+    <Compile Include="Core\Geometry\GlosaVector4.cs" />
     <Compile Include="Core\Interfaces\IClear.cs" />
     <Compile Include="Core\Interfaces\ICompare.cs" />
     <Compile Include="Core\Interfaces\ICopy.cs" />

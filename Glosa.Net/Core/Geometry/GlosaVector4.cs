@@ -313,39 +313,12 @@ namespace Glosa.Net.Core.Geometry
         }
 
         /// <summary>
-        /// Computes the cross product (or vector product, or exterior product) of two GlosaVector4.
-        /// </summary>
-        /// <param name="vector">The first GlosaVector4</param>
-        /// <param name="vector2">The second GlosaVector4</param>
-        /// <returns>A new GlosaVector4 that is perpendicular to both this instance and vector,
-        /// <para>has Length == this.Length * vector.Length and</para>
-        /// <para>with a result that is oriented following the right hand rule.</para>
-        /// </returns>
-        public static GlosaVector4 Cross(GlosaVector4 vector, GlosaVector4 vector2)
-        {
-            return cross_v4(vector, vector2);
-        }
-
-        /// <summary>
-        /// Computes the cross product (or vector product, or exterior product) of two GlosaVector4.
-        /// </summary>
-        /// <param name="vector">The second GlosaVector4 to compute</param>
-        /// <returns>A new vector that is perpendicular to both this instance and vector,
-        /// <para>has Length == this.Length * vector.Length and</para>
-        /// <para>with a result that is oriented following the right hand rule.</para>
-        /// </returns>
-        public GlosaVector4 Cross(GlosaVector4 vector)
-        {
-            return cross_v4(this, vector);
-        }
-
-        /// <summary>
         /// Multiplies two GlosaVector4 together, returning the dot product (or inner product).
         /// </summary>
         /// <param name="vector">The first GlosaVector4</param>
         /// <param name="vector2">The second GlosaVector4</param>
         /// <returns>
-        /// A value that results from the evaluation of v1.X*v2.X + v1.Y*v2.Y + v1.Z*v2.Z.
+        /// A value that results from the evaluation of v1.X*v2.X + v1.Y*v2.Y + v1.Z*v2.Z + v1.W*v2.W.
         /// <para>This value equals v1.Length * v2.Length * cos(alpha), where alpha is the angle between vectors.</para>
         /// </returns>
         public static double Dot(GlosaVector4 vector, GlosaVector4 vector2)
@@ -358,7 +331,7 @@ namespace Glosa.Net.Core.Geometry
         /// </summary>
         /// <param name="vector">The GlosaVector4 to multiply by</param>
         /// <returns>
-        /// A value that results from the evaluation of v1.X*v2.X + v1.Y*v2.Y + v1.Z*v2.Z.
+        /// A value that results from the evaluation of v1.X*v2.X + v1.Y*v2.Y + v1.Z*v2.Z + v1.W*v2.W.
         /// <para>This value equals v1.Length * v2.Length * cos(alpha), where alpha is the angle between vectors.</para>
         /// </returns>
         public double Dot(GlosaVector4 vector)
@@ -517,7 +490,7 @@ namespace Glosa.Net.Core.Geometry
         }
 
         /// <summary>
-        /// Returns the string representation of the current GlosaVector4, in the form X,Y,Z.
+        /// Returns the string representation of the current GlosaVector4, in the form X,Y,Z,W.
         /// </summary>
         /// <returns>A string with the current location of the GlosaVector4.</returns>
         public string Stringify()
@@ -593,13 +566,14 @@ namespace Glosa.Net.Core.Geometry
         /// <summary>
         /// Determines whether the first specified GlosaVector4 comes before
         /// (has inferior sorting value than) the second GlosaVector4.
-        /// <para>Components have decreasing evaluation priority: first X, then Y, then Z.</para>
+        /// <para>Components have decreasing evaluation priority: first X, then Y, then Z, then W.</para>
         /// </summary>
         /// <param name="a">The first GlosaVector4</param>
         /// <param name="b">The second GlosaVector4</param>
         /// <returns>true if a.X is smaller than b.X,
         /// or a.X == b.X and a.Y is smaller than b.Y,
         /// or a.X == b.X and a.Y == b.Y and a.Z is smaller than b.Z;
+        /// or a.X == b.X and a.Y == b.Y and a.Z == b.Z and a.W is smaller than b.W;
         /// otherwise, false.</returns>
         public static bool operator <(GlosaVector4 a, GlosaVector4 b)
         {
@@ -609,13 +583,14 @@ namespace Glosa.Net.Core.Geometry
         /// <summary>
         /// Determines whether the first specified GlosaVector4 comes before
         /// (has inferior sorting value than) the second GlosaVector4, or it is equal to it.
-        /// <para>Components have decreasing evaluation priority: first X, then Y, then Z.</para>
+        /// <para>Components have decreasing evaluation priority: first X, then Y, then Z, then W.</para>
         /// </summary>
         /// <param name="a">The first GlosaVector4</param>
         /// <param name="b">The second GlosaVector4</param>
         /// <returns>true if a.X is smaller than b.X,
         /// or a.X == b.X and a.Y is smaller than b.Y,
         /// or a.X == b.X and a.Y == b.Y and a.Z &lt;= b.Z;
+        /// or a.X == b.X and a.Y == b.Y and a.Z == b.Z and a.W &lt;= b.W;
         /// otherwise, false.</returns>
         public static bool operator <=(GlosaVector4 a, GlosaVector4 b)
         {
@@ -625,13 +600,14 @@ namespace Glosa.Net.Core.Geometry
         /// <summary>
         /// Determines whether the first specified GlosaVector4 comes after
         /// (has superior sorting value than) the second GlosaVector4.
-        /// <para>Components have decreasing evaluation priority: first X, then Y.</para>
+        /// <para>Components have decreasing evaluation priority: first X, then Y, then Z, then W.</para>
         /// </summary>
         /// <param name="a">The first GlosaVector4</param>
         /// <param name="b">The second GlosaVector4</param>
         /// <returns>true if a.X is larger than b.X,
         /// or a.X == b.X and a.Y is larger than b.Y,
         /// or a.X == b.X and a.Y == b.Y and a.Z is larger than b.Z;
+        /// or a.X == b.X and a.Y == b.Y and a.Z == b.Z and a.W is larger than b.W;
         /// otherwise, false.</returns>
         public static bool operator >(GlosaVector4 a, GlosaVector4 b)
         {
@@ -641,13 +617,14 @@ namespace Glosa.Net.Core.Geometry
         /// <summary>
         /// Determines whether the first specified GlosaVector4 comes after
         /// (has superior sorting value than) the second GlosaVector4, or it is equal to it.
-        /// <para>Components have decreasing evaluation priority: first X, then Y, then Z.</para>
+        /// <para>Components have decreasing evaluation priority: first X, then Y, then Z, then W.</para>
         /// </summary>
         /// <param name="a">The first GlosaVector4</param>
         /// <param name="b">The second GlosaVector4</param>
         /// <returns>true if a.X is larger than b.X,
         /// or a.X == b.X and a.Y is larger than b.Y,
         /// or a.X == b.X and a.Y == b.Y and a.Z &gt;= b.Z;
+        /// or a.X == b.X and a.Y == b.Y and a.Z == b.Z and a.W &gt;= b.W;
         /// otherwise, false.</returns>
         public static bool operator >=(GlosaVector4 a, GlosaVector4 b)
         {
@@ -671,7 +648,7 @@ namespace Glosa.Net.Core.Geometry
         /// <param name="vector">The GlosaVector4</param>
         /// <param name="vector2">The second GlosaVector4 to multiply by</param>
         /// <returns>
-        /// A value that results from the evaluation of v1.X*v2.X + v1.Y*v2.Y + v1.Z*v2.Z.
+        /// A value that results from the evaluation of v1.X*v2.X + v1.Y*v2.Y + v1.Z*v2.Z + v1.W*v2.W.
         /// <para>This value equals v1.Length * v2.Length * cos(alpha), where alpha is the angle between vectors.</para>
         /// </returns>
         public static double operator *(GlosaVector4 vector, GlosaVector4 vector2)
@@ -732,7 +709,7 @@ namespace Glosa.Net.Core.Geometry
         }
 
         /// <summary>
-        /// Compares this GlosaVector4 with another, Component evaluation priority is first X, then Y, then Z.
+        /// Compares this GlosaVector4 with another, Component evaluation priority is first X, then Y, then Z, then W.
         /// </summary>
         /// <param name="other">The other GlosaVector4</param>
         /// <returns>
@@ -740,6 +717,7 @@ namespace Glosa.Net.Core.Geometry
         /// <para>-1: if this.X &lt; other.X</para>
         /// <para>-1: if this.X == other.X and this.Y &lt; other.Y</para>
         /// <para>-1: if this.X == other.X and this.Y == other.Y and this.Z &lt; other.Z</para>
+        /// <para>-1: if this.X == other.X and this.Y == other.Y and this.Z == other.Z and this.W &lt; other.W</para>
         /// <para>+1: otherwise.</para>
         /// </returns>
         public int CompareTo(GlosaVector4 other)
@@ -756,6 +734,10 @@ namespace Glosa.Net.Core.Geometry
                 return -1;
             if (m_z > other.m_z)
                 return 1;
+            if (m_w < other.m_w)
+                return -1;
+            if (m_w > other.m_w)
+                return 1;
             return 0;
         }
 
@@ -770,7 +752,7 @@ namespace Glosa.Net.Core.Geometry
         /// <summary>
         /// Gets the GlosaVector4 Dimension
         /// </summary>
-        /// <returns>The dimension, for GlosaVector4 the result should be 3</returns>
+        /// <returns>The dimension, for GlosaVector4 the result should be 4</returns>
         public int Dimension()
         {
             return dimension_v4(this);
@@ -817,7 +799,7 @@ namespace Glosa.Net.Core.Geometry
         }
 
         /// <summary>
-        /// Sets the GlosaVector4 components, X Y and Z, to the specified value.
+        /// Sets the GlosaVector4 components, X Y Z and W, to the specified value.
         /// </summary>
         /// <param name="n">The value</param>
         public void Set(double n)
@@ -826,25 +808,25 @@ namespace Glosa.Net.Core.Geometry
         }
 
         /// <summary>
-        /// Returns an array with the GlosaVector4 components, X Y and Z,
+        /// Returns an array with the GlosaVector4 components, X Y Z and W,
         /// </summary>
         /// <param name="array">The fixed array to modify</param>
         /// <returns>The modified array</returns>
         public double[] ToArray(double[] array)
         {
-            if (array.Length != 3) { throw new System.ArgumentException("array must be fixed array with length of 3 for GlosaVector4", "array"); }
+            if (array.Length != 4) { throw new System.ArgumentException("array must be fixed array with length of 4 for GlosaVector4", "array"); }
             toArray_v4(this, array);
             return array;
         }
 
         /// <summary>
-        /// Returns an GlosaVector4 with the components, X Y and Z from the array
+        /// Returns an GlosaVector4 with the components, X Y Z and W from the array
         /// </summary>
         /// <param name="array">The fixed array to create a GlosaVector from</param>
         /// <returns>The GlosaVector4</returns>
         public static GlosaVector4 FromArray(double[] array)
         {
-            if (array.Length != 3) { throw new System.ArgumentException("array must be fixed array with length of 3 for GlosaVector4", "array"); }
+            if (array.Length != 4) { throw new System.ArgumentException("array must be fixed array with length of 4 for GlosaVector4", "array"); }
             return fromArray_v4(array);
         }
 
