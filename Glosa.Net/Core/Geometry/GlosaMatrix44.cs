@@ -68,7 +68,7 @@ namespace Glosa.Net.Core.Geometry
         [DllImport("wrapper_matrix.dll")]
         private static extern GlosaMatrix44 shearUniformMatrix_Z_44(double sh);
         [DllImport("wrapper_matrix.dll")]
-        private static extern GlosaMatrix44 fromVector4(GlosaVector3 v1, GlosaVector3 v2, GlosaVector3 v3, GlosaVector3 v4); //change after implementing GlosaVector4
+        private static extern GlosaMatrix44 fromVector4(GlosaVector4 v1, GlosaVector4 v2, GlosaVector4 v3, GlosaVector4 v4); 
         [DllImport("wrapper_matrix.dll")]
         private static extern void toArray_44(GlosaMatrix44 m, double[,] array);
         #endregion
@@ -568,17 +568,20 @@ namespace Glosa.Net.Core.Geometry
         {
             return shearUniformMatrix_Z_44(sh);
         }
+
         /// <summary>
-        /// Returns a new GlosaMatrix44 created from 3 GlosaVector3
-        /// [v1.x v2.x v3.x]
-        /// [v1.y v2.y v3.y]
-        /// [v1.z v2.z v3.z]
+        /// Returns a new GlosaMatrix44 created from 4 GlosaVector4
+        /// [v1.x v2.x v3.x v4.x]
+        /// [v1.y v2.y v3.y v4.y]
+        /// [v1.z v2.z v3.z v4.z]
+        /// [v1.w v2.w v3.w v4.w]
         /// </summary>
-        /// <param name="v1"></param>
-        /// <param name="v2"></param>
-        /// <param name="v3"></param>
+        /// <param name="v1">The first GlosaVector4</param>
+        /// <param name="v2">The second GlosaVector4</param>
+        /// <param name="v3">The third GlosaVector4</param>
+        /// <param name="v4">The fourth GlosaVector4</param>
         /// <returns>A new GlosaMatrix44</returns>
-        public GlosaMatrix44 FromVector3(GlosaVector3 v1, GlosaVector3 v2, GlosaVector3 v3, GlosaVector3 v4)
+        public GlosaMatrix44 FromVector4(GlosaVector4 v1, GlosaVector4 v2, GlosaVector4 v3, GlosaVector4 v4)
         {
             return fromVector4(v1, v2, v3, v4);
         }
