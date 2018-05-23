@@ -588,9 +588,10 @@ namespace Glosa.Net.Core.Geometry
 
         /// <summary>
         /// Returns an array with the GlosaMatrix44 components.
-        /// [m00(0,0) m01(0,1) m02(0,2)]
-        /// [m10(1,0) m11(1,1) m12(1,2)]
-        /// [m20(2,0) m21(2,1) m22(2,2)]
+        /// [ m00(0,0) m01(0,1) m02(0,2) m03(0,3) ]
+        /// [ m10(1,0) m11(1,1) m12(1,2) m13(1,3) ]
+        /// [ m20(2,0) m21(2,1) m22(2,2) m23(2,3) ]
+        /// [ m30(3,0) m31(3,1) m32(3,2) m33(3,3) ]
         /// </summary>
         /// <param name="array">The fixed two dimensional array to modify</param>
         /// <returns>The modified two dimensional array</returns>
