@@ -98,7 +98,7 @@ namespace Glosa.Net.Core.Geometry
         [DllImport("wrapper_vector.dll")]
         private static extern GlosaVector2 max_v2(GlosaVector2[] array);
         [DllImport("wrapper_vector.dll")]
-        private static extern GlosaVector3 toVector3(GlosaVector2 vector);
+        private static extern GlosaVector3 toVector3_v2(GlosaVector2 vector);
         [DllImport("wrapper_vector.dll")]
         private static extern GlosaVector2 fromPolar_v2(double r, double theta);
         [DllImport("wrapper_vector.dll")]
@@ -804,7 +804,7 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>The GlosaVector3</returns>
         public GlosaVector3 ToVector3()
         {
-            return toVector3(this);
+            return toVector3_v2(this);
         }
 
         /// <summary>
