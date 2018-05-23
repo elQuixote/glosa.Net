@@ -810,7 +810,8 @@ namespace Glosa.Net.Core.Geometry
         /// <summary>
         /// Computes the distance between two points.
         /// </summary>
-        /// <param name="vector">Other GlosaVector for distance measurement</param>
+        /// <param name="vector">First GlosaVector for distance measurement</param>
+        /// <param name="vector2">Other GlosaVector for distance measurement</param>
         /// <returns>The distance between 2 GlosaVectors</returns>
         public static double DistanceTo(GlosaVector3 vector, GlosaVector3 vector2)
         {
@@ -832,7 +833,8 @@ namespace Glosa.Net.Core.Geometry
         /// <summary>
         /// Interpolates between two vectors using an interpolation value (0.5 will return vector between the two vectors)
         /// </summary>
-        /// <param name="vector">The second GlosaVector</param>
+        /// <param name="vector">The first GlosaVector</param>
+        /// <param name="vector2">The second GlosaVector</param>
         /// <param name="f">The Interpolation factor (should be in the range 0..1)</param>
         /// <returns>The interpolated vector</returns>
         public static GlosaVector3 InterpolateNew(GlosaVector3 vector, GlosaVector3 vector2, double f)

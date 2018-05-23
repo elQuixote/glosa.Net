@@ -254,7 +254,7 @@ namespace Glosa.Net.Core.Geometry
         /// <summary>
         /// Copies a GlosaMatrix44 
         /// </summary>
-        /// <param name="vector">The GlosaMatrix44 to copy</param>
+        /// <param name="m">The GlosaMatrix44 to copy</param>
         /// <returns>A new copy of that GlosaMatrix44</returns>
         public static GlosaMatrix44 CopyNew(GlosaMatrix44 m)
         {
@@ -286,7 +286,7 @@ namespace Glosa.Net.Core.Geometry
         /// <summary>
         /// Determines whether the specified GlosaMatrix44 has the same value as the present GlosaMatrix44.
         /// </summary>
-        /// <param name="vector">The other GlosaMatrix44 to compare</param>
+        /// <param name="m">The other GlosaMatrix44 to compare</param>
         /// <returns>The result</returns>
         public bool Equals(GlosaMatrix44 m)
         {

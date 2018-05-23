@@ -8,6 +8,12 @@ using Glosa.Net.Core.Interfaces;
 
 namespace Glosa.Net.Core.Geometry
 {
+    /// <summary>
+    /// Represents the four coefficient values in a quaternion.
+    /// <para>The first value <i>a</i> is the real part,
+    /// while the rest multipies <i>i</i>, <i>j</i> and <i>k</i>, that are imaginary.</para>
+    /// <para>quaternion = a + bi + cj + dk</para>
+    /// </summary>
     public struct GlosaQuaternion : ILength<GlosaQuaternion>, IEquals<GlosaQuaternion>, IString<GlosaQuaternion>,
         IClear<GlosaQuaternion>, IHash<GlosaQuaternion>, ICopy<GlosaQuaternion>
     {
@@ -274,7 +280,10 @@ namespace Glosa.Net.Core.Geometry
         /// <summary>
         /// Sets all coefficients of the GlosaQuaternion to n.
         /// </summary>
-        /// <param name="n">The value</param>
+        /// <param name="x">The x value</param>
+        /// <param name="y">The y value</param>
+        /// <param name="z">The z value</param>
+        /// <param name="w">The w value</param>
         public void Set(double x, double y, double z, double w)
         {
             this = new GlosaQuaternion(x, y, z, w);
@@ -577,7 +586,7 @@ namespace Glosa.Net.Core.Geometry
         /// Divides a GlosaQuaternion with another one.
         /// </summary>
         /// <param name="q">A GlosaQuaternion.</param>
-        /// <param name="y">A number.</param>
+        /// <param name="f">A number.</param>
         /// <returns>A new GlosaQuaternion.</returns>
         public static GlosaQuaternion Divide(GlosaQuaternion q, double f)
         {

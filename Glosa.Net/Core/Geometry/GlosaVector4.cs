@@ -843,7 +843,8 @@ namespace Glosa.Net.Core.Geometry
         /// <summary>
         /// Computes the distance between two points.
         /// </summary>
-        /// <param name="vector">Other GlosaVector for distance measurement</param>
+        /// <param name="vector">First GlosaVector for distance measurement</param>
+        /// <param name="vector2">Other GlosaVector for distance measurement</param>
         /// <returns>The distance between 2 GlosaVectors</returns>
         public static double DistanceTo(GlosaVector4 vector, GlosaVector4 vector2)
         {
