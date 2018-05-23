@@ -104,6 +104,8 @@ namespace Glosa.Net.Core.Geometry
         [DllImport("wrapper_vector.dll")]
         private static extern GlosaVector2 toVector2_v3(GlosaVector3 vector);
         [DllImport("wrapper_vector.dll")]
+        private static extern GlosaVector4 toVector4_v3(GlosaVector3 vector, double w);
+        [DllImport("wrapper_vector.dll")]
         private static extern GlosaVector3 fromSpherical_v3(double r, double theta, double phi);
         [DllImport("wrapper_vector.dll")]
         private static extern GlosaVector3 transformNew_v3(GlosaVector3 vector, GlosaMatrix44 matrix);
@@ -866,6 +868,16 @@ namespace Glosa.Net.Core.Geometry
         public GlosaVector2 ToVector2()
         {
             return toVector2_v3(this);
+        }
+
+        /// <summary>
+        /// Converts a GlosaVector3 into a GlosaVector4
+        /// </summary>
+        /// <param name="w">The W value</param>
+        /// <returns>The GlosaVector4</returns>
+        public GlosaVector4 ToVector4(double w)
+        {
+            return toVector4_v3(this, w);
         }
 
         /// <summary>
