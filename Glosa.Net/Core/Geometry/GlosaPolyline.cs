@@ -71,19 +71,17 @@ namespace Glosa.Net.Core.Geometry
         private void GenerateSegmentsFromVertices(IVector[] vertices)
         {
             this.segments = new GlosaLineSegment[this.vertices.Length];
-            int count = 0;
             if (vertices.Length < 2)
             {
                 throw new System.ArgumentException("vertex count must be at least 2", "array");
             }
             for(int i = 0; i < vertices.Length -1; i++)
             {
-                this.segments[count] = (new GlosaLineSegment(vertices[count], vertices[count + 1]));
+                this.segments[i] = (new GlosaLineSegment(vertices[i], vertices[i + 1]));
                 if (this.closed)
                 {
-                    this.segments[count+1] = (new GlosaLineSegment(vertices[vertices.Length-1], vertices[0]));
+                    this.segments[i+1] = (new GlosaLineSegment(vertices[vertices.Length-1], vertices[0]));
                 }
-                count++;
             }
         }
 
@@ -111,7 +109,6 @@ namespace Glosa.Net.Core.Geometry
         private static List<IVector> ParseVertices(string data, int type)
         {
             List<List<string>> vertList = new List<List<string>>();
-            List<string> dataX, dataY, dataZ, dataW;
             switch (type)
             {
                 case 0:
@@ -119,28 +116,19 @@ namespace Glosa.Net.Core.Geometry
                 case 1:
                     break;
                 case 2:
-                    dataX = Utilities.parseData(data, "vertices.*.x");
-                    dataY = Utilities.parseData(data, "vertices.*.y");
-                    vertList.Add(dataX);
-                    vertList.Add(dataY);
+                    vertList.Add(Utilities.parseData(data, "vertices.*.x"));
+                    vertList.Add(Utilities.parseData(data, "vertices.*.y"));
                     break;
                 case 3:
-                    dataX = Utilities.parseData(data, "vertices.*.x");
-                    dataY = Utilities.parseData(data, "vertices.*.y");
-                    dataZ = Utilities.parseData(data, "vertices.*.z");
-                    vertList.Add(dataX);
-                    vertList.Add(dataY);
-                    vertList.Add(dataZ);
+                    vertList.Add(Utilities.parseData(data, "vertices.*.x"));
+                    vertList.Add(Utilities.parseData(data, "vertices.*.y"));
+                    vertList.Add(Utilities.parseData(data, "vertices.*.z"));
                     break;
                 case 4:
-                    dataX = Utilities.parseData(data, "vertices.*.x");
-                    dataY = Utilities.parseData(data, "vertices.*.y");
-                    dataZ = Utilities.parseData(data, "vertices.*.z");
-                    dataW = Utilities.parseData(data, "vertices.*.w");
-                    vertList.Add(dataX);
-                    vertList.Add(dataY);
-                    vertList.Add(dataZ);
-                    vertList.Add(dataW);
+                    vertList.Add(Utilities.parseData(data, "vertices.*.x"));
+                    vertList.Add(Utilities.parseData(data, "vertices.*.y"));
+                    vertList.Add(Utilities.parseData(data, "vertices.*.z"));
+                    vertList.Add(Utilities.parseData(data, "vertices.*.w"));
                     break;
             }
             int count = 0;
@@ -154,15 +142,12 @@ namespace Glosa.Net.Core.Geometry
                     case 1:
                         break;
                     case 2:
-                        Console.WriteLine("GlosaVector2");
                         gverts.Add(new GlosaVector2(Convert.ToDouble(str), Convert.ToDouble(vertList[1][count])));
                         break;
                     case 3:
-                        Console.WriteLine("GlosaVector3");
                         gverts.Add(new GlosaVector3(Convert.ToDouble(str), Convert.ToDouble(vertList[1][count]), Convert.ToDouble(vertList[2][count])));
                         break;
                     case 4:
-                        Console.WriteLine("GlosaVector4");
                         gverts.Add(new GlosaVector4(Convert.ToDouble(str), Convert.ToDouble(vertList[1][count]), Convert.ToDouble(vertList[2][count]), Convert.ToDouble(vertList[3][count])));
                         break;
                 }
@@ -175,8 +160,6 @@ namespace Glosa.Net.Core.Geometry
         {
             List<List<string>> spList = new List<List<string>>();
             List<List<string>> epList = new List<List<string>>();
-            List<string> dataSVx, dataSVy, dataSVz, dataSVw;
-            List<string> dataEVx, dataEVy, dataEVz, dataEVw;
             switch (type)
             {
                 case 0:
@@ -184,46 +167,28 @@ namespace Glosa.Net.Core.Geometry
                 case 1:
                     break;
                 case 2:
-                    dataSVx = Utilities.parseData(data, "segments.*.startVertex.x");
-                    dataSVy = Utilities.parseData(data, "segments.*.startVertex.y");
-                    spList.Add(dataSVx);
-                    spList.Add(dataSVy);
-                    dataEVx = Utilities.parseData(data, "segments.*.endVertex.x");
-                    dataEVy = Utilities.parseData(data, "segments.*.endVertex.y");
-                    epList.Add(dataEVx);
-                    epList.Add(dataEVy);
+                    spList.Add(Utilities.parseData(data, "segments.*.startVertex.x"));
+                    spList.Add(Utilities.parseData(data, "segments.*.startVertex.y"));
+                    epList.Add(Utilities.parseData(data, "segments.*.endVertex.x"));
+                    epList.Add(Utilities.parseData(data, "segments.*.endVertex.y"));
                     break;
                 case 3:
-                    dataSVx = Utilities.parseData(data, "segments.*.startVertex.x");
-                    dataSVy = Utilities.parseData(data, "segments.*.startVertex.y");
-                    spList.Add(dataSVx);
-                    spList.Add(dataSVy);
-                    dataEVx = Utilities.parseData(data, "segments.*.endVertex.x");
-                    dataEVy = Utilities.parseData(data, "segments.*.endVertex.y");
-                    epList.Add(dataEVx);
-                    epList.Add(dataEVy);
-                    dataSVz = Utilities.parseData(data, "segments.*.startVertex.z");
-                    dataEVz = Utilities.parseData(data, "segments.*.endVertex.z");
-                    spList.Add(dataSVz);
-                    epList.Add(dataEVz);
+                    spList.Add(Utilities.parseData(data, "segments.*.startVertex.x"));
+                    spList.Add(Utilities.parseData(data, "segments.*.startVertex.y"));
+                    epList.Add(Utilities.parseData(data, "segments.*.endVertex.x"));
+                    epList.Add(Utilities.parseData(data, "segments.*.endVertex.y"));
+                    spList.Add(Utilities.parseData(data, "segments.*.startVertex.z"));
+                    epList.Add(Utilities.parseData(data, "segments.*.endVertex.z"));
                     break;
                 case 4:
-                    dataSVx = Utilities.parseData(data, "segments.*.startVertex.x");
-                    dataSVy = Utilities.parseData(data, "segments.*.startVertex.y");
-                    spList.Add(dataSVx);
-                    spList.Add(dataSVy);
-                    dataEVx = Utilities.parseData(data, "segments.*.endVertex.x");
-                    dataEVy = Utilities.parseData(data, "segments.*.endVertex.y");
-                    epList.Add(dataEVx);
-                    epList.Add(dataEVy);
-                    dataSVz = Utilities.parseData(data, "segments.*.startVertex.z");
-                    dataEVz = Utilities.parseData(data, "segments.*.endVertex.z");
-                    spList.Add(dataSVz);
-                    epList.Add(dataEVz);
-                    dataSVw = Utilities.parseData(data, "segments.*.startVertex.w");
-                    dataEVw = Utilities.parseData(data, "segments.*.endVertex.w");
-                    spList.Add(dataSVw);
-                    epList.Add(dataEVw);
+                    spList.Add(Utilities.parseData(data, "segments.*.startVertex.x"));
+                    spList.Add(Utilities.parseData(data, "segments.*.startVertex.y"));
+                    epList.Add(Utilities.parseData(data, "segments.*.endVertex.x"));
+                    epList.Add(Utilities.parseData(data, "segments.*.endVertex.y"));
+                    spList.Add(Utilities.parseData(data, "segments.*.startVertex.z"));
+                    epList.Add(Utilities.parseData(data, "segments.*.endVertex.z"));
+                    spList.Add(Utilities.parseData(data, "segments.*.startVertex.w"));
+                    epList.Add(Utilities.parseData(data, "segments.*.endVertex.w"));
                     break;
             }
             int count = 0;
@@ -235,25 +200,20 @@ namespace Glosa.Net.Core.Geometry
                 switch (type)
                 {
                     case 0:
-                        Console.WriteLine("0");
                         break;
                     case 1:
-                        Console.WriteLine("GlosaVector1");
                         break;
                     case 2:
-                        Console.WriteLine("GlosaVector2");
                         gvs = new GlosaVector2(Convert.ToDouble(str), Convert.ToDouble(spList[1][count]));
                         gvs2 = new GlosaVector2(Convert.ToDouble(epList[0][count]), Convert.ToDouble(epList[1][count]));
                         gls.Add(new GlosaLineSegment(gvs, gvs2));
                         break;
                     case 3:
-                        Console.WriteLine("GlosaVector3");
                         gvs = new GlosaVector3(Convert.ToDouble(str), Convert.ToDouble(spList[1][count]), Convert.ToDouble(spList[2][count]));
                         gvs2 = new GlosaVector3(Convert.ToDouble(epList[0][count]), Convert.ToDouble(epList[1][count]), Convert.ToDouble(epList[2][count]));
                         gls.Add(new GlosaLineSegment(gvs, gvs2));
                         break;
                     case 4:
-                        Console.WriteLine("GlosaVector4");
                         gvs = new GlosaVector4(Convert.ToDouble(str), Convert.ToDouble(spList[1][count]), Convert.ToDouble(spList[2][count]), Convert.ToDouble(spList[3][count]));
                         gvs2 = new GlosaVector4(Convert.ToDouble(epList[0][count]), Convert.ToDouble(epList[1][count]), Convert.ToDouble(epList[2][count]), Convert.ToDouble(epList[3][count]));
                         gls.Add(new GlosaLineSegment(gvs, gvs2));
