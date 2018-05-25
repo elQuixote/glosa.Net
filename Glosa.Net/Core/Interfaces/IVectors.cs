@@ -8,5 +8,6 @@ namespace Glosa.Net.Core.Interfaces
 {
     public interface IVector
     {
+        int Dimension();
     }
 }

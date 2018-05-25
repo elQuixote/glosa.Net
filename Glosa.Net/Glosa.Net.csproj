@@ -54,6 +54,9 @@
     <Compile Include="Core\Geometry\GlosaMatrix33.cs" />
     <Compile Include="Core\Geometry\GlosaVector4.cs" />
     <Compile Include="Core\Helpers\GlosaObject.cs" />
+    <Compile Include="Core\Helpers\Json\JsonNetValueSystem.cs" />
+    <Compile Include="Core\Helpers\Json\jsonpath-0.5.1.cs" />
+    <Compile Include="Core\Helpers\Json\Utilities.cs" />
     <Compile Include="Core\Interfaces\IClear.cs" />
     <Compile Include="Core\Interfaces\ICompare.cs" />
     <Compile Include="Core\Interfaces\ICopy.cs" />
@@ -83,6 +86,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

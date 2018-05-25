@@ -13,14 +13,6 @@ namespace Glosa.Net.Core.Helpers
     public abstract class GlosaObject
     {
         /// <summary>
-        /// Populates the object from Json formatted string
-        /// </summary>
-        /// <param name="data"></param>
-        public void PopulateData(string data)
-        {
-            JsonConvert.PopulateObject(data, this);
-        }
-        /// <summary>
         /// Serializes the object into a Json formatted string
         /// </summary>
         /// <returns>The serialized string</returns>
