@@ -18,11 +18,7 @@ namespace Glosa.Net.Core.Helpers
         /// <returns>The serialized string</returns>
         public string Serialize()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-        }
-        private string AddBody(string current_string)
-        {
-            return "{ \"body\": " + current_string + " }";
+            return JsonConvert.SerializeObject(this, Formatting.None, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
         }
     }
 }
