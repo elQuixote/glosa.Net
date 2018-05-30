@@ -11,7 +11,8 @@ using Glosa.Net.Core.Helpers.Json;
 
 namespace Glosa.Net.Core.Geometry
 {
-    public class GlosaPolyline : GlosaObject
+    public class GlosaPolyline : GlosaObject, ICopy<GlosaPolyline>, IDimension<GlosaPolyline>, IHash<GlosaPolyline>, IEquals<GlosaPolyline>, IString<GlosaPolyline>,
+        ITransform<GlosaPolyline>
     {
         #region C Reference Procs
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
@@ -152,25 +153,44 @@ namespace Glosa.Net.Core.Geometry
         public GlosaLineSegment[] segments;
         public bool closed;
 
-        public GlosaPolyline()
-        {
-        }
+        private int dimension;
+
+        public GlosaPolyline(){}
 
         public GlosaPolyline(IVector[] verts, bool closed)
         {
             this.vertices = verts;
             this.closed = closed;
+            this.dimension = verts[0].Dimension();
             GenerateSegmentsFromVertices(verts);
         }
 
         public GlosaPolyline(GlosaLineSegment[] segments)
         {
             this.segments = segments;
+            this.dimension = segments[0].startVertex.Dimension();
             GenerateVerticesFromSegments(segments);
         }
 
-        public GlosaLineSegment[] GetSegments { get { return segments; } set { segments = value; } }
-        public IVector[] GetVertices { get { return vertices; } set { vertices = value; } }
+        public IVector[] GetVertices()
+        {
+            return this.vertices;
+        }
+
+        public void SetVertices(IVector[] verts)
+        {
+            this.vertices = verts;
+        }
+
+        public GlosaLineSegment[] GetSegments()
+        {
+            return this.segments;
+        }
+
+        public void SetSegments(GlosaLineSegment[] segs)
+        {
+            this.segments = segs;
+        }
 
         private void GenerateVerticesFromSegments(GlosaLineSegment[] segments)
         {
@@ -360,6 +380,76 @@ namespace Glosa.Net.Core.Geometry
                 count++;
             }
             return gls;
+        }
+
+        public GlosaPolyline Copy()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Dimension()
+        {
+            return this.dimension;
+        }
+
+        public int Hash()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Equals(GlosaPolyline other)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string Stringify()
+        {
+            throw new NotImplementedException();
+        }
+
+        public GlosaPolyline ScaleNew(double s)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ScaleSelf(double s)
+        {
+            throw new NotImplementedException();
+        }
+
+        public GlosaPolyline ScaleNew(double sx, double sy, double sz, double sw)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ScaleSelf(double sx, double sy, double sz, double sw)
+        {
+            throw new NotImplementedException();
+        }
+
+        public GlosaPolyline RotateNew(float theta, int component)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RotateSelf(float theta, int component)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Translate(GlosaPolyline vector)
+        {
+            throw new NotImplementedException();
+        }
+
+        public GlosaPolyline TransformNew(IMatrixes matrix)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void TransformSelf(IMatrixes matrix)
+        {
+            throw new NotImplementedException();
         }
     }
 }
