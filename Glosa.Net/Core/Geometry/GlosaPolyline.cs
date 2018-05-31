@@ -16,137 +16,137 @@ namespace Glosa.Net.Core.Geometry
     {
         #region C Reference Procs
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool areClosed_v2_segment(string s);
+        private static extern bool areClosed_v2_segment(string s);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool areClosed_v3_segment(string s);
+        private static extern bool areClosed_v3_segment(string s);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool areClosed_v4_segment(string s);
+        private static extern bool areClosed_v4_segment(string s);
 
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool areClosed_v2_vertices(string s);
+        private static extern bool areClosed_v2_vertices(string s);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool areClosed_v3_vertices(string s);
+        private static extern bool areClosed_v3_vertices(string s);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool areClosed_v4_vertices(string s);
+        private static extern bool areClosed_v4_vertices(string s);
 
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool isClosed_v2_polyline(string s);
+        private static extern bool isClosed_v2_polyline(string s);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool isClosed_v3_polyline(string s);
+        private static extern bool isClosed_v3_polyline(string s);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool isClosed_v4_polyline(string s);
+        private static extern bool isClosed_v4_polyline(string s);
 
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr reverse_v2_polyline(string s);
+        private static extern IntPtr reverse_v2_polyline(string s);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr reverse_v3_polyline(string s);
+        private static extern IntPtr reverse_v3_polyline(string s);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr reverse_v4_polyline(string s);
+        private static extern IntPtr reverse_v4_polyline(string s);
 
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool contains_v2_polyline(string s, GlosaVector2 v);
+        private static extern bool contains_v2_polyline(string s, GlosaVector2 v);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool contains_v3_polyline(string s, GlosaVector3 v);
+        private static extern bool contains_v3_polyline(string s, GlosaVector3 v);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool contains_v4_polyline(string s, GlosaVector4 v);
+        private static extern bool contains_v4_polyline(string s, GlosaVector4 v);
 
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool containsPoint_v2_polyline(string s, GlosaVector2 v);
+        private static extern bool containsPoint_v2_polyline(string s, GlosaVector2 v);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool containsPoint_v3_polyline(string s, GlosaVector3 v);
+        private static extern bool containsPoint_v3_polyline(string s, GlosaVector3 v);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool containsPoint_v4_polyline(string s, GlosaVector4 v);
+        private static extern bool containsPoint_v4_polyline(string s, GlosaVector4 v);
 
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool equals_v2_polyline(string s1, string s2);
+        private static extern bool equals_v2_polyline(string s1, string s2);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool equals_v3_polyline(string s1, string s2);
+        private static extern bool equals_v3_polyline(string s1, string s2);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool equals_v4_polyline(string s1, string s2);
+        private static extern bool equals_v4_polyline(string s1, string s2);
 
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int hash_v2_polyline(string s);
+        private static extern int hash_v2_polyline(string s);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int hash_v3_polyline(string s);
+        private static extern int hash_v3_polyline(string s);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int hash_v4_polyline(string s);
+        private static extern int hash_v4_polyline(string s);
 
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int dimension_v2_polyline(string s);
+        private static extern int dimension_v2_polyline(string s);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int dimension_v3_polyline(string s);
+        private static extern int dimension_v3_polyline(string s);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int dimension_v4_polyline(string s);
+        private static extern int dimension_v4_polyline(string s);
 
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr copy_v2_polyline(string s);
+        private static extern IntPtr copy_v2_polyline(string s);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr copy_v3_polyline(string s);
+        private static extern IntPtr copy_v3_polyline(string s);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr copy_v4_polyline(string s);
+        private static extern IntPtr copy_v4_polyline(string s);
 
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr stringify_v2_polyline(string s);
+        private static extern IntPtr stringify_v2_polyline(string s);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr stringify_v3_polyline(string s);
+        private static extern IntPtr stringify_v3_polyline(string s);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr stringify_v4_polyline(string s);
+        private static extern IntPtr stringify_v4_polyline(string s);
 
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern GlosaVector2 average_v2_polyline(string s);
+        private static extern GlosaVector2 average_v2_polyline(string s);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern GlosaVector3 average_v3_polyline(string s);
+        private static extern GlosaVector3 average_v3_polyline(string s);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern GlosaVector4 average_v4_polyline(string s);
+        private static extern GlosaVector4 average_v4_polyline(string s);
 
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern GlosaVector2 closestVertex_v2_polyline(string s, GlosaVector2 v);
+        private static extern GlosaVector2 closestVertex_v2_polyline(string s, GlosaVector2 v);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern GlosaVector3 closestVertex_v3_polyline(string s, GlosaVector3 v);
+        private static extern GlosaVector3 closestVertex_v3_polyline(string s, GlosaVector3 v);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern GlosaVector4 closestVertex_v4_polyline(string s, GlosaVector4 v);
+        private static extern GlosaVector4 closestVertex_v4_polyline(string s, GlosaVector4 v);
 
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr toPolygon_v2_polyline(string s);
+        private static extern IntPtr toPolygon_v2_polyline(string s);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr toPolygon_v3_polyline(string s);
+        private static extern IntPtr toPolygon_v3_polyline(string s);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr toPolygon_v4_polyline(string s);
+        private static extern IntPtr toPolygon_v4_polyline(string s);
 
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern GlosaVector2 closestPoint_v2_polyline(string s, GlosaVector2 v);
+        private static extern GlosaVector2 closestPoint_v2_polyline(string s, GlosaVector2 v);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern GlosaVector3 closestPoint_v3_polyline(string s, GlosaVector3 v);
+        private static extern GlosaVector3 closestPoint_v3_polyline(string s, GlosaVector3 v);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern GlosaVector4 closestPoint_v4_polyline(string s, GlosaVector4 v);
+        private static extern GlosaVector4 closestPoint_v4_polyline(string s, GlosaVector4 v);
 
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr rotate_v2_polyline(string s, double theta);
+        private static extern IntPtr rotate_v2_polyline(string s, double theta);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr rotate_v3_polyline(string s, GlosaVector3 axis, double theta);
+        private static extern IntPtr rotate_v3_polyline(string s, GlosaVector3 axis, double theta);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr rotate_v4_polyline(string s, GlosaVector4 b1, GlosaVector4 b2, double theta, GlosaVector4 b3, GlosaVector4 b4, double phi);
+        private static extern IntPtr rotate_v4_polyline(string s, GlosaVector4 b1, GlosaVector4 b2, double theta, GlosaVector4 b3, GlosaVector4 b4, double phi);
 
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr scale_v2_polyline(string s, double sx, double sy);
+        private static extern IntPtr scale_v2_polyline(string s, double sx, double sy);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr scale_v3_polyline(string s, double sx, double sy, double sz);
+        private static extern IntPtr scale_v3_polyline(string s, double sx, double sy, double sz);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr scale_v4_polyline(string s, double sx, double sy, double sw);
+        private static extern IntPtr scale_v4_polyline(string s, double sx, double sy, double sw);
 
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr translate_v2_polyline(string s, GlosaVector2 v);
+        private static extern IntPtr translate_v2_polyline(string s, GlosaVector2 v);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr translate_v3_polyline(string s, GlosaVector3 v);
+        private static extern IntPtr translate_v3_polyline(string s, GlosaVector3 v);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr translate_v4_polyline(string s, GlosaVector4 v);
+        private static extern IntPtr translate_v4_polyline(string s, GlosaVector4 v);
 
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr transform_v2_polyline(string s, GlosaMatrix33 m);
+        private static extern IntPtr transform_v2_polyline(string s, GlosaMatrix33 m);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr transform_v3_polyline(string s, GlosaMatrix44 m);
+        private static extern IntPtr transform_v3_polyline(string s, GlosaMatrix44 m);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr transform_v4_polyline(string s, GlosaMatrix44 m);
+        private static extern IntPtr transform_v4_polyline(string s, GlosaMatrix44 m);
         #endregion
 
         public IVector[] vertices;
