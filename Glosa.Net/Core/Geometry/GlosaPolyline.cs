@@ -462,6 +462,65 @@ namespace Glosa.Net.Core.Geometry
             }
         }
 
+        public bool ContainsVertex(IVector vector)
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Polyline cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    if (vector.GetType() != typeof(GlosaVector2))
+                    {
+                        throw new System.ArgumentException("This Polyline is made up of GlosaVector2's, please pass a GlosaVector2 to test", "vector");
+                    }
+                    return contains_v2_polyline(this.Serialize(), (GlosaVector2)vector);
+                case 3:
+                    if(vector.GetType() != typeof(GlosaVector3)) {
+                        throw new System.ArgumentException("This Polyline is made up of GlosaVector3's, please pass a GlosaVector3 to test", "vector");
+                    }
+                    return contains_v3_polyline(this.Serialize(), (GlosaVector3)vector);
+                case 4:
+                    if (vector.GetType() != typeof(GlosaVector4))
+                    {
+                        throw new System.ArgumentException("This Polyline is made up of GlosaVector4's, please pass a GlosaVector4 to test", "vector");
+                    }
+                    return contains_v4_polyline(this.Serialize(), (GlosaVector4)vector);
+                default: throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+            }
+        }
+
+        public bool ContainsPoint(IVector vector)
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Polyline cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    if (vector.GetType() != typeof(GlosaVector2))
+                    {
+                        throw new System.ArgumentException("This Polyline is made up of GlosaVector2's, please pass a GlosaVector2 to test", "vector");
+                    }
+                    return containsPoint_v2_polyline(this.Serialize(), (GlosaVector2)vector);
+                case 3:
+                    if (vector.GetType() != typeof(GlosaVector3))
+                    {
+                        throw new System.ArgumentException("This Polyline is made up of GlosaVector3's, please pass a GlosaVector3 to test", "vector");
+                    }
+                    return containsPoint_v3_polyline(this.Serialize(), (GlosaVector3)vector);
+                case 4:
+                    if (vector.GetType() != typeof(GlosaVector4))
+                    {
+                        throw new System.ArgumentException("This Polyline is made up of GlosaVector4's, please pass a GlosaVector4 to test", "vector");
+                    }
+                    return containsPoint_v4_polyline(this.Serialize(), (GlosaVector4)vector);
+                default: throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+            }
+        }
+
         public GlosaPolyline Copy()
         {
             throw new NotImplementedException();
