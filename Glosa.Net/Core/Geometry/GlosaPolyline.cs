@@ -637,7 +637,6 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>True if components of the two GlosaPolyline are pairwise equal; otherwise false.</returns>
         public static bool operator ==(GlosaPolyline a, GlosaPolyline b)
         {
-
             switch (a.dimension)
             {
                 case 0:
@@ -665,12 +664,25 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>True if any component of the two GlosaPolyline is pairwise different; otherwise false.</returns>
         public static bool operator !=(GlosaPolyline a, GlosaPolyline b)
         {
-            return notEqual_v3(a, b);
+            return !(a == b);
         }
 
-        public GlosaPolyline Copy()
+        public int Hash()
         {
-            throw new NotImplementedException();
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Polyline cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    return hash_v2_polyline(this.Serialize());
+                case 3:
+                    return hash_v3_polyline(this.Serialize());
+                case 4:
+                    return hash_v4_polyline(this.Serialize());
+                default: throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+            }
         }
 
         public int Dimension()
@@ -678,9 +690,46 @@ namespace Glosa.Net.Core.Geometry
             return this.dimension;
         }
 
-        public int Hash()
+        public GlosaPolyline Copy()
         {
-            throw new NotImplementedException();
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Polyline cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    IntPtr pStr = copy_v2_polyline(this.Serialize());
+                    return DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                case 3:
+                    pStr = copy_v3_polyline(this.Serialize());
+                    return DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                case 4:
+                    pStr = copy_v4_polyline(this.Serialize());
+                    return DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                default: throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+            }
+        }
+
+        public static GlosaPolyline Copy(GlosaPolyline p)
+        {
+            switch (p.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Polyline cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    IntPtr pStr = copy_v2_polyline(p.Serialize());
+                    return DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                case 3:
+                    pStr = copy_v3_polyline(p.Serialize());
+                    return DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                case 4:
+                    pStr = copy_v4_polyline(p.Serialize());
+                    return DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                default: throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+            }
         }
 
         public string Stringify()
