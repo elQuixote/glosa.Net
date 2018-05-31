@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Core\Geometry\GlosaLineSegment.cs" />
     <Compile Include="Core\Geometry\GlosaMatrix44.cs" />
+    <Compile Include="Core\Geometry\GlosaPolygon.cs" />
     <Compile Include="Core\Geometry\GlosaPolyline.cs" />
     <Compile Include="Core\Geometry\GlosaQuaternion.cs" />
     <Compile Include="Core\Geometry\GlosaVector2.cs" />
