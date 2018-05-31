@@ -930,9 +930,9 @@ namespace Glosa.Net.Core.Geometry
             else { throw new System.ArgumentException("Component value must be between 0 and 2 representing x, y, z"); }
         }
 
-        public void Translate(GlosaVector3 vector)
+        public void Translate(IVector vector)
         {
-            this = translate_v3(this, vector);
+            this = translate_v3(this, (GlosaVector3)vector);
         }
 
         public GlosaVector3 TransformNew(IMatrixes matrix)

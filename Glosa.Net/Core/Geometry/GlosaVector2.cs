@@ -864,9 +864,9 @@ namespace Glosa.Net.Core.Geometry
             this = rotateSelf_v2(this, theta); 
         }
 
-        public void Translate(GlosaVector2 vector)
+        public void Translate(IVector vector)
         {
-            this = translate_v2(this, vector);
+            this = translate_v2(this, (GlosaVector2)vector);
         }
 
         public GlosaVector2 TransformNew(IMatrixes matrix)

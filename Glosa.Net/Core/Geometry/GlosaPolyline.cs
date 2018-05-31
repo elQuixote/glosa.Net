@@ -11,6 +11,9 @@ using Glosa.Net.Core.Helpers.Json;
 
 namespace Glosa.Net.Core.Geometry
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class GlosaPolyline : GlosaObject, ICopy<GlosaPolyline>, IDimension<GlosaPolyline>, IHash<GlosaPolyline>, IEquals<GlosaPolyline>, IString<GlosaPolyline>,
         ITransform<GlosaPolyline>, IClosest<GlosaPolyline>, IVertices<GlosaPolyline>
     {
@@ -297,12 +300,9 @@ namespace Glosa.Net.Core.Geometry
         public static GlosaPolyline DeserializeFromVertexData(string data)
         {
             List<string> dataList = Utilities.parseData(data, "vertices.*");
-            int number = dataList.Count;
             List<string> dataX2 = Utilities.parseData(data, "vertices.*.*");
-            int totalNumber = dataX2.Count;
-            int componentValue = totalNumber / number;
             List<string> dataClosed = Utilities.parseData(data, "closed");          
-            return new GlosaPolyline(ParseVertices(data, componentValue).ToArray(), Convert.ToBoolean(dataClosed[0]));
+            return new GlosaPolyline(ParseVertices(data, (dataX2.Count / dataList.Count)).ToArray(), Convert.ToBoolean(dataClosed[0]));
         }
         
         /// <summary>
@@ -313,11 +313,8 @@ namespace Glosa.Net.Core.Geometry
         public static GlosaPolyline DeserializeFromSegmentData(string data)
         {
             List<string> dataList = Utilities.parseData(data, "vertices.*");
-            int number = dataList.Count;
             List<string> dataX2 = Utilities.parseData(data, "vertices.*.*");
-            int totalNumber = dataX2.Count;
-            int componentValue = totalNumber / number;
-            return new GlosaPolyline(ParseSegments(data, componentValue).ToArray());
+            return new GlosaPolyline(ParseSegments(data, (dataX2.Count / dataList.Count)).ToArray());
         }
 
         /// <summary>
@@ -332,9 +329,9 @@ namespace Glosa.Net.Core.Geometry
             switch (type)
             {
                 case 0:
-                    break;
+                    throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
                 case 1:
-                    break;
+                    throw new System.ArgumentException("Polyline cannot have GlosaVectors of dimension 1", "dimension");
                 case 2:
                     vertList.Add(Utilities.parseData(data, "vertices.*.x"));
                     vertList.Add(Utilities.parseData(data, "vertices.*.y"));
@@ -358,9 +355,9 @@ namespace Glosa.Net.Core.Geometry
                 switch (type)
                 {
                     case 0:
-                        break;
+                        throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
                     case 1:
-                        break;
+                        throw new System.ArgumentException("Polyline cannot have GlosaVectors of dimension 1", "dimension");
                     case 2:
                         gverts.Add(new GlosaVector2(Convert.ToDouble(str), Convert.ToDouble(vertList[1][count])));
                         break;
@@ -389,9 +386,9 @@ namespace Glosa.Net.Core.Geometry
             switch (type)
             {
                 case 0:
-                    break;
+                    throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
                 case 1:
-                    break;
+                    throw new System.ArgumentException("Polyline cannot have GlosaVectors of dimension 1", "dimension");
                 case 2:
                     spList.Add(Utilities.parseData(data, "segments.*.startVertex.x"));
                     spList.Add(Utilities.parseData(data, "segments.*.startVertex.y"));
@@ -426,9 +423,9 @@ namespace Glosa.Net.Core.Geometry
                 switch (type)
                 {
                     case 0:
-                        break;
+                        throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
                     case 1:
-                        break;
+                        throw new System.ArgumentException("Polyline cannot have GlosaVectors of dimension 1", "dimension");
                     case 2:
                         gvs = new GlosaVector2(Convert.ToDouble(str), Convert.ToDouble(spList[1][count]));
                         gvs2 = new GlosaVector2(Convert.ToDouble(epList[0][count]), Convert.ToDouble(epList[1][count]));
