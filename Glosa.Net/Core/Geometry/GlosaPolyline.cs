@@ -132,7 +132,7 @@ namespace Glosa.Net.Core.Geometry
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
         private static extern IntPtr scale_v3_polyline(string s, double sx, double sy, double sz);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
-        private static extern IntPtr scale_v4_polyline(string s, double sx, double sy, double sw);
+        private static extern IntPtr scale_v4_polyline(string s, double sx, double sy, double sz, double sw);
 
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
         private static extern IntPtr translate_v2_polyline(string s, GlosaVector2 v);
@@ -667,6 +667,10 @@ namespace Glosa.Net.Core.Geometry
             return !(a == b);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public int Hash()
         {
             switch (this.dimension)
@@ -685,11 +689,19 @@ namespace Glosa.Net.Core.Geometry
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public int Dimension()
         {
             return this.dimension;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public GlosaPolyline Copy()
         {
             switch (this.dimension)
@@ -711,6 +723,11 @@ namespace Glosa.Net.Core.Geometry
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
         public static GlosaPolyline Copy(GlosaPolyline p)
         {
             switch (p.dimension)
@@ -732,69 +749,573 @@ namespace Glosa.Net.Core.Geometry
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public string Stringify()
         {
-            throw new NotImplementedException();
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Polyline cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    IntPtr pStr = stringify_v2_polyline(this.Serialize());
+                    return Marshal.PtrToStringAnsi(pStr);
+                case 3:
+                    pStr = stringify_v3_polyline(this.Serialize());
+                    return Marshal.PtrToStringAnsi(pStr);
+                case 4:
+                    pStr = stringify_v4_polyline(this.Serialize());
+                    return Marshal.PtrToStringAnsi(pStr);
+                default: throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+            }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
         public GlosaPolyline ScaleNew(double s)
         {
-            throw new NotImplementedException();
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Polyline cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    IntPtr pStr = scale_v2_polyline(this.Serialize(), s, s);
+                    return DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                case 3:
+                    pStr = scale_v3_polyline(this.Serialize(), s, s, s);
+                    return DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                case 4:
+                    pStr = scale_v4_polyline(this.Serialize(), s, s, s, s);
+                    return DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                default: throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+            }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="s"></param>
         public void ScaleSelf(double s)
         {
-            throw new NotImplementedException();
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Polyline cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    IntPtr pStr = scale_v2_polyline(this.Serialize(), s, s);
+                    GlosaPolyline p = DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                    this.vertices = p.vertices;
+                    this.segments = p.segments;
+                    break;
+                case 3:
+                    pStr = scale_v3_polyline(this.Serialize(), s, s, s);
+                    p = DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                    this.vertices = p.vertices;
+                    this.segments = p.segments;
+                    break;
+                case 4:
+                    pStr = scale_v4_polyline(this.Serialize(), s, s, s, s);
+                    p = DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                    this.vertices = p.vertices;
+                    this.segments = p.segments;
+                    break;
+            }
         }
 
-        public GlosaPolyline ScaleNew(double sx, double sy, double sz, double sw)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sx"></param>
+        /// <param name="sy"></param>
+        /// <param name="sz"></param>
+        /// <param name="sw"></param>
+        /// <returns></returns>
+        public GlosaPolyline ScaleNew(double sx, double sy, double sz = 0, double sw = 0)
         {
-            throw new NotImplementedException();
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Polyline cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    IntPtr pStr = scale_v2_polyline(this.Serialize(), sx, sy);
+                    return DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                case 3:
+                    pStr = scale_v3_polyline(this.Serialize(), sx, sy, sz);
+                    return DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                case 4:
+                    pStr = scale_v4_polyline(this.Serialize(), sx, sy, sz, sw);
+                    return DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                default: throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+            }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sx"></param>
+        /// <param name="sy"></param>
+        /// <param name="sz"></param>
+        /// <param name="sw"></param>
         public void ScaleSelf(double sx, double sy, double sz, double sw)
         {
-            throw new NotImplementedException();
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Polyline cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    IntPtr pStr = scale_v2_polyline(this.Serialize(), sx, sy);
+                    GlosaPolyline p = DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                    this.vertices = p.vertices;
+                    this.segments = p.segments;
+                    break;
+                case 3:
+                    pStr = scale_v3_polyline(this.Serialize(), sx, sy, sz);
+                    p = DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                    this.vertices = p.vertices;
+                    this.segments = p.segments;
+                    break;
+                case 4:
+                    pStr = scale_v4_polyline(this.Serialize(), sx, sy, sz, sw);
+                    p = DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                    this.vertices = p.vertices;
+                    this.segments = p.segments;
+                    break;
+            }
         }
 
-        public GlosaPolyline RotateNew(float theta, int component)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="theta"></param>
+        /// <param name="component"></param>
+        /// <returns></returns>
+        public GlosaPolyline RotateNew(float theta, int component = 0)
         {
-            throw new NotImplementedException();
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Polyline cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    IntPtr pStr = rotate_v2_polyline(this.Serialize(), theta);
+                    return DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                case 3:
+                    throw new System.ArgumentException("Rotate new only works on polylines are made up of GlosaVector2, please use RotateAxis methods", "dimension");
+                case 4:
+                    throw new System.ArgumentException("Rotate new only works on polylines are made up of GlosaVector2, please use RotateAxis methods", "dimension");
+                default: throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+            }
         }
 
-        public void RotateSelf(float theta, int component)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="theta"></param>
+        /// <param name="component"></param>
+        public void RotateSelf(float theta, int component = 0)
         {
-            throw new NotImplementedException();
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Polyline cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    IntPtr pStr = rotate_v2_polyline(this.Serialize(), theta);
+                    GlosaPolyline p = DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                    this.vertices = p.vertices;
+                    this.segments = p.segments;
+                    break;
+                case 3:
+                    throw new System.ArgumentException("Rotate new only works on polylines are made up of GlosaVector2, please use RotateAxis methods", "dimension");
+                case 4:
+                    throw new System.ArgumentException("Rotate new only works on polylines are made up of GlosaVector2, please use RotateAxis methods", "dimension");
+                default: throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+            }
         }
-
-        public void Translate(GlosaPolyline vector)
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="axis"></param>
+        /// <param name="theta"></param>
+        /// <returns></returns>
+        public GlosaPolyline RotateAxis(GlosaVector3 axis, float theta)
         {
-            throw new NotImplementedException();
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Polyline cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    throw new System.ArgumentException("Rotate new only works on polylines are made up of GlosaVector3, please use Rotate methods", "dimension");
+                case 3:
+                    IntPtr pStr = rotate_v3_polyline(this.Serialize(), axis, theta);
+                    return DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                case 4:
+                    throw new System.ArgumentException("Rotate new only works on polylines are made up of GlosaVector3, please use overloaded RotateAxis method", "dimension");
+                default: throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+            }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="axis"></param>
+        /// <param name="theta"></param>
+        public void RotateAxisSelf(GlosaVector3 axis, float theta)
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Polyline cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    throw new System.ArgumentException("Rotate new only works on polylines are made up of GlosaVector3, please use Rotate methods", "dimension");
+                case 3:
+                    IntPtr pStr = rotate_v3_polyline(this.Serialize(), axis, theta);
+                    GlosaPolyline p = DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                    this.vertices = p.vertices;
+                    this.segments = p.segments;
+                    break;
+                case 4:
+                    throw new System.ArgumentException("Rotate new only works on polylines are made up of GlosaVector3, please use overloaded RotateAxis method", "dimension");
+                default: throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="b1"></param>
+        /// <param name="b2"></param>
+        /// <param name="theta"></param>
+        /// <param name="b3"></param>
+        /// <param name="b4"></param>
+        /// <param name="phi"></param>
+        /// <returns></returns>
+        public GlosaPolyline RotateAxis(GlosaVector4 b1, GlosaVector4 b2, float theta, GlosaVector4 b3, GlosaVector4 b4, float phi)
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Polyline cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    throw new System.ArgumentException("Rotate new only works on polylines are made up of GlosaVector4, please use Rotate methods", "dimension");
+                case 3:
+                    throw new System.ArgumentException("Rotate new only works on polylines are made up of GlosaVector4, please use overloaded RotateAxis method", "dimension");
+                case 4:
+                    IntPtr pStr = rotate_v4_polyline(this.Serialize(), b1, b2, theta, b3, b4, phi);
+                    return DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                default: throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="b1"></param>
+        /// <param name="b2"></param>
+        /// <param name="theta"></param>
+        /// <param name="b3"></param>
+        /// <param name="b4"></param>
+        /// <param name="phi"></param>
+        public void RotateAxisSelf(GlosaVector4 b1, GlosaVector4 b2, float theta, GlosaVector4 b3, GlosaVector4 b4, float phi)
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Polyline cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    throw new System.ArgumentException("Rotate new only works on polylines are made up of GlosaVector3, please use Rotate methods", "dimension");
+                case 3:
+                    throw new System.ArgumentException("Rotate new only works on polylines are made up of GlosaVector3, please use overloaded RotateAxis method", "dimension");
+                case 4:
+                    IntPtr pStr = rotate_v4_polyline(this.Serialize(), b1, b2, theta, b3, b4, phi);
+                    GlosaPolyline p = DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                    this.vertices = p.vertices;
+                    this.segments = p.segments;
+                    break;
+                default: throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public IVector Average()
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Polyline cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    return average_v2_polyline(this.Serialize());
+                case 3:
+                    return average_v3_polyline(this.Serialize());
+                case 4:
+                    return average_v4_polyline(this.Serialize());
+                default: throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
+        public static IVector Average(GlosaPolyline p)
+        {
+            switch (p.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Polyline cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    return average_v2_polyline(p.Serialize());
+                case 3:
+                    return average_v3_polyline(p.Serialize());
+                case 4:
+                    return average_v4_polyline(p.Serialize());
+                default: throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vector"></param>
+        public void Translate(IVector vector)
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Polyline cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    if (vector.GetType() != typeof(GlosaVector2))
+                    {
+                        throw new System.ArgumentException("This Polyline is made up of GlosaVector2's, please pass a GlosaVector2 to test", "vector");
+                    }
+                    IntPtr pStr = translate_v2_polyline(this.Serialize(), (GlosaVector2)vector);
+                    GlosaPolyline p = DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                    this.vertices = p.vertices;
+                    this.segments = p.segments;
+                    break;
+                case 3:
+                    if (vector.GetType() != typeof(GlosaVector3))
+                    {
+                        throw new System.ArgumentException("This Polyline is made up of GlosaVector3's, please pass a GlosaVector3 to test", "vector");
+                    }
+                    pStr = translate_v3_polyline(this.Serialize(), (GlosaVector3)vector);
+                    p = DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                    this.vertices = p.vertices;
+                    this.segments = p.segments;
+                    break;
+                case 4:
+                    if (vector.GetType() != typeof(GlosaVector4))
+                    {
+                        throw new System.ArgumentException("This Polyline is made up of GlosaVector4's, please pass a GlosaVector4 to test", "vector");
+                    }
+                    pStr = translate_v4_polyline(this.Serialize(), (GlosaVector4)vector);
+                    p = DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                    this.vertices = p.vertices;
+                    this.segments = p.segments;
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
         public GlosaPolyline TransformNew(IMatrixes matrix)
         {
-            throw new NotImplementedException();
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Polyline cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    if (matrix.GetType() != typeof(GlosaMatrix33))
+                    {
+                        throw new System.ArgumentException("This Polyline is made up of GlosaVector2's, please pass a GlosaMatrix33 to use for transforms", "vector");
+                    }
+                    IntPtr pStr = transform_v2_polyline(this.Serialize(), (GlosaMatrix33)matrix);
+                    return DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                case 3:
+                    if (matrix.GetType() != typeof(GlosaMatrix44))
+                    {
+                        throw new System.ArgumentException("This Polyline is made up of GlosaVector3's, please pass a GlosaMatrix44 to use for transforms", "vector");
+                    }
+                    pStr = transform_v3_polyline(this.Serialize(), (GlosaMatrix44)matrix);
+                    return DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                case 4:
+                    if (matrix.GetType() != typeof(GlosaMatrix44))
+                    {
+                        throw new System.ArgumentException("This Polyline is made up of GlosaVector4's, please pass a GlosaMatrix44 to use for transforms", "vector");
+                    }
+                    pStr = transform_v4_polyline(this.Serialize(), (GlosaMatrix44)matrix);
+                    return DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                default: throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+            }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
         public void TransformSelf(IMatrixes matrix)
         {
-            throw new NotImplementedException();
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Polyline cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    if (matrix.GetType() != typeof(GlosaMatrix33))
+                    {
+                        throw new System.ArgumentException("This Polyline is made up of GlosaVector2's, please pass a GlosaMatrix33 to use for transforms", "vector");
+                    }
+                    IntPtr pStr = transform_v2_polyline(this.Serialize(), (GlosaMatrix33)matrix);
+                    GlosaPolyline p = DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                    this.vertices = p.vertices;
+                    this.segments = p.segments;
+                    break;
+                case 3:
+                    if (matrix.GetType() != typeof(GlosaMatrix44))
+                    {
+                        throw new System.ArgumentException("This Polyline is made up of GlosaVector3's, please pass a GlosaMatrix44 to use for transforms", "vector");
+                    }
+                    pStr = transform_v3_polyline(this.Serialize(), (GlosaMatrix44)matrix);
+                    p = DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                    this.vertices = p.vertices;
+                    this.segments = p.segments;
+                    break;
+                case 4:
+                    if (matrix.GetType() != typeof(GlosaMatrix44))
+                    {
+                        throw new System.ArgumentException("This Polyline is made up of GlosaVector4's, please pass a GlosaMatrix44 to use for transforms", "vector");
+                    }
+                    pStr = transform_v4_polyline(this.Serialize(), (GlosaMatrix44)matrix);
+                    p = DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                    this.vertices = p.vertices;
+                    this.segments = p.segments;
+                    break;
+            }
         }
 
-        public IVector ClosestPoint(IVector v)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vector"></param>
+        /// <returns></returns>
+        public IVector ClosestPoint(IVector vector)
         {
-            throw new NotImplementedException();
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Polyline cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    if (vector.GetType() != typeof(GlosaVector2))
+                    {
+                        throw new System.ArgumentException("This Polyline is made up of GlosaVector2's, please pass a GlosaVector2 to test", "vector");
+                    }
+                    return closestPoint_v2_polyline(this.Serialize(), (GlosaVector2)vector);
+                case 3:
+                    if (vector.GetType() != typeof(GlosaVector3))
+                    {
+                        throw new System.ArgumentException("This Polyline is made up of GlosaVector3's, please pass a GlosaVector3 to test", "vector");
+                    }
+                    return closestPoint_v3_polyline(this.Serialize(), (GlosaVector3)vector);
+                case 4:
+                    if (vector.GetType() != typeof(GlosaVector4))
+                    {
+                        throw new System.ArgumentException("This Polyline is made up of GlosaVector4's, please pass a GlosaVector4 to test", "vector");
+                    }
+                    return closestPoint_v4_polyline(this.Serialize(), (GlosaVector4)vector);
+                default: throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+            }
         }
 
-        public IVector ClosestVertex(IVector v)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vector"></param>
+        /// <returns></returns>
+        public IVector ClosestVertex(IVector vector)
         {
-            throw new NotImplementedException();
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Polyline cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    if (vector.GetType() != typeof(GlosaVector2))
+                    {
+                        throw new System.ArgumentException("This Polyline is made up of GlosaVector2's, please pass a GlosaVector2 to test", "vector");
+                    }
+                    return closestVertex_v2_polyline(this.Serialize(), (GlosaVector2)vector);
+                case 3:
+                    if (vector.GetType() != typeof(GlosaVector3))
+                    {
+                        throw new System.ArgumentException("This Polyline is made up of GlosaVector3's, please pass a GlosaVector3 to test", "vector");
+                    }
+                    return closestVertex_v3_polyline(this.Serialize(), (GlosaVector3)vector);
+                case 4:
+                    if (vector.GetType() != typeof(GlosaVector4))
+                    {
+                        throw new System.ArgumentException("This Polyline is made up of GlosaVector4's, please pass a GlosaVector4 to test", "vector");
+                    }
+                    return closestVertex_v4_polyline(this.Serialize(), (GlosaVector4)vector);
+                default: throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+            }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public GlosaPolyline ToPolyline(GlosaPolyline obj)
         {
-            throw new NotImplementedException();
+            //seems trivial
+            return obj;
         }
+
+
     }
 }
