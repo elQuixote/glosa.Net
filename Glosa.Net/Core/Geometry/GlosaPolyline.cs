@@ -414,45 +414,52 @@ namespace Glosa.Net.Core.Geometry
 
         public static GlosaPolyline Reverse(GlosaPolyline p)
         {
-            if (p.dimension == 2)
+            switch (p.dimension)
             {
-                IntPtr pStr = reverse_v2_polyline(p.Serialize());
-                return DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                case 0:
+                    throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Polyline cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    IntPtr pStr = reverse_v2_polyline(p.Serialize());
+                    return DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                case 3:
+                    pStr = reverse_v3_polyline(p.Serialize());
+                    return DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                case 4:
+                    pStr = reverse_v4_polyline(p.Serialize());
+                    return DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                default: throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
             }
-            else if (p.dimension == 3)
-            {
-                IntPtr pStr = reverse_v3_polyline(p.Serialize());
-                return DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
-            }
-            else if (p.dimension == 4)
-            {
-                IntPtr pStr = reverse_v4_polyline(p.Serialize());
-                return DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
-            }
-            else { throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension"); }
         }
 
         public void Reverse()
         {
-            if (this.dimension == 2) {
-                IntPtr pStr = reverse_v2_polyline(this.Serialize());
-                GlosaPolyline p = DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
-                this.vertices = p.vertices;
-                this.segments = p.segments;
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Polyline cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    IntPtr pStr = reverse_v2_polyline(this.Serialize());
+                    GlosaPolyline p = DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                    this.vertices = p.vertices;
+                    this.segments = p.segments;
+                    break;
+                case 3:
+                    pStr = reverse_v3_polyline(this.Serialize());
+                    p = DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                    this.vertices = p.vertices;
+                    this.segments = p.segments;
+                    break;
+                case 4:
+                    pStr = reverse_v4_polyline(this.Serialize());
+                    p = DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                    this.vertices = p.vertices;
+                    this.segments = p.segments;
+                    break;
             }
-            else if (this.dimension == 3) {
-                IntPtr pStr = reverse_v3_polyline(this.Serialize());
-                GlosaPolyline p = DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
-                this.vertices = p.vertices;
-                this.segments = p.segments;
-            }
-            else if (this.dimension == 4) {
-                IntPtr pStr = reverse_v4_polyline(this.Serialize());
-                GlosaPolyline p = DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
-                this.vertices = p.vertices;
-                this.segments = p.segments;
-            }
-            else { throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension"); }
         }
 
         public GlosaPolyline Copy()
