@@ -58,6 +58,7 @@
     <Compile Include="Core\Helpers\Json\jsonpath-0.5.1.cs" />
     <Compile Include="Core\Helpers\Json\Utilities.cs" />
     <Compile Include="Core\Interfaces\IClear.cs" />
+    <Compile Include="Core\Interfaces\IClosest.cs" />
     <Compile Include="Core\Interfaces\ICompare.cs" />
     <Compile Include="Core\Interfaces\ICopy.cs" />
     <Compile Include="Core\Interfaces\IDimension.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Core\Interfaces\ITransform.cs" />
     <Compile Include="Core\Interfaces\IVector.cs" />
     <Compile Include="Core\Interfaces\IVectors.cs" />
+    <Compile Include="Core\Interfaces\IVertices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

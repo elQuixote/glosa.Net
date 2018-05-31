@@ -12,7 +12,7 @@ using Glosa.Net.Core.Helpers.Json;
 namespace Glosa.Net.Core.Geometry
 {
     public class GlosaPolyline : GlosaObject, ICopy<GlosaPolyline>, IDimension<GlosaPolyline>, IHash<GlosaPolyline>, IEquals<GlosaPolyline>, IString<GlosaPolyline>,
-        ITransform<GlosaPolyline>
+        ITransform<GlosaPolyline>, IClosest<GlosaPolyline>, IVertices<GlosaPolyline>
     {
         #region C Reference Procs
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
@@ -382,6 +382,79 @@ namespace Glosa.Net.Core.Geometry
             return gls;
         }
 
+        public bool AreSegmentsClosed()
+        {
+            bool closed = false;
+            if(this.dimension == 2) { closed = areClosed_v2_segment(this.Serialize()); }
+            else if(this.dimension == 3) { closed = areClosed_v3_segment(this.Serialize()); }
+            else if(this.dimension == 4) { closed = areClosed_v3_segment(this.Serialize()); }
+            else{ throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension"); }
+            return closed;
+        }
+
+        public bool AreVerticesClosed()
+        {
+            bool closed = false;
+            if (this.dimension == 2) { closed = areClosed_v2_vertices(this.Serialize()); }
+            else if (this.dimension == 3) { closed = areClosed_v3_vertices(this.Serialize()); }
+            else if (this.dimension == 4) { closed = areClosed_v4_vertices(this.Serialize()); }
+            else { throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension"); }
+            return closed;
+        }
+
+        public bool IsClosed()
+        {
+            bool closed = false;
+            if (this.dimension == 2) { closed = isClosed_v2_polyline(this.Serialize()); }
+            else if (this.dimension == 3) { closed = isClosed_v3_polyline(this.Serialize()); }
+            else if (this.dimension == 4) { closed = isClosed_v4_polyline(this.Serialize()); }
+            else { throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension"); }
+            return closed;
+        }
+
+        public static GlosaPolyline Reverse(GlosaPolyline p)
+        {
+            if (p.dimension == 2)
+            {
+                IntPtr pStr = reverse_v2_polyline(p.Serialize());
+                return DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+            }
+            else if (p.dimension == 3)
+            {
+                IntPtr pStr = reverse_v3_polyline(p.Serialize());
+                return DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+            }
+            else if (p.dimension == 4)
+            {
+                IntPtr pStr = reverse_v4_polyline(p.Serialize());
+                return DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+            }
+            else { throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension"); }
+        }
+
+        public void Reverse()
+        {
+            if (this.dimension == 2) {
+                IntPtr pStr = reverse_v2_polyline(this.Serialize());
+                GlosaPolyline p = DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                this.vertices = p.vertices;
+                this.segments = p.segments;
+            }
+            else if (this.dimension == 3) {
+                IntPtr pStr = reverse_v3_polyline(this.Serialize());
+                GlosaPolyline p = DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                this.vertices = p.vertices;
+                this.segments = p.segments;
+            }
+            else if (this.dimension == 4) {
+                IntPtr pStr = reverse_v4_polyline(this.Serialize());
+                GlosaPolyline p = DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+                this.vertices = p.vertices;
+                this.segments = p.segments;
+            }
+            else { throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension"); }
+        }
+
         public GlosaPolyline Copy()
         {
             throw new NotImplementedException();
@@ -448,6 +521,21 @@ namespace Glosa.Net.Core.Geometry
         }
 
         public void TransformSelf(IMatrixes matrix)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IVector ClosestPoint(IVector v)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IVector ClosestVertex(IVector v)
+        {
+            throw new NotImplementedException();
+        }
+
+        public GlosaPolyline ToPolyline(GlosaPolyline obj)
         {
             throw new NotImplementedException();
         }
