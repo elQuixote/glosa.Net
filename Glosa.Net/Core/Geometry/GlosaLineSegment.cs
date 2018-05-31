@@ -13,18 +13,19 @@ namespace Glosa.Net.Core.Geometry
         [DllImport("wrapper_path.dll")]
         private static extern GlosaLineSegment segmentFromVectors(GlosaVector3 v1, GlosaVector3 v2);
 
-        public GlosaVector3 sp, ep;
+        public IVector startVertex, endVertex;
 
         public GlosaLineSegment(IVector startVertex, IVector endVertex)
         {
-            this.sp = (GlosaVector3)startVertex;
-            this.ep = (GlosaVector3)endVertex;
+            this.startVertex = startVertex;
+            this.endVertex = endVertex;
         }
-
+        /*
         public static GlosaLineSegment SegmentFromVectors(IVector startVertex, IVector endVertex)
         {
             return segmentFromVectors((GlosaVector3)startVertex, (GlosaVector3)endVertex);
         }
+        */
         /*
         public static GlosaLineSegment SegmentFromVectors_B(IVector startVertex, IVector endVertex)
         {        

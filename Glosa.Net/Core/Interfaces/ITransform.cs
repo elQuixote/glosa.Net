@@ -16,7 +16,7 @@ namespace Glosa.Net.Core.Interfaces
         void ScaleSelf(double sx, double sy, double sz, double sw);
         T RotateNew(float theta, int component);
         void RotateSelf(float theta, int component);
-        void Translate(T vector);
+        void Translate(IVector vector);
         T TransformNew(IMatrixes matrix);
         void TransformSelf(IMatrixes matrix);
     }

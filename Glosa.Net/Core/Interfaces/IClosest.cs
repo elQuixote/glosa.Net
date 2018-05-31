@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Glosa.Net.Core.Interfaces
 {
-    public interface IVector
+    public interface IClosest<T>
     {
-        int Dimension();
+        IVector ClosestPoint(IVector v);
     }
 }
