@@ -14,18 +14,34 @@ namespace Glosa.Net.Core.Geometry
     public class GlosaPolygon : GlosaObject
     {
 
+        /// <summary>
+        /// 
+        /// </summary>
         public GlosaPolyline polyline;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="verts"></param>
+        /// <param name="closed"></param>
         public GlosaPolygon(IVector[] verts, bool closed = true)
         {
             this.polyline = new GlosaPolyline(verts, closed);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="segments"></param>
         public GlosaPolygon(GlosaLineSegment[] segments)
         {
             this.polyline = new GlosaPolyline(segments);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="polyline"></param>
         public GlosaPolygon(GlosaPolyline polyline)
         {
             this.polyline = polyline;
