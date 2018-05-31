@@ -149,14 +149,32 @@ namespace Glosa.Net.Core.Geometry
         private static extern IntPtr transform_v4_polyline(string s, GlosaMatrix44 m);
         #endregion
 
+        /// <summary>
+        /// 
+        /// </summary>
         public IVector[] vertices;
-        public GlosaLineSegment[] segments;
-        public bool closed;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public GlosaLineSegment[] segments;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool closed;
         private int dimension;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public GlosaPolyline(){}
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="verts"></param>
+        /// <param name="closed"></param>
         public GlosaPolyline(IVector[] verts, bool closed)
         {
             this.vertices = verts;
@@ -165,6 +183,10 @@ namespace Glosa.Net.Core.Geometry
             GenerateSegmentsFromVertices(verts);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="segments"></param>
         public GlosaPolyline(GlosaLineSegment[] segments)
         {
             this.segments = segments;
@@ -172,26 +194,46 @@ namespace Glosa.Net.Core.Geometry
             GenerateVerticesFromSegments(segments);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public IVector[] GetVertices()
         {
             return this.vertices;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="verts"></param>
         public void SetVertices(IVector[] verts)
         {
             this.vertices = verts;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public GlosaLineSegment[] GetSegments()
         {
             return this.segments;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="segs"></param>
         public void SetSegments(GlosaLineSegment[] segs)
         {
             this.segments = segs;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="segments"></param>
         private void GenerateVerticesFromSegments(GlosaLineSegment[] segments)
         {
             if (segments.Length < 1)
@@ -226,6 +268,10 @@ namespace Glosa.Net.Core.Geometry
             this.vertices = IVectorList.ToArray();          
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vertices"></param>
         private void GenerateSegmentsFromVertices(IVector[] vertices)
         {
             this.segments = new GlosaLineSegment[this.vertices.Length];
@@ -243,6 +289,11 @@ namespace Glosa.Net.Core.Geometry
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public static GlosaPolyline DeserializeFromVertexData(string data)
         {
             List<string> dataList = Utilities.parseData(data, "vertices.*");
@@ -253,7 +304,12 @@ namespace Glosa.Net.Core.Geometry
             List<string> dataClosed = Utilities.parseData(data, "closed");          
             return new GlosaPolyline(ParseVertices(data, componentValue).ToArray(), Convert.ToBoolean(dataClosed[0]));
         }
-
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public static GlosaPolyline DeserializeFromSegmentData(string data)
         {
             List<string> dataList = Utilities.parseData(data, "vertices.*");
@@ -264,6 +320,12 @@ namespace Glosa.Net.Core.Geometry
             return new GlosaPolyline(ParseSegments(data, componentValue).ToArray());
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
         private static List<IVector> ParseVertices(string data, int type)
         {
             List<List<string>> vertList = new List<List<string>>();
@@ -314,6 +376,12 @@ namespace Glosa.Net.Core.Geometry
             return gverts;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
         private static List<GlosaLineSegment> ParseSegments(string data, int type)
         {
             List<List<string>> spList = new List<List<string>>();
@@ -382,6 +450,10 @@ namespace Glosa.Net.Core.Geometry
             return gls;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public bool AreSegmentsClosed()
         {
             bool closed = false;
@@ -392,6 +464,10 @@ namespace Glosa.Net.Core.Geometry
             return closed;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public bool AreVerticesClosed()
         {
             bool closed = false;
@@ -402,6 +478,10 @@ namespace Glosa.Net.Core.Geometry
             return closed;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public bool IsClosed()
         {
             bool closed = false;
@@ -412,6 +492,11 @@ namespace Glosa.Net.Core.Geometry
             return closed;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
         public static GlosaPolyline Reverse(GlosaPolyline p)
         {
             switch (p.dimension)
@@ -433,6 +518,9 @@ namespace Glosa.Net.Core.Geometry
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Reverse()
         {
             switch (this.dimension)
@@ -462,6 +550,11 @@ namespace Glosa.Net.Core.Geometry
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vector"></param>
+        /// <returns></returns>
         public bool ContainsVertex(IVector vector)
         {
             switch (this.dimension)
@@ -491,6 +584,11 @@ namespace Glosa.Net.Core.Geometry
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vector"></param>
+        /// <returns></returns>
         public bool ContainsPoint(IVector vector)
         {
             switch (this.dimension)
