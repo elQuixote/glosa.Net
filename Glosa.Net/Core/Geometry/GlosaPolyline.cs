@@ -619,6 +619,55 @@ namespace Glosa.Net.Core.Geometry
             }
         }
 
+        /// <summary>
+        /// Determines whether the specified GlosaPolyline has the same value as the present GlosaPolyline.
+        /// </summary>
+        /// <param name="polyline">The other GlosaPolyline to compare</param>
+        /// <returns>The result</returns>
+        public bool Equals(GlosaPolyline polyline)
+        {
+            return this == polyline;
+        }
+
+        /// <summary>
+        /// Determines whether two GlosaPolyline have equal values.
+        /// </summary>
+        /// <param name="a">The first GlosaPolyline</param>
+        /// <param name="b">The second GlosaPolyline</param>
+        /// <returns>True if components of the two GlosaPolyline are pairwise equal; otherwise false.</returns>
+        public static bool operator ==(GlosaPolyline a, GlosaPolyline b)
+        {
+
+            switch (a.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Polyline cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    if (b.vertices[0].GetType() != typeof(GlosaVector2)) {return false; }
+                    return equals_v2_polyline(a.Serialize(), b.Serialize());
+                case 3:
+                    if (b.vertices[0].GetType() != typeof(GlosaVector3)) { return false; }
+                    return equals_v3_polyline(a.Serialize(), b.Serialize());
+                case 4:
+                    if (b.vertices[0].GetType() != typeof(GlosaVector4)) { return false; }
+                    return equals_v4_polyline(a.Serialize(), b.Serialize());
+                default: throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+            }        
+        }
+
+        /// <summary>
+        /// Determines whether two GlosaPolyline have different values.
+        /// </summary>
+        /// <param name="a">The first GlosaPolyline</param>
+        /// <param name="b">The second GlosaPolyline</param>
+        /// <returns>True if any component of the two GlosaPolyline is pairwise different; otherwise false.</returns>
+        public static bool operator !=(GlosaPolyline a, GlosaPolyline b)
+        {
+            return notEqual_v3(a, b);
+        }
+
         public GlosaPolyline Copy()
         {
             throw new NotImplementedException();
@@ -630,11 +679,6 @@ namespace Glosa.Net.Core.Geometry
         }
 
         public int Hash()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Equals(GlosaPolyline other)
         {
             throw new NotImplementedException();
         }
