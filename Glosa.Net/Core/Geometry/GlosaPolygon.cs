@@ -445,5 +445,74 @@ namespace Glosa.Net.Core.Geometry
                 throw new System.ArgumentException(e.Message.ToString());
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void ContainsVertex(IVector vector)
+        {
+            try
+            {
+                this.polyline.ContainsVertex(vector);
+            }
+            catch (Exception e)
+            {
+                throw new System.ArgumentException(e.Message.ToString());
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void ContainsPoint(IVector vector)
+        {
+            try
+            {
+                this.polyline.ContainsPoint(vector);
+            }
+            catch (Exception e)
+            {
+                throw new System.ArgumentException(e.Message.ToString());
+            }
+        }
+
+        /// <summary>
+        /// Determines whether the specified GlosaPolygon has the same value as the present GlosaPolygon.
+        /// </summary>
+        /// <param name="polygon">The other GlosaPolygon to compare</param>
+        /// <returns>The result</returns>
+        public bool Equals(GlosaPolygon polygon)
+        {
+            return this == polygon;
+        }
+
+        /// <summary>
+        /// Determines whether two GlosaPolygon have equal values.
+        /// </summary>
+        /// <param name="a">The first GlosaPolygon</param>
+        /// <param name="b">The second GlosaPolygon</param>
+        /// <returns>True if components of the two GlosaPolygon are pairwise equal; otherwise false.</returns>
+        public static bool operator ==(GlosaPolygon a, GlosaPolygon b)
+        {
+            try
+            {
+                return a.polyline == b.polyline;
+            }
+            catch (Exception e)
+            {
+                throw new System.ArgumentException(e.Message.ToString());
+            }
+        }
+
+        /// <summary>
+        /// Determines whether two GlosaPolygon have different values.
+        /// </summary>
+        /// <param name="a">The first GlosaPolygon</param>
+        /// <param name="b">The second GlosaPolygon</param>
+        /// <returns>True if any component of the two GlosaPolygon is pairwise different; otherwise false.</returns>
+        public static bool operator !=(GlosaPolygon a, GlosaPolygon b)
+        {
+            return !(a == b);
+        }
     }
 }
