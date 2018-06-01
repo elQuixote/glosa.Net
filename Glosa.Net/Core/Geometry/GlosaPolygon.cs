@@ -727,6 +727,163 @@ namespace Glosa.Net.Core.Geometry
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public GlosaPolygon ScaleNew(double s)
+        {
+            try { return new GlosaPolygon(this.polyline.ScaleNew(s)); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public void ScaleSelf(double s)
+        {
+            try { this.polyline.ScaleNew(s); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sx"></param>
+        /// <param name="sy"></param>
+        /// <param name="sz"></param>
+        /// <param name="sw"></param>
+        /// <returns></returns>
+        public GlosaPolygon ScaleNew(double sx, double sy, double sz = 0, double sw = 0)
+        {
+            try { return new GlosaPolygon(this.polyline.ScaleNew(sx, sy, sz, sw)); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sx"></param>
+        /// <param name="sy"></param>
+        /// <param name="sz"></param>
+        /// <param name="sw"></param>
+        public void ScaleSelf(double sx, double sy, double sz = 0, double sw = 0)
+        {
+            try { this.polyline.ScaleNew(sx, sy, sz, sw); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="theta"></param>
+        /// <param name="component"></param>
+        /// <returns></returns>
+        public GlosaPolygon RotateNew(float theta, int component = 0)
+        {
+            try { return new GlosaPolygon(this.polyline.RotateNew(theta)); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="theta"></param>
+        /// <param name="component"></param>
+        public void RotateSelf(float theta, int component = 0)
+        {
+            try { this.polyline.RotateNew(theta); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="axis"></param>
+        /// <param name="theta"></param>
+        /// <returns></returns>
+        public GlosaPolygon RotateAxis(GlosaVector3 axis, float theta)
+        {
+            try { return new GlosaPolygon(this.polyline.RotateAxis(axis, theta)); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="axis"></param>
+        /// <param name="theta"></param>
+        public void RotateAxisSelf(GlosaVector3 axis, float theta)
+        {
+            try { this.polyline.RotateAxis(axis, theta); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="b1"></param>
+        /// <param name="b2"></param>
+        /// <param name="theta"></param>
+        /// <param name="b3"></param>
+        /// <param name="b4"></param>
+        /// <param name="phi"></param>
+        /// <returns></returns>
+        public GlosaPolygon RotateAxis(GlosaVector4 b1, GlosaVector4 b2, float theta, GlosaVector4 b3, GlosaVector4 b4, float phi)
+        {
+            try { return new GlosaPolygon(this.polyline.RotateAxis(b1, b2, theta, b3, b4, phi)); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="b1"></param>
+        /// <param name="b2"></param>
+        /// <param name="theta"></param>
+        /// <param name="b3"></param>
+        /// <param name="b4"></param>
+        /// <param name="phi"></param>
+        public void RotateAxisSelf(GlosaVector4 b1, GlosaVector4 b2, float theta, GlosaVector4 b3, GlosaVector4 b4, float phi)
+        {
+            try { this.polyline.RotateAxis(b1, b2, theta, b3, b4, phi); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vector"></param>
+        public void Translate(IVector vector)
+        {
+            try { this.polyline.Translate(vector); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
+        public GlosaPolygon TransformNew(IMatrixes matrix)
+        {
+            try { return new GlosaPolygon(this.polyline.TransformNew(matrix)); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        public void TransformSelf(IMatrixes matrix)
+        {
+            try { this.polyline.TransformNew(matrix); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="vector"></param>
         /// <returns></returns>
         public IVector ClosestVertex(IVector vector)
