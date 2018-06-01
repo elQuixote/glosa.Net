@@ -675,5 +675,28 @@ namespace Glosa.Net.Core.Geometry
                 default: throw new System.ArgumentException("Polygon has an unvalid dimension", "dimension");
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public GlosaVector2 Centroid()
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Polygon has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Polygon cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try { return centroid_v2_polygon(this.Serialize()); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    throw new System.ArgumentException("Centroid is currently not enabled for Polygons made up of GlosaVector3s");
+                case 4:
+                    throw new System.ArgumentException("Centroid is currently not enabled for Polygons made up of GlosaVector4s");
+                default: throw new System.ArgumentException("Polygon has an unvalid dimension", "dimension");
+            }
+        }
     }
 }
