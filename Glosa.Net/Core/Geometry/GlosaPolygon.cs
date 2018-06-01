@@ -13,6 +13,150 @@ namespace Glosa.Net.Core.Geometry
 {
     public class GlosaPolygon : GlosaObject
     {
+        #region C Reference Procs
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr reverse_v2_polygon(string s);
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr reverse_v3_polygon(string s);
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr reverse_v4_polygon(string s);
+
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern bool contains_v2_polygon(string s, GlosaVector2 v);
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern bool contains_v3_polygon(string s, GlosaVector3 v);
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern bool contains_v4_polygon(string s, GlosaVector4 v);
+
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern bool containsPoint_v2_polygon(string s, GlosaVector2 v);
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern bool containsPoint_v3_polygon(string s, GlosaVector3 v);
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern bool containsPoint_v4_polygon(string s, GlosaVector4 v);
+
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern bool equals_v2_polygon(string s1, string s2);
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern bool equals_v3_polygon(string s1, string s2);
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern bool equals_v4_polygon(string s1, string s2);
+
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern int hash_v2_polygon(string s);
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern int hash_v3_polygon(string s);
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern int hash_v4_polygon(string s);
+
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern int dimension_v2_polygon(string s);
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern int dimension_v3_polygon(string s);
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern int dimension_v4_polygon(string s);
+
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr copy_v2_polygon(string s);
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr copy_v3_polygon(string s);
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr copy_v4_polygon(string s);
+
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr stringify_v2_polygon(string s);
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr stringify_v3_polygon(string s);
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr stringify_v4_polygon(string s);
+
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern double area_v2_polygon(string s);
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern double area_v3_polygon(string s);
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern double area_v4_polygon(string s);
+
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern double perimeter_v2_polygon(string s);
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern double perimeter_v3_polygon(string s);
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern double perimeter_v4_polygon(string s);
+
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern GlosaVector2 centroid_v2_polygon(string s);
+
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern GlosaVector2 closestVertex_v2_polygon(string s, GlosaVector2 v);
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern GlosaVector3 closestVertex_v3_polygon(string s, GlosaVector3 v);
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern GlosaVector4 closestVertex_v4_polygon(string s, GlosaVector4 v);
+
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr toPolyline_v2_polygon(string s);
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr toPolyline_v3_polygon(string s);
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr toPolyline_v4_polygon(string s);
+
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern GlosaVector2 closestPoint_v2_polygon(string s, GlosaVector2 v);
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern GlosaVector3 closestPoint_v3_polygon(string s, GlosaVector3 v);
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern GlosaVector4 closestPoint_v4_polygon(string s, GlosaVector4 v);
+
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern bool isClockwise_v2_polygon(string s);
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern bool isClockwise_v3_polygon(string s);
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern bool isClockwise_v4_polygon(string s);
+
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr rotate_v2_polygon(string s, double theta);
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr rotate_v3_polygon(string s, GlosaVector3 axis, double theta);
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr rotate_v4_polygon(string s, GlosaVector4 b1, GlosaVector4 b2, double theta, GlosaVector4 b3, GlosaVector4 b4, double phi);
+
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr scale_v2_polygon(string s, double sx, double sy);
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr scale_v3_polygon(string s, double sx, double sy, double sz);
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr scale_v4_polygon(string s, double sx, double sy, double sz, double sw);
+
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr translate_v2_polygon(string s, GlosaVector2 v);
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr translate_v3_polygon(string s, GlosaVector3 v);
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr translate_v4_polygon(string s, GlosaVector4 v);
+
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr transform_v2_polygon(string s, GlosaMatrix33 m);
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr transform_v3_polygon(string s, GlosaMatrix44 m);
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr transform_v4_polygon(string s, GlosaMatrix44 m);
+
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern bool isPlanar_v2_polygon(string s);
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern bool isPlanar_v3_polygon(string s);
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern bool isPlanar_v4_polygon(string s);
+
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern bool isSegmentsClosed_v2_polygon(string s);
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern bool isSegmentsClosed_v3_polygon(string s);
+        [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern bool isSegmentsClosed_v4_polygon(string s);
+        #endregion
 
         /// <summary>
         /// 
@@ -43,7 +187,7 @@ namespace Glosa.Net.Core.Geometry
         /// </summary>
         /// <param name="polyline"></param>
         public GlosaPolygon(GlosaPolyline polyline)
-        {
+        {           
             this.polyline = polyline;
         }
 
