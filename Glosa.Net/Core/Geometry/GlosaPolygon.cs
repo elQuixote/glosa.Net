@@ -144,11 +144,11 @@ namespace Glosa.Net.Core.Geometry
         private static extern IntPtr transform_v4_polygon(string s, GlosaMatrix44 m);
 
         [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
-        private static extern bool isPlanar_v2_polygon(string s);
+        private static extern bool isPlanarVertices_v2_polygon(string s);
         [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
-        private static extern bool isPlanar_v3_polygon(string s);
+        private static extern bool isPlanarVertices_v3_polygon(string s);
         [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
-        private static extern bool isPlanar_v4_polygon(string s);
+        private static extern bool isPlanarVertices_v4_polygon(string s);
 
         [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
         private static extern bool isSegmentsClosed_v2_polygon(string s);
@@ -162,6 +162,7 @@ namespace Glosa.Net.Core.Geometry
         /// 
         /// </summary>
         public GlosaPolyline polyline;
+        private int dimension;
 
         /// <summary>
         /// 
@@ -171,6 +172,8 @@ namespace Glosa.Net.Core.Geometry
         public GlosaPolygon(IVector[] verts, bool closed = true)
         {
             this.polyline = new GlosaPolyline(verts, closed);
+            this.dimension = this.polyline.Dimension();
+            if (!IsPlanar()) { throw new System.ArgumentException("Polygon polyline is not planar", "dimension"); }
         }
 
         /// <summary>
@@ -180,6 +183,9 @@ namespace Glosa.Net.Core.Geometry
         public GlosaPolygon(GlosaLineSegment[] segments)
         {
             this.polyline = new GlosaPolyline(segments);
+            this.dimension = this.polyline.Dimension();
+            if (!IsClosed()) { throw new System.ArgumentException("Polygon polyline is not closed"); }
+            if (!IsPlanar()) { throw new System.ArgumentException("Polygon polyline is not planar", "dimension"); }
         }
 
         /// <summary>
@@ -187,8 +193,61 @@ namespace Glosa.Net.Core.Geometry
         /// </summary>
         /// <param name="polyline"></param>
         public GlosaPolygon(GlosaPolyline polyline)
-        {           
+        {
+            this.dimension = polyline.Dimension();
             this.polyline = polyline;
+            if (!IsClosed()) { throw new System.ArgumentException("Polygon polyline is not closed"); }
+            if (!IsPlanar()) { throw new System.ArgumentException("Polygon polyline is not planar"); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private bool IsPlanar()
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Polygon has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Polygon cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try { return isPlanarVertices_v2_polygon(this.Serialize()); }
+                    catch(Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try { return isPlanarVertices_v3_polygon(this.Serialize()); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    try { return isPlanarVertices_v4_polygon(this.Serialize()); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                default: throw new System.ArgumentException("Polygon has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private bool IsClosed()
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Polygon has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Polygon cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try { return isSegmentsClosed_v2_polygon(this.Serialize()); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try { return isSegmentsClosed_v3_polygon(this.Serialize()); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    try { return isSegmentsClosed_v4_polygon(this.Serialize()); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                default: throw new System.ArgumentException("Polygon has an unvalid dimension", "dimension");
+            }
         }
 
         /// <summary>
@@ -344,6 +403,47 @@ namespace Glosa.Net.Core.Geometry
                 count++;
             }
             return gls;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
+        public static GlosaPolygon Reverse(GlosaPolygon p)
+        {
+            switch (p.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Polygon has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Polygon cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try { IntPtr pStr = reverse_v2_polygon(p.Serialize()); return DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr)); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try { IntPtr pStr = reverse_v3_polygon(p.Serialize()); return DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr)); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    try { IntPtr pStr = reverse_v4_polygon(p.Serialize()); return DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr)); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                default: throw new System.ArgumentException("Polygon has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Reverse()
+        {
+            try
+            {
+                this.polyline.Reverse();
+            }
+            catch(Exception e)
+            {
+                throw new System.ArgumentException(e.Message.ToString());
+            }
         }
     }
 }
