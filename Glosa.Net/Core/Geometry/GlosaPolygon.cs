@@ -548,5 +548,57 @@ namespace Glosa.Net.Core.Geometry
         {
             return this.dimension;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
+        public static GlosaPolygon Copy(GlosaPolygon p)
+        {
+            switch (p.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Polygon has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Polygon cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try { IntPtr pStr = copy_v2_polygon(p.Serialize()); return DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr)); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try { IntPtr pStr = copy_v3_polygon(p.Serialize()); return DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr)); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    try { IntPtr pStr = copy_v4_polygon(p.Serialize()); return DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr)); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                default: throw new System.ArgumentException("Polygon has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
+        public GlosaPolygon Copy()
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Polygon has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Polygon cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try { IntPtr pStr = copy_v2_polygon(this.Serialize()); return DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr)); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try { IntPtr pStr = copy_v3_polygon(this.Serialize()); return DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr)); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    try { IntPtr pStr = copy_v4_polygon(this.Serialize()); return DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr)); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                default: throw new System.ArgumentException("Polygon has an unvalid dimension", "dimension");
+            }
+        }
     }
 }
