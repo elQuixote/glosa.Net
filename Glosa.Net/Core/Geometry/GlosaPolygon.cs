@@ -449,11 +449,11 @@ namespace Glosa.Net.Core.Geometry
         /// <summary>
         /// 
         /// </summary>
-        public void ContainsVertex(IVector vector)
+        public bool ContainsVertex(IVector vector)
         {
             try
             {
-                this.polyline.ContainsVertex(vector);
+                return this.polyline.ContainsVertex(vector);
             }
             catch (Exception e)
             {
@@ -464,11 +464,11 @@ namespace Glosa.Net.Core.Geometry
         /// <summary>
         /// 
         /// </summary>
-        public void ContainsPoint(IVector vector)
+        public bool ContainsPoint(IVector vector)
         {
             try
             {
-                this.polyline.ContainsPoint(vector);
+                return this.polyline.ContainsPoint(vector);
             }
             catch (Exception e)
             {
@@ -697,6 +697,56 @@ namespace Glosa.Net.Core.Geometry
                     throw new System.ArgumentException("Centroid is currently not enabled for Polygons made up of GlosaVector4s");
                 default: throw new System.ArgumentException("Polygon has an unvalid dimension", "dimension");
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vector"></param>
+        /// <returns></returns>
+        public IVector ClosestVertex(IVector vector)
+        {
+            try { return this.polyline.ClosestVertex(vector); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vector"></param>
+        /// <returns></returns>
+        public IVector ClosestPoint(IVector vector)
+        {
+            try { return this.polyline.ClosestPoint(vector); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public GlosaPolyline ToPolyline()
+        {
+            return this.polyline;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="polygon"></param>
+        /// <returns></returns>
+        public static GlosaPolyline ToPolyline(GlosaPolygon polygon)
+        {
+            return polygon.polyline;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public GlosaPolygon ToPolygon()
+        {
+            return this;
         }
     }
 }
