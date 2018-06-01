@@ -600,5 +600,30 @@ namespace Glosa.Net.Core.Geometry
                 default: throw new System.ArgumentException("Polygon has an unvalid dimension", "dimension");
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public string Stringify()
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Polyline cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try { IntPtr pStr = stringify_v2_polygon(this.Serialize()); return Marshal.PtrToStringAnsi(pStr); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try { IntPtr pStr = stringify_v3_polygon(this.Serialize()); return Marshal.PtrToStringAnsi(pStr); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    try { IntPtr pStr = stringify_v4_polygon(this.Serialize()); return Marshal.PtrToStringAnsi(pStr); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                default: throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
+            }
+        }
     }
 }
