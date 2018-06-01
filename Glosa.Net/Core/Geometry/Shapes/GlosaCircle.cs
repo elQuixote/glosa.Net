@@ -16,6 +16,122 @@ namespace Glosa.Net.Core.Geometry.Shapes
     /// </summary>
     public class GlosaCircle : GlosaObject
     {
+        #region C Reference Procs
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern bool contains_v2_circle(string s, GlosaVector2 v);
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern bool contains_v3_circle(string s, GlosaVector3 v);
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern bool contains_v4_circle(string s, GlosaVector4 v);
+
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern double area_v2_circle(string s);
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern double area_v3_circle(string s);
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern double area_v4_circle(string s);
+
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern double perimeter_v2_circle(string s);
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern double perimeter_v3_circle(string s);
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern double perimeter_v4_circle(string s);
+
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern double circumference_v2_circle(string s);
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern double circumference_v3_circle(string s);
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern double circumference_v4_circle(string s);
+
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern GlosaVector2 centroid_v2_circle(string s);
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern GlosaVector3 centroid_v3_circle(string s);
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern GlosaVector4 centroid_v4_circle(string s);
+
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern GlosaVector2 average_v2_circle(string s);
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern GlosaVector3 average_v3_circle(string s);
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern GlosaVector4 average_v4_circle(string s);
+
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern GlosaVector2 closestPoint_v2_circle(string s, GlosaVector2 v);
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern GlosaVector3 closestPoint_v3_circle(string s, GlosaVector3 v);
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern GlosaVector4 closestPoint_v4_circle(string s, GlosaVector4 v);
+
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern bool equals_v2_circle(string s1, string s2);
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern bool equals_v3_circle(string s1, string s2);
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern bool equals_v4_circle(string s1, string s2);
+
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern int hash_v2_circle(string s);
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern int hash_v3_circle(string s);
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern int hash_v4_circle(string s);
+
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern int dimension_v2_circle(string s);
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern int dimension_v3_circle(string s);
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern int dimension_v4_circle(string s);
+
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr copy_v2_circle(string s);
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr copy_v3_circle(string s);
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr copy_v4_circle(string s);
+
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr clear_v2_circle(string s);
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr clear_v3_circle(string s);
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr clear_v4_circle(string s);
+
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr stringify_v2_circle(string s);
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr stringify_v3_circle(string s);
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr stringify_v4_circle(string s);
+
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr rotate_v2_circle(string s, double theta);
+
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr scale_v2_circle(string s, double f);
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr scale_v3_circle(string s, double f);
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr scale_v4_circle(string s, double f);
+
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr translate_v2_circle(string s, double t);
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr translate_v3_circle(string s, double t);
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr translate_v4_circle(string s, double t);
+
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr transform_v2_circle(string s, GlosaMatrix33 m);
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr transform_v3_circle(string s, GlosaMatrix44 m);
+        [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr transform_v4_circle(string s, GlosaMatrix44 m);
+        #endregion
         /// <summary>
         /// 
         /// </summary>
