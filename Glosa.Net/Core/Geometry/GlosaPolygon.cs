@@ -514,5 +514,39 @@ namespace Glosa.Net.Core.Geometry
         {
             return !(a == b);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public int Hash()
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Polygon has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Polygon cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try { return hash_v2_polygon(this.Serialize()); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try { return hash_v3_polygon(this.Serialize()); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    try { return hash_v4_polygon(this.Serialize()); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                default: throw new System.ArgumentException("Polygon has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public int Dimension()
+        {
+            return this.dimension;
+        }
     }
 }
