@@ -866,7 +866,7 @@ namespace Glosa.Net.Core.Geometry
         /// <param name="sy"></param>
         /// <param name="sz"></param>
         /// <param name="sw"></param>
-        public void ScaleSelf(double sx, double sy, double sz, double sw)
+        public void ScaleSelf(double sx, double sy, double sz, double sw = 0)
         {
             switch (this.dimension)
             {
