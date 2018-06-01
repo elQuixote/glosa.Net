@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Core\Geometry\GlosaLineSegment.cs" />
     <Compile Include="Core\Geometry\GlosaMatrix44.cs" />
+    <Compile Include="Core\Geometry\GlosaPolygon.cs" />
     <Compile Include="Core\Geometry\GlosaPolyline.cs" />
     <Compile Include="Core\Geometry\GlosaQuaternion.cs" />
     <Compile Include="Core\Geometry\GlosaVector2.cs" />
@@ -79,6 +80,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="wrapper_path.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wrapper_polygon.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="wrapper_quaternion.dll">

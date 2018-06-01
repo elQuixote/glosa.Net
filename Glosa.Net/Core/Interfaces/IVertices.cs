@@ -10,6 +10,7 @@ namespace Glosa.Net.Core.Interfaces
     public interface IVertices<T>
     {
         IVector ClosestVertex(IVector v);
-        GlosaPolyline ToPolyline(T obj);
+        GlosaPolyline ToPolyline();
+        GlosaPolygon ToPolygon();
     }
 }

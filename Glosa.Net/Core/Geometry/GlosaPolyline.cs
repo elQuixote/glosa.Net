@@ -866,7 +866,7 @@ namespace Glosa.Net.Core.Geometry
         /// <param name="sy"></param>
         /// <param name="sz"></param>
         /// <param name="sw"></param>
-        public void ScaleSelf(double sx, double sy, double sz, double sw)
+        public void ScaleSelf(double sx, double sy, double sz, double sw = 0)
         {
             switch (this.dimension)
             {
@@ -1307,12 +1307,30 @@ namespace Glosa.Net.Core.Geometry
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public GlosaPolyline ToPolyline(GlosaPolyline obj)
+        public GlosaPolyline ToPolyline()
         {
             //seems trivial
-            return obj;
+            return this;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public GlosaPolygon ToPolygon()
+        {
+            return new GlosaPolygon(this);
+        }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="polyline"></param>
+        /// <returns></returns>
+        public static GlosaPolygon ToPolygon(GlosaPolyline polyline)
+        {
+            return new GlosaPolygon(polyline);
+        }
     }
 }
