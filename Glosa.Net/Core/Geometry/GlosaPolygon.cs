@@ -702,6 +702,31 @@ namespace Glosa.Net.Core.Geometry
         /// <summary>
         /// 
         /// </summary>
+        /// <returns></returns>
+        public bool IsClockwise()
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Polygon has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Polygon cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try { return isClockwise_v2_polygon(this.Serialize()); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try { return isClockwise_v3_polygon(this.Serialize()); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    try { return isClockwise_v4_polygon(this.Serialize()); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                default: throw new System.ArgumentException("Polygon has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="vector"></param>
         /// <returns></returns>
         public IVector ClosestVertex(IVector vector)
