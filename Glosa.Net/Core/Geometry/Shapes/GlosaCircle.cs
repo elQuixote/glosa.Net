@@ -444,5 +444,54 @@ namespace Glosa.Net.Core.Geometry.Shapes
                 default: throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
             }
         }
+
+        /// <summary>
+        /// Determines whether the specified GlosaCircle has the same value as the present GlosaCircle.
+        /// </summary>
+        /// <param name="circle">The other GlosaCircle to compare</param>
+        /// <returns>The result</returns>
+        public bool Equals(GlosaCircle circle)
+        {
+            return this == circle;
+        }
+
+        /// <summary>
+        /// Determines whether two GlosaCircle have equal values.
+        /// </summary>
+        /// <param name="a">The first GlosaCircle</param>
+        /// <param name="b">The second GlosaCircle</param>
+        /// <returns>True if components of the two GlosaCircle are pairwise equal; otherwise false.</returns>
+        public static bool operator ==(GlosaCircle a, GlosaCircle b)
+        {
+            switch (a.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Circle cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    if (b.center.GetType() != typeof(GlosaVector2)) { return false; }
+                    return equals_v2_circle(a.Serialize(), b.Serialize());
+                case 3:
+                    if (b.center.GetType() != typeof(GlosaVector3)) { return false; }
+                    return equals_v3_circle(a.Serialize(), b.Serialize());
+                case 4:
+                    if (b.center.GetType() != typeof(GlosaVector4)) { return false; }
+                    return equals_v4_circle(a.Serialize(), b.Serialize());
+                default: throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// Determines whether two GlosaCircle have different values.
+        /// </summary
+        /// <param name="a">The first GlosaCircle</param>
+        /// <param name="b">The second GlosaCircle</param>
+        /// <returns>True if any component of the two GlosaCircle is pairwise different; otherwise false.</returns>
+        public static bool operator !=(GlosaCircle a, GlosaCircle b)
+        {
+            return !(a == b);
+        }
+
     }
 }
