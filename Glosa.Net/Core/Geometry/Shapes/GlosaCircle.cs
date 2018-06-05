@@ -14,7 +14,8 @@ namespace Glosa.Net.Core.Geometry.Shapes
     /// <summary>
     /// 
     /// </summary>
-    public class GlosaCircle : GlosaObject
+    public class GlosaCircle : GlosaObject, ICopy<GlosaCircle>, IDimension<GlosaCircle>, IHash<GlosaCircle>, IEquals<GlosaCircle>, IString<GlosaCircle>,
+        IClosest<GlosaCircle>, IShape2<GlosaCircle>
     {
         #region C Reference Procs
         [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
@@ -960,7 +961,5 @@ namespace Glosa.Net.Core.Geometry.Shapes
                 default: throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
             }
         }
-
-
     }
 }
