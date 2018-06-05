@@ -626,5 +626,53 @@ namespace Glosa.Net.Core.Geometry.Shapes
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public string Stringify()
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Circle cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    IntPtr pStr = stringify_v2_circle(this.Serialize());
+                    return Marshal.PtrToStringAnsi(pStr);
+                case 3:
+                    pStr = stringify_v3_circle(this.Serialize());
+                    return Marshal.PtrToStringAnsi(pStr);
+                case 4:
+                    pStr = stringify_v4_circle(this.Serialize());
+                    return Marshal.PtrToStringAnsi(pStr);
+                default: throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public GlosaCircle Rotate(float theta)
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Circle cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try { IntPtr pStr = rotate_v2_circle(this.Serialize(), theta); return Deserialize(Marshal.PtrToStringAnsi(pStr)); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    throw new System.ArgumentException("Rotate is currently not enabled for Circle made up of GlosaVector3s");
+                case 4:
+                    throw new System.ArgumentException("Rotate is currently not enabled for Circle made up of GlosaVector4s");
+                default: throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+            }
+        }
+
     }
 }
