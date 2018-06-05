@@ -515,5 +515,116 @@ namespace Glosa.Net.Core.Geometry.Shapes
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public int Dimension()
+        {
+            return this.dimension;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public GlosaCircle Copy()
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Circle cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    IntPtr pStr = copy_v2_circle(this.Serialize());
+                    return Deserialize(Marshal.PtrToStringAnsi(pStr));
+                case 3:
+                    pStr = copy_v3_circle(this.Serialize());
+                    return Deserialize(Marshal.PtrToStringAnsi(pStr));
+                case 4:
+                    pStr = copy_v4_circle(this.Serialize());
+                    return Deserialize(Marshal.PtrToStringAnsi(pStr));
+                default: throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="c"></param>
+        /// <returns></returns>
+        public static GlosaCircle Copy(GlosaCircle c)
+        {
+            switch (c.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Circle cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    IntPtr pStr = copy_v2_circle(c.Serialize());
+                    return Deserialize(Marshal.PtrToStringAnsi(pStr));
+                case 3:
+                    pStr = copy_v3_circle(c.Serialize());
+                    return Deserialize(Marshal.PtrToStringAnsi(pStr));
+                case 4:
+                    pStr = copy_v4_circle(c.Serialize());
+                    return Deserialize(Marshal.PtrToStringAnsi(pStr));
+                default: throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public GlosaCircle Clear()
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Circle cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    IntPtr pStr = clear_v2_circle(this.Serialize());
+                    return Deserialize(Marshal.PtrToStringAnsi(pStr));
+                case 3:
+                    pStr = clear_v3_circle(this.Serialize());
+                    return Deserialize(Marshal.PtrToStringAnsi(pStr));
+                case 4:
+                    pStr = clear_v4_circle(this.Serialize());
+                    return Deserialize(Marshal.PtrToStringAnsi(pStr));
+                default: throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="c"></param>
+        /// <returns></returns>
+        public static GlosaCircle Clear(GlosaCircle c)
+        {
+            switch (c.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Circle cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    IntPtr pStr = clear_v2_circle(c.Serialize());
+                    return Deserialize(Marshal.PtrToStringAnsi(pStr));
+                case 3:
+                    pStr = clear_v3_circle(c.Serialize());
+                    return Deserialize(Marshal.PtrToStringAnsi(pStr));
+                case 4:
+                    pStr = clear_v4_circle(c.Serialize());
+                    return Deserialize(Marshal.PtrToStringAnsi(pStr));
+                default: throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+            }
+        }
+
     }
 }
