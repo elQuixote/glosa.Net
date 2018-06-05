@@ -287,5 +287,80 @@ namespace Glosa.Net.Core.Geometry.Shapes
                 default: throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public double Area()
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Circle cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try { return area_v2_circle(this.Serialize()); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try { return area_v3_circle(this.Serialize()); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    try { return area_v4_circle(this.Serialize()); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                default: throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public double Perimeter()
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Circle cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try { return perimeter_v2_circle(this.Serialize()); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try { return perimeter_v3_circle(this.Serialize()); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    try { return perimeter_v4_circle(this.Serialize()); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                default: throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public double Circumference()
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Circle cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try { return circumference_v2_circle(this.Serialize()); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try { return circumference_v3_circle(this.Serialize()); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    try { return circumference_v4_circle(this.Serialize()); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                default: throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+            }
+        }
     }
 }
