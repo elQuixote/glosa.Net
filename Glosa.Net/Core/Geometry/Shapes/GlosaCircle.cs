@@ -493,5 +493,27 @@ namespace Glosa.Net.Core.Geometry.Shapes
             return !(a == b);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public int Hash()
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Circle cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    return hash_v2_circle(this.Serialize());
+                case 3:
+                    return hash_v3_circle(this.Serialize());
+                case 4:
+                    return hash_v4_circle(this.Serialize());
+                default: throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+            }
+        }
+
     }
 }
