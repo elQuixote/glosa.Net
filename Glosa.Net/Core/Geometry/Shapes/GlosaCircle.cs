@@ -362,5 +362,52 @@ namespace Glosa.Net.Core.Geometry.Shapes
                 default: throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public IVector Centroid()
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Circle cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try { return centroid_v2_circle(this.Serialize()); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try { return centroid_v3_circle(this.Serialize()); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    try { return centroid_v4_circle(this.Serialize()); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                default: throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public IVector Average()
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Circle cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    return average_v2_circle(this.Serialize());
+                case 3:
+                    return average_v3_circle(this.Serialize());
+                case 4:
+                    return average_v4_circle(this.Serialize());
+                default: throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+            }
+        }
     }
 }
