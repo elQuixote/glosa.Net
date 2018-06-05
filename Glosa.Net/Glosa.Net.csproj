@@ -69,6 +69,7 @@
     <Compile Include="Core\Interfaces\ILength.cs" />
     <Compile Include="Core\Interfaces\IMatrix.cs" />
     <Compile Include="Core\Interfaces\IMatrixes.cs" />
+    <Compile Include="Core\Interfaces\IShape2.cs" />
     <Compile Include="Core\Interfaces\IString.cs" />
     <Compile Include="Core\Interfaces\ITransform.cs" />
     <Compile Include="Core\Interfaces\IVector.cs" />
