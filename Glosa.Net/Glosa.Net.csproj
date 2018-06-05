@@ -54,6 +54,7 @@
     <Compile Include="Core\Geometry\GlosaVector3.cs" />
     <Compile Include="Core\Geometry\GlosaMatrix33.cs" />
     <Compile Include="Core\Geometry\GlosaVector4.cs" />
+    <Compile Include="Core\Geometry\Shapes\GlosaCircle.cs" />
     <Compile Include="Core\Helpers\GlosaObject.cs" />
     <Compile Include="Core\Helpers\Json\JsonNetValueSystem.cs" />
     <Compile Include="Core\Helpers\Json\jsonpath-0.5.1.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="Core\Interfaces\ILength.cs" />
     <Compile Include="Core\Interfaces\IMatrix.cs" />
     <Compile Include="Core\Interfaces\IMatrixes.cs" />
+    <Compile Include="Core\Interfaces\IShape2.cs" />
     <Compile Include="Core\Interfaces\IString.cs" />
     <Compile Include="Core\Interfaces\ITransform.cs" />
     <Compile Include="Core\Interfaces\IVector.cs" />
@@ -86,6 +88,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="wrapper_quaternion.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wrapper_shape.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="wrapper_vector.dll">

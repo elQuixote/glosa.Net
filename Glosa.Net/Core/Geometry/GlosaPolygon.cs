@@ -12,7 +12,7 @@ using Glosa.Net.Core.Helpers.Json;
 namespace Glosa.Net.Core.Geometry
 {
     public class GlosaPolygon : GlosaObject, ICopy<GlosaPolygon>, IDimension<GlosaPolygon>, IHash<GlosaPolygon>, IEquals<GlosaPolygon>, IString<GlosaPolygon>,
-        ITransform<GlosaPolygon>, IClosest<GlosaPolygon>, IVertices<GlosaPolygon>
+        ITransform<GlosaPolygon>, IClosest<GlosaPolygon>, IVertices<GlosaPolygon>, IShape2<GlosaPolygon>
     {
         #region C Reference Procs
         [DllImport("wrapper_polygon.dll", CallingConvention = CallingConvention.Cdecl)]
