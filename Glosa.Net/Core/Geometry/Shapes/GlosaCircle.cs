@@ -252,5 +252,40 @@ namespace Glosa.Net.Core.Geometry.Shapes
                 default: throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vector"></param>
+        /// <returns></returns>
+        public bool ContainsPoint(IVector vector)
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Circle cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    if (vector.GetType() != typeof(GlosaVector2))
+                    {
+                        throw new System.ArgumentException("This Circle is made up of GlosaVector2's, please pass a GlosaVector2 to test", "vector");
+                    }
+                    return contains_v2_circle(this.Serialize(), (GlosaVector2)vector);
+                case 3:
+                    if (vector.GetType() != typeof(GlosaVector3))
+                    {
+                        throw new System.ArgumentException("This Circle is made up of GlosaVector3's, please pass a GlosaVector3 to test", "vector");
+                    }
+                    return contains_v3_circle(this.Serialize(), (GlosaVector3)vector);
+                case 4:
+                    if (vector.GetType() != typeof(GlosaVector4))
+                    {
+                        throw new System.ArgumentException("This Circle is made up of GlosaVector4's, please pass a GlosaVector4 to test", "vector");
+                    }
+                    return contains_v4_circle(this.Serialize(), (GlosaVector4)vector);
+                default: throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+            }
+        }
     }
 }
