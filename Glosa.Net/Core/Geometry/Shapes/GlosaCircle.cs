@@ -669,8 +669,9 @@ namespace Glosa.Net.Core.Geometry.Shapes
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="theta"></param>
         /// <returns></returns>
-        public GlosaCircle Rotate(float theta)
+        public GlosaCircle RotateNew(float theta)
         {
             switch (this.dimension)
             {
@@ -688,6 +689,278 @@ namespace Glosa.Net.Core.Geometry.Shapes
                 default: throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
             }
         }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="theta"></param>
+        public void RotateSelf(float theta)
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Circle cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try
+                    {
+                        IntPtr pStr = rotate_v2_circle(this.Serialize(), theta);
+                        GlosaCircle circl = Deserialize(Marshal.PtrToStringAnsi(pStr));
+                        this.center = circl.center;
+                        this.radius = circl.radius;
+                        break;
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    throw new System.ArgumentException("Rotate is currently not enabled for Circle made up of GlosaVector3s");
+                case 4:
+                    throw new System.ArgumentException("Rotate is currently not enabled for Circle made up of GlosaVector4s");
+                default: throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public GlosaCircle ScaleNew(double s)
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Circle cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try { IntPtr pStr = scale_v2_circle(this.Serialize(), s); return Deserialize(Marshal.PtrToStringAnsi(pStr)); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try { IntPtr pStr = scale_v3_circle(this.Serialize(), s); return Deserialize(Marshal.PtrToStringAnsi(pStr)); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    try { IntPtr pStr = scale_v4_circle(this.Serialize(), s); return Deserialize(Marshal.PtrToStringAnsi(pStr)); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                default: throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="s"></param>
+        public void ScaleSelf(double s)
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Circle cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try
+                    {
+                        IntPtr pStr = scale_v2_circle(this.Serialize(), s);
+                        GlosaCircle circl = Deserialize(Marshal.PtrToStringAnsi(pStr));
+                        this.center = circl.center;
+                        this.radius = circl.radius;
+                        break;
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try
+                    {
+                        IntPtr pStr = scale_v3_circle(this.Serialize(), s);
+                        GlosaCircle circl = Deserialize(Marshal.PtrToStringAnsi(pStr));
+                        this.center = circl.center;
+                        this.radius = circl.radius;
+                        break;
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    try
+                    {
+                        IntPtr pStr = scale_v4_circle(this.Serialize(), s);
+                        GlosaCircle circl = Deserialize(Marshal.PtrToStringAnsi(pStr));
+                        this.center = circl.center;
+                        this.radius = circl.radius;
+                        break;
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                default: throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="t"></param>
+        /// <returns></returns>
+        public GlosaCircle TranslateNew(double t)
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Circle cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try { IntPtr pStr = translate_v2_circle(this.Serialize(), t); return Deserialize(Marshal.PtrToStringAnsi(pStr)); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try { IntPtr pStr = translate_v3_circle(this.Serialize(), t); return Deserialize(Marshal.PtrToStringAnsi(pStr)); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    try { IntPtr pStr = translate_v4_circle(this.Serialize(), t); return Deserialize(Marshal.PtrToStringAnsi(pStr)); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                default: throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="t"></param>
+        public void TranslateSelf(double t)
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Circle cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try
+                    {
+                        IntPtr pStr = translate_v2_circle(this.Serialize(), t);
+                        GlosaCircle circl = Deserialize(Marshal.PtrToStringAnsi(pStr));
+                        this.center = circl.center;
+                        this.radius = circl.radius;
+                        break;
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try
+                    {
+                        IntPtr pStr = translate_v3_circle(this.Serialize(), t);
+                        GlosaCircle circl = Deserialize(Marshal.PtrToStringAnsi(pStr));
+                        this.center = circl.center;
+                        this.radius = circl.radius;
+                        break;
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    try
+                    {
+                        IntPtr pStr = translate_v4_circle(this.Serialize(), t);
+                        GlosaCircle circl = Deserialize(Marshal.PtrToStringAnsi(pStr));
+                        this.center = circl.center;
+                        this.radius = circl.radius;
+                        break;
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                default: throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="c"></param>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
+        public GlosaCircle TransformNew(GlosaCircle c, IMatrixes matrix)
+        {
+            switch (c.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Circle cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    if (matrix.GetType() != typeof(GlosaMatrix33))
+                    {
+                        throw new System.ArgumentException("This Circle is made up of GlosaVector2's, please pass a GlosaMatrix33 to use for transforms", "vector");
+                    }
+                    try { IntPtr pStr = transform_v2_circle(c.Serialize(), (GlosaMatrix33)matrix); return Deserialize(Marshal.PtrToStringAnsi(pStr)); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    if (matrix.GetType() != typeof(GlosaMatrix44))
+                    {
+                        throw new System.ArgumentException("This Circle is made up of GlosaVector3's, please pass a GlosaMatrix44 to use for transforms", "vector");
+                    }
+                    try { IntPtr pStr = transform_v3_circle(c.Serialize(), (GlosaMatrix44)matrix); return Deserialize(Marshal.PtrToStringAnsi(pStr)); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    if (matrix.GetType() != typeof(GlosaMatrix44))
+                    {
+                        throw new System.ArgumentException("This Circle is made up of GlosaVector4's, please pass a GlosaMatrix44 to use for transforms", "vector");
+                    }
+                    try { IntPtr pStr = transform_v4_circle(c.Serialize(), (GlosaMatrix44)matrix); return Deserialize(Marshal.PtrToStringAnsi(pStr)); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                default: throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        public void TransformSelf(IMatrixes matrix)
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Circle cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    if (matrix.GetType() != typeof(GlosaMatrix33))
+                    {
+                        throw new System.ArgumentException("This Circle is made up of GlosaVector2's, please pass a GlosaMatrix33 to use for transforms", "vector");
+                    }
+                    try
+                    {
+                        IntPtr pStr = transform_v2_circle(this.Serialize(), (GlosaMatrix33)matrix);
+                        GlosaCircle circl = Deserialize(Marshal.PtrToStringAnsi(pStr));
+                        this.center = circl.center;
+                        this.radius = circl.radius;
+                        break;
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    if (matrix.GetType() != typeof(GlosaMatrix44))
+                    {
+                        throw new System.ArgumentException("This Circle is made up of GlosaVector3's, please pass a GlosaMatrix44 to use for transforms", "vector");
+                    }
+                    try
+                    {
+                        IntPtr pStr = transform_v3_circle(this.Serialize(), (GlosaMatrix44)matrix);
+                        GlosaCircle circl = Deserialize(Marshal.PtrToStringAnsi(pStr));
+                        this.center = circl.center;
+                        this.radius = circl.radius;
+                        break;
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    if (matrix.GetType() != typeof(GlosaMatrix44))
+                    {
+                        throw new System.ArgumentException("This Circle is made up of GlosaVector4's, please pass a GlosaMatrix44 to use for transforms", "vector");
+                    }
+                    try
+                    {
+                        IntPtr pStr = transform_v4_circle(this.Serialize(), (GlosaMatrix44)matrix);
+                        GlosaCircle circl = Deserialize(Marshal.PtrToStringAnsi(pStr));
+                        this.center = circl.center;
+                        this.radius = circl.radius;
+                        break;
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                default: throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+            }
+        }
+
 
     }
 }
