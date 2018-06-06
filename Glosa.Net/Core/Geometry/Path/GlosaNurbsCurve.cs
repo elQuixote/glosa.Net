@@ -109,5 +109,72 @@ namespace Glosa.Net.Core.Geometry.Path
             s += "]}";
             return s;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        private static List<double> ParseNurbsComponents(string data, string key)
+        {
+            return Utilities.parseData(data, key).Select(x => double.Parse(x)).ToList();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        private static List<IVector> ParseControlPoints(string data, int type)
+        {
+            List<List<string>> vertList = new List<List<string>>();
+            switch (type)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    vertList.Add(Utilities.parseData(data, "controlPoints.*.x"));
+                    vertList.Add(Utilities.parseData(data, "controlPoints.*.y"));
+                    break;
+                case 3:
+                    vertList.Add(Utilities.parseData(data, "controlPoints.*.x"));
+                    vertList.Add(Utilities.parseData(data, "controlPoints.*.y"));
+                    vertList.Add(Utilities.parseData(data, "controlPoints.*.z"));
+                    break;
+                case 4:
+                    vertList.Add(Utilities.parseData(data, "controlPoints.*.x"));
+                    vertList.Add(Utilities.parseData(data, "controlPoints.*.y"));
+                    vertList.Add(Utilities.parseData(data, "controlPoints.*.z"));
+                    vertList.Add(Utilities.parseData(data, "controlPoints.*.w"));
+                    break;
+            }
+            int count = 0;
+            List<IVector> gverts = new List<IVector>();
+            foreach (string str in vertList[0])
+            {
+                switch (type)
+                {
+                    case 0:
+                        throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                    case 1:
+                        throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                    case 2:
+                        gverts.Add(new GlosaVector2(Convert.ToDouble(str), Convert.ToDouble(vertList[1][count])));
+                        break;
+                    case 3:
+                        gverts.Add(new GlosaVector3(Convert.ToDouble(str), Convert.ToDouble(vertList[1][count]), Convert.ToDouble(vertList[2][count])));
+                        break;
+                    case 4:
+                        gverts.Add(new GlosaVector4(Convert.ToDouble(str), Convert.ToDouble(vertList[1][count]), Convert.ToDouble(vertList[2][count]), Convert.ToDouble(vertList[3][count])));
+                        break;
+                }
+                count++;
+            }
+            return gverts;
+        }
     }
 }
