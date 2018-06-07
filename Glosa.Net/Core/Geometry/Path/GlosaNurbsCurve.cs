@@ -24,7 +24,7 @@ namespace Glosa.Net.Core.Geometry.Path
         /// <summary>
         /// 
         /// </summary>
-        public IVector[] points;
+        public IVector[] controlPoints;
 
         /// <summary>
         /// 
@@ -44,7 +44,7 @@ namespace Glosa.Net.Core.Geometry.Path
         /// <param name="degree"></param>
         public GlosaNurbsCurve(IVector[] points, int degree = 3)
         {
-            this.points = points;
+            this.controlPoints = points;
             this.degree = degree;
             this.dimension = points[0].Dimension();
         }
@@ -58,7 +58,7 @@ namespace Glosa.Net.Core.Geometry.Path
         /// <param name="degree"></param>
         public GlosaNurbsCurve(IVector[] controlPoints, double[] weights, double[] knots, int degree = 3)
         {
-            this.points = controlPoints;
+            this.controlPoints = controlPoints;
             this.weights = weights;
             this.knots = knots;
             this.degree = degree;
