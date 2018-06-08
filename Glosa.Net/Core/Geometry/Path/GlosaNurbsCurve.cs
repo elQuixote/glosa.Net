@@ -16,6 +16,13 @@ namespace Glosa.Net.Core.Geometry.Path
     /// </summary>
     public class GlosaNurbsCurve : GlosaObject
     {
+        #region C Reference Procs
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr interpolateCurve_v2_curve(string s);
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr interpolateCurve_v3_curve(string s);
+        #endregion
+
         /// <summary>
         /// 
         /// </summary>
@@ -44,9 +51,12 @@ namespace Glosa.Net.Core.Geometry.Path
         /// <param name="degree"></param>
         public GlosaNurbsCurve(IVector[] points, int degree = 3)
         {
-            this.controlPoints = points;
+            string incomingData = InterpolateCurve(GenerateJsonFromPoints(points, degree));
+            this.controlPoints = ParseControlPoints(incomingData, points[0].Dimension()).ToArray();
+            this.weights = ParseNurbsComponents(incomingData, "weights").ToArray();
+            this.knots = ParseNurbsComponents(incomingData, "knots").ToArray();
             this.degree = degree;
-            this.dimension = points[0].Dimension();
+            this.dimension = this.controlPoints[0].Dimension();
         }
 
         /// <summary>
@@ -110,34 +120,16 @@ namespace Glosa.Net.Core.Geometry.Path
             return s;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="data"></param>
-        /// <param name="key"></param>
-        /// <returns></returns>
         private static List<double> ParseNurbsComponents(string data, string key)
         {
             return Utilities.parseData(data, key + ".*").Select(x => double.Parse(x)).ToList();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="data"></param>
-        /// <param name="key"></param>
-        /// <returns></returns>
         private static List<double> ParseArray(string data, string key)
         {
             return Utilities.parseData(data, key + ".*").Select(x => double.Parse(x)).ToList();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="data"></param>
-        /// <param name="type"></param>
-        /// <returns></returns>
         private static List<IVector> ParseControlPoints(string data, int type)
         {
             List<List<string>> vertList = new List<List<string>>();
@@ -186,6 +178,26 @@ namespace Glosa.Net.Core.Geometry.Path
                 count++;
             }
             return gverts;
+        }
+
+        private string InterpolateCurve(string s)
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try { IntPtr pStr = interpolateCurve_v2_curve(s); return Marshal.PtrToStringAnsi(pStr); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try { IntPtr pStr = interpolateCurve_v3_curve(s); return Marshal.PtrToStringAnsi(pStr); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 4", "dimension");
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
         }
     }
 }
