@@ -14,8 +14,9 @@ namespace Glosa.Net.Core.Geometry.Path
     /// <summary>
     /// 
     /// </summary>
-    public class GlosaNurbsCurve : GlosaObject, ICopy<GlosaNurbsCurve>, IDimension<GlosaNurbsCurve>, IHash<GlosaNurbsCurve>, IEquals<GlosaNurbsCurve>, IString<GlosaNurbsCurve>,
-        IClosest<GlosaNurbsCurve>
+    public class GlosaNurbsCurve : GlosaObject
+        //, ICopy<GlosaNurbsCurve>, IDimension<GlosaNurbsCurve>, IHash<GlosaNurbsCurve>, IEquals<GlosaNurbsCurve>, IString<GlosaNurbsCurve>,
+        //IClosest<GlosaNurbsCurve>
     {
         #region C Reference Procs
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
@@ -28,6 +29,8 @@ namespace Glosa.Net.Core.Geometry.Path
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
         private static extern GlosaVector4 homogenize_v3_curve(GlosaVector3 v, double weight);
 
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr homogenizeArray_v1_curve(string s1, string s2);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
         private static extern IntPtr homogenizeArray_v2_curve(string s1, string s2);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
@@ -211,7 +214,7 @@ namespace Glosa.Net.Core.Geometry.Path
             this.dimension = controlPoints[0].Dimension();
         }
 
-        private string GenerateJsonFromPoints(IVector[] points, int degree)
+        private static string GenerateJsonFromPoints(IVector[] points, int degree)
         {
             string s = "";
             s += @"{""degree"":" + degree.ToString() + "," + @"""points"":[";
@@ -249,6 +252,27 @@ namespace Glosa.Net.Core.Geometry.Path
                         }
                         break;
                     default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                }
+                count++;
+            }
+            s += "]}";
+            return s;
+        }
+
+        private static string GenerateJsonFromArray(double[] values)
+        {
+            string s = "";
+            s += @"{""data"":[";
+            int count = 0;
+            foreach (double d in values)
+            {
+                if (count == 0)
+                {
+                    s += d.ToString();
+                }
+                else
+                {
+                    s += ", " + d.ToString();
                 }
                 count++;
             }
@@ -360,6 +384,77 @@ namespace Glosa.Net.Core.Geometry.Path
             catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="points"></param>
+        /// <param name="weights"></param>
+        /// <returns></returns>
+        public static List<GlosaVector3> Homogenize(GlosaVector2[] points, double[] weights)
+        {
+            try
+            {
+                List<IVector> ivecArray = points.Select(x => ((IVector)x)).ToList();
+                IntPtr pStr = homogenizeArray_v2_curve(GenerateJsonFromPoints(ivecArray.ToArray(), 3), GenerateJsonFromArray(weights));
+                return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), points[0].Dimension() + 1, "points").Select(x => ((GlosaVector3)x)).ToList();
+            }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+        }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="points"></param>
+        /// <param name="weights"></param>
+        /// <returns></returns>
+        public static List<GlosaVector4> Homogenize(GlosaVector3[] points, double[] weights)
+        {
+            try
+            {
+                List<IVector> ivecArray = points.Select(x => ((IVector)x)).ToList();
+                IntPtr pStr = homogenizeArray_v3_curve(GenerateJsonFromPoints(ivecArray.ToArray(), 3), GenerateJsonFromArray(weights));
+                return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), points[0].Dimension() + 1, "points").Select(x => ((GlosaVector4)x)).ToList();
+            }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="points"></param>
+        /// <param name="weights"></param>
+        /// <returns></returns>
+        public static List<IVector> Homogenize(IVector[] points, double[] weights)
+        {
+            switch (points[0].Dimension())
+            {
+                case 0:
+                    throw new System.ArgumentException("Cannot homogenize a set of Vector0s", "dimension");
+                case 1:
+                    try
+                    {
+                        IntPtr pStr = homogenizeArray_v1_curve(GenerateJsonFromPoints(points, 3), GenerateJsonFromArray(weights));
+                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), points[0].Dimension() + 1, "points");
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 2:
+                    try
+                    {
+                        IntPtr pStr = homogenizeArray_v2_curve(GenerateJsonFromPoints(points, 3), GenerateJsonFromArray(weights));
+                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), points[0].Dimension() + 1, "points");
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try
+                    {
+                        IntPtr pStr = homogenizeArray_v3_curve(GenerateJsonFromPoints(points, 3), GenerateJsonFromArray(weights));
+                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), points[0].Dimension() + 1, "points");
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    throw new System.ArgumentException("Cannot homogenize a set of Vector4s", "dimension");
+                default: throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+            }
+        }
     }
 }
