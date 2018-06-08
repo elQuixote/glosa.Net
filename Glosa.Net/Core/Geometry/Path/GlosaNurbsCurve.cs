@@ -544,5 +544,94 @@ namespace Glosa.Net.Core.Geometry.Path
                 default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
             }
         }
+
+        public double Weight(GlosaVector2 vector)
+        {
+            try { return weight_v2_curve(vector); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+        }
+
+        public double Weight(GlosaVector3 vector)
+        {
+            try { return weight_v3_curve(vector); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+        }
+
+        public double Weight(GlosaVector4 vector)
+        {
+            try { return weight_v4_curve(vector); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+        }
+
+        public List<double> Weights(GlosaVector2[] points)
+        {
+            try
+            {
+                List<IVector> ivecArray = points.Select(x => ((IVector)x)).ToList();
+                IntPtr pStr = weights_v2_curve(GenerateJsonFromPoints(ivecArray.ToArray(), 3));
+                return ParseArray(Marshal.PtrToStringAnsi(pStr), "data");
+            }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+        }
+
+        public List<double> Weights(GlosaVector3[] points)
+        {
+            try
+            {
+                List<IVector> ivecArray = points.Select(x => ((IVector)x)).ToList();
+                IntPtr pStr = weights_v3_curve(GenerateJsonFromPoints(ivecArray.ToArray(), 3));
+                return ParseArray(Marshal.PtrToStringAnsi(pStr), "data");
+            }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+        }
+
+        public List<double> Weights(GlosaVector4[] points)
+        {
+            try
+            {
+                List<IVector> ivecArray = points.Select(x => ((IVector)x)).ToList();
+                IntPtr pStr = weights_v4_curve(GenerateJsonFromPoints(ivecArray.ToArray(), 3));
+                return ParseArray(Marshal.PtrToStringAnsi(pStr), "data");
+            }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="points"></param>
+        /// <returns></returns>
+        public static List<double> Weights(IVector[] points)
+        {
+            switch (points[0].Dimension())
+            {
+                case 0:
+                    throw new System.ArgumentException("Cannot generate weights of Vector0s", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Cannot generate weights of Vector1s", "dimension");
+                case 2:
+                    try
+                    {
+                        IntPtr pStr = weights_v2_curve(GenerateJsonFromPoints(points, 3));
+                        return ParseArray(Marshal.PtrToStringAnsi(pStr), "data");
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try
+                    {
+                        IntPtr pStr = weights_v3_curve(GenerateJsonFromPoints(points, 3));
+                        return ParseArray(Marshal.PtrToStringAnsi(pStr), "data");
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    try
+                    {
+                        IntPtr pStr = weights_v4_curve(GenerateJsonFromPoints(points, 3));
+                        return ParseArray(Marshal.PtrToStringAnsi(pStr), "data");
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
     }
 }
