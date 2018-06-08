@@ -21,6 +21,140 @@ namespace Glosa.Net.Core.Geometry.Path
         private static extern IntPtr interpolateCurve_v2_curve(string s);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
         private static extern IntPtr interpolateCurve_v3_curve(string s);
+
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern GlosaVector3 homogenize_v2_curve(GlosaVector2 v, double weight);
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern GlosaVector4 homogenize_v3_curve(GlosaVector3 v, double weight);
+
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr homogenizeArray_v2_curve(string s1, string s2);
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr homogenizeArray_v3_curve(string s1, string s2);
+
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern GlosaVector2 dehomogenize_v2_curve(GlosaVector3 v);
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern GlosaVector3 dehomogenize_v3_curve(GlosaVector4 v);
+
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr dehomogenizeArray_v2_curve(string s);
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr dehomogenizeArray_v3_curve(string s);
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr dehomogenizeArray_v4_curve(string s);
+
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern double weight_v2_curve(GlosaVector2 v);
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern double weight_v3_curve(GlosaVector3 v);
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern double weight_v4_curve(GlosaVector4 v);
+
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr weights_v2_curve(string s);
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr weights_v3_curve(string s);
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr weights_v4_curve(string s);
+
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern bool equals_v2_curve(string s1, string s2);
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern bool equals_v3_curve(string s1, string s2);
+
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr weightedControlPoints_v2_curve(string s);
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr weightedControlPoints_v3_curve(string s);
+
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern GlosaVector3 rationalSample_v2_curve(string s, double u);
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern GlosaVector4 rationalSample_v3_curve(string s, double u);
+
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr rationalRegularSample_v2_curve(string s, int n);
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr rationalRegularSample_v3_curve(string s, int n);
+
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr rationalSampleDerrivatives_v2_curve(string s, double u, int n);
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr rationalSampleDerrivatives_v3_curve(string s, double u, int n);
+
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern GlosaVector2 sample_v2_curve(string s, double u);
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern GlosaVector3 sample_v3_curve(string s, double u);
+
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr regularSample_v2_curve(string s, double uStart, double uEnd, int n);
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr regularSample_v3_curve(string s, double uStart, double uEnd, int n);
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr regularSample2_v2_curve(string s, int n);
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr regularSample2_v3_curve(string s, int n);
+
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr sampleDerivatives_v2_curve(string s, double u, int n);
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr sampleDerivatives_v3_curve(string s, double u, int n);
+
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern double rationalClosestParameter_v2_curve(string s, GlosaVector2 v);
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern double rationalClosestParameter_v3_curve(string s, GlosaVector3 v);
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern double closestParameter_v2_curve(string s, GlosaVector2 v);
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern double closestParameter_v3_curve(string s, GlosaVector3 v);
+
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern GlosaVector2 closestPoint_v2_curve(string s, GlosaVector2 v);
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern GlosaVector3 closestPoint_v3_curve(string s, GlosaVector3 v);
+
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr transform_v2_curve(string s, GlosaMatrix33 m);
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr transform_v3_curve(string s, GlosaMatrix44 m);
+
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr rotate_v2_curve(string s, double theta);
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr rotate_v3_curve(string s, GlosaVector3 axis, double theta);
+
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr scale_v2_curve(string s, double sx, double sy);
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr scale_v3_curve(string s, double sx, double sy, double sz);
+
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr translate_v2_curve(string s, GlosaVector2 v);
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr translate_v3_curve(string s, GlosaVector3 v);
+
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern int hash_v2_curve(string s);
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern int hash_v3_curve(string s);
+
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern int dimension_v2_curve(string s);
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern int dimension_v3_curve(string s);
+
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr copy_v2_curve(string s);
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr copy_v3_curve(string s);
+
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr stringify_v2_curve(string s);
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr stringify_v3_curve(string s);
         #endregion
 
         /// <summary>
