@@ -665,6 +665,44 @@ namespace Glosa.Net.Core.Geometry.Path
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nc"></param>
+        /// <returns></returns>
+        public List<double> Weights(GlosaNurbsCurve nc)
+        {
+            switch (nc.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Cannot generate weights of Vector0s", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Cannot generate weights of Vector1s", "dimension");
+                case 2:
+                    try
+                    {
+                        IntPtr pStr = weights_v2_curve(GenerateJsonFromPoints(nc.controlPoints, 3));
+                        return ParseArray(Marshal.PtrToStringAnsi(pStr), "data");
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try
+                    {
+                        IntPtr pStr = weights_v3_curve(GenerateJsonFromPoints(nc.controlPoints, 3));
+                        return ParseArray(Marshal.PtrToStringAnsi(pStr), "data");
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    try
+                    {
+                        IntPtr pStr = weights_v4_curve(GenerateJsonFromPoints(nc.controlPoints, 3));
+                        return ParseArray(Marshal.PtrToStringAnsi(pStr), "data");
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
         /// Determines whether the specified GlosaNurbsCurve has the same value as the present GlosaNurbsCurve.
         /// </summary>
         /// <param name="curve">The other GlosaNurbsCurve to compare</param>
