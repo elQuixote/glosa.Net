@@ -14,7 +14,8 @@ namespace Glosa.Net.Core.Geometry.Path
     /// <summary>
     /// 
     /// </summary>
-    public class GlosaNurbsCurve : GlosaObject
+    public class GlosaNurbsCurve : GlosaObject, ICopy<GlosaNurbsCurve>, IDimension<GlosaNurbsCurve>, IHash<GlosaNurbsCurve>, IEquals<GlosaNurbsCurve>, IString<GlosaNurbsCurve>,
+        IClosest<GlosaNurbsCurve>
     {
         #region C Reference Procs
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
@@ -178,6 +179,7 @@ namespace Glosa.Net.Core.Geometry.Path
         public double[] knots;
         private int dimension;
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -333,5 +335,31 @@ namespace Glosa.Net.Core.Geometry.Path
                 default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vector"></param>
+        /// <param name="weight"></param>
+        /// <returns></returns>
+        public GlosaVector3 Homogenize(GlosaVector2 vector, double weight)
+        {
+            try { return homogenize_v2_curve(vector, weight); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vector"></param>
+        /// <param name="weight"></param>
+        /// <returns></returns>
+        public GlosaVector4 Homogenize(GlosaVector3 vector, double weight)
+        {
+            try { return homogenize_v3_curve(vector, weight); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+        }
+
+
     }
 }
