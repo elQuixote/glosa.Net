@@ -14,9 +14,8 @@ namespace Glosa.Net.Core.Geometry.Path
     /// <summary>
     /// 
     /// </summary>
-    public class GlosaNurbsCurve : GlosaObject
-        //, ICopy<GlosaNurbsCurve>, IDimension<GlosaNurbsCurve>, IHash<GlosaNurbsCurve>, IEquals<GlosaNurbsCurve>, IString<GlosaNurbsCurve>,
-        //IClosest<GlosaNurbsCurve>
+    public class GlosaNurbsCurve : GlosaObject, ICopy<GlosaNurbsCurve>, IDimension<GlosaNurbsCurve>, IHash<GlosaNurbsCurve>, IEquals<GlosaNurbsCurve>, IString<GlosaNurbsCurve>,
+        IClosest<GlosaNurbsCurve>
     {
         #region C Reference Procs
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
@@ -760,6 +759,16 @@ namespace Glosa.Net.Core.Geometry.Path
         public bool Equals(GlosaNurbsCurve curve)
         {
             return this == curve;
+        }
+
+        /// <summary>
+        /// Determines whether the specified System.Object is a GlosaNurbsCurve and has the same values as the present GlosaNurbsCurve.
+        /// </summary>
+        /// <param name="obj">THe specified object</param>
+        /// <returns>true if obj is a GlosaNurbsCurve and has the same coordinates as this; otherwise false.</returns>
+        public override bool Equals(object obj)
+        {
+            return (obj is GlosaNurbsCurve && this == (GlosaNurbsCurve)obj);
         }
 
         /// <summary>
@@ -1959,6 +1968,30 @@ namespace Glosa.Net.Core.Geometry.Path
         }
 
         /// <summary>
+        /// Provides a hashing value for the present GlosaNurbsCurve.
+        /// </summary>
+        /// <returns>A non-unique number based on GlosaNurbsCurve components.</returns>
+        public override int GetHashCode()
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try { return hash_v2_curve(this.Serialize()); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try { return hash_v3_curve(this.Serialize()); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    throw new System.ArgumentException("Cannot Get Hash for Nurbs Curve made up of GlosaVector 4s", "dimension");
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
@@ -2029,6 +2062,25 @@ namespace Glosa.Net.Core.Geometry.Path
                     throw new System.ArgumentException("Cannot Stringify Nurbs Curve made up of GlosaVector 4s", "dimension");
                 default: throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public int Dimension()
+        {
+            return this.dimension;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nc"></param>
+        /// <returns></returns>
+        public static int Dimensions(GlosaNurbsCurve nc)
+        {
+            return nc.dimension;
         }
     }
 }
