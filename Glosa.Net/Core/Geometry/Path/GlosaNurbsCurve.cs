@@ -188,7 +188,7 @@ namespace Glosa.Net.Core.Geometry.Path
         public GlosaNurbsCurve(IVector[] points, int degree = 3)
         {
             string incomingData = InterpolateCurve(GenerateJsonFromPoints(points, degree));
-            this.controlPoints = ParseControlPoints(incomingData, points[0].Dimension()).ToArray();
+            this.controlPoints = ParseControlPoints(incomingData, points[0].Dimension(), "controlPoints").ToArray();
             this.weights = ParseNurbsComponents(incomingData, "weights").ToArray();
             this.knots = ParseNurbsComponents(incomingData, "knots").ToArray();
             this.degree = degree;
@@ -266,7 +266,7 @@ namespace Glosa.Net.Core.Geometry.Path
             return Utilities.parseData(data, key + ".*").Select(x => double.Parse(x)).ToList();
         }
 
-        private static List<IVector> ParseControlPoints(string data, int type)
+        private static List<IVector> ParseControlPoints(string data, int type, string key)
         {
             List<List<string>> vertList = new List<List<string>>();
             switch (type)
@@ -276,19 +276,19 @@ namespace Glosa.Net.Core.Geometry.Path
                 case 1:
                     throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
                 case 2:
-                    vertList.Add(Utilities.parseData(data, "controlPoints.*.x"));
-                    vertList.Add(Utilities.parseData(data, "controlPoints.*.y"));
+                    vertList.Add(Utilities.parseData(data, key + ".*.x"));
+                    vertList.Add(Utilities.parseData(data, key + ".*.y"));
                     break;
                 case 3:
-                    vertList.Add(Utilities.parseData(data, "controlPoints.*.x"));
-                    vertList.Add(Utilities.parseData(data, "controlPoints.*.y"));
-                    vertList.Add(Utilities.parseData(data, "controlPoints.*.z"));
+                    vertList.Add(Utilities.parseData(data, key + ".*.x"));
+                    vertList.Add(Utilities.parseData(data, key + ".*.y"));
+                    vertList.Add(Utilities.parseData(data, key + ".*.z"));
                     break;
                 case 4:
-                    vertList.Add(Utilities.parseData(data, "controlPoints.*.x"));
-                    vertList.Add(Utilities.parseData(data, "controlPoints.*.y"));
-                    vertList.Add(Utilities.parseData(data, "controlPoints.*.z"));
-                    vertList.Add(Utilities.parseData(data, "controlPoints.*.w"));
+                    vertList.Add(Utilities.parseData(data, key + ".*.x"));
+                    vertList.Add(Utilities.parseData(data, key + ".*.y"));
+                    vertList.Add(Utilities.parseData(data, key + ".*.z"));
+                    vertList.Add(Utilities.parseData(data, key + ".*.w"));
                     break;
             }
             int count = 0;
