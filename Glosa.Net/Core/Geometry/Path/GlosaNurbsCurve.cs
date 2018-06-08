@@ -453,7 +453,95 @@ namespace Glosa.Net.Core.Geometry.Path
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 case 4:
                     throw new System.ArgumentException("Cannot homogenize a set of Vector4s", "dimension");
-                default: throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vector"></param>
+        /// <returns></returns>
+        public GlosaVector2 Dehomogenize(GlosaVector3 vector)
+        {
+            try { return dehomogenize_v2_curve(vector); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vector"></param>
+        /// <returns></returns>
+        public GlosaVector3 Dehomogenize(GlosaVector4 vector)
+        {
+            try { return dehomogenize_v3_curve(vector); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="points"></param>
+        /// <returns></returns>
+        public static List<GlosaVector2> Dehomogenize(GlosaVector3[] points)
+        {
+            try
+            {
+                List<IVector> ivecArray = points.Select(x => ((IVector)x)).ToList();
+                IntPtr pStr = dehomogenizeArray_v3_curve(GenerateJsonFromPoints(ivecArray.ToArray(), 3));
+                return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), points[0].Dimension() - 1, "points").Select(x => ((GlosaVector2)x)).ToList();
+            }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="points"></param>
+        /// <param name="weights"></param>
+        /// <returns></returns>
+        public static List<GlosaVector3> Dehomogenize(GlosaVector4[] points)
+        {
+            try
+            {
+                List<IVector> ivecArray = points.Select(x => ((IVector)x)).ToList();
+                IntPtr pStr = dehomogenizeArray_v4_curve(GenerateJsonFromPoints(ivecArray.ToArray(), 3));
+                return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), points[0].Dimension() - 1, "points").Select(x => ((GlosaVector3)x)).ToList();
+            }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="points"></param>
+        /// <returns></returns>
+        public static List<IVector> Dehomogenize(IVector[] points)
+        {
+            switch (points[0].Dimension())
+            {
+                case 0:
+                    throw new System.ArgumentException("Cannot dehomogenize a set of Vector0s", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Cannot dehomogenize a set of Vector1s", "dimension");
+                case 2:
+                    throw new System.ArgumentException("Cannot dehomogenize a set of Vector2s", "dimension");
+                case 3:
+                    try
+                    {
+                        IntPtr pStr = dehomogenizeArray_v3_curve(GenerateJsonFromPoints(points, 3));
+                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), points[0].Dimension() - 1, "points");
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    try
+                    {
+                        IntPtr pStr = dehomogenizeArray_v4_curve(GenerateJsonFromPoints(points, 3));
+                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), points[0].Dimension() - 1, "points");
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
             }
         }
     }
