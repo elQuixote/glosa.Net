@@ -1296,5 +1296,629 @@ namespace Glosa.Net.Core.Geometry.Path
                 default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="v"></param>
+        /// <returns></returns>
+        public double RationalClosestParameter(IVector v)
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    if (v.Dimension() != 2) throw new System.ArgumentException("NurbsCurve is made up of GlosaVector2s please input GlosaVector2 to get ClosestParameter", "IVector");
+                    try { return rationalClosestParameter_v2_curve(this.Serialize(), (GlosaVector2)v); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    if (v.Dimension() != 3) throw new System.ArgumentException("NurbsCurve is made up of GlosaVector3s please input GlosaVector3 to get ClosestParameter", "IVector");
+                    try { return rationalClosestParameter_v3_curve(this.Serialize(), (GlosaVector3)v); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    throw new System.ArgumentException("Cannot get RationalClosestParameter for Nurbs Curve made up of GlosaVector 4s", "dimension");
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nc"></param>
+        /// <param name="v"></param>
+        /// <returns></returns>
+        public static double RationalClosestParameter(GlosaNurbsCurve nc, IVector v)
+        {
+            switch (nc.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    if (v.Dimension() != 2) throw new System.ArgumentException("NurbsCurve is made up of GlosaVector2s please input GlosaVector2 to get ClosestParameter", "IVector");
+                    try { return rationalClosestParameter_v2_curve(nc.Serialize(), (GlosaVector2)v); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    if (v.Dimension() != 3) throw new System.ArgumentException("NurbsCurve is made up of GlosaVector3s please input GlosaVector3 to get ClosestParameter", "IVector");
+                    try { return rationalClosestParameter_v3_curve(nc.Serialize(), (GlosaVector3)v); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    throw new System.ArgumentException("Cannot get RationalClosestParameter for Nurbs Curve made up of GlosaVector 4s", "dimension");
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="v"></param>
+        /// <returns></returns>
+        public double ClosestParameter(IVector v)
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    if (v.Dimension() != 2) throw new System.ArgumentException("NurbsCurve is made up of GlosaVector2s please input GlosaVector2 to get ClosestParameter", "IVector");
+                    try { return closestParameter_v2_curve(this.Serialize(), (GlosaVector2)v); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    if (v.Dimension() != 3) throw new System.ArgumentException("NurbsCurve is made up of GlosaVector3s please input GlosaVector3 to get ClosestParameter", "IVector");
+                    try { return closestParameter_v3_curve(this.Serialize(), (GlosaVector3)v); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    throw new System.ArgumentException("Cannot get ClosestParameter for Nurbs Curve made up of GlosaVector 4s", "dimension");
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nc"></param>
+        /// <param name="v"></param>
+        /// <returns></returns>
+        public static double ClosestParameter(GlosaNurbsCurve nc, IVector v)
+        {
+            switch (nc.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    if (v.Dimension() != 2) throw new System.ArgumentException("NurbsCurve is made up of GlosaVector2s please input GlosaVector2 to get ClosestParameter", "IVector");
+                    try { return closestParameter_v2_curve(nc.Serialize(), (GlosaVector2)v); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    if (v.Dimension() != 3) throw new System.ArgumentException("NurbsCurve is made up of GlosaVector3s please input GlosaVector3 to get ClosestParameter", "IVector");
+                    try { return closestParameter_v3_curve(nc.Serialize(), (GlosaVector3)v); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    throw new System.ArgumentException("Cannot get ClosestParameter for Nurbs Curve made up of GlosaVector 4s", "dimension");
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="v"></param>
+        /// <returns></returns>
+        public IVector ClosestPoint(IVector v)
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    if (v.Dimension() != 2) throw new System.ArgumentException("NurbsCurve is made up of GlosaVector2s please input GlosaVector2 to get ClosestPoint", "IVector");
+                    try { return closestPoint_v2_curve(this.Serialize(), (GlosaVector2)v); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    if (v.Dimension() != 3) throw new System.ArgumentException("NurbsCurve is made up of GlosaVector3s please input GlosaVector3 to get ClosestPoint", "IVector");
+                    try { return closestPoint_v3_curve(this.Serialize(), (GlosaVector3)v); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    throw new System.ArgumentException("Cannot get ClosestPoint for Nurbs Curve made up of GlosaVector 4s", "dimension");
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nc"></param>
+        /// <param name="v"></param>
+        /// <returns></returns>
+        public static IVector ClosestPoint(GlosaNurbsCurve nc, IVector v)
+        {
+            switch (nc.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    if (v.Dimension() != 2) throw new System.ArgumentException("NurbsCurve is made up of GlosaVector2s please input GlosaVector2 to get ClosestPoint", "IVector");
+                    try { return closestPoint_v2_curve(nc.Serialize(), (GlosaVector2)v); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    if (v.Dimension() != 3) throw new System.ArgumentException("NurbsCurve is made up of GlosaVector3s please input GlosaVector3 to get ClosestPoint", "IVector");
+                    try { return closestPoint_v3_curve(nc.Serialize(), (GlosaVector3)v); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    throw new System.ArgumentException("Cannot get ClosestPoint for Nurbs Curve made up of GlosaVector 4s", "dimension");
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        public void TransformSelf(IMatrixes matrix)
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    if (matrix.GetType() != typeof(GlosaMatrix33))
+                    {
+                        throw new System.ArgumentException("This NurbsCurve is made up of GlosaVector2's, please pass a GlosaMatrix33 to use for transforms", "matrix");
+                    }
+                    try
+                    {
+                        IntPtr pStr = transform_v2_curve(this.Serialize(), (GlosaMatrix33)matrix);
+                        string data = Marshal.PtrToStringAnsi(pStr);
+                        this.controlPoints = ParseControlPoints(data, this.dimension, "controlPoints").ToArray();
+                        this.weights = ParseNurbsComponents(data, "weights").ToArray();
+                        this.knots = ParseNurbsComponents(data, "knots").ToArray();
+                        this.degree = Convert.ToInt32(Utilities.parseData(data, "degree.")[0]);
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                    break;
+                case 3:
+                    if (matrix.GetType() != typeof(GlosaMatrix44))
+                    {
+                        throw new System.ArgumentException("This NurbsCurve is made up of GlosaVector3's, please pass a GlosaMatrix44 to use for transforms", "matrix");
+                    }
+                    try
+                    {
+                        IntPtr pStr = transform_v3_curve(this.Serialize(), (GlosaMatrix44)matrix);
+                        string data = Marshal.PtrToStringAnsi(pStr);
+                        this.controlPoints = ParseControlPoints(data, this.dimension, "controlPoints").ToArray();
+                        this.weights = ParseNurbsComponents(data, "weights").ToArray();
+                        this.knots = ParseNurbsComponents(data, "knots").ToArray();
+                        this.degree = Convert.ToInt32(Utilities.parseData(data, "degree.")[0]);
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                    break;
+                case 4:
+                    throw new System.ArgumentException("Cannot get ClosestPoint for Nurbs Curve made up of GlosaVector 4s", "dimension");
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
+        public GlosaNurbsCurve TransformNew(IMatrixes matrix)
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    if (matrix.GetType() != typeof(GlosaMatrix33))
+                    {
+                        throw new System.ArgumentException("This NurbsCurve is made up of GlosaVector2's, please pass a GlosaMatrix33 to use for transforms", "matrix");
+                    }
+                    try
+                    {
+                        IntPtr pStr = transform_v2_curve(this.Serialize(), (GlosaMatrix33)matrix);
+                        string data = Marshal.PtrToStringAnsi(pStr);
+                        return new GlosaNurbsCurve(ParseControlPoints(data, this.dimension, "controlPoints").ToArray(),
+                            ParseNurbsComponents(data, "weights").ToArray(), ParseNurbsComponents(data, "knots").ToArray(),
+                            Convert.ToInt32(Utilities.parseData(data, "degree.")[0]));
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    if (matrix.GetType() != typeof(GlosaMatrix44))
+                    {
+                        throw new System.ArgumentException("This NurbsCurve is made up of GlosaVector3's, please pass a GlosaMatrix44 to use for transforms", "matrix");
+                    }
+                    try
+                    {
+                        IntPtr pStr = transform_v3_curve(this.Serialize(), (GlosaMatrix44)matrix);
+                        string data = Marshal.PtrToStringAnsi(pStr);
+                        return new GlosaNurbsCurve(ParseControlPoints(data, this.dimension, "controlPoints").ToArray(),
+                            ParseNurbsComponents(data, "weights").ToArray(), ParseNurbsComponents(data, "knots").ToArray(),
+                            Convert.ToInt32(Utilities.parseData(data, "degree.")[0]));
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    throw new System.ArgumentException("Cannot get ClosestPoint for Nurbs Curve made up of GlosaVector 4s", "dimension");
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nc"></param>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
+        public static GlosaNurbsCurve Transform(GlosaNurbsCurve nc, IMatrixes matrix)
+        {
+            switch (nc.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    if (matrix.GetType() != typeof(GlosaMatrix33))
+                    {
+                        throw new System.ArgumentException("This NurbsCurve is made up of GlosaVector2's, please pass a GlosaMatrix33 to use for transforms", "matrix");
+                    }
+                    try
+                    {
+                        IntPtr pStr = transform_v2_curve(nc.Serialize(), (GlosaMatrix33)matrix);
+                        string data = Marshal.PtrToStringAnsi(pStr);
+                        return new GlosaNurbsCurve(ParseControlPoints(data, nc.dimension, "controlPoints").ToArray(),
+                            ParseNurbsComponents(data, "weights").ToArray(), ParseNurbsComponents(data, "knots").ToArray(),
+                            Convert.ToInt32(Utilities.parseData(data, "degree.")[0]));
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    if (matrix.GetType() != typeof(GlosaMatrix44))
+                    {
+                        throw new System.ArgumentException("This NurbsCurve is made up of GlosaVector3's, please pass a GlosaMatrix44 to use for transforms", "matrix");
+                    }
+                    try
+                    {
+                        IntPtr pStr = transform_v3_curve(nc.Serialize(), (GlosaMatrix44)matrix);
+                        string data = Marshal.PtrToStringAnsi(pStr);
+                        return new GlosaNurbsCurve(ParseControlPoints(data, nc.dimension, "controlPoints").ToArray(),
+                            ParseNurbsComponents(data, "weights").ToArray(), ParseNurbsComponents(data, "knots").ToArray(),
+                            Convert.ToInt32(Utilities.parseData(data, "degree.")[0]));
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    throw new System.ArgumentException("Cannot get ClosestPoint for Nurbs Curve made up of GlosaVector 4s", "dimension");
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="theta"></param>
+        public void RotateSelf(double theta)
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try
+                    {
+                        IntPtr pStr = rotate_v2_curve(this.Serialize(), theta);
+                        string data = Marshal.PtrToStringAnsi(pStr);
+                        this.controlPoints = ParseControlPoints(data, this.dimension, "controlPoints").ToArray();
+                        this.weights = ParseNurbsComponents(data, "weights").ToArray();
+                        this.knots = ParseNurbsComponents(data, "knots").ToArray();
+                        this.degree = Convert.ToInt32(Utilities.parseData(data, "degree.")[0]);
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                    break;
+                case 3:
+                    throw new System.ArgumentException("This is a 3 Dimensional Nurbs Curve please use Rotate Axis method", "dimension");
+                case 4:
+                    throw new System.ArgumentException("Cannot Rotate Nurbs Curve made up of GlosaVector 4s", "dimension");
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nc"></param>
+        /// <param name="theta"></param>
+        /// <returns></returns>
+        public static GlosaNurbsCurve Rotate(GlosaNurbsCurve nc, double theta)
+        {
+            switch (nc.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try
+                    {
+                        IntPtr pStr = rotate_v2_curve(nc.Serialize(), theta);
+                        string data = Marshal.PtrToStringAnsi(pStr);
+                        nc.controlPoints = ParseControlPoints(data, nc.dimension, "controlPoints").ToArray();
+                        nc.weights = ParseNurbsComponents(data, "weights").ToArray();
+                        nc.knots = ParseNurbsComponents(data, "knots").ToArray();
+                        nc.degree = Convert.ToInt32(Utilities.parseData(data, "degree.")[0]);
+                        return nc;
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    throw new System.ArgumentException("This is a 3 Dimensional Nurbs Curve please use Rotate Axis method", "dimension");
+                case 4:
+                    throw new System.ArgumentException("Cannot Rotate Nurbs Curve made up of GlosaVector 4s", "dimension");
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="axis"></param>
+        /// <param name="theta"></param>
+        public void RotateAxisSelf(GlosaVector3 axis, double theta)
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    throw new System.ArgumentException("This is a 2 Dimensional Nurbs Curve please use Rotate method", "dimension");
+                case 3:
+                    try
+                    {
+                        IntPtr pStr = rotate_v3_curve(this.Serialize(), axis, theta);
+                        string data = Marshal.PtrToStringAnsi(pStr);
+                        this.controlPoints = ParseControlPoints(data, this.dimension, "controlPoints").ToArray();
+                        this.weights = ParseNurbsComponents(data, "weights").ToArray();
+                        this.knots = ParseNurbsComponents(data, "knots").ToArray();
+                        this.degree = Convert.ToInt32(Utilities.parseData(data, "degree.")[0]);
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                    break;
+                case 4:
+                    throw new System.ArgumentException("Cannot Rotate Nurbs Curve made up of GlosaVector 4s", "dimension");
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nc"></param>
+        /// <param name="axis"></param>
+        /// <param name="theta"></param>
+        /// <returns></returns>
+        public static GlosaNurbsCurve RotateAxis(GlosaNurbsCurve nc, GlosaVector3 axis, double theta)
+        {
+            switch (nc.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    throw new System.ArgumentException("This is a 2 Dimensional Nurbs Curve please use Rotate method", "dimension");
+                case 3:
+                    try
+                    {
+                        IntPtr pStr = rotate_v3_curve(nc.Serialize(), axis, theta);
+                        string data = Marshal.PtrToStringAnsi(pStr);
+                        nc.controlPoints = ParseControlPoints(data, nc.dimension, "controlPoints").ToArray();
+                        nc.weights = ParseNurbsComponents(data, "weights").ToArray();
+                        nc.knots = ParseNurbsComponents(data, "knots").ToArray();
+                        nc.degree = Convert.ToInt32(Utilities.parseData(data, "degree.")[0]);
+                        return nc;
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    throw new System.ArgumentException("Cannot Rotate Nurbs Curve made up of GlosaVector 4s", "dimension");
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sx"></param>
+        /// <param name="sy"></param>
+        /// <param name="sz"></param>
+        public void ScaleSelf(double sx, double sy, double sz = 1)
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try
+                    {
+                        IntPtr pStr = scale_v2_curve(this.Serialize(), sx, sy);
+                        string data = Marshal.PtrToStringAnsi(pStr);
+                        this.controlPoints = ParseControlPoints(data, this.dimension, "controlPoints").ToArray();
+                        this.weights = ParseNurbsComponents(data, "weights").ToArray();
+                        this.knots = ParseNurbsComponents(data, "knots").ToArray();
+                        this.degree = Convert.ToInt32(Utilities.parseData(data, "degree.")[0]);
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                    break;
+                case 3:
+                    try
+                    {
+                        IntPtr pStr = scale_v3_curve(this.Serialize(), sx, sy, sz);
+                        string data = Marshal.PtrToStringAnsi(pStr);
+                        this.controlPoints = ParseControlPoints(data, this.dimension, "controlPoints").ToArray();
+                        this.weights = ParseNurbsComponents(data, "weights").ToArray();
+                        this.knots = ParseNurbsComponents(data, "knots").ToArray();
+                        this.degree = Convert.ToInt32(Utilities.parseData(data, "degree.")[0]);
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                    break;
+                case 4:
+                    throw new System.ArgumentException("Cannot Scale Nurbs Curve made up of GlosaVector 4s", "dimension");
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nc"></param>
+        /// <param name="sx"></param>
+        /// <param name="sy"></param>
+        /// <param name="sz"></param>
+        /// <returns></returns>
+        public static GlosaNurbsCurve ScaleNew(GlosaNurbsCurve nc, double sx, double sy, double sz = 1)
+        {
+            switch (nc.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try
+                    {
+                        IntPtr pStr = scale_v2_curve(nc.Serialize(), sx, sy);
+                        string data = Marshal.PtrToStringAnsi(pStr);
+                        nc.controlPoints = ParseControlPoints(data, nc.dimension, "controlPoints").ToArray();
+                        nc.weights = ParseNurbsComponents(data, "weights").ToArray();
+                        nc.knots = ParseNurbsComponents(data, "knots").ToArray();
+                        nc.degree = Convert.ToInt32(Utilities.parseData(data, "degree.")[0]);
+                        return nc;
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try
+                    {
+                        IntPtr pStr = scale_v3_curve(nc.Serialize(), sx, sy, sz);
+                        string data = Marshal.PtrToStringAnsi(pStr);
+                        nc.controlPoints = ParseControlPoints(data, nc.dimension, "controlPoints").ToArray();
+                        nc.weights = ParseNurbsComponents(data, "weights").ToArray();
+                        nc.knots = ParseNurbsComponents(data, "knots").ToArray();
+                        nc.degree = Convert.ToInt32(Utilities.parseData(data, "degree.")[0]);
+                        return nc;
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    throw new System.ArgumentException("Cannot Scale Nurbs Curve made up of GlosaVector 4s", "dimension");
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="v"></param>
+        public void TranslateSelf(IVector v)
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    if (v.Dimension() != 2) throw new System.ArgumentException("NurbsCurve is made up of GlosaVector2s please input GlosaVector2 to use for Translate", "IVector");
+                    try
+                    {
+                        IntPtr pStr = translate_v2_curve(this.Serialize(), (GlosaVector2)v);
+                        string data = Marshal.PtrToStringAnsi(pStr);
+                        this.controlPoints = ParseControlPoints(data, this.dimension, "controlPoints").ToArray();
+                        this.weights = ParseNurbsComponents(data, "weights").ToArray();
+                        this.knots = ParseNurbsComponents(data, "knots").ToArray();
+                        this.degree = Convert.ToInt32(Utilities.parseData(data, "degree.")[0]);
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                    break;
+                case 3:
+                    if (v.Dimension() != 3) throw new System.ArgumentException("NurbsCurve is made up of GlosaVector3s please input GlosaVector3 to use for Translate", "IVector");
+                    try
+                    {
+                        IntPtr pStr = translate_v3_curve(this.Serialize(), (GlosaVector3)v);
+                        string data = Marshal.PtrToStringAnsi(pStr);
+                        this.controlPoints = ParseControlPoints(data, this.dimension, "controlPoints").ToArray();
+                        this.weights = ParseNurbsComponents(data, "weights").ToArray();
+                        this.knots = ParseNurbsComponents(data, "knots").ToArray();
+                        this.degree = Convert.ToInt32(Utilities.parseData(data, "degree.")[0]);
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                    break;
+                case 4:
+                    throw new System.ArgumentException("Cannot Translate Nurbs Curve made up of GlosaVector 4s", "dimension");
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nc"></param>
+        /// <param name="v"></param>
+        /// <returns></returns>
+        public static GlosaNurbsCurve Translate(GlosaNurbsCurve nc, IVector v)
+        {
+            switch (nc.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    if (v.Dimension() != 2) throw new System.ArgumentException("NurbsCurve is made up of GlosaVector2s please input GlosaVector2 to use for Translate", "IVector");
+                    try
+                    {
+                        IntPtr pStr = translate_v2_curve(nc.Serialize(), (GlosaVector2)v);
+                        string data = Marshal.PtrToStringAnsi(pStr);
+                        nc.controlPoints = ParseControlPoints(data, nc.dimension, "controlPoints").ToArray();
+                        nc.weights = ParseNurbsComponents(data, "weights").ToArray();
+                        nc.knots = ParseNurbsComponents(data, "knots").ToArray();
+                        nc.degree = Convert.ToInt32(Utilities.parseData(data, "degree.")[0]);
+                        return nc;
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    if (v.Dimension() != 3) throw new System.ArgumentException("NurbsCurve is made up of GlosaVector3s please input GlosaVector3 to use for Translate", "IVector");
+                    try
+                    {
+                        IntPtr pStr = translate_v3_curve(nc.Serialize(), (GlosaVector3)v);
+                        string data = Marshal.PtrToStringAnsi(pStr);
+                        nc.controlPoints = ParseControlPoints(data, nc.dimension, "controlPoints").ToArray();
+                        nc.weights = ParseNurbsComponents(data, "weights").ToArray();
+                        nc.knots = ParseNurbsComponents(data, "knots").ToArray();
+                        nc.degree = Convert.ToInt32(Utilities.parseData(data, "degree.")[0]);
+                        return nc;
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    throw new System.ArgumentException("Cannot Translate Nurbs Curve made up of GlosaVector 4s", "dimension");
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
     }
 }
