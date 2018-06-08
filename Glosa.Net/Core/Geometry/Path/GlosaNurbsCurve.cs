@@ -545,24 +545,44 @@ namespace Glosa.Net.Core.Geometry.Path
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vector"></param>
+        /// <returns></returns>
         public double Weight(GlosaVector2 vector)
         {
             try { return weight_v2_curve(vector); }
             catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vector"></param>
+        /// <returns></returns>
         public double Weight(GlosaVector3 vector)
         {
             try { return weight_v3_curve(vector); }
             catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vector"></param>
+        /// <returns></returns>
         public double Weight(GlosaVector4 vector)
         {
             try { return weight_v4_curve(vector); }
             catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="points"></param>
+        /// <returns></returns>
         public List<double> Weights(GlosaVector2[] points)
         {
             try
@@ -574,6 +594,11 @@ namespace Glosa.Net.Core.Geometry.Path
             catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="points"></param>
+        /// <returns></returns>
         public List<double> Weights(GlosaVector3[] points)
         {
             try
@@ -585,6 +610,11 @@ namespace Glosa.Net.Core.Geometry.Path
             catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="points"></param>
+        /// <returns></returns>
         public List<double> Weights(GlosaVector4[] points)
         {
             try
@@ -631,6 +661,120 @@ namespace Glosa.Net.Core.Geometry.Path
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// Determines whether the specified GlosaNurbsCurve has the same value as the present GlosaNurbsCurve.
+        /// </summary>
+        /// <param name="curve">The other GlosaNurbsCurve to compare</param>
+        /// <returns>The result</returns>
+        public bool Equals(GlosaNurbsCurve curve)
+        {
+            return this == curve;
+        }
+
+        /// <summary>
+        /// Determines whether two GlosaNurbsCurve have equal values.
+        /// </summary>
+        /// <param name="a">The first GlosaNurbsCurve</param>
+        /// <param name="b">The second GlosaNurbsCurve</param>
+        /// <returns>True if components of the two GlosaNurbsCurve are pairwise equal; otherwise false.</returns>
+        public static bool operator ==(GlosaNurbsCurve a, GlosaNurbsCurve b)
+        {
+            switch (a.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    if (b.dimension != 2) { return false; }
+                    try { return equals_v2_curve(a.Serialize(), b.Serialize()); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    if (b.dimension != 3) { return false; }
+                    try { return equals_v3_curve(a.Serialize(), b.Serialize()); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    throw new System.ArgumentException("Equals is not set up for NurbsCurve made up of GlosaVectors of dimension 4", "dimension");
+                default: throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// Determines whether two GlosaNurbsCurve have different values.
+        /// </summary>
+        /// <param name="a">The first GlosaNurbsCurve</param>
+        /// <param name="b">The second GlosaNurbsCurve</param>
+        /// <returns>True if any component of the two GlosaNurbsCurve is pairwise different; otherwise false.</returns>
+        public static bool operator !=(GlosaNurbsCurve a, GlosaNurbsCurve b)
+        {
+            return !(a == b);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nc"></param>
+        /// <returns></returns>
+        public static List<IVector> WeightedControlPoints(GlosaNurbsCurve nc)
+        {
+            switch (nc.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try
+                    {
+                        IntPtr pStr = weightedControlPoints_v2_curve(nc.Serialize());
+                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), nc.dimension + 1, "points").ToList();
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try
+                    {
+                        IntPtr pStr = weightedControlPoints_v3_curve(nc.Serialize());
+                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), nc.dimension + 1, "points").ToList();
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    throw new System.ArgumentException("Cannot get weighted control points for Nurbs Curve made up of GlosaVector 4s", "dimension");
+                default: throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public List<IVector> WeightedControlPoints()
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try
+                    {
+                        IntPtr pStr = weightedControlPoints_v2_curve(this.Serialize());
+                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), this.dimension + 1, "points").ToList();
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try
+                    {
+                        IntPtr pStr = weightedControlPoints_v3_curve(this.Serialize());
+                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), this.dimension + 1, "points").ToList();
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    throw new System.ArgumentException("Cannot get weighted control points for Nurbs Curve made up of GlosaVector 4s", "dimension");
+                default: throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
             }
         }
     }
