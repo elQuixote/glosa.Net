@@ -118,7 +118,18 @@ namespace Glosa.Net.Core.Geometry.Path
         /// <returns></returns>
         private static List<double> ParseNurbsComponents(string data, string key)
         {
-            return Utilities.parseData(data, key).Select(x => double.Parse(x)).ToList();
+            return Utilities.parseData(data, key + ".*").Select(x => double.Parse(x)).ToList();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        private static List<double> ParseArray(string data, string key)
+        {
+            return Utilities.parseData(data, key + ".*").Select(x => double.Parse(x)).ToList();
         }
 
         /// <summary>
