@@ -511,7 +511,6 @@ namespace Glosa.Net.Core.Geometry.Path
         /// 
         /// </summary>
         /// <param name="points"></param>
-        /// <param name="weights"></param>
         /// <returns></returns>
         public static List<GlosaVector3> Dehomogenize(GlosaVector4[] points)
         {
