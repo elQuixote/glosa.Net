@@ -669,7 +669,7 @@ namespace Glosa.Net.Core.Geometry.Path
         /// </summary>
         /// <param name="nc"></param>
         /// <returns></returns>
-        public List<double> Weights(GlosaNurbsCurve nc)
+        public static List<double> Weights(GlosaNurbsCurve nc)
         {
             switch (nc.dimension)
             {
@@ -695,6 +695,43 @@ namespace Glosa.Net.Core.Geometry.Path
                     try
                     {
                         IntPtr pStr = weights_v4_curve(GenerateJsonFromPoints(nc.controlPoints, 3));
+                        return ParseArray(Marshal.PtrToStringAnsi(pStr), "data");
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public List<double> Weights()
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("Cannot generate weights of Vector0s", "dimension");
+                case 1:
+                    throw new System.ArgumentException("Cannot generate weights of Vector1s", "dimension");
+                case 2:
+                    try
+                    {
+                        IntPtr pStr = weights_v2_curve(GenerateJsonFromPoints(this.controlPoints, 3));
+                        return ParseArray(Marshal.PtrToStringAnsi(pStr), "data");
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try
+                    {
+                        IntPtr pStr = weights_v3_curve(GenerateJsonFromPoints(this.controlPoints, 3));
+                        return ParseArray(Marshal.PtrToStringAnsi(pStr), "data");
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    try
+                    {
+                        IntPtr pStr = weights_v4_curve(GenerateJsonFromPoints(this.controlPoints, 3));
                         return ParseArray(Marshal.PtrToStringAnsi(pStr), "data");
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
@@ -736,7 +773,7 @@ namespace Glosa.Net.Core.Geometry.Path
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 case 4:
                     throw new System.ArgumentException("Equals is not set up for NurbsCurve made up of GlosaVectors of dimension 4", "dimension");
-                default: throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
             }
         }
 
@@ -780,7 +817,7 @@ namespace Glosa.Net.Core.Geometry.Path
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 case 4:
                     throw new System.ArgumentException("Cannot get weighted control points for Nurbs Curve made up of GlosaVector 4s", "dimension");
-                default: throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
             }
         }
 
@@ -812,7 +849,451 @@ namespace Glosa.Net.Core.Geometry.Path
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 case 4:
                     throw new System.ArgumentException("Cannot get weighted control points for Nurbs Curve made up of GlosaVector 4s", "dimension");
-                default: throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="u"></param>
+        /// <returns></returns>
+        public IVector RationalSample(double u)
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try { return rationalSample_v2_curve(this.Serialize(), u); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try { return rationalSample_v3_curve(this.Serialize(), u); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    throw new System.ArgumentException("Cannot get RationalSample for Nurbs Curve made up of GlosaVector 4s", "dimension");
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nc"></param>
+        /// <param name="u"></param>
+        /// <returns></returns>
+        public static IVector RationalSample(GlosaNurbsCurve nc, double u)
+        {
+            switch (nc.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try { return rationalSample_v2_curve(nc.Serialize(), u); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try { return rationalSample_v3_curve(nc.Serialize(), u); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    throw new System.ArgumentException("Cannot get RationalSample for Nurbs Curve made up of GlosaVector 4s", "dimension");
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nc"></param>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public static List<IVector> RationalSample(GlosaNurbsCurve nc, int n)
+        {
+            switch (nc.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try
+                    {
+                        IntPtr pStr = rationalRegularSample_v2_curve(nc.Serialize(), n);
+                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), nc.dimension + 1, "points").ToList();
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try
+                    {
+                        IntPtr pStr = rationalRegularSample_v3_curve(nc.Serialize(), n);
+                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), nc.dimension + 1, "points").ToList();
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    throw new System.ArgumentException("Cannot get RationalSample for Nurbs Curve made up of GlosaVector 4s", "dimension");
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public List<IVector> RationalSample(int n)
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try
+                    {
+                        IntPtr pStr = rationalRegularSample_v2_curve(this.Serialize(), n);
+                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), this.dimension + 1, "points").ToList();
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try
+                    {
+                        IntPtr pStr = rationalRegularSample_v3_curve(this.Serialize(), n);
+                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), this.dimension + 1, "points").ToList();
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    throw new System.ArgumentException("Cannot get RationalSample for Nurbs Curve made up of GlosaVector 4s", "dimension");
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// Rational Sample Derrivatives
+        /// </summary>
+        /// <param name="nc"></param>
+        /// <param name="u"></param>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public static List<IVector> RationalSample(GlosaNurbsCurve nc, double u, int n)
+        {
+            switch (nc.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try
+                    {
+                        IntPtr pStr = rationalSampleDerrivatives_v2_curve(nc.Serialize(), u, n);
+                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), nc.dimension + 1, "points").ToList();
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try
+                    {
+                        IntPtr pStr = rationalSampleDerrivatives_v3_curve(nc.Serialize(), u, n);
+                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), nc.dimension + 1, "points").ToList();
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    throw new System.ArgumentException("Cannot get RationalSample for Nurbs Curve made up of GlosaVector 4s", "dimension");
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// Rational Sample Derrivatives
+        /// </summary>
+        /// <param name="u"></param>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public List<IVector> RationalSample(double u, int n)
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try
+                    {
+                        IntPtr pStr = rationalSampleDerrivatives_v2_curve(this.Serialize(), u, n);
+                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), this.dimension + 1, "points").ToList();
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try
+                    {
+                        IntPtr pStr = rationalSampleDerrivatives_v3_curve(this.Serialize(), u, n);
+                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), this.dimension + 1, "points").ToList();
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    throw new System.ArgumentException("Cannot get RationalSample for Nurbs Curve made up of GlosaVector 4s", "dimension");
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="u"></param>
+        /// <returns></returns>
+        public IVector Sample(double u)
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try { return sample_v2_curve(this.Serialize(), u); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try { return sample_v3_curve(this.Serialize(), u); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    throw new System.ArgumentException("Cannot get Sample for Nurbs Curve made up of GlosaVector 4s", "dimension");
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nc"></param>
+        /// <param name="u"></param>
+        /// <returns></returns>
+        public static IVector Sample(GlosaNurbsCurve nc, double u)
+        {
+            switch (nc.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try { return sample_v2_curve(nc.Serialize(), u); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try { return sample_v3_curve(nc.Serialize(), u); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    throw new System.ArgumentException("Cannot get Sample for Nurbs Curve made up of GlosaVector 4s", "dimension");
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// Regular Sample
+        /// </summary>
+        /// <param name="uStart"></param>
+        /// <param name="uEnd"></param>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public List<IVector> Sample(double uStart, double uEnd, int n)
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try
+                    {
+                        IntPtr pStr = regularSample_v2_curve(this.Serialize(), uStart, uEnd, n);
+                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), this.dimension, "points").ToList();
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try
+                    {
+                        IntPtr pStr = regularSample_v3_curve(this.Serialize(), uStart, uEnd, n);
+                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), this.dimension, "points").ToList();
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    throw new System.ArgumentException("Cannot get RegularSample for Nurbs Curve made up of GlosaVector 4s", "dimension");
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// Regular Sample
+        /// </summary>
+        /// <param name="nc"></param>
+        /// <param name="uStart"></param>
+        /// <param name="uEnd"></param>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public static List<IVector> Sample(GlosaNurbsCurve nc, double uStart, double uEnd, int n)
+        {
+            switch (nc.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try
+                    {
+                        IntPtr pStr = regularSample_v2_curve(nc.Serialize(), uStart, uEnd, n);
+                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), nc.dimension, "points").ToList();
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try
+                    {
+                        IntPtr pStr = regularSample_v3_curve(nc.Serialize(), uStart, uEnd, n);
+                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), nc.dimension, "points").ToList();
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    throw new System.ArgumentException("Cannot get RegularSample for Nurbs Curve made up of GlosaVector 4s", "dimension");
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// Regular Sample 2
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public List<IVector> Sample(int n)
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try
+                    {
+                        IntPtr pStr = regularSample2_v2_curve(this.Serialize(), n);
+                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), this.dimension, "points").ToList();
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try
+                    {
+                        IntPtr pStr = regularSample2_v3_curve(this.Serialize(), n);
+                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), this.dimension, "points").ToList();
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    throw new System.ArgumentException("Cannot get RegularSample for Nurbs Curve made up of GlosaVector 4s", "dimension");
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// Regular Sample 2
+        /// </summary>
+        /// <param name="nc"></param>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public static List<IVector> Sample(GlosaNurbsCurve nc, int n)
+        {
+            switch (nc.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try
+                    {
+                        IntPtr pStr = regularSample2_v2_curve(nc.Serialize(), n);
+                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), nc.dimension, "points").ToList();
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try
+                    {
+                        IntPtr pStr = regularSample2_v3_curve(nc.Serialize(), n);
+                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), nc.dimension, "points").ToList();
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    throw new System.ArgumentException("Cannot get RegularSample for Nurbs Curve made up of GlosaVector 4s", "dimension");
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// Sample Derrivatives
+        /// </summary>
+        /// <param name="u"></param>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public List<IVector> Sample(double u, int n)
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try
+                    {
+                        IntPtr pStr = sampleDerivatives_v2_curve(this.Serialize(), u, n);
+                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), this.dimension, "points").ToList();
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try
+                    {
+                        IntPtr pStr = sampleDerivatives_v3_curve(this.Serialize(), u, n);
+                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), this.dimension, "points").ToList();
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    throw new System.ArgumentException("Cannot get Sample Derrivatives for Nurbs Curve made up of GlosaVector 4s", "dimension");
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// Sample Derrivatives
+        /// </summary>
+        /// <param name="nc"></param>
+        /// <param name="u"></param>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public static List<IVector> Sample(GlosaNurbsCurve nc, double u, int n)
+        {
+            switch (nc.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try
+                    {
+                        IntPtr pStr = sampleDerivatives_v2_curve(nc.Serialize(), u, n);
+                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), nc.dimension, "points").ToList();
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try
+                    {
+                        IntPtr pStr = sampleDerivatives_v3_curve(nc.Serialize(), u, n);
+                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), nc.dimension, "points").ToList();
+                    }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    throw new System.ArgumentException("Cannot get Sample Derrivatives for Nurbs Curve made up of GlosaVector 4s", "dimension");
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
             }
         }
     }
