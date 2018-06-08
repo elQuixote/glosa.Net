@@ -214,6 +214,19 @@ namespace Glosa.Net.Core.Geometry.Path
             this.dimension = controlPoints[0].Dimension();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static GlosaNurbsCurve Deserialize(string data)
+        {
+            List<string> dataList = Utilities.parseData(data, "controlPoints.*");
+            List<string> dataX2 = Utilities.parseData(data, "controlPoints.*.*");
+            return new GlosaNurbsCurve(ParseControlPoints(data, (dataX2.Count / dataList.Count), "controlPoints").ToArray(),
+                ParseNurbsComponents(data, "weights").ToArray(), ParseNurbsComponents(data, "knots").ToArray(), Convert.ToInt32(Utilities.parseData(data, "degree.")[0]));
+        }
+
         private static string GenerateJsonFromPoints(IVector[] points, int degree)
         {
             string s = "";
@@ -1918,6 +1931,103 @@ namespace Glosa.Net.Core.Geometry.Path
                 case 4:
                     throw new System.ArgumentException("Cannot Translate Nurbs Curve made up of GlosaVector 4s", "dimension");
                 default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public int Hash()
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try { return hash_v2_curve(this.Serialize()); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try { return hash_v3_curve(this.Serialize()); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    throw new System.ArgumentException("Cannot Get Hash for Nurbs Curve made up of GlosaVector 4s", "dimension");
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public GlosaNurbsCurve Copy()
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try { IntPtr pStr = copy_v2_curve(this.Serialize()); return Deserialize(Marshal.PtrToStringAnsi(pStr)); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try { IntPtr pStr = copy_v3_curve(this.Serialize()); return Deserialize(Marshal.PtrToStringAnsi(pStr)); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    throw new System.ArgumentException("Cannot Copy Nurbs Curve made up of GlosaVector 4s", "dimension");
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nc"></param>
+        /// <returns></returns>
+        public static GlosaNurbsCurve Copy(GlosaNurbsCurve nc)
+        {
+            switch (nc.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try { IntPtr pStr = copy_v2_curve(nc.Serialize()); return Deserialize(Marshal.PtrToStringAnsi(pStr)); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try { IntPtr pStr = copy_v3_curve(nc.Serialize()); return Deserialize(Marshal.PtrToStringAnsi(pStr)); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    throw new System.ArgumentException("Cannot Copy for Nurbs Curve made up of GlosaVector 4s", "dimension");
+                default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public string Stringify()
+        {
+            switch (this.dimension)
+            {
+                case 0:
+                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+                case 1:
+                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+                case 2:
+                    try { IntPtr pStr = stringify_v2_curve(this.Serialize()); return Marshal.PtrToStringAnsi(pStr); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 3:
+                    try { IntPtr pStr = stringify_v3_curve(this.Serialize()); return Marshal.PtrToStringAnsi(pStr); }
+                    catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+                case 4:
+                    throw new System.ArgumentException("Cannot Stringify Nurbs Curve made up of GlosaVector 4s", "dimension");
+                default: throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
             }
         }
     }
