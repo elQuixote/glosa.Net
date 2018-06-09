@@ -54,6 +54,7 @@
     <Compile Include="Core\Geometry\GlosaVector3.cs" />
     <Compile Include="Core\Geometry\GlosaMatrix33.cs" />
     <Compile Include="Core\Geometry\GlosaVector4.cs" />
+    <Compile Include="Core\Geometry\Path\GlosaNurbsCurve.cs" />
     <Compile Include="Core\Geometry\Shapes\GlosaCircle.cs" />
     <Compile Include="Core\Helpers\GlosaObject.cs" />
     <Compile Include="Core\Helpers\Json\JsonNetValueSystem.cs" />

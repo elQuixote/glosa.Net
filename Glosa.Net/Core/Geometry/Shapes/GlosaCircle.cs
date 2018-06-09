@@ -497,7 +497,7 @@ namespace Glosa.Net.Core.Geometry.Shapes
 
         /// <summary>
         /// Determines whether two GlosaCircle have different values.
-        /// </summary
+        /// </summary>
         /// <param name="a">The first GlosaCircle</param>
         /// <param name="b">The second GlosaCircle</param>
         /// <returns>True if any component of the two GlosaCircle is pairwise different; otherwise false.</returns>
