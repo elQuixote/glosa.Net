@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.InteropServices;
-using Newtonsoft.Json;
 using Glosa.Net.Core.Interfaces;
 using Glosa.Net.Core.Helpers;
 using Glosa.Net.Core.Helpers.Json;
+using Glosa.Net.Core.Geometry.Path;
+using Glosa.Net.Core.Geometry.Vector;
+using Glosa.Net.Core.Geometry.Matrix;
+using Glosa.Net.Core.Geometry.Shape;
 
-namespace Glosa.Net.Core.Geometry
+namespace Glosa.Net.Core.Geometry.Polygon
 {
     public class GlosaPolygon : GlosaObject, ICopy<GlosaPolygon>, IDimension<GlosaPolygon>, IHash<GlosaPolygon>, IEquals<GlosaPolygon>, IString<GlosaPolygon>,
         ITransform<GlosaPolygon>, IClosest<GlosaPolygon>, IVertices<GlosaPolygon>, IShape2<GlosaPolygon>

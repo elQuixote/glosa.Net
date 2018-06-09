@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using Glosa.Net.Core.Interfaces;
+using Glosa.Net.Core.Geometry.Vector;
 
-namespace Glosa.Net.Core.Geometry
+namespace Glosa.Net.Core.Geometry.Matrix
 {
     /// <summary>
     /// Implements a simple row-major 2d matrix (3x3) matrix struct
@@ -31,7 +28,7 @@ namespace Glosa.Net.Core.Geometry
         [DllImport("wrapper_matrix.dll")]
         private static extern int hash_33(GlosaMatrix33 m);
         [DllImport("wrapper_matrix.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr stringify_33(GlosaMatrix33 m);
+        private static extern IntPtr stringify_33(GlosaMatrix33 m);
         [DllImport("wrapper_matrix.dll")]
         private static extern GlosaMatrix33 transposeSelf_33(GlosaMatrix33 m);
         [DllImport("wrapper_matrix.dll")]

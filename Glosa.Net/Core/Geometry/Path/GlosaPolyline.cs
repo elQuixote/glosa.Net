@@ -9,7 +9,7 @@ using Glosa.Net.Core.Interfaces;
 using Glosa.Net.Core.Helpers;
 using Glosa.Net.Core.Helpers.Json;
 
-namespace Glosa.Net.Core.Geometry
+namespace Glosa.Net.Core.Geometry.Path
 {
     /// <summary>
     /// 

@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using Glosa.Net.Core.Interfaces;
+using Glosa.Net.Core.Geometry.Vector;
+using Glosa.Net.Core.Geometry.Matrix;
 
-namespace Glosa.Net.Core.Geometry
+namespace Glosa.Net.Core.Geometry.Quaternion
 {
     /// <summary>
     /// Represents the four coefficient values in a quaternion.
@@ -37,7 +35,7 @@ namespace Glosa.Net.Core.Geometry
         [DllImport("wrapper_quaternion.dll")]
         private static extern int hash_quat(GlosaQuaternion q);
         [DllImport("wrapper_quaternion.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr stringify_quat(GlosaQuaternion q);
+        private static extern IntPtr stringify_quat(GlosaQuaternion q);
         [DllImport("wrapper_quaternion.dll")]
         private static extern double magnitudeSquared_quat(GlosaQuaternion q);
         [DllImport("wrapper_quaternion.dll")]
