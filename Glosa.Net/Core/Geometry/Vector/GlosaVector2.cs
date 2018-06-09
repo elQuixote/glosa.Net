@@ -1,12 +1,9 @@
 ﻿using Glosa.Net.Core.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.InteropServices;
+using Glosa.Net.Core.Geometry.Matrix;
 
-namespace Glosa.Net.Core.Geometry
+namespace Glosa.Net.Core.Geometry.Vector
 {
     /// <summary>
     /// Represents the two components of a vector in two-dimensional space
@@ -834,46 +831,94 @@ namespace Glosa.Net.Core.Geometry
             return fromPolar_v2(r, theta);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
         public GlosaVector2 ScaleNew(double s)
         {
             return scaleNew_v2(this, s);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="s"></param>
         public void ScaleSelf(double s)
         {
             this = scaleSelf_v2(this, s);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sx"></param>
+        /// <param name="sy"></param>
+        /// <param name="sz"></param>
+        /// <param name="sw"></param>
+        /// <returns></returns>
         public GlosaVector2 ScaleNew(double sx, double sy, double sz = 0, double sw = 0)
         {
             return scaleNewComponent_v2(this, sx, sy);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sx"></param>
+        /// <param name="sy"></param>
+        /// <param name="sz"></param>
+        /// <param name="sw"></param>
         public void ScaleSelf(double sx, double sy, double sz = 0, double sw = 0)
         {
             this = scaleSelfComponent_v2(this, sx, sy);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="theta"></param>
+        /// <param name="component"></param>
+        /// <returns></returns>
         public GlosaVector2 RotateNew(float theta, int component = 0)
         {
             return rotateNew_v2(this, theta);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="theta"></param>
+        /// <param name="component"></param>
         public void RotateSelf(float theta, int component = 0)
         {
             this = rotateSelf_v2(this, theta); 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vector"></param>
         public void Translate(IVector vector)
         {
             this = translate_v2(this, (GlosaVector2)vector);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
         public GlosaVector2 TransformNew(IMatrixes matrix)
         {
             return transformNew_v2(this, (GlosaMatrix33)matrix);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
         public void TransformSelf(IMatrixes matrix)
         {
             this = transformSelf_v2(this, (GlosaMatrix33)matrix);

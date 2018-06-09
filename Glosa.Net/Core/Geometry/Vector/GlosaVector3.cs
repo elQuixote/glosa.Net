@@ -1,12 +1,9 @@
 ﻿using Glosa.Net.Core.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.InteropServices;
+using Glosa.Net.Core.Geometry.Matrix;
 
-namespace Glosa.Net.Core.Geometry
+namespace Glosa.Net.Core.Geometry.Vector
 {
     /// <summary>
     /// Represents the three components of a vector in three-dimensional space
@@ -894,26 +891,56 @@ namespace Glosa.Net.Core.Geometry
             return fromSpherical_v3(r, theta, phi);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
         public GlosaVector3 ScaleNew(double s)
         {
             return scaleNew_v3(this, s);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="s"></param>
         public void ScaleSelf(double s)
         {
             this = scaleSelf_v3(this, s);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sx"></param>
+        /// <param name="sy"></param>
+        /// <param name="sz"></param>
+        /// <param name="sw"></param>
+        /// <returns></returns>
         public GlosaVector3 ScaleNew(double sx, double sy, double sz, double sw = 0)
         {
             return scaleNewComponent_v3(this, sx, sy, sz);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sx"></param>
+        /// <param name="sy"></param>
+        /// <param name="sz"></param>
+        /// <param name="sw"></param>
         public void ScaleSelf(double sx, double sy, double sz, double sw = 0)
         {
             this = scaleSelfComponent_v3(this, sx, sy, sz);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="theta"></param>
+        /// <param name="component"></param>
+        /// <returns></returns>
         public GlosaVector3 RotateNew(float theta, int component = 0)
         {
             if (component == 0) { return rotateXNew_v3(this, theta); }
@@ -922,6 +949,11 @@ namespace Glosa.Net.Core.Geometry
             else { throw new System.ArgumentException("Component value must be between 0 and 2 representing x, y, z"); }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="theta"></param>
+        /// <param name="component"></param>
         public void RotateSelf(float theta, int component = 0)
         {
             if (component == 0){ this = rotateXSelf_v3(this, theta);}
@@ -930,31 +962,61 @@ namespace Glosa.Net.Core.Geometry
             else { throw new System.ArgumentException("Component value must be between 0 and 2 representing x, y, z"); }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vector"></param>
         public void Translate(IVector vector)
         {
             this = translate_v3(this, (GlosaVector3)vector);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
         public GlosaVector3 TransformNew(IMatrixes matrix)
         {
             return transformNew_v3(this, (GlosaMatrix44)matrix);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
         public void TransformSelf(IMatrixes matrix)
         {
             this = transformSelf_v3(this, (GlosaMatrix44)matrix);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="axis"></param>
+        /// <param name="theta"></param>
         public void RotateAxis(GlosaVector3 axis, double theta)
         {
             this = rotateAxis_v3(this, axis, theta);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="v1"></param>
+        /// <param name="v2"></param>
+        /// <param name="v3"></param>
+        /// <returns></returns>
         public static bool AreCollinear(GlosaVector3 v1, GlosaVector3 v2, GlosaVector3 v3)
         {
             return areCollinear_v(v1, v2, v3);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="array"></param>
+        /// <returns></returns>
         public static bool ArePlanar(GlosaVector3[] array)
         {
             return arePlanar_v(array);

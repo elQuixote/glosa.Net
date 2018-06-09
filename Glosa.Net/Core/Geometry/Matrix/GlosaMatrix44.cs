@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using Glosa.Net.Core.Interfaces;
+using Glosa.Net.Core.Geometry.Vector;
+using Glosa.Net.Core.Geometry.Quaternion;
 
-namespace Glosa.Net.Core.Geometry
+namespace Glosa.Net.Core.Geometry.Matrix
 {
     /// <summary>
     /// Implements a simple row-major 3d matrix (4x4) matrix struct
@@ -32,7 +30,7 @@ namespace Glosa.Net.Core.Geometry
         [DllImport("wrapper_matrix.dll")]
         private static extern int hash_44(GlosaMatrix44 m);
         [DllImport("wrapper_matrix.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr stringify_44(GlosaMatrix44 m);
+        private static extern IntPtr stringify_44(GlosaMatrix44 m);
         [DllImport("wrapper_matrix.dll")]
         private static extern GlosaMatrix44 transposeSelf_44(GlosaMatrix44 m);
         [DllImport("wrapper_matrix.dll")]

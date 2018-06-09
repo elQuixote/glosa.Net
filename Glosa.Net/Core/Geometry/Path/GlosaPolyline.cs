@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.InteropServices;
-using Newtonsoft.Json;
 using Glosa.Net.Core.Interfaces;
 using Glosa.Net.Core.Helpers;
 using Glosa.Net.Core.Helpers.Json;
+using Glosa.Net.Core.Geometry.Vector;
+using Glosa.Net.Core.Geometry.Matrix;
+using Glosa.Net.Core.Geometry.Shape;
+using Glosa.Net.Core.Geometry.Polygon;
 
 namespace Glosa.Net.Core.Geometry.Path
 {
@@ -1301,11 +1301,10 @@ namespace Glosa.Net.Core.Geometry.Path
                 default: throw new System.ArgumentException("Polyline has an unvalid dimension", "dimension");
             }
         }
-
+        
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="obj"></param>
         /// <returns></returns>
         public GlosaPolyline ToPolyline()
         {
@@ -1316,7 +1315,6 @@ namespace Glosa.Net.Core.Geometry.Path
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="obj"></param>
         /// <returns></returns>
         public GlosaPolygon ToPolygon()
         {

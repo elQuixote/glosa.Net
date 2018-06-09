@@ -11,6 +11,9 @@ using Glosa.Net.Core.Geometry.Shape;
 
 namespace Glosa.Net.Core.Geometry.Polygon
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class GlosaPolygon : GlosaObject, ICopy<GlosaPolygon>, IDimension<GlosaPolygon>, IHash<GlosaPolygon>, IEquals<GlosaPolygon>, IString<GlosaPolygon>,
         ITransform<GlosaPolygon>, IClosest<GlosaPolygon>, IVertices<GlosaPolygon>, IShape2<GlosaPolygon>
     {
@@ -579,7 +582,6 @@ namespace Glosa.Net.Core.Geometry.Polygon
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="p"></param>
         /// <returns></returns>
         public GlosaPolygon Copy()
         {
