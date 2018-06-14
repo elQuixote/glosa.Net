@@ -159,6 +159,7 @@ namespace Glosa.Net.Core.Geometry.Path
         private static extern IntPtr stringify_v3_curve(string s);
         #endregion
 
+        #region Properties
         /// <summary>
         /// 
         /// </summary>
@@ -179,8 +180,9 @@ namespace Glosa.Net.Core.Geometry.Path
         /// </summary>
         public double[] knots;
         private int dimension;
+        #endregion
 
-
+        #region Constructors
         /// <summary>
         /// 
         /// </summary>
@@ -211,7 +213,9 @@ namespace Glosa.Net.Core.Geometry.Path
             this.degree = degree;
             this.dimension = controlPoints[0].Dimension();
         }
+        #endregion
 
+        #region Methods
         /// <summary>
         /// 
         /// </summary>
@@ -225,133 +229,6 @@ namespace Glosa.Net.Core.Geometry.Path
                 Utilities.ParseNurbsComponents(data, "weights").ToArray(), Utilities.ParseNurbsComponents(data, "knots").ToArray(), Convert.ToInt32(Utilities.parseData(data, "degree.")[0]));
         }
 
-        #region
-        //private static string GenerateJsonFromPoints(IVector[] points, int degree)
-        //{
-        //    string s = "";
-        //    s += @"{""degree"":" + degree.ToString() + "," + @"""points"":[";
-        //    int type = points[0].Dimension();
-        //    int count = 0;
-        //    foreach (IVector p in points)
-        //    {
-        //        switch (type)
-        //        {
-        //            case 0:
-        //                throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
-        //            case 1:
-        //                throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
-        //            case 2:
-        //                GlosaVector2 gv2 = (GlosaVector2)p;
-        //                if (count == 0) { s += @"{""x"":" + gv2.x.ToString() + "," + @"""y"":" + gv2.y.ToString() + "}"; }
-        //                else { s += @",{""x"":" + gv2.x.ToString() + @",""y"":" + gv2.y.ToString() + "}"; }
-        //                break;
-        //            case 3:
-        //                GlosaVector3 gv3 = (GlosaVector3)p;
-        //                if (count == 0) { s += @"{""x"":" + gv3.x.ToString() + "," + @"""y"":" + gv3.y.ToString() + "," + @"""z"":" + gv3.z.ToString() + "}"; }
-        //                else { s += @",{""x"":" + gv3.x.ToString() + @",""y"":" + gv3.y.ToString() + @",""z"":" + gv3.z.ToString() + "}"; }
-        //                break;
-        //            case 4:
-        //                GlosaVector4 gv4 = (GlosaVector4)p;
-        //                if (count == 0)
-        //                {
-        //                    s += @"{""x"":" + gv4.x.ToString() + "," + @"""y"":" + gv4.y.ToString() + "," + @"""z"":" + 
-        //                        gv4.z.ToString() + "," + @"""w"":" + gv4.w.ToString() + "}";
-        //                }
-        //                else
-        //                {
-        //                    s += @",{""x"":" + gv4.x.ToString() + @",""y"":" + gv4.y.ToString() + @",""z"":" + 
-        //                        gv4.z.ToString() + @",""w"":" + gv4.w.ToString() + "}";
-        //                }
-        //                break;
-        //            default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
-        //        }
-        //        count++;
-        //    }
-        //    s += "]}";
-        //    return s;
-        //}
-
-        //private static string GenerateJsonFromArray(double[] values)
-        //{
-        //    string s = "";
-        //    s += @"{""data"":[";
-        //    int count = 0;
-        //    foreach (double d in values)
-        //    {
-        //        if (count == 0)
-        //        {
-        //            s += d.ToString();
-        //        }
-        //        else
-        //        {
-        //            s += ", " + d.ToString();
-        //        }
-        //        count++;
-        //    }
-        //    s += "]}";
-        //    return s;
-        //}
-
-        //private static List<double> ParseNurbsComponents(string data, string key)
-        //{
-        //    return Utilities.parseData(data, key + ".*").Select(x => double.Parse(x)).ToList();
-        //}
-
-        //private static List<double> ParseArray(string data, string key)
-        //{
-        //    return Utilities.parseData(data, key + ".*").Select(x => double.Parse(x)).ToList();
-        //}
-
-        //private static List<IVector> ParsePoints(string data, int type, string key)
-        //{
-        //    List<List<string>> vertList = new List<List<string>>();
-        //    switch (type)
-        //    {
-        //        case 0:
-        //            throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
-        //        case 1:
-        //            throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
-        //        case 2:
-        //            vertList.Add(Utilities.parseData(data, key + ".*.x"));
-        //            vertList.Add(Utilities.parseData(data, key + ".*.y"));
-        //            break;
-        //        case 3:
-        //            vertList.Add(Utilities.parseData(data, key + ".*.x"));
-        //            vertList.Add(Utilities.parseData(data, key + ".*.y"));
-        //            vertList.Add(Utilities.parseData(data, key + ".*.z"));
-        //            break;
-        //        case 4:
-        //            vertList.Add(Utilities.parseData(data, key + ".*.x"));
-        //            vertList.Add(Utilities.parseData(data, key + ".*.y"));
-        //            vertList.Add(Utilities.parseData(data, key + ".*.z"));
-        //            vertList.Add(Utilities.parseData(data, key + ".*.w"));
-        //            break;
-        //    }
-        //    int count = 0;
-        //    List<IVector> gverts = new List<IVector>();
-        //    foreach (string str in vertList[0])
-        //    {
-        //        switch (type)
-        //        {
-        //            case 0:
-        //                throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
-        //            case 1:
-        //                throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
-        //            case 2:
-        //                gverts.Add(new GlosaVector2(Convert.ToDouble(str), Convert.ToDouble(vertList[1][count])));
-        //                break;
-        //            case 3:
-        //                gverts.Add(new GlosaVector3(Convert.ToDouble(str), Convert.ToDouble(vertList[1][count]), Convert.ToDouble(vertList[2][count])));
-        //                break;
-        //            case 4:
-        //                gverts.Add(new GlosaVector4(Convert.ToDouble(str), Convert.ToDouble(vertList[1][count]), Convert.ToDouble(vertList[2][count]), Convert.ToDouble(vertList[3][count])));
-        //                break;
-        //        }
-        //        count++;
-        //    }
-        //    return gverts;
-        //}
-        #endregion
         private string InterpolateCurve(string s)
         {
             switch (this.dimension)
@@ -2081,5 +1958,6 @@ namespace Glosa.Net.Core.Geometry.Path
         {
             return nc.dimension;
         }
+        #endregion
     }
 }
