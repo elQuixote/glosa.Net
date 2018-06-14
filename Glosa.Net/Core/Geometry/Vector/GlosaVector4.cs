@@ -153,6 +153,8 @@ namespace Glosa.Net.Core.Geometry.Vector
         [DllImport("wrapper_vector.dll")]
         private static extern GlosaVector4 calculatePlane_v4(GlosaVector3 v1, GlosaVector3 v2, GlosaVector3 v3);
         #endregion
+
+        #region Properties
         private double m_x, m_y, m_z, m_w;
 
         /// <summary>
@@ -174,7 +176,9 @@ namespace Glosa.Net.Core.Geometry.Vector
         /// Gets or sets the Z (third) component of this vector.
         /// </summary>
         public double w { get { return m_w; } set { m_w = value; } }
+        #endregion
 
+        #region Constructors
         /// <summary>
         /// Initializes a new instance of the GlosaVector4 based on three, X Y Z and W, components.
         /// </summary>
@@ -189,7 +193,9 @@ namespace Glosa.Net.Core.Geometry.Vector
             this.m_z = z;
             this.m_w = w;
         }
+        #endregion
 
+        #region Methods
         /// <summary>
         /// Sums up two GlosaVector4.
         /// </summary>
@@ -1054,5 +1060,6 @@ namespace Glosa.Net.Core.Geometry.Vector
         {
             return calculatePlane_v4(v1, v2, v3);
         }
+        #endregion
     }
 }
