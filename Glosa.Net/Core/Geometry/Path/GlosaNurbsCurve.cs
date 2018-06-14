@@ -188,10 +188,10 @@ namespace Glosa.Net.Core.Geometry.Path
         /// <param name="degree"></param>
         public GlosaNurbsCurve(IVector[] points, int degree = 3)
         {
-            string incomingData = InterpolateCurve(GenerateJsonFromPoints(points, degree));
-            this.controlPoints = ParseControlPoints(incomingData, points[0].Dimension(), "controlPoints").ToArray();
-            this.weights = ParseNurbsComponents(incomingData, "weights").ToArray();
-            this.knots = ParseNurbsComponents(incomingData, "knots").ToArray();
+            string incomingData = InterpolateCurve(Utilities.GenerateJsonFromPoints(points, degree));
+            this.controlPoints = Utilities.ParsePoints(incomingData, points[0].Dimension(), "controlPoints").ToArray();
+            this.weights = Utilities.ParseNurbsComponents(incomingData, "weights").ToArray();
+            this.knots = Utilities.ParseNurbsComponents(incomingData, "knots").ToArray();
             this.degree = degree;
             this.dimension = this.controlPoints[0].Dimension();
         }
@@ -221,136 +221,137 @@ namespace Glosa.Net.Core.Geometry.Path
         {
             List<string> dataList = Utilities.parseData(data, "controlPoints.*");
             List<string> dataX2 = Utilities.parseData(data, "controlPoints.*.*");
-            return new GlosaNurbsCurve(ParseControlPoints(data, (dataX2.Count / dataList.Count), "controlPoints").ToArray(),
-                ParseNurbsComponents(data, "weights").ToArray(), ParseNurbsComponents(data, "knots").ToArray(), Convert.ToInt32(Utilities.parseData(data, "degree.")[0]));
+            return new GlosaNurbsCurve(Utilities.ParsePoints(data, (dataX2.Count / dataList.Count), "controlPoints").ToArray(),
+                Utilities.ParseNurbsComponents(data, "weights").ToArray(), Utilities.ParseNurbsComponents(data, "knots").ToArray(), Convert.ToInt32(Utilities.parseData(data, "degree.")[0]));
         }
 
-        private static string GenerateJsonFromPoints(IVector[] points, int degree)
-        {
-            string s = "";
-            s += @"{""degree"":" + degree.ToString() + "," + @"""points"":[";
-            int type = points[0].Dimension();
-            int count = 0;
-            foreach (IVector p in points)
-            {
-                switch (type)
-                {
-                    case 0:
-                        throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
-                    case 1:
-                        throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
-                    case 2:
-                        GlosaVector2 gv2 = (GlosaVector2)p;
-                        if (count == 0) { s += @"{""x"":" + gv2.x.ToString() + "," + @"""y"":" + gv2.y.ToString() + "}"; }
-                        else { s += @",{""x"":" + gv2.x.ToString() + @",""y"":" + gv2.y.ToString() + "}"; }
-                        break;
-                    case 3:
-                        GlosaVector3 gv3 = (GlosaVector3)p;
-                        if (count == 0) { s += @"{""x"":" + gv3.x.ToString() + "," + @"""y"":" + gv3.y.ToString() + "," + @"""z"":" + gv3.z.ToString() + "}"; }
-                        else { s += @",{""x"":" + gv3.x.ToString() + @",""y"":" + gv3.y.ToString() + @",""z"":" + gv3.z.ToString() + "}"; }
-                        break;
-                    case 4:
-                        GlosaVector4 gv4 = (GlosaVector4)p;
-                        if (count == 0)
-                        {
-                            s += @"{""x"":" + gv4.x.ToString() + "," + @"""y"":" + gv4.y.ToString() + "," + @"""z"":" + 
-                                gv4.z.ToString() + "," + @"""w"":" + gv4.w.ToString() + "}";
-                        }
-                        else
-                        {
-                            s += @",{""x"":" + gv4.x.ToString() + @",""y"":" + gv4.y.ToString() + @",""z"":" + 
-                                gv4.z.ToString() + @",""w"":" + gv4.w.ToString() + "}";
-                        }
-                        break;
-                    default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
-                }
-                count++;
-            }
-            s += "]}";
-            return s;
-        }
+        #region
+        //private static string GenerateJsonFromPoints(IVector[] points, int degree)
+        //{
+        //    string s = "";
+        //    s += @"{""degree"":" + degree.ToString() + "," + @"""points"":[";
+        //    int type = points[0].Dimension();
+        //    int count = 0;
+        //    foreach (IVector p in points)
+        //    {
+        //        switch (type)
+        //        {
+        //            case 0:
+        //                throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+        //            case 1:
+        //                throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+        //            case 2:
+        //                GlosaVector2 gv2 = (GlosaVector2)p;
+        //                if (count == 0) { s += @"{""x"":" + gv2.x.ToString() + "," + @"""y"":" + gv2.y.ToString() + "}"; }
+        //                else { s += @",{""x"":" + gv2.x.ToString() + @",""y"":" + gv2.y.ToString() + "}"; }
+        //                break;
+        //            case 3:
+        //                GlosaVector3 gv3 = (GlosaVector3)p;
+        //                if (count == 0) { s += @"{""x"":" + gv3.x.ToString() + "," + @"""y"":" + gv3.y.ToString() + "," + @"""z"":" + gv3.z.ToString() + "}"; }
+        //                else { s += @",{""x"":" + gv3.x.ToString() + @",""y"":" + gv3.y.ToString() + @",""z"":" + gv3.z.ToString() + "}"; }
+        //                break;
+        //            case 4:
+        //                GlosaVector4 gv4 = (GlosaVector4)p;
+        //                if (count == 0)
+        //                {
+        //                    s += @"{""x"":" + gv4.x.ToString() + "," + @"""y"":" + gv4.y.ToString() + "," + @"""z"":" + 
+        //                        gv4.z.ToString() + "," + @"""w"":" + gv4.w.ToString() + "}";
+        //                }
+        //                else
+        //                {
+        //                    s += @",{""x"":" + gv4.x.ToString() + @",""y"":" + gv4.y.ToString() + @",""z"":" + 
+        //                        gv4.z.ToString() + @",""w"":" + gv4.w.ToString() + "}";
+        //                }
+        //                break;
+        //            default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+        //        }
+        //        count++;
+        //    }
+        //    s += "]}";
+        //    return s;
+        //}
 
-        private static string GenerateJsonFromArray(double[] values)
-        {
-            string s = "";
-            s += @"{""data"":[";
-            int count = 0;
-            foreach (double d in values)
-            {
-                if (count == 0)
-                {
-                    s += d.ToString();
-                }
-                else
-                {
-                    s += ", " + d.ToString();
-                }
-                count++;
-            }
-            s += "]}";
-            return s;
-        }
+        //private static string GenerateJsonFromArray(double[] values)
+        //{
+        //    string s = "";
+        //    s += @"{""data"":[";
+        //    int count = 0;
+        //    foreach (double d in values)
+        //    {
+        //        if (count == 0)
+        //        {
+        //            s += d.ToString();
+        //        }
+        //        else
+        //        {
+        //            s += ", " + d.ToString();
+        //        }
+        //        count++;
+        //    }
+        //    s += "]}";
+        //    return s;
+        //}
 
-        private static List<double> ParseNurbsComponents(string data, string key)
-        {
-            return Utilities.parseData(data, key + ".*").Select(x => double.Parse(x)).ToList();
-        }
+        //private static List<double> ParseNurbsComponents(string data, string key)
+        //{
+        //    return Utilities.parseData(data, key + ".*").Select(x => double.Parse(x)).ToList();
+        //}
 
-        private static List<double> ParseArray(string data, string key)
-        {
-            return Utilities.parseData(data, key + ".*").Select(x => double.Parse(x)).ToList();
-        }
+        //private static List<double> ParseArray(string data, string key)
+        //{
+        //    return Utilities.parseData(data, key + ".*").Select(x => double.Parse(x)).ToList();
+        //}
 
-        private static List<IVector> ParseControlPoints(string data, int type, string key)
-        {
-            List<List<string>> vertList = new List<List<string>>();
-            switch (type)
-            {
-                case 0:
-                    throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
-                case 1:
-                    throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
-                case 2:
-                    vertList.Add(Utilities.parseData(data, key + ".*.x"));
-                    vertList.Add(Utilities.parseData(data, key + ".*.y"));
-                    break;
-                case 3:
-                    vertList.Add(Utilities.parseData(data, key + ".*.x"));
-                    vertList.Add(Utilities.parseData(data, key + ".*.y"));
-                    vertList.Add(Utilities.parseData(data, key + ".*.z"));
-                    break;
-                case 4:
-                    vertList.Add(Utilities.parseData(data, key + ".*.x"));
-                    vertList.Add(Utilities.parseData(data, key + ".*.y"));
-                    vertList.Add(Utilities.parseData(data, key + ".*.z"));
-                    vertList.Add(Utilities.parseData(data, key + ".*.w"));
-                    break;
-            }
-            int count = 0;
-            List<IVector> gverts = new List<IVector>();
-            foreach (string str in vertList[0])
-            {
-                switch (type)
-                {
-                    case 0:
-                        throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
-                    case 1:
-                        throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
-                    case 2:
-                        gverts.Add(new GlosaVector2(Convert.ToDouble(str), Convert.ToDouble(vertList[1][count])));
-                        break;
-                    case 3:
-                        gverts.Add(new GlosaVector3(Convert.ToDouble(str), Convert.ToDouble(vertList[1][count]), Convert.ToDouble(vertList[2][count])));
-                        break;
-                    case 4:
-                        gverts.Add(new GlosaVector4(Convert.ToDouble(str), Convert.ToDouble(vertList[1][count]), Convert.ToDouble(vertList[2][count]), Convert.ToDouble(vertList[3][count])));
-                        break;
-                }
-                count++;
-            }
-            return gverts;
-        }
-
+        //private static List<IVector> ParsePoints(string data, int type, string key)
+        //{
+        //    List<List<string>> vertList = new List<List<string>>();
+        //    switch (type)
+        //    {
+        //        case 0:
+        //            throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+        //        case 1:
+        //            throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+        //        case 2:
+        //            vertList.Add(Utilities.parseData(data, key + ".*.x"));
+        //            vertList.Add(Utilities.parseData(data, key + ".*.y"));
+        //            break;
+        //        case 3:
+        //            vertList.Add(Utilities.parseData(data, key + ".*.x"));
+        //            vertList.Add(Utilities.parseData(data, key + ".*.y"));
+        //            vertList.Add(Utilities.parseData(data, key + ".*.z"));
+        //            break;
+        //        case 4:
+        //            vertList.Add(Utilities.parseData(data, key + ".*.x"));
+        //            vertList.Add(Utilities.parseData(data, key + ".*.y"));
+        //            vertList.Add(Utilities.parseData(data, key + ".*.z"));
+        //            vertList.Add(Utilities.parseData(data, key + ".*.w"));
+        //            break;
+        //    }
+        //    int count = 0;
+        //    List<IVector> gverts = new List<IVector>();
+        //    foreach (string str in vertList[0])
+        //    {
+        //        switch (type)
+        //        {
+        //            case 0:
+        //                throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
+        //            case 1:
+        //                throw new System.ArgumentException("NurbsCurve cannot have GlosaVectors of dimension 1", "dimension");
+        //            case 2:
+        //                gverts.Add(new GlosaVector2(Convert.ToDouble(str), Convert.ToDouble(vertList[1][count])));
+        //                break;
+        //            case 3:
+        //                gverts.Add(new GlosaVector3(Convert.ToDouble(str), Convert.ToDouble(vertList[1][count]), Convert.ToDouble(vertList[2][count])));
+        //                break;
+        //            case 4:
+        //                gverts.Add(new GlosaVector4(Convert.ToDouble(str), Convert.ToDouble(vertList[1][count]), Convert.ToDouble(vertList[2][count]), Convert.ToDouble(vertList[3][count])));
+        //                break;
+        //        }
+        //        count++;
+        //    }
+        //    return gverts;
+        //}
+        #endregion
         private string InterpolateCurve(string s)
         {
             switch (this.dimension)
@@ -406,8 +407,8 @@ namespace Glosa.Net.Core.Geometry.Path
             try
             {
                 List<IVector> ivecArray = points.Select(x => ((IVector)x)).ToList();
-                IntPtr pStr = homogenizeArray_v2_curve(GenerateJsonFromPoints(ivecArray.ToArray(), 3), GenerateJsonFromArray(weights));
-                return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), points[0].Dimension() + 1, "points").Select(x => ((GlosaVector3)x)).ToList();
+                IntPtr pStr = homogenizeArray_v2_curve(Utilities.GenerateJsonFromPoints(ivecArray.ToArray(), 3), Utilities.GenerateJsonFromArray(weights));
+                return Utilities.ParsePoints(Marshal.PtrToStringAnsi(pStr), points[0].Dimension() + 1, "points").Select(x => ((GlosaVector3)x)).ToList();
             }
             catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
@@ -423,8 +424,8 @@ namespace Glosa.Net.Core.Geometry.Path
             try
             {
                 List<IVector> ivecArray = points.Select(x => ((IVector)x)).ToList();
-                IntPtr pStr = homogenizeArray_v3_curve(GenerateJsonFromPoints(ivecArray.ToArray(), 3), GenerateJsonFromArray(weights));
-                return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), points[0].Dimension() + 1, "points").Select(x => ((GlosaVector4)x)).ToList();
+                IntPtr pStr = homogenizeArray_v3_curve(Utilities.GenerateJsonFromPoints(ivecArray.ToArray(), 3), Utilities.GenerateJsonFromArray(weights));
+                return Utilities.ParsePoints(Marshal.PtrToStringAnsi(pStr), points[0].Dimension() + 1, "points").Select(x => ((GlosaVector4)x)).ToList();
             }
             catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
@@ -444,22 +445,22 @@ namespace Glosa.Net.Core.Geometry.Path
                 case 1:
                     try
                     {
-                        IntPtr pStr = homogenizeArray_v1_curve(GenerateJsonFromPoints(points, 3), GenerateJsonFromArray(weights));
-                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), points[0].Dimension() + 1, "points");
+                        IntPtr pStr = homogenizeArray_v1_curve(Utilities.GenerateJsonFromPoints(points, 3), Utilities.GenerateJsonFromArray(weights));
+                        return Utilities.ParsePoints(Marshal.PtrToStringAnsi(pStr), points[0].Dimension() + 1, "points");
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 case 2:
                     try
                     {
-                        IntPtr pStr = homogenizeArray_v2_curve(GenerateJsonFromPoints(points, 3), GenerateJsonFromArray(weights));
-                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), points[0].Dimension() + 1, "points");
+                        IntPtr pStr = homogenizeArray_v2_curve(Utilities.GenerateJsonFromPoints(points, 3), Utilities.GenerateJsonFromArray(weights));
+                        return Utilities.ParsePoints(Marshal.PtrToStringAnsi(pStr), points[0].Dimension() + 1, "points");
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 case 3:
                     try
                     {
-                        IntPtr pStr = homogenizeArray_v3_curve(GenerateJsonFromPoints(points, 3), GenerateJsonFromArray(weights));
-                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), points[0].Dimension() + 1, "points");
+                        IntPtr pStr = homogenizeArray_v3_curve(Utilities.GenerateJsonFromPoints(points, 3), Utilities.GenerateJsonFromArray(weights));
+                        return Utilities.ParsePoints(Marshal.PtrToStringAnsi(pStr), points[0].Dimension() + 1, "points");
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 case 4:
@@ -500,8 +501,8 @@ namespace Glosa.Net.Core.Geometry.Path
             try
             {
                 List<IVector> ivecArray = points.Select(x => ((IVector)x)).ToList();
-                IntPtr pStr = dehomogenizeArray_v3_curve(GenerateJsonFromPoints(ivecArray.ToArray(), 3));
-                return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), points[0].Dimension() - 1, "points").Select(x => ((GlosaVector2)x)).ToList();
+                IntPtr pStr = dehomogenizeArray_v3_curve(Utilities.GenerateJsonFromPoints(ivecArray.ToArray(), 3));
+                return Utilities.ParsePoints(Marshal.PtrToStringAnsi(pStr), points[0].Dimension() - 1, "points").Select(x => ((GlosaVector2)x)).ToList();
             }
             catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
@@ -516,8 +517,8 @@ namespace Glosa.Net.Core.Geometry.Path
             try
             {
                 List<IVector> ivecArray = points.Select(x => ((IVector)x)).ToList();
-                IntPtr pStr = dehomogenizeArray_v4_curve(GenerateJsonFromPoints(ivecArray.ToArray(), 3));
-                return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), points[0].Dimension() - 1, "points").Select(x => ((GlosaVector3)x)).ToList();
+                IntPtr pStr = dehomogenizeArray_v4_curve(Utilities.GenerateJsonFromPoints(ivecArray.ToArray(), 3));
+                return Utilities.ParsePoints(Marshal.PtrToStringAnsi(pStr), points[0].Dimension() - 1, "points").Select(x => ((GlosaVector3)x)).ToList();
             }
             catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
@@ -540,15 +541,15 @@ namespace Glosa.Net.Core.Geometry.Path
                 case 3:
                     try
                     {
-                        IntPtr pStr = dehomogenizeArray_v3_curve(GenerateJsonFromPoints(points, 3));
-                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), points[0].Dimension() - 1, "points");
+                        IntPtr pStr = dehomogenizeArray_v3_curve(Utilities.GenerateJsonFromPoints(points, 3));
+                        return Utilities.ParsePoints(Marshal.PtrToStringAnsi(pStr), points[0].Dimension() - 1, "points");
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 case 4:
                     try
                     {
-                        IntPtr pStr = dehomogenizeArray_v4_curve(GenerateJsonFromPoints(points, 3));
-                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), points[0].Dimension() - 1, "points");
+                        IntPtr pStr = dehomogenizeArray_v4_curve(Utilities.GenerateJsonFromPoints(points, 3));
+                        return Utilities.ParsePoints(Marshal.PtrToStringAnsi(pStr), points[0].Dimension() - 1, "points");
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
@@ -598,8 +599,8 @@ namespace Glosa.Net.Core.Geometry.Path
             try
             {
                 List<IVector> ivecArray = points.Select(x => ((IVector)x)).ToList();
-                IntPtr pStr = weights_v2_curve(GenerateJsonFromPoints(ivecArray.ToArray(), 3));
-                return ParseArray(Marshal.PtrToStringAnsi(pStr), "data");
+                IntPtr pStr = weights_v2_curve(Utilities.GenerateJsonFromPoints(ivecArray.ToArray(), 3));
+                return Utilities.ParseArray(Marshal.PtrToStringAnsi(pStr), "data");
             }
             catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
@@ -614,8 +615,8 @@ namespace Glosa.Net.Core.Geometry.Path
             try
             {
                 List<IVector> ivecArray = points.Select(x => ((IVector)x)).ToList();
-                IntPtr pStr = weights_v3_curve(GenerateJsonFromPoints(ivecArray.ToArray(), 3));
-                return ParseArray(Marshal.PtrToStringAnsi(pStr), "data");
+                IntPtr pStr = weights_v3_curve(Utilities.GenerateJsonFromPoints(ivecArray.ToArray(), 3));
+                return Utilities.ParseArray(Marshal.PtrToStringAnsi(pStr), "data");
             }
             catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
@@ -630,8 +631,8 @@ namespace Glosa.Net.Core.Geometry.Path
             try
             {
                 List<IVector> ivecArray = points.Select(x => ((IVector)x)).ToList();
-                IntPtr pStr = weights_v4_curve(GenerateJsonFromPoints(ivecArray.ToArray(), 3));
-                return ParseArray(Marshal.PtrToStringAnsi(pStr), "data");
+                IntPtr pStr = weights_v4_curve(Utilities.GenerateJsonFromPoints(ivecArray.ToArray(), 3));
+                return Utilities.ParseArray(Marshal.PtrToStringAnsi(pStr), "data");
             }
             catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
@@ -652,22 +653,22 @@ namespace Glosa.Net.Core.Geometry.Path
                 case 2:
                     try
                     {
-                        IntPtr pStr = weights_v2_curve(GenerateJsonFromPoints(points, 3));
-                        return ParseArray(Marshal.PtrToStringAnsi(pStr), "data");
+                        IntPtr pStr = weights_v2_curve(Utilities.GenerateJsonFromPoints(points, 3));
+                        return Utilities.ParseArray(Marshal.PtrToStringAnsi(pStr), "data");
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 case 3:
                     try
                     {
-                        IntPtr pStr = weights_v3_curve(GenerateJsonFromPoints(points, 3));
-                        return ParseArray(Marshal.PtrToStringAnsi(pStr), "data");
+                        IntPtr pStr = weights_v3_curve(Utilities.GenerateJsonFromPoints(points, 3));
+                        return Utilities.ParseArray(Marshal.PtrToStringAnsi(pStr), "data");
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 case 4:
                     try
                     {
-                        IntPtr pStr = weights_v4_curve(GenerateJsonFromPoints(points, 3));
-                        return ParseArray(Marshal.PtrToStringAnsi(pStr), "data");
+                        IntPtr pStr = weights_v4_curve(Utilities.GenerateJsonFromPoints(points, 3));
+                        return Utilities.ParseArray(Marshal.PtrToStringAnsi(pStr), "data");
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
@@ -690,22 +691,22 @@ namespace Glosa.Net.Core.Geometry.Path
                 case 2:
                     try
                     {
-                        IntPtr pStr = weights_v2_curve(GenerateJsonFromPoints(nc.controlPoints, 3));
-                        return ParseArray(Marshal.PtrToStringAnsi(pStr), "data");
+                        IntPtr pStr = weights_v2_curve(Utilities.GenerateJsonFromPoints(nc.controlPoints, 3));
+                        return Utilities.ParseArray(Marshal.PtrToStringAnsi(pStr), "data");
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 case 3:
                     try
                     {
-                        IntPtr pStr = weights_v3_curve(GenerateJsonFromPoints(nc.controlPoints, 3));
-                        return ParseArray(Marshal.PtrToStringAnsi(pStr), "data");
+                        IntPtr pStr = weights_v3_curve(Utilities.GenerateJsonFromPoints(nc.controlPoints, 3));
+                        return Utilities.ParseArray(Marshal.PtrToStringAnsi(pStr), "data");
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 case 4:
                     try
                     {
-                        IntPtr pStr = weights_v4_curve(GenerateJsonFromPoints(nc.controlPoints, 3));
-                        return ParseArray(Marshal.PtrToStringAnsi(pStr), "data");
+                        IntPtr pStr = weights_v4_curve(Utilities.GenerateJsonFromPoints(nc.controlPoints, 3));
+                        return Utilities.ParseArray(Marshal.PtrToStringAnsi(pStr), "data");
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
@@ -727,22 +728,22 @@ namespace Glosa.Net.Core.Geometry.Path
                 case 2:
                     try
                     {
-                        IntPtr pStr = weights_v2_curve(GenerateJsonFromPoints(this.controlPoints, 3));
-                        return ParseArray(Marshal.PtrToStringAnsi(pStr), "data");
+                        IntPtr pStr = weights_v2_curve(Utilities.GenerateJsonFromPoints(this.controlPoints, 3));
+                        return Utilities.ParseArray(Marshal.PtrToStringAnsi(pStr), "data");
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 case 3:
                     try
                     {
-                        IntPtr pStr = weights_v3_curve(GenerateJsonFromPoints(this.controlPoints, 3));
-                        return ParseArray(Marshal.PtrToStringAnsi(pStr), "data");
+                        IntPtr pStr = weights_v3_curve(Utilities.GenerateJsonFromPoints(this.controlPoints, 3));
+                        return Utilities.ParseArray(Marshal.PtrToStringAnsi(pStr), "data");
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 case 4:
                     try
                     {
-                        IntPtr pStr = weights_v4_curve(GenerateJsonFromPoints(this.controlPoints, 3));
-                        return ParseArray(Marshal.PtrToStringAnsi(pStr), "data");
+                        IntPtr pStr = weights_v4_curve(Utilities.GenerateJsonFromPoints(this.controlPoints, 3));
+                        return Utilities.ParseArray(Marshal.PtrToStringAnsi(pStr), "data");
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 default: throw new System.ArgumentException("NurbsCurve has an unvalid dimension", "dimension");
@@ -825,14 +826,14 @@ namespace Glosa.Net.Core.Geometry.Path
                     try
                     {
                         IntPtr pStr = weightedControlPoints_v2_curve(nc.Serialize());
-                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), nc.dimension + 1, "points").ToList();
+                        return Utilities.ParsePoints(Marshal.PtrToStringAnsi(pStr), nc.dimension + 1, "points").ToList();
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 case 3:
                     try
                     {
                         IntPtr pStr = weightedControlPoints_v3_curve(nc.Serialize());
-                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), nc.dimension + 1, "points").ToList();
+                        return Utilities.ParsePoints(Marshal.PtrToStringAnsi(pStr), nc.dimension + 1, "points").ToList();
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 case 4:
@@ -857,14 +858,14 @@ namespace Glosa.Net.Core.Geometry.Path
                     try
                     {
                         IntPtr pStr = weightedControlPoints_v2_curve(this.Serialize());
-                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), this.dimension + 1, "points").ToList();
+                        return Utilities.ParsePoints(Marshal.PtrToStringAnsi(pStr), this.dimension + 1, "points").ToList();
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 case 3:
                     try
                     {
                         IntPtr pStr = weightedControlPoints_v3_curve(this.Serialize());
-                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), this.dimension + 1, "points").ToList();
+                        return Utilities.ParsePoints(Marshal.PtrToStringAnsi(pStr), this.dimension + 1, "points").ToList();
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 case 4:
@@ -942,14 +943,14 @@ namespace Glosa.Net.Core.Geometry.Path
                     try
                     {
                         IntPtr pStr = rationalRegularSample_v2_curve(nc.Serialize(), n);
-                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), nc.dimension + 1, "points").ToList();
+                        return Utilities.ParsePoints(Marshal.PtrToStringAnsi(pStr), nc.dimension + 1, "points").ToList();
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 case 3:
                     try
                     {
                         IntPtr pStr = rationalRegularSample_v3_curve(nc.Serialize(), n);
-                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), nc.dimension + 1, "points").ToList();
+                        return Utilities.ParsePoints(Marshal.PtrToStringAnsi(pStr), nc.dimension + 1, "points").ToList();
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 case 4:
@@ -974,14 +975,14 @@ namespace Glosa.Net.Core.Geometry.Path
                     try
                     {
                         IntPtr pStr = rationalRegularSample_v2_curve(this.Serialize(), n);
-                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), this.dimension + 1, "points").ToList();
+                        return Utilities.ParsePoints(Marshal.PtrToStringAnsi(pStr), this.dimension + 1, "points").ToList();
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 case 3:
                     try
                     {
                         IntPtr pStr = rationalRegularSample_v3_curve(this.Serialize(), n);
-                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), this.dimension + 1, "points").ToList();
+                        return Utilities.ParsePoints(Marshal.PtrToStringAnsi(pStr), this.dimension + 1, "points").ToList();
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 case 4:
@@ -1009,14 +1010,14 @@ namespace Glosa.Net.Core.Geometry.Path
                     try
                     {
                         IntPtr pStr = rationalSampleDerrivatives_v2_curve(nc.Serialize(), u, n);
-                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), nc.dimension + 1, "points").ToList();
+                        return Utilities.ParsePoints(Marshal.PtrToStringAnsi(pStr), nc.dimension + 1, "points").ToList();
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 case 3:
                     try
                     {
                         IntPtr pStr = rationalSampleDerrivatives_v3_curve(nc.Serialize(), u, n);
-                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), nc.dimension + 1, "points").ToList();
+                        return Utilities.ParsePoints(Marshal.PtrToStringAnsi(pStr), nc.dimension + 1, "points").ToList();
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 case 4:
@@ -1043,14 +1044,14 @@ namespace Glosa.Net.Core.Geometry.Path
                     try
                     {
                         IntPtr pStr = rationalSampleDerrivatives_v2_curve(this.Serialize(), u, n);
-                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), this.dimension + 1, "points").ToList();
+                        return Utilities.ParsePoints(Marshal.PtrToStringAnsi(pStr), this.dimension + 1, "points").ToList();
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 case 3:
                     try
                     {
                         IntPtr pStr = rationalSampleDerrivatives_v3_curve(this.Serialize(), u, n);
-                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), this.dimension + 1, "points").ToList();
+                        return Utilities.ParsePoints(Marshal.PtrToStringAnsi(pStr), this.dimension + 1, "points").ToList();
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 case 4:
@@ -1129,14 +1130,14 @@ namespace Glosa.Net.Core.Geometry.Path
                     try
                     {
                         IntPtr pStr = regularSample_v2_curve(this.Serialize(), uStart, uEnd, n);
-                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), this.dimension, "points").ToList();
+                        return Utilities.ParsePoints(Marshal.PtrToStringAnsi(pStr), this.dimension, "points").ToList();
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 case 3:
                     try
                     {
                         IntPtr pStr = regularSample_v3_curve(this.Serialize(), uStart, uEnd, n);
-                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), this.dimension, "points").ToList();
+                        return Utilities.ParsePoints(Marshal.PtrToStringAnsi(pStr), this.dimension, "points").ToList();
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 case 4:
@@ -1165,14 +1166,14 @@ namespace Glosa.Net.Core.Geometry.Path
                     try
                     {
                         IntPtr pStr = regularSample_v2_curve(nc.Serialize(), uStart, uEnd, n);
-                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), nc.dimension, "points").ToList();
+                        return Utilities.ParsePoints(Marshal.PtrToStringAnsi(pStr), nc.dimension, "points").ToList();
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 case 3:
                     try
                     {
                         IntPtr pStr = regularSample_v3_curve(nc.Serialize(), uStart, uEnd, n);
-                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), nc.dimension, "points").ToList();
+                        return Utilities.ParsePoints(Marshal.PtrToStringAnsi(pStr), nc.dimension, "points").ToList();
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 case 4:
@@ -1198,14 +1199,14 @@ namespace Glosa.Net.Core.Geometry.Path
                     try
                     {
                         IntPtr pStr = regularSample2_v2_curve(this.Serialize(), n);
-                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), this.dimension, "points").ToList();
+                        return Utilities.ParsePoints(Marshal.PtrToStringAnsi(pStr), this.dimension, "points").ToList();
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 case 3:
                     try
                     {
                         IntPtr pStr = regularSample2_v3_curve(this.Serialize(), n);
-                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), this.dimension, "points").ToList();
+                        return Utilities.ParsePoints(Marshal.PtrToStringAnsi(pStr), this.dimension, "points").ToList();
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 case 4:
@@ -1232,14 +1233,14 @@ namespace Glosa.Net.Core.Geometry.Path
                     try
                     {
                         IntPtr pStr = regularSample2_v2_curve(nc.Serialize(), n);
-                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), nc.dimension, "points").ToList();
+                        return Utilities.ParsePoints(Marshal.PtrToStringAnsi(pStr), nc.dimension, "points").ToList();
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 case 3:
                     try
                     {
                         IntPtr pStr = regularSample2_v3_curve(nc.Serialize(), n);
-                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), nc.dimension, "points").ToList();
+                        return Utilities.ParsePoints(Marshal.PtrToStringAnsi(pStr), nc.dimension, "points").ToList();
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 case 4:
@@ -1266,14 +1267,14 @@ namespace Glosa.Net.Core.Geometry.Path
                     try
                     {
                         IntPtr pStr = sampleDerivatives_v2_curve(this.Serialize(), u, n);
-                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), this.dimension, "points").ToList();
+                        return Utilities.ParsePoints(Marshal.PtrToStringAnsi(pStr), this.dimension, "points").ToList();
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 case 3:
                     try
                     {
                         IntPtr pStr = sampleDerivatives_v3_curve(this.Serialize(), u, n);
-                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), this.dimension, "points").ToList();
+                        return Utilities.ParsePoints(Marshal.PtrToStringAnsi(pStr), this.dimension, "points").ToList();
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 case 4:
@@ -1301,14 +1302,14 @@ namespace Glosa.Net.Core.Geometry.Path
                     try
                     {
                         IntPtr pStr = sampleDerivatives_v2_curve(nc.Serialize(), u, n);
-                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), nc.dimension, "points").ToList();
+                        return Utilities.ParsePoints(Marshal.PtrToStringAnsi(pStr), nc.dimension, "points").ToList();
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 case 3:
                     try
                     {
                         IntPtr pStr = sampleDerivatives_v3_curve(nc.Serialize(), u, n);
-                        return ParseControlPoints(Marshal.PtrToStringAnsi(pStr), nc.dimension, "points").ToList();
+                        return Utilities.ParsePoints(Marshal.PtrToStringAnsi(pStr), nc.dimension, "points").ToList();
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
                 case 4:
@@ -1503,9 +1504,9 @@ namespace Glosa.Net.Core.Geometry.Path
                     {
                         IntPtr pStr = transform_v2_curve(this.Serialize(), (GlosaMatrix33)matrix);
                         string data = Marshal.PtrToStringAnsi(pStr);
-                        this.controlPoints = ParseControlPoints(data, this.dimension, "controlPoints").ToArray();
-                        this.weights = ParseNurbsComponents(data, "weights").ToArray();
-                        this.knots = ParseNurbsComponents(data, "knots").ToArray();
+                        this.controlPoints = Utilities.ParsePoints(data, this.dimension, "controlPoints").ToArray();
+                        this.weights = Utilities.ParseNurbsComponents(data, "weights").ToArray();
+                        this.knots = Utilities.ParseNurbsComponents(data, "knots").ToArray();
                         this.degree = Convert.ToInt32(Utilities.parseData(data, "degree.")[0]);
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
@@ -1519,9 +1520,9 @@ namespace Glosa.Net.Core.Geometry.Path
                     {
                         IntPtr pStr = transform_v3_curve(this.Serialize(), (GlosaMatrix44)matrix);
                         string data = Marshal.PtrToStringAnsi(pStr);
-                        this.controlPoints = ParseControlPoints(data, this.dimension, "controlPoints").ToArray();
-                        this.weights = ParseNurbsComponents(data, "weights").ToArray();
-                        this.knots = ParseNurbsComponents(data, "knots").ToArray();
+                        this.controlPoints = Utilities.ParsePoints(data, this.dimension, "controlPoints").ToArray();
+                        this.weights = Utilities.ParseNurbsComponents(data, "weights").ToArray();
+                        this.knots = Utilities.ParseNurbsComponents(data, "knots").ToArray();
                         this.degree = Convert.ToInt32(Utilities.parseData(data, "degree.")[0]);
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
@@ -1554,8 +1555,8 @@ namespace Glosa.Net.Core.Geometry.Path
                     {
                         IntPtr pStr = transform_v2_curve(this.Serialize(), (GlosaMatrix33)matrix);
                         string data = Marshal.PtrToStringAnsi(pStr);
-                        return new GlosaNurbsCurve(ParseControlPoints(data, this.dimension, "controlPoints").ToArray(),
-                            ParseNurbsComponents(data, "weights").ToArray(), ParseNurbsComponents(data, "knots").ToArray(),
+                        return new GlosaNurbsCurve(Utilities.ParsePoints(data, this.dimension, "controlPoints").ToArray(),
+                            Utilities.ParseNurbsComponents(data, "weights").ToArray(), Utilities.ParseNurbsComponents(data, "knots").ToArray(),
                             Convert.ToInt32(Utilities.parseData(data, "degree.")[0]));
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
@@ -1568,8 +1569,8 @@ namespace Glosa.Net.Core.Geometry.Path
                     {
                         IntPtr pStr = transform_v3_curve(this.Serialize(), (GlosaMatrix44)matrix);
                         string data = Marshal.PtrToStringAnsi(pStr);
-                        return new GlosaNurbsCurve(ParseControlPoints(data, this.dimension, "controlPoints").ToArray(),
-                            ParseNurbsComponents(data, "weights").ToArray(), ParseNurbsComponents(data, "knots").ToArray(),
+                        return new GlosaNurbsCurve(Utilities.ParsePoints(data, this.dimension, "controlPoints").ToArray(),
+                            Utilities.ParseNurbsComponents(data, "weights").ToArray(), Utilities.ParseNurbsComponents(data, "knots").ToArray(),
                             Convert.ToInt32(Utilities.parseData(data, "degree.")[0]));
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
@@ -1602,8 +1603,8 @@ namespace Glosa.Net.Core.Geometry.Path
                     {
                         IntPtr pStr = transform_v2_curve(nc.Serialize(), (GlosaMatrix33)matrix);
                         string data = Marshal.PtrToStringAnsi(pStr);
-                        return new GlosaNurbsCurve(ParseControlPoints(data, nc.dimension, "controlPoints").ToArray(),
-                            ParseNurbsComponents(data, "weights").ToArray(), ParseNurbsComponents(data, "knots").ToArray(),
+                        return new GlosaNurbsCurve(Utilities.ParsePoints(data, nc.dimension, "controlPoints").ToArray(),
+                            Utilities.ParseNurbsComponents(data, "weights").ToArray(), Utilities.ParseNurbsComponents(data, "knots").ToArray(),
                             Convert.ToInt32(Utilities.parseData(data, "degree.")[0]));
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
@@ -1616,8 +1617,8 @@ namespace Glosa.Net.Core.Geometry.Path
                     {
                         IntPtr pStr = transform_v3_curve(nc.Serialize(), (GlosaMatrix44)matrix);
                         string data = Marshal.PtrToStringAnsi(pStr);
-                        return new GlosaNurbsCurve(ParseControlPoints(data, nc.dimension, "controlPoints").ToArray(),
-                            ParseNurbsComponents(data, "weights").ToArray(), ParseNurbsComponents(data, "knots").ToArray(),
+                        return new GlosaNurbsCurve(Utilities.ParsePoints(data, nc.dimension, "controlPoints").ToArray(),
+                            Utilities.ParseNurbsComponents(data, "weights").ToArray(), Utilities.ParseNurbsComponents(data, "knots").ToArray(),
                             Convert.ToInt32(Utilities.parseData(data, "degree.")[0]));
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
@@ -1644,9 +1645,9 @@ namespace Glosa.Net.Core.Geometry.Path
                     {
                         IntPtr pStr = rotate_v2_curve(this.Serialize(), theta);
                         string data = Marshal.PtrToStringAnsi(pStr);
-                        this.controlPoints = ParseControlPoints(data, this.dimension, "controlPoints").ToArray();
-                        this.weights = ParseNurbsComponents(data, "weights").ToArray();
-                        this.knots = ParseNurbsComponents(data, "knots").ToArray();
+                        this.controlPoints = Utilities.ParsePoints(data, this.dimension, "controlPoints").ToArray();
+                        this.weights = Utilities.ParseNurbsComponents(data, "weights").ToArray();
+                        this.knots = Utilities.ParseNurbsComponents(data, "knots").ToArray();
                         this.degree = Convert.ToInt32(Utilities.parseData(data, "degree.")[0]);
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
@@ -1678,9 +1679,9 @@ namespace Glosa.Net.Core.Geometry.Path
                     {
                         IntPtr pStr = rotate_v2_curve(nc.Serialize(), theta);
                         string data = Marshal.PtrToStringAnsi(pStr);
-                        nc.controlPoints = ParseControlPoints(data, nc.dimension, "controlPoints").ToArray();
-                        nc.weights = ParseNurbsComponents(data, "weights").ToArray();
-                        nc.knots = ParseNurbsComponents(data, "knots").ToArray();
+                        nc.controlPoints = Utilities.ParsePoints(data, nc.dimension, "controlPoints").ToArray();
+                        nc.weights = Utilities.ParseNurbsComponents(data, "weights").ToArray();
+                        nc.knots = Utilities.ParseNurbsComponents(data, "knots").ToArray();
                         nc.degree = Convert.ToInt32(Utilities.parseData(data, "degree.")[0]);
                         return nc;
                     }
@@ -1713,9 +1714,9 @@ namespace Glosa.Net.Core.Geometry.Path
                     {
                         IntPtr pStr = rotate_v3_curve(this.Serialize(), axis, theta);
                         string data = Marshal.PtrToStringAnsi(pStr);
-                        this.controlPoints = ParseControlPoints(data, this.dimension, "controlPoints").ToArray();
-                        this.weights = ParseNurbsComponents(data, "weights").ToArray();
-                        this.knots = ParseNurbsComponents(data, "knots").ToArray();
+                        this.controlPoints = Utilities.ParsePoints(data, this.dimension, "controlPoints").ToArray();
+                        this.weights = Utilities.ParseNurbsComponents(data, "weights").ToArray();
+                        this.knots = Utilities.ParseNurbsComponents(data, "knots").ToArray();
                         this.degree = Convert.ToInt32(Utilities.parseData(data, "degree.")[0]);
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
@@ -1748,9 +1749,9 @@ namespace Glosa.Net.Core.Geometry.Path
                     {
                         IntPtr pStr = rotate_v3_curve(nc.Serialize(), axis, theta);
                         string data = Marshal.PtrToStringAnsi(pStr);
-                        nc.controlPoints = ParseControlPoints(data, nc.dimension, "controlPoints").ToArray();
-                        nc.weights = ParseNurbsComponents(data, "weights").ToArray();
-                        nc.knots = ParseNurbsComponents(data, "knots").ToArray();
+                        nc.controlPoints = Utilities.ParsePoints(data, nc.dimension, "controlPoints").ToArray();
+                        nc.weights = Utilities.ParseNurbsComponents(data, "weights").ToArray();
+                        nc.knots = Utilities.ParseNurbsComponents(data, "knots").ToArray();
                         nc.degree = Convert.ToInt32(Utilities.parseData(data, "degree.")[0]);
                         return nc;
                     }
@@ -1780,9 +1781,9 @@ namespace Glosa.Net.Core.Geometry.Path
                     {
                         IntPtr pStr = scale_v2_curve(this.Serialize(), sx, sy);
                         string data = Marshal.PtrToStringAnsi(pStr);
-                        this.controlPoints = ParseControlPoints(data, this.dimension, "controlPoints").ToArray();
-                        this.weights = ParseNurbsComponents(data, "weights").ToArray();
-                        this.knots = ParseNurbsComponents(data, "knots").ToArray();
+                        this.controlPoints = Utilities.ParsePoints(data, this.dimension, "controlPoints").ToArray();
+                        this.weights = Utilities.ParseNurbsComponents(data, "weights").ToArray();
+                        this.knots = Utilities.ParseNurbsComponents(data, "knots").ToArray();
                         this.degree = Convert.ToInt32(Utilities.parseData(data, "degree.")[0]);
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
@@ -1792,9 +1793,9 @@ namespace Glosa.Net.Core.Geometry.Path
                     {
                         IntPtr pStr = scale_v3_curve(this.Serialize(), sx, sy, sz);
                         string data = Marshal.PtrToStringAnsi(pStr);
-                        this.controlPoints = ParseControlPoints(data, this.dimension, "controlPoints").ToArray();
-                        this.weights = ParseNurbsComponents(data, "weights").ToArray();
-                        this.knots = ParseNurbsComponents(data, "knots").ToArray();
+                        this.controlPoints = Utilities.ParsePoints(data, this.dimension, "controlPoints").ToArray();
+                        this.weights = Utilities.ParseNurbsComponents(data, "weights").ToArray();
+                        this.knots = Utilities.ParseNurbsComponents(data, "knots").ToArray();
                         this.degree = Convert.ToInt32(Utilities.parseData(data, "degree.")[0]);
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
@@ -1826,9 +1827,9 @@ namespace Glosa.Net.Core.Geometry.Path
                     {
                         IntPtr pStr = scale_v2_curve(nc.Serialize(), sx, sy);
                         string data = Marshal.PtrToStringAnsi(pStr);
-                        nc.controlPoints = ParseControlPoints(data, nc.dimension, "controlPoints").ToArray();
-                        nc.weights = ParseNurbsComponents(data, "weights").ToArray();
-                        nc.knots = ParseNurbsComponents(data, "knots").ToArray();
+                        nc.controlPoints = Utilities.ParsePoints(data, nc.dimension, "controlPoints").ToArray();
+                        nc.weights = Utilities.ParseNurbsComponents(data, "weights").ToArray();
+                        nc.knots = Utilities.ParseNurbsComponents(data, "knots").ToArray();
                         nc.degree = Convert.ToInt32(Utilities.parseData(data, "degree.")[0]);
                         return nc;
                     }
@@ -1838,9 +1839,9 @@ namespace Glosa.Net.Core.Geometry.Path
                     {
                         IntPtr pStr = scale_v3_curve(nc.Serialize(), sx, sy, sz);
                         string data = Marshal.PtrToStringAnsi(pStr);
-                        nc.controlPoints = ParseControlPoints(data, nc.dimension, "controlPoints").ToArray();
-                        nc.weights = ParseNurbsComponents(data, "weights").ToArray();
-                        nc.knots = ParseNurbsComponents(data, "knots").ToArray();
+                        nc.controlPoints = Utilities.ParsePoints(data, nc.dimension, "controlPoints").ToArray();
+                        nc.weights = Utilities.ParseNurbsComponents(data, "weights").ToArray();
+                        nc.knots = Utilities.ParseNurbsComponents(data, "knots").ToArray();
                         nc.degree = Convert.ToInt32(Utilities.parseData(data, "degree.")[0]);
                         return nc;
                     }
@@ -1869,9 +1870,9 @@ namespace Glosa.Net.Core.Geometry.Path
                     {
                         IntPtr pStr = translate_v2_curve(this.Serialize(), (GlosaVector2)v);
                         string data = Marshal.PtrToStringAnsi(pStr);
-                        this.controlPoints = ParseControlPoints(data, this.dimension, "controlPoints").ToArray();
-                        this.weights = ParseNurbsComponents(data, "weights").ToArray();
-                        this.knots = ParseNurbsComponents(data, "knots").ToArray();
+                        this.controlPoints = Utilities.ParsePoints(data, this.dimension, "controlPoints").ToArray();
+                        this.weights = Utilities.ParseNurbsComponents(data, "weights").ToArray();
+                        this.knots = Utilities.ParseNurbsComponents(data, "knots").ToArray();
                         this.degree = Convert.ToInt32(Utilities.parseData(data, "degree.")[0]);
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
@@ -1882,9 +1883,9 @@ namespace Glosa.Net.Core.Geometry.Path
                     {
                         IntPtr pStr = translate_v3_curve(this.Serialize(), (GlosaVector3)v);
                         string data = Marshal.PtrToStringAnsi(pStr);
-                        this.controlPoints = ParseControlPoints(data, this.dimension, "controlPoints").ToArray();
-                        this.weights = ParseNurbsComponents(data, "weights").ToArray();
-                        this.knots = ParseNurbsComponents(data, "knots").ToArray();
+                        this.controlPoints = Utilities.ParsePoints(data, this.dimension, "controlPoints").ToArray();
+                        this.weights = Utilities.ParseNurbsComponents(data, "weights").ToArray();
+                        this.knots = Utilities.ParseNurbsComponents(data, "knots").ToArray();
                         this.degree = Convert.ToInt32(Utilities.parseData(data, "degree.")[0]);
                     }
                     catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
@@ -1915,9 +1916,9 @@ namespace Glosa.Net.Core.Geometry.Path
                     {
                         IntPtr pStr = translate_v2_curve(nc.Serialize(), (GlosaVector2)v);
                         string data = Marshal.PtrToStringAnsi(pStr);
-                        nc.controlPoints = ParseControlPoints(data, nc.dimension, "controlPoints").ToArray();
-                        nc.weights = ParseNurbsComponents(data, "weights").ToArray();
-                        nc.knots = ParseNurbsComponents(data, "knots").ToArray();
+                        nc.controlPoints = Utilities.ParsePoints(data, nc.dimension, "controlPoints").ToArray();
+                        nc.weights = Utilities.ParseNurbsComponents(data, "weights").ToArray();
+                        nc.knots = Utilities.ParseNurbsComponents(data, "knots").ToArray();
                         nc.degree = Convert.ToInt32(Utilities.parseData(data, "degree.")[0]);
                         return nc;
                     }
@@ -1928,9 +1929,9 @@ namespace Glosa.Net.Core.Geometry.Path
                     {
                         IntPtr pStr = translate_v3_curve(nc.Serialize(), (GlosaVector3)v);
                         string data = Marshal.PtrToStringAnsi(pStr);
-                        nc.controlPoints = ParseControlPoints(data, nc.dimension, "controlPoints").ToArray();
-                        nc.weights = ParseNurbsComponents(data, "weights").ToArray();
-                        nc.knots = ParseNurbsComponents(data, "knots").ToArray();
+                        nc.controlPoints = Utilities.ParsePoints(data, nc.dimension, "controlPoints").ToArray();
+                        nc.weights = Utilities.ParseNurbsComponents(data, "weights").ToArray();
+                        nc.knots = Utilities.ParseNurbsComponents(data, "knots").ToArray();
                         nc.degree = Convert.ToInt32(Utilities.parseData(data, "degree.")[0]);
                         return nc;
                     }
