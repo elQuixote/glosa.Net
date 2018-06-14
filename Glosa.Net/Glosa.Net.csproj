@@ -45,17 +45,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\Geometry\GlosaLineSegment.cs" />
-    <Compile Include="Core\Geometry\GlosaMatrix44.cs" />
-    <Compile Include="Core\Geometry\GlosaPolygon.cs" />
-    <Compile Include="Core\Geometry\GlosaPolyline.cs" />
-    <Compile Include="Core\Geometry\GlosaQuaternion.cs" />
-    <Compile Include="Core\Geometry\GlosaVector2.cs" />
-    <Compile Include="Core\Geometry\GlosaVector3.cs" />
-    <Compile Include="Core\Geometry\GlosaMatrix33.cs" />
-    <Compile Include="Core\Geometry\GlosaVector4.cs" />
+    <Compile Include="Core\Geometry\Shape\GlosaLineSegment.cs" />
+    <Compile Include="Core\Geometry\Matrix\GlosaMatrix44.cs" />
+    <Compile Include="Core\Geometry\Polygon\GlosaPolygon.cs" />
+    <Compile Include="Core\Geometry\Path\GlosaPolyline.cs" />
+    <Compile Include="Core\Geometry\Quaternion\GlosaQuaternion.cs" />
+    <Compile Include="Core\Geometry\Vector\GlosaVector2.cs" />
+    <Compile Include="Core\Geometry\Vector\GlosaVector3.cs" />
+    <Compile Include="Core\Geometry\Matrix\GlosaMatrix33.cs" />
+    <Compile Include="Core\Geometry\Vector\GlosaVector4.cs" />
     <Compile Include="Core\Geometry\Path\GlosaNurbsCurve.cs" />
-    <Compile Include="Core\Geometry\Shapes\GlosaCircle.cs" />
+    <Compile Include="Core\Geometry\Shape\GlosaCircle.cs" />
     <Compile Include="Core\Helpers\GlosaObject.cs" />
     <Compile Include="Core\Helpers\Json\JsonNetValueSystem.cs" />
     <Compile Include="Core\Helpers\Json\jsonpath-0.5.1.cs" />
@@ -98,7 +98,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

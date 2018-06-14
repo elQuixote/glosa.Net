@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using Glosa.Net.Core.Interfaces;
+using Glosa.Net.Core.Geometry.Vector;
+using Glosa.Net.Core.Geometry.Quaternion;
 
-namespace Glosa.Net.Core.Geometry
+namespace Glosa.Net.Core.Geometry.Matrix
 {
     /// <summary>
     /// Implements a simple row-major 3d matrix (4x4) matrix struct
@@ -32,7 +30,7 @@ namespace Glosa.Net.Core.Geometry
         [DllImport("wrapper_matrix.dll")]
         private static extern int hash_44(GlosaMatrix44 m);
         [DllImport("wrapper_matrix.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr stringify_44(GlosaMatrix44 m);
+        private static extern IntPtr stringify_44(GlosaMatrix44 m);
         [DllImport("wrapper_matrix.dll")]
         private static extern GlosaMatrix44 transposeSelf_44(GlosaMatrix44 m);
         [DllImport("wrapper_matrix.dll")]
@@ -72,9 +70,9 @@ namespace Glosa.Net.Core.Geometry
         [DllImport("wrapper_matrix.dll")]
         private static extern void toArray_44(GlosaMatrix44 m, double[,] array);
         #endregion
-        private double m_00, m_01, m_02, m_03, m_10, m_11, m_12, m_13, m_20, m_21, m_22, m_23, m_30, m_31, m_32, m_33;
-        
+
         #region Properties
+        private double m_00, m_01, m_02, m_03, m_10, m_11, m_12, m_13, m_20, m_21, m_22, m_23, m_30, m_31, m_32, m_33;
         /// <summary>
         /// Gets or sets the 0,0 component of this matrix.
         /// </summary>
@@ -213,7 +211,8 @@ namespace Glosa.Net.Core.Geometry
         /// </summary>
         public void Clear()
         {
-            this = clear_44(this);
+            try { this = clear_44(this); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -226,7 +225,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>The identity matrix</returns>
         public static GlosaMatrix44 IDMatrix()
         {
-            return idMatrix_44();
+            try { return idMatrix_44(); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -239,7 +239,8 @@ namespace Glosa.Net.Core.Geometry
         /// <param name="n">The value</param>
         public void Set(double n)
         {
-            this = set_44(this, n);
+            try { this = set_44(this, n); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -248,7 +249,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>A new copy of that GlosaMatrix44</returns>
         public GlosaMatrix44 Copy()
         {
-            return copy_44(this);
+            try { return copy_44(this); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -258,7 +260,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>A new copy of that GlosaMatrix44</returns>
         public static GlosaMatrix44 CopyNew(GlosaMatrix44 m)
         {
-            return copy_44(m);
+            try { return copy_44(m); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -269,7 +272,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>True if components of the two GlosaMatrix44 are pairwise equal; otherwise false.</returns>
         public static bool operator ==(GlosaMatrix44 a, GlosaMatrix44 b)
         {
-            return equals_44(a, b);
+            try { return equals_44(a, b); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -280,7 +284,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>True if any component of the two GlosaMatrix44 is pairwise different; otherwise false.</returns>
         public static bool operator !=(GlosaMatrix44 a, GlosaMatrix44 b)
         {
-            return !equals_44(a, b);
+            try { return !equals_44(a, b); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -290,7 +295,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>The result</returns>
         public bool Equals(GlosaMatrix44 m)
         {
-            return this == m;
+            try { return this == m; }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -300,7 +306,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>true if obj is a GlosaMatrix44 and has the same components as this; otherwise false.</returns>
         public override bool Equals(object obj)
         {
-            return (obj is GlosaMatrix44 && this == (GlosaMatrix44)obj);
+            try { return (obj is GlosaMatrix44 && this == (GlosaMatrix44)obj); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -309,7 +316,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>A non-unique number based on GlosaMatrix44 components.</returns>
         public int Hash()
         {
-            return hash_44(this);
+            try { return hash_44(this); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -318,7 +326,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>A non-unique number based on GlosaMatrix44 components.</returns>
         public override int GetHashCode()
         {
-            return hash_44(this);
+            try { return hash_44(this); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -331,9 +340,13 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>A string</returns>
         public string Stringify()
         {
-            IntPtr pStr = stringify_44(this);
-            string rs = Marshal.PtrToStringAnsi(pStr);
-            return rs ?? String.Empty;
+            try
+            {
+                IntPtr pStr = stringify_44(this);
+                string rs = Marshal.PtrToStringAnsi(pStr);
+                return rs ?? String.Empty;
+            }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -341,7 +354,8 @@ namespace Glosa.Net.Core.Geometry
         /// </summary>
         public void TransposeSelf()
         {
-            this = transposeSelf_44(this);
+            try { this = transposeSelf_44(this); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -350,7 +364,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>The new transposed GlosaMatrix44</returns>
         public GlosaMatrix44 Transpose()
         {
-            return transposeNew_44(this);
+            try { return transposeNew_44(this); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -360,7 +375,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>The new transposed GlosaMatrix44</returns>
         public static GlosaMatrix44 Transpose(GlosaMatrix44 m)
         {
-            return transposeNew_44(m);
+            try { return transposeNew_44(m); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -369,7 +385,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>The determinant</returns>
         public double Determinant()
         {
-            return determinant_44(this);
+            try { return determinant_44(this); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -379,7 +396,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>The determinant</returns>
         public static double Determinant(GlosaMatrix44 m)
         {
-            return determinant_44(m);
+            try { return determinant_44(m); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -388,7 +406,8 @@ namespace Glosa.Net.Core.Geometry
         /// </summary>
         public void InvertSelf()
         {
-            this = invertSelf_44(this);
+            try { this = invertSelf_44(this); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -397,7 +416,8 @@ namespace Glosa.Net.Core.Geometry
         /// </summary>
         public GlosaMatrix44 Invert()
         {
-            return invertNew_44(this);
+            try { return invertNew_44(this); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -407,7 +427,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>A new inverted GlosaMatrix44</returns>
         public static GlosaMatrix44 Invert(GlosaMatrix44 m)
         {
-            return invertNew_44(m);
+            try { return invertNew_44(m); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -421,7 +442,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>The rotation matrix</returns>
         public static GlosaMatrix44 RotateX(double theta)
         {
-            return rotateMatrixX_44(theta);
+            try { return rotateMatrixX_44(theta); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -435,7 +457,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>The rotation matrix</returns>
         public static GlosaMatrix44 RotateY(double theta)
         {
-            return rotateMatrixY_44(theta);
+            try { return rotateMatrixY_44(theta); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -449,7 +472,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>The rotation matrix</returns>
         public static GlosaMatrix44 RotateZ(double theta)
         {
-            return rotateMatrixZ_44(theta);
+            try { return rotateMatrixZ_44(theta); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -463,7 +487,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>The scale matrix</returns>
         public static GlosaMatrix44 Scale(double s)
         {
-            return scaleMatrix_44(s);
+            try { return scaleMatrix_44(s); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -479,7 +504,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>A new stretch matrix</returns>
         public static GlosaMatrix44 Stretch(double sx, double sy, double sz)
         {
-            return scaleMatrix2_44(sx, sy, sz);
+            try { return scaleMatrix2_44(sx, sy, sz); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -494,7 +520,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>A new shear matrix</returns>
         public static GlosaMatrix44 ShearX(double sy, double sz)
         {
-            return shearMatrixX_44(sy, sz);
+            try { return shearMatrixX_44(sy, sz); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -508,7 +535,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>A new shear matrix</returns>
         public static GlosaMatrix44 ShearX(double sh)
         {
-            return shearUniformMatrix_X_44(sh);
+            try { return shearUniformMatrix_X_44(sh); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -523,7 +551,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>A new shear matrix</returns>
         public static GlosaMatrix44 ShearY(double sx, double sz)
         {
-            return shearMatrixY_44(sx, sz);
+            try { return shearMatrixY_44(sx, sz); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -537,7 +566,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>A new shear matrix</returns>
         public static GlosaMatrix44 ShearY(double sh)
         {
-            return shearUniformMatrix_Y_44(sh);
+            try { return shearUniformMatrix_Y_44(sh); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -552,7 +582,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>A new shear matrix</returns>
         public static GlosaMatrix44 ShearZ(double sx, double sy)
         {
-            return shearMatrixZ_44(sx, sy);
+            try { return shearMatrixZ_44(sx, sy); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -566,7 +597,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>A new shear matrix</returns>
         public static GlosaMatrix44 ShearZ(double sh)
         {
-            return shearUniformMatrix_Z_44(sh);
+            try { return shearUniformMatrix_Z_44(sh); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }       
         }
 
         /// <summary>
@@ -583,7 +615,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>A new GlosaMatrix44</returns>
         public GlosaMatrix44 FromVector4(GlosaVector4 v1, GlosaVector4 v2, GlosaVector4 v3, GlosaVector4 v4)
         {
-            return fromVector4(v1, v2, v3, v4);
+            try { return fromVector4(v1, v2, v3, v4); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -598,8 +631,12 @@ namespace Glosa.Net.Core.Geometry
         public double[,] ToArray(double[,] array)
         {
             if (array.GetUpperBound(0) != 3 && array.GetUpperBound(1) != 3) { throw new System.ArgumentException("array must be fixed two dimensional array [4,4] for GlosaMatrix44", "array"); }
-            toArray_44(this, array);
-            return array;
+            try
+            {
+                toArray_44(this, array);
+                return array;
+            }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -618,7 +655,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>A new GlosaMatrix44</returns>
         public static GlosaMatrix44 FromQuaternion(GlosaQuaternion q)
         {
-            return fromQuaternion_44(q);
+            try { return fromQuaternion_44(q); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
         #endregion
     }

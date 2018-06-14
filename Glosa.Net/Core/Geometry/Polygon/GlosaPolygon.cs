@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.InteropServices;
-using Newtonsoft.Json;
 using Glosa.Net.Core.Interfaces;
 using Glosa.Net.Core.Helpers;
 using Glosa.Net.Core.Helpers.Json;
+using Glosa.Net.Core.Geometry.Path;
+using Glosa.Net.Core.Geometry.Vector;
+using Glosa.Net.Core.Geometry.Matrix;
+using Glosa.Net.Core.Geometry.Shape;
 
-namespace Glosa.Net.Core.Geometry
+namespace Glosa.Net.Core.Geometry.Polygon
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class GlosaPolygon : GlosaObject, ICopy<GlosaPolygon>, IDimension<GlosaPolygon>, IHash<GlosaPolygon>, IEquals<GlosaPolygon>, IString<GlosaPolygon>,
         ITransform<GlosaPolygon>, IClosest<GlosaPolygon>, IVertices<GlosaPolygon>, IShape2<GlosaPolygon>
     {
@@ -159,12 +162,15 @@ namespace Glosa.Net.Core.Geometry
         private static extern bool isSegmentsClosed_v4_polygon(string s);
         #endregion
 
+        #region Properties
         /// <summary>
         /// 
         /// </summary>
         public GlosaPolyline polyline;
         private int dimension;
+        #endregion
 
+        #region Constructors
         /// <summary>
         /// 
         /// </summary>
@@ -200,7 +206,9 @@ namespace Glosa.Net.Core.Geometry
             if (!IsClosed()) { throw new System.ArgumentException("Polygon polyline is not closed"); }
             if (!IsPlanar()) { throw new System.ArgumentException("Polygon polyline is not planar"); }
         }
+        #endregion
 
+        #region Methods
         /// <summary>
         /// 
         /// </summary>
@@ -261,7 +269,7 @@ namespace Glosa.Net.Core.Geometry
             List<string> dataList = Utilities.parseData(data, "polyline.vertices.*");
             List<string> dataX2 = Utilities.parseData(data, "polyline.vertices.*.*");
             List<string> dataClosed = Utilities.parseData(data, "polyline.closed");
-            return new GlosaPolygon(new GlosaPolyline(ParseVertices(data, (dataX2.Count / dataList.Count)).ToArray(), Convert.ToBoolean(dataClosed[0])));
+            return new GlosaPolygon(new GlosaPolyline(Utilities.ParsePoints(data, (dataX2.Count / dataList.Count), "polyline.vertices").ToArray(), Convert.ToBoolean(dataClosed[0])));
         }
 
         /// <summary>
@@ -274,62 +282,6 @@ namespace Glosa.Net.Core.Geometry
             List<string> dataList = Utilities.parseData(data, "polyline.vertices.*");
             List<string> dataX2 = Utilities.parseData(data, "polyline.vertices.*.*");
             return new GlosaPolygon(new GlosaPolyline(ParseSegments(data, (dataX2.Count / dataList.Count)).ToArray()));
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="data"></param>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        private static List<IVector> ParseVertices(string data, int type)
-        {
-            List<List<string>> vertList = new List<List<string>>();
-            switch (type)
-            {
-                case 0:
-                    throw new System.ArgumentException("Polygon has an unvalid dimension", "dimension");
-                case 1:
-                    throw new System.ArgumentException("Polygon cannot have GlosaVectors of dimension 1", "dimension");
-                case 2:
-                    vertList.Add(Utilities.parseData(data, "polyline.vertices.*.x"));
-                    vertList.Add(Utilities.parseData(data, "polyline.vertices.*.y"));
-                    break;
-                case 3:
-                    vertList.Add(Utilities.parseData(data, "polyline.vertices.*.x"));
-                    vertList.Add(Utilities.parseData(data, "polyline.vertices.*.y"));
-                    vertList.Add(Utilities.parseData(data, "polyline.vertices.*.z"));
-                    break;
-                case 4:
-                    vertList.Add(Utilities.parseData(data, "polyline.vertices.*.x"));
-                    vertList.Add(Utilities.parseData(data, "polyline.vertices.*.y"));
-                    vertList.Add(Utilities.parseData(data, "polyline.vertices.*.z"));
-                    vertList.Add(Utilities.parseData(data, "polyline.vertices.*.w"));
-                    break;
-            }
-            int count = 0;
-            List<IVector> gverts = new List<IVector>();
-            foreach (string str in vertList[0])
-            {
-                switch (type)
-                {
-                    case 0:
-                        throw new System.ArgumentException("Polygon has an unvalid dimension", "dimension");
-                    case 1:
-                        throw new System.ArgumentException("Polygon cannot have GlosaVectors of dimension 1", "dimension");
-                    case 2:
-                        gverts.Add(new GlosaVector2(Convert.ToDouble(str), Convert.ToDouble(vertList[1][count])));
-                        break;
-                    case 3:
-                        gverts.Add(new GlosaVector3(Convert.ToDouble(str), Convert.ToDouble(vertList[1][count]), Convert.ToDouble(vertList[2][count])));
-                        break;
-                    case 4:
-                        gverts.Add(new GlosaVector4(Convert.ToDouble(str), Convert.ToDouble(vertList[1][count]), Convert.ToDouble(vertList[2][count]), Convert.ToDouble(vertList[3][count])));
-                        break;
-                }
-                count++;
-            }
-            return gverts;
         }
 
         /// <summary>
@@ -579,7 +531,6 @@ namespace Glosa.Net.Core.Geometry
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="p"></param>
         /// <returns></returns>
         public GlosaPolygon Copy()
         {
@@ -931,5 +882,6 @@ namespace Glosa.Net.Core.Geometry
         {
             return this;
         }
+        #endregion
     }
 }

@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using Glosa.Net.Core.Interfaces;
+using Glosa.Net.Core.Geometry.Vector;
 
-namespace Glosa.Net.Core.Geometry
+namespace Glosa.Net.Core.Geometry.Matrix
 {
     /// <summary>
     /// Implements a simple row-major 2d matrix (3x3) matrix struct
@@ -31,7 +28,7 @@ namespace Glosa.Net.Core.Geometry
         [DllImport("wrapper_matrix.dll")]
         private static extern int hash_33(GlosaMatrix33 m);
         [DllImport("wrapper_matrix.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr stringify_33(GlosaMatrix33 m);
+        private static extern IntPtr stringify_33(GlosaMatrix33 m);
         [DllImport("wrapper_matrix.dll")]
         private static extern GlosaMatrix33 transposeSelf_33(GlosaMatrix33 m);
         [DllImport("wrapper_matrix.dll")]
@@ -57,8 +54,9 @@ namespace Glosa.Net.Core.Geometry
         [DllImport("wrapper_matrix.dll")]
         private static extern void toArray_33(GlosaMatrix33 m, double[,] array);
         #endregion
-        private double m_00, m_01, m_02, m_10, m_11, m_12, m_20, m_21, m_22;
 
+        #region Properties
+        private double m_00, m_01, m_02, m_10, m_11, m_12, m_20, m_21, m_22;
         /// <summary>
         /// Gets or sets the 0,0 component of this matrix.
         /// </summary>
@@ -95,7 +93,9 @@ namespace Glosa.Net.Core.Geometry
         /// Gets or sets the 2,2 component of this matrix.
         /// </summary>
         public double m22 { get { return m_22; } set { m_22 = value; } }
+        #endregion
 
+        #region Constructors
         /// <summary>
         /// Initializes a new instance of the GlosaMatrix33
         /// </summary>
@@ -138,13 +138,16 @@ namespace Glosa.Net.Core.Geometry
             this.m_21 = array[2, 1];
             this.m_22 = array[2, 2];
         }
+        #endregion
 
+        #region Methods
         /// <summary>
         /// Sets all GlosaMatrix33 components to 0.
         /// </summary>
         public void Clear()
         {
-            this = clear_33(this);
+            try { this = clear_33(this); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -156,7 +159,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>The identity matrix</returns>
         public static GlosaMatrix33 IDMatrix()
         {
-            return idMatrix_33();
+            try { return idMatrix_33(); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -168,7 +172,8 @@ namespace Glosa.Net.Core.Geometry
         /// <param name="n">The value</param>
         public void Set(double n)
         {
-            this = set_33(this, n);
+            try { this = set_33(this, n); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -177,7 +182,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>A new copy of that GlosaMatrix33</returns>
         public GlosaMatrix33 Copy()
         {
-            return copy_33(this);
+            try { return copy_33(this); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -187,7 +193,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>A new copy of that GlosaMatrix33</returns>
         public static GlosaMatrix33 CopyNew(GlosaMatrix33 m)
         {
-            return copy_33(m);
+            try { return copy_33(m); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -198,7 +205,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>True if components of the two GlosaMatrix33 are pairwise equal; otherwise false.</returns>
         public static bool operator ==(GlosaMatrix33 a, GlosaMatrix33 b)
         {
-            return equals_33(a, b);
+            try { return equals_33(a, b); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -209,7 +217,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>True if any component of the two GlosaMatrix33 is pairwise different; otherwise false.</returns>
         public static bool operator !=(GlosaMatrix33 a, GlosaMatrix33 b)
         {
-            return !equals_33(a, b);
+            try { return !equals_33(a, b); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -219,7 +228,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>The result</returns>
         public bool Equals(GlosaMatrix33 m)
         {
-            return this == m;
+            try { return this == m; }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -229,7 +239,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>true if obj is a GlosaMatrix33 and has the same components as this; otherwise false.</returns>
         public override bool Equals(object obj)
         {
-            return (obj is GlosaMatrix33 && this == (GlosaMatrix33)obj);
+            try { return (obj is GlosaMatrix33 && this == (GlosaMatrix33)obj); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -238,7 +249,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>A non-unique number based on GlosaMatrix33 components.</returns>
         public int Hash()
         {
-            return hash_33(this);
+            try { return hash_33(this); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -247,7 +259,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>A non-unique number based on GlosaMatrix33 components.</returns>
         public override int GetHashCode()
         {
-            return hash_33(this);
+            try { return hash_33(this); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -259,9 +272,13 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>A string</returns>
         public string Stringify()
         {
-            IntPtr pStr = stringify_33(this);
-            string rs = Marshal.PtrToStringAnsi(pStr);
-            return rs ?? String.Empty;
+            try
+            {
+                IntPtr pStr = stringify_33(this);
+                string rs = Marshal.PtrToStringAnsi(pStr);
+                return rs ?? String.Empty;
+            }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -269,7 +286,8 @@ namespace Glosa.Net.Core.Geometry
         /// </summary>
         public void TransposeSelf()
         {
-            this = transposeSelf_33(this);
+            try { this = transposeSelf_33(this); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -278,7 +296,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>The new transposed GlosaMatrix33</returns>
         public GlosaMatrix33 Transpose()
         {
-            return transposeNew_33(this);
+            try { return transposeNew_33(this); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -288,7 +307,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>The new transposed GlosaMatrix33</returns>
         public static GlosaMatrix33 Transpose(GlosaMatrix33 m)
         {
-            return transposeNew_33(m);
+            try { return transposeNew_33(m); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -297,7 +317,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>The determinant</returns>
         public double Determinant()
         {
-            return determinant_33(this);
+            try { return determinant_33(this); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -307,7 +328,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>The determinant</returns>
         public static double Determinant(GlosaMatrix33 m)
         {
-            return determinant_33(m);
+            try { return determinant_33(m); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -316,7 +338,8 @@ namespace Glosa.Net.Core.Geometry
         /// </summary>
         public void InvertSelf()
         {
-            this = invertSelf_33(this);
+            try { this = invertSelf_33(this); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -325,7 +348,8 @@ namespace Glosa.Net.Core.Geometry
         /// </summary>
         public GlosaMatrix33 Invert()
         {
-            return invertNew_33(this);
+            try { return invertNew_33(this); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -335,7 +359,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>A new inverted GlosaMatrix33</returns>
         public static GlosaMatrix33 Invert(GlosaMatrix33 m)
         {
-            return invertNew_33(m);
+            try { return invertNew_33(m); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -348,7 +373,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>The rotation matrix</returns>
         public static GlosaMatrix33 Rotate(double theta)
         {
-            return rotateMatrix_33(theta);
+            try { return rotateMatrix_33(theta); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -361,7 +387,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>The scale matrix</returns>
         public static GlosaMatrix33 Scale(double s)
         {
-            return scaleMatrix_33(s);
+            try { return scaleMatrix_33(s); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -375,7 +402,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>A new stretch matrix</returns>
         public static GlosaMatrix33 Stretch(double sx, double sy)
         {
-            return scaleMatrix2_33(sx, sy);
+            try { return scaleMatrix2_33(sx, sy); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -388,7 +416,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>A new shear matrix</returns>
         public static GlosaMatrix33 ShearX(double sx)
         {
-            return shearMatrixX_33(sx);
+            try { return shearMatrixX_33(sx); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -401,7 +430,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>A new shear matrix</returns>
         public static GlosaMatrix33 ShearY(double sy)
         {
-            return shearMatrixY_33(sy);
+            try { return shearMatrixY_33(sy); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -416,7 +446,8 @@ namespace Glosa.Net.Core.Geometry
         /// <returns>A new GlosaMatrix33</returns>
         public GlosaMatrix33 FromVector3(GlosaVector3 v1, GlosaVector3 v2, GlosaVector3 v3)
         {
-            return fromVector3(v1, v2, v3);
+            try { return fromVector3(v1, v2, v3); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -430,8 +461,12 @@ namespace Glosa.Net.Core.Geometry
         public double[,] ToArray(double[,] array)
         {
             if (array.GetUpperBound(0) != 2 && array.GetUpperBound(1) != 2) { throw new System.ArgumentException("array must be fixed two dimensional array [3,3] for GlosaMatrix33", "array"); }
-            toArray_33(this, array);
-            return array;
+            try
+            {
+                toArray_33(this, array);
+                return array;
+            }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -442,5 +477,6 @@ namespace Glosa.Net.Core.Geometry
         {
             return 2;
         }
+        #endregion
     }
 }

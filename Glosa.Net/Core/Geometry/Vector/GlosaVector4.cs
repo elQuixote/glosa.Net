@@ -1,12 +1,9 @@
 ﻿using Glosa.Net.Core.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.InteropServices;
+using Glosa.Net.Core.Geometry.Matrix;
 
-namespace Glosa.Net.Core.Geometry
+namespace Glosa.Net.Core.Geometry.Vector
 {
     /// <summary>
     /// Represents the four components of a vector in four-dimensional space
@@ -156,6 +153,8 @@ namespace Glosa.Net.Core.Geometry
         [DllImport("wrapper_vector.dll")]
         private static extern GlosaVector4 calculatePlane_v4(GlosaVector3 v1, GlosaVector3 v2, GlosaVector3 v3);
         #endregion
+
+        #region Properties
         private double m_x, m_y, m_z, m_w;
 
         /// <summary>
@@ -177,7 +176,9 @@ namespace Glosa.Net.Core.Geometry
         /// Gets or sets the Z (third) component of this vector.
         /// </summary>
         public double w { get { return m_w; } set { m_w = value; } }
+        #endregion
 
+        #region Constructors
         /// <summary>
         /// Initializes a new instance of the GlosaVector4 based on three, X Y Z and W, components.
         /// </summary>
@@ -192,7 +193,9 @@ namespace Glosa.Net.Core.Geometry
             this.m_z = z;
             this.m_w = w;
         }
+        #endregion
 
+        #region Methods
         /// <summary>
         /// Sums up two GlosaVector4.
         /// </summary>
@@ -866,7 +869,8 @@ namespace Glosa.Net.Core.Geometry
         /// <summary>
         /// Interpolates between two vectors using an interpolation value (0.5 will return vector between the two vectors)
         /// </summary>
-        /// <param name="vector">The second GlosaVector</param>
+        /// <param name="vector">The first GlosaVector</param>
+        /// <param name="vector2">The second GlosaVector</param>
         /// <param name="f">The Interpolation factor (should be in the range 0..1)</param>
         /// <returns>The interpolated vector</returns>
         public static GlosaVector4 InterpolateNew(GlosaVector4 vector, GlosaVector4 vector2, double f)
@@ -926,26 +930,56 @@ namespace Glosa.Net.Core.Geometry
             return fromSpherical_v4(r, theta, phi, psi);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
         public GlosaVector4 ScaleNew(double s)
         {
             return scaleNew_v4(this, s);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="s"></param>
         public void ScaleSelf(double s)
         {
             this = scaleSelf_v4(this, s);
         }
-
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sx"></param>
+        /// <param name="sy"></param>
+        /// <param name="sz"></param>
+        /// <param name="sw"></param>
+        /// <returns></returns>
         public GlosaVector4 ScaleNew(double sx, double sy, double sz, double sw = 0)
         {
             return scaleNewComponent_v4(this, sx, sy, sz, sw);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sx"></param>
+        /// <param name="sy"></param>
+        /// <param name="sz"></param>
+        /// <param name="sw"></param>
         public void ScaleSelf(double sx, double sy, double sz, double sw = 0)
         {
             this = scaleSelfComponent_v4(this, sx, sy, sz, sw);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="theta"></param>
+        /// <param name="component"></param>
+        /// <returns></returns>
         public GlosaVector4 RotateNew(float theta, int component = 0)
         {
             if (component == 0) { return rotateXYNew_v4(this, theta); }
@@ -957,6 +991,11 @@ namespace Glosa.Net.Core.Geometry
             else { throw new System.ArgumentException("Component value must be between 0 and 2 representing x, y, z"); }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="theta"></param>
+        /// <param name="component"></param>
         public void RotateSelf(float theta, int component = 0)
         {
             if (component == 0) { this = rotateXYSelf_v4(this, theta); }
@@ -968,29 +1007,59 @@ namespace Glosa.Net.Core.Geometry
             else { throw new System.ArgumentException("Component value must be between 0 and 2 representing x, y, z"); }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vector"></param>
         public void Translate(IVector vector)
         {
             this = translate_v4(this, (GlosaVector4)vector);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
         public GlosaVector4 TransformNew(IMatrixes matrix)
         {
             return transformNew_v4(this, (GlosaMatrix44)matrix);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
         public void TransformSelf(IMatrixes matrix)
         {
             this = transformSelf_v4(this, (GlosaMatrix44)matrix);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="b1"></param>
+        /// <param name="b2"></param>
+        /// <param name="theta"></param>
+        /// <param name="b3"></param>
+        /// <param name="b4"></param>
+        /// <param name="phi"></param>
         public void RotateAxis(GlosaVector4 b1, GlosaVector4 b2, double theta, GlosaVector4 b3, GlosaVector4 b4, double phi)
         {
             this = rotateAxis_v4(this, b1, b2, theta, b3, b4, phi);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="v1"></param>
+        /// <param name="v2"></param>
+        /// <param name="v3"></param>
+        /// <returns></returns>
         public static GlosaVector4 CalculatePlane(GlosaVector3 v1, GlosaVector3 v2, GlosaVector3 v3)
         {
             return calculatePlane_v4(v1, v2, v3);
         }
+        #endregion
     }
 }

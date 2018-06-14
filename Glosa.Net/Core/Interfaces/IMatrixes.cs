@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Glosa.Net.Core.Interfaces
+﻿namespace Glosa.Net.Core.Interfaces
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IMatrixes
     {
     }

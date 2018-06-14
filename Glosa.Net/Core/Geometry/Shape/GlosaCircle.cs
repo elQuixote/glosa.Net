@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.InteropServices;
-using Newtonsoft.Json;
 using Glosa.Net.Core.Interfaces;
 using Glosa.Net.Core.Helpers;
 using Glosa.Net.Core.Helpers.Json;
+using Glosa.Net.Core.Geometry.Vector;
+using Glosa.Net.Core.Geometry.Matrix;
 
-namespace Glosa.Net.Core.Geometry.Shapes
+namespace Glosa.Net.Core.Geometry.Shape
 {
     /// <summary>
     /// 
@@ -133,6 +131,8 @@ namespace Glosa.Net.Core.Geometry.Shapes
         [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
         private static extern IntPtr transform_v4_circle(string s, GlosaMatrix44 m);
         #endregion
+
+        #region Properties
         /// <summary>
         /// 
         /// </summary>
@@ -142,7 +142,9 @@ namespace Glosa.Net.Core.Geometry.Shapes
         /// </summary>
         public IVector center;
         private int dimension;
+        #endregion
 
+        #region Constructors
         /// <summary>
         /// 
         /// </summary>
@@ -216,7 +218,9 @@ namespace Glosa.Net.Core.Geometry.Shapes
                 default: throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
             }
         }
+        #endregion
 
+        #region Methods
         /// <summary>
         /// 
         /// </summary>
@@ -226,32 +230,7 @@ namespace Glosa.Net.Core.Geometry.Shapes
         {
             List<string> vectorData = Utilities.parseData(data, "center.*");
             List<string> radiusData = Utilities.parseData(data, "radius.");
-            return new GlosaCircle(ParseCircleData(data, vectorData.Count), Convert.ToDouble(radiusData[0]));
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="data"></param>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        private static IVector ParseCircleData(string data, int type)
-        {
-            List<string> vectorData = Utilities.parseData(data, "center.*");
-            switch (type)
-            {
-                case 0:
-                    throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
-                case 1:
-                    throw new System.ArgumentException("Circle cannot have GlosaVectors of dimension 1", "dimension");
-                case 2:
-                    return new GlosaVector2(Convert.ToDouble(vectorData[0]), Convert.ToDouble(vectorData[1]));
-                case 3:
-                    return new GlosaVector3(Convert.ToDouble(vectorData[0]), Convert.ToDouble(vectorData[1]), Convert.ToDouble(vectorData[2]));
-                case 4:
-                    return new GlosaVector4(Convert.ToDouble(vectorData[0]), Convert.ToDouble(vectorData[1]), Convert.ToDouble(vectorData[2]), Convert.ToDouble(vectorData[3]));
-                default: throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
-            }
+            return new GlosaCircle(Utilities.ParseCircleData(data, vectorData.Count), Convert.ToDouble(radiusData[0]));
         }
 
         /// <summary>
@@ -961,5 +940,6 @@ namespace Glosa.Net.Core.Geometry.Shapes
                 default: throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
             }
         }
+        #endregion
     }
 }
