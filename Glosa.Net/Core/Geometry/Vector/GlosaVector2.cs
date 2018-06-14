@@ -119,6 +119,8 @@ namespace Glosa.Net.Core.Geometry.Vector
         [DllImport("wrapper_vector.dll")]
         private static extern GlosaVector2 scaleNewComponent_v2(GlosaVector2 vector, double sx, double sy);
         #endregion
+
+        #region Properties
         private double m_x, m_y;
 
         /// <summary>
@@ -130,7 +132,9 @@ namespace Glosa.Net.Core.Geometry.Vector
         /// Gets or sets the Y (second) component of this vector.
         /// </summary>
         public double y { get { return m_y; } set { m_y = value; } }
+        #endregion
 
+        #region Constructors
         /// <summary>
         /// Initializes a new instance of the vector based on two, X and Y, components.
         /// </summary>
@@ -141,7 +145,9 @@ namespace Glosa.Net.Core.Geometry.Vector
             this.m_x = x;
             this.m_y = y;
         }
+        #endregion
 
+        #region Methods
         /// <summary>
         /// Sums up two GlosaVector2.
         /// </summary>
@@ -923,5 +929,6 @@ namespace Glosa.Net.Core.Geometry.Vector
         {
             this = transformSelf_v2(this, (GlosaMatrix33)matrix);
         }
+        #endregion
     }
 }
