@@ -162,12 +162,15 @@ namespace Glosa.Net.Core.Geometry.Polygon
         private static extern bool isSegmentsClosed_v4_polygon(string s);
         #endregion
 
+        #region Properties
         /// <summary>
         /// 
         /// </summary>
         public GlosaPolyline polyline;
         private int dimension;
+        #endregion
 
+        #region Constructors
         /// <summary>
         /// 
         /// </summary>
@@ -203,7 +206,9 @@ namespace Glosa.Net.Core.Geometry.Polygon
             if (!IsClosed()) { throw new System.ArgumentException("Polygon polyline is not closed"); }
             if (!IsPlanar()) { throw new System.ArgumentException("Polygon polyline is not planar"); }
         }
+        #endregion
 
+        #region Methods
         /// <summary>
         /// 
         /// </summary>
@@ -877,5 +882,6 @@ namespace Glosa.Net.Core.Geometry.Polygon
         {
             return this;
         }
+        #endregion
     }
 }
