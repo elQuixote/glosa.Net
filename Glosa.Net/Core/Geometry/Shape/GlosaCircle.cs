@@ -131,6 +131,8 @@ namespace Glosa.Net.Core.Geometry.Shape
         [DllImport("wrapper_shape.dll", CallingConvention = CallingConvention.Cdecl)]
         private static extern IntPtr transform_v4_circle(string s, GlosaMatrix44 m);
         #endregion
+
+        #region Properties
         /// <summary>
         /// 
         /// </summary>
@@ -140,7 +142,9 @@ namespace Glosa.Net.Core.Geometry.Shape
         /// </summary>
         public IVector center;
         private int dimension;
+        #endregion
 
+        #region Constructors
         /// <summary>
         /// 
         /// </summary>
@@ -214,7 +218,9 @@ namespace Glosa.Net.Core.Geometry.Shape
                 default: throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
             }
         }
+        #endregion
 
+        #region Methods
         /// <summary>
         /// 
         /// </summary>
@@ -934,5 +940,6 @@ namespace Glosa.Net.Core.Geometry.Shape
                 default: throw new System.ArgumentException("Circle has an unvalid dimension", "dimension");
             }
         }
+        #endregion
     }
 }
