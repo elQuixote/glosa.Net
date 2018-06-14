@@ -91,6 +91,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         [DllImport("wrapper_quaternion.dll")]
         private static extern GlosaQuaternion fromVector3_quat(double w, GlosaVector3 v);
         #endregion
+
+        #region Properties
         private double m_x, m_y, m_z, m_w;
 
         /// <summary>
@@ -112,7 +114,9 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// Gets or sets the W (fourth) component of this quaternion.
         /// </summary>
         public double w { get { return m_w; } set { m_w = value; } }
+        #endregion
 
+        #region Constructors
         /// <summary>
         /// Initializes a new instance of the GlosaQuaternion based on four, X and Y and Z and W, components.
         /// </summary>
@@ -149,14 +153,17 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         {
             this = fromMatrix_quat(m);
         }
+        #endregion
 
+        #region Methods
         /// <summary>
         /// Computes the length of the GlosaQuaternion
         /// </summary>
         /// <returns>The length</returns>
         public double Length()
         {
-            return length_quat(this);
+            try { return length_quat(this); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -165,7 +172,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>The length</returns>
         public double MagnitudeSquared()
         {
-            return magnitudeSquared_quat(this);
+            try { return magnitudeSquared_quat(this); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -175,7 +183,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>The result</returns>
         public bool Equals(GlosaQuaternion quaternion)
         {
-            return this == quaternion;
+            try { return this == quaternion; }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -185,7 +194,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>true if obj is a GlosaQuaternion and has the same coordinates as this; otherwise false.</returns>
         public override bool Equals(object obj)
         {
-            return (obj is GlosaQuaternion && this == (GlosaQuaternion)obj);
+            try { return (obj is GlosaQuaternion && this == (GlosaQuaternion)obj); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -196,7 +206,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>True if components of the two GlosaQuaternion are pairwise equal; otherwise false.</returns>
         public static bool operator ==(GlosaQuaternion a, GlosaQuaternion b)
         {
-            return equals_quat(a, b);
+            try { return equals_quat(a, b); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -207,7 +218,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>True if any component of the two GlosaQuaternion is pairwise different; otherwise false.</returns>
         public static bool operator !=(GlosaQuaternion a, GlosaQuaternion b)
         {
-            return !equals_quat(a, b);
+            try { return !equals_quat(a, b); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -216,9 +228,13 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>A string representing the GlosaQuaternion.</returns>
         public string Stringify()
         {
-            IntPtr pStr = stringify_quat(this);
-            string rs = Marshal.PtrToStringAnsi(pStr);
-            return rs ?? String.Empty;
+            try
+            {
+                IntPtr pStr = stringify_quat(this);
+                string rs = Marshal.PtrToStringAnsi(pStr);
+                return rs ?? String.Empty;
+            }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -226,7 +242,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// </summary>
         public void Clear()
         {
-            this = clear_quat(this);
+            try { this = clear_quat(this); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -235,7 +252,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>A non-unique number based on GlosaQuaternion components.</returns>
         public override int GetHashCode()
         {
-            return hash_quat(this);
+            try { return hash_quat(this); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -244,7 +262,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>A non-unique number based on GlosaQuaternion components.</returns>
         public int Hash()
         {
-            return hash_quat(this);
+            try { return hash_quat(this); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -253,7 +272,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>A new copy of that GlosaQuaternion</returns>
         public GlosaQuaternion Copy()
         {
-            return copy_quat(this);
+            try { return copy_quat(this); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -263,7 +283,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>A new copy of that GlosaQuaternion</returns>
         public static GlosaQuaternion CopyNew(GlosaQuaternion quaternion)
         {
-            return copy_quat(quaternion);
+            try { return copy_quat(quaternion); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -272,7 +293,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <param name="n">The value</param>
         public void Set(double n)
         {
-            this = set_quat(this, n);
+            try { this = set_quat(this, n); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -284,7 +306,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <param name="w">The w value</param>
         public void Set(double x, double y, double z, double w)
         {
-            this = new GlosaQuaternion(x, y, z, w);
+            try { this = new GlosaQuaternion(x, y, z, w); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -293,7 +316,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// </summary>
         public void InverseSelf()
         {
-            this = inverseSelf_quat(this);
+            try { this = inverseSelf_quat(this); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -303,7 +327,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>A new inversed Quaternion</returns>
         public GlosaQuaternion InverseNew()
         {
-            return inverseNew_quat(this);
+            try { return inverseNew_quat(this); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -313,7 +338,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>A new inversed Quaternion</returns>
         public static GlosaQuaternion InverseNew(GlosaQuaternion q)
         {
-            return inverseNew_quat(q);
+            try { return inverseNew_quat(q); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -322,7 +348,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// </summary>
         public void InvertSelf()
         {
-            this = invertSelf_quat(this);
+            try { this = invertSelf_quat(this); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -332,7 +359,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>A new inverted Quaternion</returns>
         public GlosaQuaternion InvertNew()
         {
-            return invertNew_quat(this);
+            try { return invertNew_quat(this); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -342,7 +370,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>A new inverted Quaternion</returns>
         public static GlosaQuaternion InvertNew(GlosaQuaternion q)
         {
-            return invertNew_quat(q);
+            try { return invertNew_quat(q); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -351,7 +380,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <param name="q">The GlosaQuaternion to add</param>
         public void AddSelf(GlosaQuaternion q)
         {
-            this = addSelf_quat(this, q);
+            try { this = addSelf_quat(this, q); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -360,7 +390,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <param name="f">The value to add</param>
         public void AddSelf(double f)
         {
-            this = addSelf2_quat(this, f);
+            try { this = addSelf2_quat(this, f); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -370,7 +401,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>A new GlosaQuaternion that results from the componentwise addition of the two GlosaQuaternion.</returns>
         public GlosaQuaternion AddNew(GlosaQuaternion q)
         {
-            return addNew_quat(this, q);
+            try { return addNew_quat(this, q); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }     
         }
 
         /// <summary>
@@ -380,7 +412,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>A new GlosaQuaternion that results from the componentwise addition of the GlosaQuaternion and f</returns>
         public GlosaQuaternion AddNew(double f)
         {
-            return addNew2_quat(this, f);
+            try { return addNew2_quat(this, f); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -391,7 +424,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>A new GlosaQuaternion that results from the componentwise addition of the two GlosaQuaternion.</returns>
         public static GlosaQuaternion Add(GlosaQuaternion q1, GlosaQuaternion q2)
         {
-            return addNew_quat(q1, q2);
+            try { return addNew_quat(q1, q2); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -402,7 +436,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>A new GlosaQuaternion that results from the componentwise addition of the GlosaQuaternion and f</returns>
         public static GlosaQuaternion Add(GlosaQuaternion q1, double f)
         {
-            return addNew2_quat(q1, f);
+            try { return addNew2_quat(q1, f); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -411,7 +446,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <param name="q">The GlosaQuaternion to subtract</param>
         public void SubtractSelf(GlosaQuaternion q)
         {
-            this = subtractSelf_quat(this, q);
+            try { this = subtractSelf_quat(this, q); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -420,7 +456,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <param name="f">The value to subtract</param>
         public void SubtractSelf(double f)
         {
-            this = subtractSelf2_quat(this, f);
+            try { this = subtractSelf2_quat(this, f); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -432,7 +469,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>A new GlosaQuaternion.</returns>
         public GlosaQuaternion SubtractNew(GlosaQuaternion q)
         {
-            return subtractNew_quat(this, q);
+            try { return subtractNew_quat(this, q); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -442,7 +480,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>A new GlosaQuaternion that results from the componentwise subtraction of the GlosaQuaternion and f</returns>
         public GlosaQuaternion SubtractNew(double f)
         {
-            return subtractNew2_quat(this, f);
+            try { return subtractNew2_quat(this, f); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -455,7 +494,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>A new GlosaQuaternion.</returns>
         public static GlosaQuaternion Subtract(GlosaQuaternion q1, GlosaQuaternion q2)
         {
-            return subtractNew_quat(q1, q2);
+            try { return subtractNew_quat(q1, q2); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -466,7 +506,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>A new GlosaQuaternion that results from the componentwise subtraction of the GlosaQuaternion and f</returns>
         public static GlosaQuaternion Subtract(GlosaQuaternion q1, double f)
         {
-            return subtractNew2_quat(q1, f);
+            try { return subtractNew2_quat(q1, f); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -475,7 +516,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <param name="q">The GlosaQuaternion to multiply</param>
         public void MultiplySelf(GlosaQuaternion q)
         {
-            this = multiplySelf_quat(this, q);
+            try { this = multiplySelf_quat(this, q); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -484,7 +526,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <param name="f">The value to multiply</param>
         public void MultiplySelf(double f)
         {
-            this = multiplySelf2_quat(this, f);
+            try { this = multiplySelf2_quat(this, f); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -495,7 +538,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>A new GlosaQuaternion.</returns>
         public GlosaQuaternion MultiplyNew(GlosaQuaternion q)
         {
-            return multiplyNew_quat(this, q);
+            try { return multiplyNew_quat(this, q); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -505,7 +549,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>A new GlosaQuaternion that is the original vector coordinatewise multiplied by f.</returns>
         public GlosaQuaternion MultiplyNew(double f)
         {
-            return multiplyNew2_quat(this, f);
+            try { return multiplyNew2_quat(this, f); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -517,7 +562,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>A new GlosaQuaternion.</returns>
         public static GlosaQuaternion Multiply(GlosaQuaternion q1, GlosaQuaternion q2)
         {
-            return multiplyNew_quat(q1, q2);
+            try { return multiplyNew_quat(q1, q2); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }   
         }
 
         /// <summary>
@@ -528,7 +574,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>A new GlosaQuaternion that is the original vector coordinatewise multiplied by f.</returns>
         public static GlosaQuaternion Multiply(GlosaQuaternion q, double f)
         {
-            return multiplyNew2_quat(q, f);
+            try { return multiplyNew2_quat(q, f); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -537,7 +584,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <param name="q">The GlosaQuaternion to divide</param>
         public void DivideSelf(GlosaQuaternion q)
         {
-            this = divideSelf_quat(this, q);
+            try { this = divideSelf_quat(this, q); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -546,7 +594,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <param name="f">The value to divide</param>
         public void DivideSelf(double f)
         {
-            this = divideSelf2_quat(this, f);
+            try { this = divideSelf2_quat(this, f); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -556,7 +605,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>A new GlosaQuaternion.</returns>
         public GlosaQuaternion DivideNew(GlosaQuaternion q)
         {
-            return divideNew_quat(this, q);
+            try { return divideNew_quat(this, q); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -566,7 +616,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>A new GlosaQuaternion.</returns>
         public GlosaQuaternion DivideNew(double f)
         {
-            return divideNew2_quat(this, f);
+            try { return divideNew2_quat(this, f); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -577,7 +628,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>A new GlosaQuaternion.</returns>
         public static GlosaQuaternion Divide(GlosaQuaternion q1, GlosaQuaternion q2)
         {
-            return divideNew_quat(q1, q2);
+            try { return divideNew_quat(q1, q2); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -588,7 +640,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>A new GlosaQuaternion.</returns>
         public static GlosaQuaternion Divide(GlosaQuaternion q, double f)
         {
-            return divideNew2_quat(q, f);
+            try { return divideNew2_quat(q, f); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -599,7 +652,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>A new GlosaQuaternion that results from the componentwise addition of the two GlosaQuaternion.</returns>
         public static GlosaQuaternion operator +(GlosaQuaternion q1, GlosaQuaternion q2)
         {
-            return addNew_quat(q1, q2);
+            try { return addNew_quat(q1, q2); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -610,7 +664,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>A new GlosaQuaternion that results from the componentwise addition of the GlosaQuaternion and f</returns>
         public static GlosaQuaternion operator +(GlosaQuaternion q1, double f)
         {
-            return addNew2_quat(q1, f);
+            try { return addNew2_quat(q1, f); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -623,7 +678,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>A new GlosaQuaternion.</returns>
         public static GlosaQuaternion operator -(GlosaQuaternion q1, GlosaQuaternion q2)
         {
-            return subtractNew_quat(q1, q2);
+            try { return subtractNew_quat(q1, q2); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -634,7 +690,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>A new GlosaQuaternion that results from the componentwise subtraction of the GlosaQuaternion and f</returns>
         public static GlosaQuaternion operator -(GlosaQuaternion q1, double f)
         {
-            return subtractNew2_quat(q1, f);
+            try { return subtractNew2_quat(q1, f); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -645,7 +702,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>A new GlosaQuaternion that is the original vector coordinatewise multiplied by f.</returns>
         public static GlosaQuaternion operator *(GlosaQuaternion q, float f)
         {
-            return multiplyNew2_quat(q, f);
+            try { return multiplyNew2_quat(q, f); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -657,7 +715,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>A new GlosaQuaternion.</returns>
         public static GlosaQuaternion operator *(GlosaQuaternion q1, GlosaQuaternion q2)
         {
-            return multiplyNew_quat(q1, q2);
+            try { return multiplyNew_quat(q1, q2); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -668,7 +727,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>A new GlosaQuaternion.</returns>
         public static GlosaQuaternion operator /(GlosaQuaternion q, double f)
         {
-            return divideNew2_quat(q, f);
+            try { return divideNew2_quat(q, f); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -679,7 +739,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>A new GlosaQuaternion.</returns>
         public static GlosaQuaternion operator /(GlosaQuaternion q1, GlosaQuaternion q2)
         {
-            return divideNew_quat(q1, q2);
+            try { return divideNew_quat(q1, q2); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -689,7 +750,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>A new normalized GlosaQuaternion</returns>
         public GlosaQuaternion NormalizeNew(double value)
         {
-            return normalizeNew_quat(this, value);
+            try { return normalizeNew_quat(this, value); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -699,7 +761,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>Itself</returns>
         public void NormalizeSelf(double value)
         {
-            this = normalizeSelf_quat(this, value);
+            try { this = normalizeSelf_quat(this, value); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -710,7 +773,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>The dot product</returns>
         public static double Dot(GlosaQuaternion q1, GlosaQuaternion q2)
         {
-            return dot_quat(q1, q2);
+            try { return dot_quat(q1, q2); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -720,7 +784,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>The dot product</returns>
         public double Dot(GlosaQuaternion q)
         {
-            return dot_quat(this, q);
+            try { return dot_quat(this, q); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -729,7 +794,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// </summary>
         public void ConjugateSelf()
         {
-            this = conjugateSelf_quat(this);
+            try { this = conjugateSelf_quat(this); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -739,7 +805,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>A new conjugated GlosaQuaternion</returns>
         public GlosaQuaternion ConjugateNew()
         {
-            return conjugateNew_quat(this);
+            try { return conjugateNew_quat(this); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -749,7 +816,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// </summary>/// <returns>A new conjugated GlosaQuaternion</returns>
         public static GlosaQuaternion Conjugate(GlosaQuaternion q)
         {
-            return conjugateNew_quat(q);
+            try { return conjugateNew_quat(q); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -759,7 +827,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>The GlosaQuaternion</returns>
         public GlosaQuaternion FromMatrix(GlosaMatrix44 m)
         {
-            return fromMatrix_quat(m);
+            try { return fromMatrix_quat(m); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -770,7 +839,8 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         /// <returns>The new GlosaQuaternion</returns>
         public static GlosaQuaternion FromAxisAngle(GlosaVector3 axis, double angle)
         {
-            return fromAxisAngle_quat(axis, angle);
+            try { return fromAxisAngle_quat(axis, angle); }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
 
         /// <summary>
@@ -781,8 +851,13 @@ namespace Glosa.Net.Core.Geometry.Quaternion
         public double[] ToArray(double[] array)
         {
             if (array.Length != 4) { throw new System.ArgumentException("array must be fixed array with length of 4 for GlosaQuaternion", "array"); }
-            toArray_quat(this, array);
-            return array;
+            try
+            {
+                toArray_quat(this, array);
+                return array;
+            }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
         }
+        #endregion
     }
 }
