@@ -54,8 +54,9 @@ namespace Glosa.Net.Core.Geometry.Matrix
         [DllImport("wrapper_matrix.dll")]
         private static extern void toArray_33(GlosaMatrix33 m, double[,] array);
         #endregion
-        private double m_00, m_01, m_02, m_10, m_11, m_12, m_20, m_21, m_22;
 
+        #region Properties
+        private double m_00, m_01, m_02, m_10, m_11, m_12, m_20, m_21, m_22;
         /// <summary>
         /// Gets or sets the 0,0 component of this matrix.
         /// </summary>
@@ -92,7 +93,9 @@ namespace Glosa.Net.Core.Geometry.Matrix
         /// Gets or sets the 2,2 component of this matrix.
         /// </summary>
         public double m22 { get { return m_22; } set { m_22 = value; } }
+        #endregion
 
+        #region Constructors
         /// <summary>
         /// Initializes a new instance of the GlosaMatrix33
         /// </summary>
@@ -135,7 +138,9 @@ namespace Glosa.Net.Core.Geometry.Matrix
             this.m_21 = array[2, 1];
             this.m_22 = array[2, 2];
         }
+        #endregion
 
+        #region Methods
         /// <summary>
         /// Sets all GlosaMatrix33 components to 0.
         /// </summary>
@@ -472,5 +477,6 @@ namespace Glosa.Net.Core.Geometry.Matrix
         {
             return 2;
         }
+        #endregion
     }
 }
