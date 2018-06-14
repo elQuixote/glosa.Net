@@ -137,6 +137,8 @@ namespace Glosa.Net.Core.Geometry.Vector
         [DllImport("wrapper_vector.dll")]
         private static extern bool arePlanar_v(GlosaVector3[] array);
         #endregion
+
+        #region Properties
         private double m_x, m_y, m_z;
 
         /// <summary>
@@ -153,7 +155,9 @@ namespace Glosa.Net.Core.Geometry.Vector
         /// Gets or sets the Z (third) component of this vector.
         /// </summary>
         public double z { get { return m_z; } set { m_z = value; } }
+        #endregion
 
+        #region Constructor
         /// <summary>
         /// Initializes a new instance of the GlosaVector3 based on three, X and Y and Z, components.
         /// </summary>
@@ -166,7 +170,9 @@ namespace Glosa.Net.Core.Geometry.Vector
             this.m_y = y;
             this.m_z = z;
         }
+        #endregion
 
+        #region Methods
         /// <summary>
         /// Sums up two GlosaVector3.
         /// </summary>
@@ -1021,5 +1027,6 @@ namespace Glosa.Net.Core.Geometry.Vector
         {
             return arePlanar_v(array);
         }
+        #endregion
     }
 }
