@@ -9,14 +9,19 @@ namespace Glosa.Net.Core.Geometry.Shape
     /// </summary>
     public struct GlosaLineSegment
     {
+        #region C Reference Functions
         [DllImport("wrapper_path.dll")]
         private static extern GlosaLineSegment segmentFromVectors(GlosaVector3 v1, GlosaVector3 v2);
+        #endregion
 
+        #region Properties
         /// <summary>
         /// 
         /// </summary>
         public IVector startVertex, endVertex;
+        #endregion
 
+        #region Constructors
         /// <summary>
         /// 
         /// </summary>
@@ -27,6 +32,9 @@ namespace Glosa.Net.Core.Geometry.Shape
             this.startVertex = startVertex;
             this.endVertex = endVertex;
         }
+        #endregion
+
+        #region Methods
         /*
         public static GlosaLineSegment SegmentFromVectors(IVector startVertex, IVector endVertex)
         {
@@ -42,5 +50,6 @@ namespace Glosa.Net.Core.Geometry.Shape
             //return segmentFromVectors(startVertex, endVertex);
         }
         */
+        #endregion
     }
 }
