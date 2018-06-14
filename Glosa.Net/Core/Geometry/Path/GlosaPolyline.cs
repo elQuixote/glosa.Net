@@ -152,6 +152,7 @@ namespace Glosa.Net.Core.Geometry.Path
         private static extern IntPtr transform_v4_polyline(string s, GlosaMatrix44 m);
         #endregion
 
+        #region Properties
         /// <summary>
         /// 
         /// </summary>
@@ -167,7 +168,9 @@ namespace Glosa.Net.Core.Geometry.Path
         /// </summary>
         public bool closed;
         private int dimension;
+        #endregion
 
+        #region Constructors
         /// <summary>
         /// 
         /// </summary>
@@ -196,7 +199,9 @@ namespace Glosa.Net.Core.Geometry.Path
             this.dimension = segments[0].startVertex.Dimension();
             GenerateVerticesFromSegments(segments);
         }
+        #endregion
 
+        #region Methods
         /// <summary>
         /// 
         /// </summary>
@@ -1200,5 +1205,6 @@ namespace Glosa.Net.Core.Geometry.Path
         {
             return new GlosaPolygon(polyline);
         }
+        #endregion
     }
 }
