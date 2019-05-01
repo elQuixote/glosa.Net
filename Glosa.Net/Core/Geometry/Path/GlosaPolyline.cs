@@ -8,6 +8,7 @@ using Glosa.Net.Core.Geometry.Vector;
 using Glosa.Net.Core.Geometry.Matrix;
 using Glosa.Net.Core.Geometry.Shape;
 using Glosa.Net.Core.Geometry.Polygon;
+using System.Linq;
 
 namespace Glosa.Net.Core.Geometry.Path
 {
@@ -150,6 +151,16 @@ namespace Glosa.Net.Core.Geometry.Path
         private static extern IntPtr transform_v3_polyline(string s, GlosaMatrix44 m);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
         private static extern IntPtr transform_v4_polyline(string s, GlosaMatrix44 m);
+
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr SamplePolyline(string s, int c);
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern void SamplePolyline_Base(string s, int c);
+
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr MultiTransform(string s, int c);
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern void MultiTransform_Base(string s, int c);
         #endregion
 
         #region Properties
@@ -1204,6 +1215,36 @@ namespace Glosa.Net.Core.Geometry.Path
         public static GlosaPolygon ToPolygon(GlosaPolyline polyline)
         {
             return new GlosaPolygon(polyline);
+        }
+
+        public static List<GlosaVector3> SampleCurveCount(GlosaPolyline nc, int count)
+        {
+            try
+            {
+                IntPtr pStr = SamplePolyline(nc.Serialize(), count);
+                return Utilities.ParsePoints(Marshal.PtrToStringAnsi(pStr), 3, "points").Select(x => ((GlosaVector3)x)).ToList();
+            }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+        }
+
+        public static void SampleCurveCount_Base(GlosaPolyline nc, int count)
+        {
+            SamplePolyline_Base(nc.Serialize(), count);
+        }
+
+        public static GlosaPolyline MultiTransformPolyline(GlosaPolyline nc, int count)
+        {
+            try
+            {
+                IntPtr pStr = MultiTransform(nc.Serialize(), count);
+                return DeserializeFromVertexData(Marshal.PtrToStringAnsi(pStr));
+            }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+        }
+
+        public static void MultiTransformPolyline_Base(GlosaPolyline nc, int count)
+        {
+            MultiTransform_Base(nc.Serialize(), count);
         }
         #endregion
     }

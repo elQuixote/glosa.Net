@@ -136,6 +136,8 @@ namespace Glosa.Net.Core.Geometry.Vector
         private static extern bool areCollinear_v(GlosaVector3 v1, GlosaVector3 v2, GlosaVector3 v3);
         [DllImport("wrapper_vector.dll")]
         private static extern bool arePlanar_v(GlosaVector3[] array);
+        [DllImport("wrapper_vector.dll")]
+        private static extern void transformSetOfVectors();
         #endregion
 
         #region Properties
@@ -1026,6 +1028,11 @@ namespace Glosa.Net.Core.Geometry.Vector
         public static bool ArePlanar(GlosaVector3[] array)
         {
             return arePlanar_v(array);
+        }
+
+        public static void GenerateAndTransform()
+        {
+            transformSetOfVectors();
         }
         #endregion
     }

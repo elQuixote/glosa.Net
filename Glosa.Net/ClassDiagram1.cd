@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Glosa.Net.Core.Geometry.Path.GlosaNurbsCurve" Collapsed="true">
+    <Position X="2.75" Y="4.5" Width="1.5" />
+    <InheritanceLine Type="Glosa.Net.Core.Helpers.GlosaObject" ManuallyRouted="true">
+      <Path>
+        <Point X="4.75" Y="1.312" />
+        <Point X="4.75" Y="2.594" />
+        <Point X="3.5" Y="2.594" />
+        <Point X="3.5" Y="4.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAFAAEgIBAKAWAQAgo4CQg7UWiDUeIlKhF0sBAiIYnQ=</HashCode>
+      <FileName>Core\Geometry\Path\GlosaNurbsCurve.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Glosa.Net.Core.Geometry.Path.GlosaPolyline" Collapsed="true">
+    <Position X="4.75" Y="4.5" Width="1.5" />
+    <InheritanceLine Type="Glosa.Net.Core.Helpers.GlosaObject" ManuallyRouted="true">
+      <Path>
+        <Point X="4.75" Y="1.312" />
+        <Point X="4.75" Y="2.594" />
+        <Point X="5.5" Y="2.594" />
+        <Point X="5.5" Y="4.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>ACKhAlEAlAMCEAIIgEZEYxh0MkiTQUoD0IhGQIYEYnI=</HashCode>
+      <FileName>Core\Geometry\Path\GlosaPolyline.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Glosa.Net.Core.Geometry.Polygon.GlosaPolygon" Collapsed="true">
+    <Position X="7" Y="4.5" Width="1.5" />
+    <InheritanceLine Type="Glosa.Net.Core.Helpers.GlosaObject" ManuallyRouted="true">
+      <Path>
+        <Point X="4.75" Y="1.312" />
+        <Point X="4.75" Y="2.594" />
+        <Point X="7.75" Y="2.594" />
+        <Point X="7.75" Y="4.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>RAMhAF4HAQYAgMIAgAjAQtlkAmWQQUoBQoFG0QsCYnA=</HashCode>
+      <FileName>Core\Geometry\Polygon\GlosaPolygon.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Glosa.Net.Core.Geometry.Shape.GlosaCircle" Collapsed="true">
+    <Position X="0.75" Y="4.5" Width="1.5" />
+    <InheritanceLine Type="Glosa.Net.Core.Helpers.GlosaObject" ManuallyRouted="true">
+      <Path>
+        <Point X="4.75" Y="1.312" />
+        <Point X="4.75" Y="2.594" />
+        <Point X="1.5" Y="2.594" />
+        <Point X="1.5" Y="4.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AGgAIIJACRIAOI0AwAIBRAhcKgJQaAkoACIIAQJAQjA=</HashCode>
+      <FileName>Core\Geometry\Shape\GlosaCircle.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Glosa.Net.Core.Helpers.GlosaObject" Collapsed="true">
+    <Position X="4" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Helpers\GlosaObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JsonNetValueSystem" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAgAAAAAAAAAAAAAgEAAACAABAQAAAAAA=</HashCode>
+      <FileName>Core\Helpers\Json\JsonNetValueSystem.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="JsonPath.JsonPathNode" Collapsed="true">
+    <Position X="4.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIEAAACAAAAAAAAACACAAAgAAAQAAA=</HashCode>
+      <FileName>Core\Helpers\Json\jsonpath-0.5.1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JsonPath.JsonPathContext" Collapsed="true">
+    <Position X="2.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CQAgAABECAAQgACAEAAAIAAAAAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Helpers\Json\jsonpath-0.5.1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Glosa.Net.Core.Helpers.Json.Utilities" Collapsed="true">
+    <Position X="7" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAAAAhIBAIAAAAAAAgABAACAoABAA=</HashCode>
+      <FileName>Core\Helpers\Json\Utilities.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="Glosa.Net.Core.Geometry.Matrix.GlosaMatrix33" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAECUAAACIAFAgB8gIAQAgIEgApQKgAoICQEAhAKiA=</HashCode>
+      <FileName>Core\Geometry\Matrix\GlosaMatrix33.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Struct>
+  <Struct Name="Glosa.Net.Core.Geometry.Matrix.GlosaMatrix44" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BTAE2UiAAAMABAoE/gKAEBAQEgAgYKggIEAUAAhAQiA=</HashCode>
+      <FileName>Core\Geometry\Matrix\GlosaMatrix44.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Struct>
+  <Struct Name="Glosa.Net.Core.Geometry.Quaternion.GlosaQuaternion" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIZEAzg0AUIABABJ+B8LAqBAToAzAokAQRhkTQR3BiE=</HashCode>
+      <FileName>Core\Geometry\Quaternion\GlosaQuaternion.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Struct>
+  <Struct Name="Glosa.Net.Core.Geometry.Shape.GlosaLineSegment" Collapsed="true">
+    <Position X="13.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAgCgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Geometry\Shape\GlosaLineSegment.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Glosa.Net.Core.Geometry.Vector.GlosaVector2" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BQCAANEACNJiDBTA8IeCCqzF3iAU1ogGQAHmWDtLxyA=</HashCode>
+      <FileName>Core\Geometry\Vector\GlosaVector2.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Struct>
+  <Struct Name="Glosa.Net.Core.Geometry.Vector.GlosaVector3" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CSgAgLEEDPJjFBTw8LfQEu7N3yIUxqwGQAH+SS/TR2E=</HashCode>
+      <FileName>Core\Geometry\Vector\GlosaVector3.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Struct>
+  <Struct Name="Glosa.Net.Core.Geometry.Vector.GlosaVector4" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AylMFBSwAFNjxBbh9KeIAqz/3iAUxooGwB90SStDR2A=</HashCode>
+      <FileName>Core\Geometry\Vector\GlosaVector4.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Struct>
+  <Interface Name="JsonPath.IJsonPathValueSystem">
+    <Position X="17.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAAAgEAAACAABAQAAAAAA=</HashCode>
+      <FileName>Core\Helpers\Json\jsonpath-0.5.1.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Glosa.Net.Core.Interfaces.IClear&lt;T&gt;">
+    <Position X="13.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Core\Interfaces\IClear.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Glosa.Net.Core.Interfaces.IClosest&lt;T&gt;">
+    <Position X="15.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Interfaces\IClosest.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Glosa.Net.Core.Interfaces.ICompare&lt;T&gt;">
+    <Position X="17.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Interfaces\ICompare.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Glosa.Net.Core.Interfaces.ICopy&lt;T&gt;">
+    <Position X="19" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Interfaces\ICopy.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Glosa.Net.Core.Interfaces.IDimension&lt;T&gt;">
+    <Position X="13.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Interfaces\IDimension.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Glosa.Net.Core.Interfaces.IEquals&lt;T&gt;">
+    <Position X="15.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Interfaces\IEquals.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Glosa.Net.Core.Interfaces.IHash&lt;T&gt;">
+    <Position X="17.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Interfaces\IHash.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Glosa.Net.Core.Interfaces.ILength&lt;T&gt;">
+    <Position X="13.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Interfaces\ILength.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Glosa.Net.Core.Interfaces.IMatrix&lt;T&gt;">
+    <Position X="22.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAUAAAAAABAAAAgAAAAAAAAAAACAAAAAAAAhAAAA=</HashCode>
+      <FileName>Core\Interfaces\IMatrix.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Glosa.Net.Core.Interfaces.IMatrixes" Collapsed="true">
+    <Position X="22.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Interfaces\IMatrixes.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Glosa.Net.Core.Interfaces.IShape2&lt;T&gt;">
+    <Position X="15.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Core\Interfaces\IShape2.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Glosa.Net.Core.Interfaces.IString&lt;T&gt;">
+    <Position X="17.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Interfaces\IString.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Glosa.Net.Core.Interfaces.ITransform&lt;T&gt;">
+    <Position X="19" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgEAAAQAAAAAAAEAAIAQCA=</HashCode>
+      <FileName>Core\Interfaces\ITransform.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Glosa.Net.Core.Interfaces.IVector&lt;T&gt;">
+    <Position X="20.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEACBADAAIAAAKSADiAQAAAAQAAASCEDAAA=</HashCode>
+      <FileName>Core\Interfaces\IVector.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Glosa.Net.Core.Interfaces.IVector" Collapsed="true">
+    <Position X="20.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Interfaces\IVectors.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Glosa.Net.Core.Interfaces.IVertices&lt;T&gt;">
+    <Position X="13.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAQAAAAAA=</HashCode>
+      <FileName>Core\Interfaces\IVertices.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Delegate Name="JsonPath.JsonPathScriptEvaluator" Collapsed="true">
+    <Position X="11.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Core\Helpers\Json\jsonpath-0.5.1.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="JsonPath.JsonPathResultAccumulator" Collapsed="true">
+    <Position X="9.25" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Helpers\Json\jsonpath-0.5.1.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

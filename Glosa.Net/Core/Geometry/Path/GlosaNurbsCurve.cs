@@ -157,6 +157,11 @@ namespace Glosa.Net.Core.Geometry.Path
         private static extern IntPtr stringify_v2_curve(string s);
         [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
         private static extern IntPtr stringify_v3_curve(string s);
+
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr SampleCurve(string s, int c);
+        [DllImport("wrapper_path.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern void SampleCurve_Base(string s, int c);
         #endregion
 
         #region Properties
@@ -1957,6 +1962,21 @@ namespace Glosa.Net.Core.Geometry.Path
         public static int Dimensions(GlosaNurbsCurve nc)
         {
             return nc.dimension;
+        }
+
+        public static List<GlosaVector3> SampleCurveCount(GlosaNurbsCurve nc, int count)
+        {
+            try
+            {
+                IntPtr pStr = SampleCurve(nc.Serialize(), count);
+                return Utilities.ParsePoints(Marshal.PtrToStringAnsi(pStr), 3, "points").Select(x => ((GlosaVector3)x)).ToList();
+            }
+            catch (Exception e) { throw new System.ArgumentException(e.Message.ToString()); }
+        }
+
+        public static void SampleCurveCount_Base(GlosaNurbsCurve nc, int count)
+        {
+            SampleCurve_Base(nc.Serialize(), count);
         }
         #endregion
     }
