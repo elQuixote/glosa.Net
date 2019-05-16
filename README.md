@@ -10,7 +10,6 @@ Glosa is a cross platform, high performance geometry library written in Nim by R
 Currently we have created the wrapper around the first building blocks of the core geometry library.
 
 ### Interfaces ###
-* IClear-IClosest-ICompare-ICopy-IDimension-IEquals-IHash-ILength-IMatrix-IMatrices-IShape2-IString-ITransform-IVector-IVectors-IVertices
 * IClear
 * IClosest
 * ICompare
